@@ -1,0 +1,25 @@
+/* Pie de página */
+.footer { padding-block: clamp(64px, 8vw, 110px) 32px; }
+.footer__top { display: grid; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--line-dark); }
+.footer .logo--light { justify-self: start; }
+.footer .logo--light .logo__mark { font-size: clamp(1.8rem, 1.2rem + 2.4vw, 3rem); }
+.footer .logo--light .logo__sub { font-size: clamp(.6rem, .5rem + .3vw, .85rem); }
+.news label { display: block; font-family: var(--f-display); font-size: var(--t-h3); line-height: 1.25; max-width: 24rem; }
+.news__row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.2rem; max-width: 30rem; }
+.news__row input { flex: 1 1 200px; min-height: 48px; padding: .6rem .9rem; border: 1px solid rgba(245, 241, 234, .35); background: transparent; border-radius: 0; color: var(--paper); }
+.news__row input::placeholder { color: rgba(245, 241, 234, .5); }
+.news__row input:focus-visible { outline: 2px solid var(--oak-light); outline-offset: 0; }
+.news__msg { min-height: 1.4em; margin-top: .6rem; font-size: var(--t-sm); color: var(--oak-light); }
+.footer__cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1.5rem; padding-block: 2.6rem; font-size: var(--t-sm); color: rgba(245, 241, 234, .74); }
+.footer__cols p + p { margin-top: .5rem; }
+.footer__label { margin-bottom: .6rem; font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak-light); font-weight: 500; }
+.footer__cols li + li { margin-top: .5rem; }
+.footer__cols li a { display: inline-block; text-decoration: none; }
+.footer__cols li a:hover { color: var(--paper); text-decoration: underline; text-underline-offset: 3px; }
+.footer__legal { padding-top: 1.6rem; border-top: 1px solid var(--line-dark); font-size: var(--t-xs); color: rgba(245, 241, 234, .55); }
+.footer--slim { padding-block: 2rem; }
+.footer--slim .footer__legal { padding-top: 0; border-top: 0; }
+@media (min-width: 960px) {
+  .footer__top { grid-template-columns: 1fr 1fr; align-items: end; }
+  .footer__cols { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}

@@ -1,0 +1,16 @@
+/* Casa del mes */
+.invitada { padding-bottom: var(--section); }
+.invitada__media { margin: 0; aspect-ratio: 16 / 9; overflow: hidden; background: var(--stone); }
+.invitada__media img { width: 100%; height: 100%; object-fit: cover; }
+.invitada__copy { display: grid; gap: 1rem; padding-top: 2.4rem; }
+.invitada__title { font-size: var(--t-h2); }
+.invitada__copy > p:not(.eyebrow) { max-width: 38rem; color: var(--muted); font-size: var(--t-lg); font-weight: 300; }
+.invitada .link { justify-self: start; }
+@media (min-width: 960px) {
+  .invitada__media { aspect-ratio: 21 / 9; }
+  .invitada__copy { grid-template-columns: 1fr 1.4fr; column-gap: 6vw; align-items: start; padding-top: 3rem; }
+  .invitada__copy .eyebrow { grid-column: 1; }
+  .invitada__title { grid-column: 1; }
+  .invitada__copy > p:not(.eyebrow), .invitada .link { grid-column: 2; }
+  .invitada__copy > p:not(.eyebrow) { grid-row: 1 / 3; }
+}

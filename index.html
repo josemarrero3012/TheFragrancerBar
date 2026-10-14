@@ -6,25 +6,37 @@
   <title>The Fragrance Bar Triana · Perfumería nicho en Las Palmas de Gran Canaria</title>
   <meta name="description" content="Perfumería nicho en la Calle Mayor de Triana, Las Palmas de Gran Canaria. Creed, Amouage, Xerjoff, Parfums de Marly, Initio, Montale, Memo Paris y Tom Ford. Prueba sin compromiso en nuestra barra.">
   <meta name="theme-color" content="#161412">
+  <link rel="canonical" href="%SITE_URL%/">
 
   <meta property="og:type" content="website">
+  <meta property="og:url" content="%SITE_URL%/">
   <meta property="og:locale" content="es_ES">
   <meta property="og:site_name" content="The Fragrance Bar">
   <meta property="og:title" content="The Fragrance Bar · Triana, Las Palmas de Gran Canaria">
   <meta property="og:description" content="Perfumería nicho en la Calle Mayor de Triana. Grandes casas de perfumería de autor, para oler con calma.">
-  <meta property="og:image" content="assets/og-tienda.jpg">
+  <meta property="og:image" content="%SITE_URL%/og-tienda.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Fachada de The Fragrance Bar en la Calle Mayor de Triana">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Hanken+Grotesk:wght@300..600&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="assets/img/tienda/triana-fachada-1448.webp" imagesrcset="assets/img/tienda/triana-fachada-800.webp 800w, assets/img/tienda/triana-fachada-1448.webp 1448w" imagesizes="(min-width: 960px) 58vw, 100vw">
-  <link rel="stylesheet" href="styles.css">
-  <!-- Datos estructurados LocalBusiness: se generan en main.js desde el objeto SITE -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preload" as="image" href="/img/tienda/triana-fachada-1448.webp" imagesrcset="/img/tienda/triana-fachada-800.webp 800w, /img/tienda/triana-fachada-1448.webp 1448w" imagesizes="(min-width: 960px) 58vw, 100vw">
+  <link rel="stylesheet" href="/src/styles/main.css">
+  <script>
+    /* Animaciones: oculta la portada hasta que src/js/motion.js lance la entrada (con red de seguridad) */
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('has-motion', 'is-intro');
+      setTimeout(function () { document.documentElement.classList.remove('is-intro'); }, 3000);
+    }
+  </script>
+  <!-- Datos estructurados (schema.org): los inserta vite.config.js desde src/data/site.js -->
+  <script type="module" src="/src/main.js"></script>
 </head>
 <body>
-  <a class="skip" href="#seleccion">Saltar a la selección</a>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
 
   <!-- ============ CABECERA ============ -->
   <header class="header" data-header>
@@ -39,9 +51,9 @@
         <a href="#historia">Historia</a>
         <a href="#tienda">Tiendas</a>
       </nav>
-      <a class="btn btn--dark btn--sm header__cta" href="#contacto">Contacto</a>
+      <a class="btn btn--dark btn--sm header__cta" href="#contacto">Contacto<span class="badge" data-picks-count hidden><span data-n>0</span><span class="visually-hidden"> en tu lista</span></span></a>
       <button class="burger" type="button" aria-expanded="false" aria-controls="menu-movil">
-        <span class="burger__lines" aria-hidden="true"></span><span class="burger__label">Menú</span>
+        <span class="burger__lines" aria-hidden="true"></span><span class="burger__label">Menú</span><span class="badge" data-picks-count hidden><span data-n>0</span><span class="visually-hidden"> en tu lista</span></span>
       </button>
     </div>
   </header>
@@ -53,12 +65,12 @@
       <a href="#barra">La barra</a>
       <a href="#historia">Nuestra historia</a>
       <a href="#tienda">Tiendas</a>
-      <a href="#contacto">Contacto</a>
+      <a href="#contacto">Contacto<span class="badge" data-picks-count hidden><span data-n>0</span><span class="visually-hidden"> en tu lista</span></span></a>
     </nav>
     <p class="mobile-menu__foot" data-bind="addressShort"></p>
   </div>
 
-  <main>
+  <main id="contenido">
     <!-- ============ INICIO ============ -->
     <section class="hero" id="inicio" aria-labelledby="hero-title">
       <div class="hero__copy wrap-left">
@@ -73,8 +85,8 @@
       </div>
       <figure class="hero__media">
         <!-- Foto real de la tienda de Triana. Sustituir por versión en alta resolución cuando el negocio la facilite -->
-        <img src="assets/img/tienda/triana-fachada-1448.webp"
-             srcset="assets/img/tienda/triana-fachada-800.webp 800w, assets/img/tienda/triana-fachada-1448.webp 1448w"
+        <img src="/img/tienda/triana-fachada-1448.webp"
+             srcset="/img/tienda/triana-fachada-800.webp 800w, /img/tienda/triana-fachada-1448.webp 1448w"
              sizes="(min-width: 960px) 58vw, 100vw" width="1448" height="1086"
              alt="Fachada de The Fragrance Bar en Triana: arco de piedra, rótulo negro y un interior iluminado con vitrinas de perfumes y una barra de madera en el centro"
              fetchpriority="high">
@@ -83,20 +95,20 @@
 
     <!-- Franja de casas -->
     <div class="brandline" aria-label="Casas que trabajamos">
-      <ul class="brandline__list wrap" data-brandline></ul>
+      <ul class="brandline__list wrap" data-brandline data-reveal="up" data-stagger></ul>
     </div>
 
     <!-- ============ CASAS ============ -->
     <section class="casas section" id="casas" aria-labelledby="casas-title">
       <div class="wrap">
-        <header class="section__head">
+        <header class="section__head" data-reveal="up" data-stagger>
           <h2 class="section__title" id="casas-title">Las casas</h2>
           <p class="section__intro">Trabajamos con perfumistas y maisons independientes. Cada una tiene un carácter muy distinto; te ayudamos a encontrar la tuya.</p>
         </header>
 
         <div class="casas__grid">
-          <ol class="casas__list" data-brands role="tablist" aria-label="Casas"></ol>
-          <figure class="casas__panel" aria-live="polite">
+          <ol class="casas__list scroller" data-reveal="up" data-stagger data-brands role="tablist" aria-label="Casas"></ol>
+          <figure class="casas__panel" id="casa-panel" role="tabpanel">
             <div class="casas__img" data-brand-img></div>
             <figcaption class="casas__caption">
               <p class="casas__origin" data-brand-origin></p>
@@ -112,11 +124,11 @@
     <section class="seleccion section" id="seleccion" aria-labelledby="seleccion-title">
       <div class="wrap">
         <header class="section__head section__head--row">
-          <div>
+          <div data-reveal="up" data-stagger>
             <h2 class="section__title" id="seleccion-title">Selección de la casa</h2>
             <p class="section__intro">Algunas de las fragancias más pedidas en nuestras tiendas. Guarda las que te interesen en tu lista y pregúntanos por ellas.</p>
           </div>
-          <div class="filters" role="group" aria-label="Filtrar por familia olfativa" data-filters></div>
+          <div class="filters scroller" role="group" aria-label="Filtrar por familia olfativa" data-filters data-reveal="up" data-stagger></div>
         </header>
         <ul class="products" data-products></ul>
       </div>
@@ -125,12 +137,12 @@
     <!-- ============ CASA INVITADA ============ -->
     <section class="invitada" aria-labelledby="invitada-title">
       <figure class="invitada__media">
-        <img src="assets/img/casas/xerjoff-banner-1200.webp"
-             srcset="assets/img/casas/xerjoff-banner-1200.webp 1200w, assets/img/casas/xerjoff-banner-2400.webp 2400w"
+        <img src="/img/casas/xerjoff-banner-1200.webp"
+             srcset="/img/casas/xerjoff-banner-1200.webp 1200w, /img/casas/xerjoff-banner-2400.webp 2400w"
              sizes="100vw" width="2400" height="1350" loading="lazy"
              alt="Frasco de Xerjoff Naxos sobre un mapa antiguo, envuelto por una cinta verde">
       </figure>
-      <div class="invitada__copy wrap">
+      <div class="invitada__copy wrap" data-reveal="up" data-stagger>
         <p class="eyebrow">Casa del mes</p>
         <h2 class="invitada__title" id="invitada-title">Xerjoff</h2>
         <p>Cristal tallado, tapones dorados y composiciones luminosas desde Turín. Este mes destacamos Naxos, con lavanda, miel y tabaco, y Erba Pura, una de las más pedidas en tienda.</p>
@@ -141,14 +153,14 @@
     <!-- ============ LA BARRA (concepto, no es un servicio) ============ -->
     <section class="barra section section--dark" id="barra" aria-labelledby="barra-title">
       <div class="wrap barra__grid">
-        <figure class="barra__media">
-          <img src="assets/img/casas/initio-barra-888.webp" width="888" height="1110" loading="lazy"
+        <figure class="barra__media" data-reveal="clip">
+          <img src="/img/casas/initio-barra-888.webp" width="888" height="1110" loading="lazy"
                alt="Frascos de Initio Oud for Greatness alineados en penumbra, con detalles dorados">
         </figure>
-        <div class="barra__copy">
+        <div class="barra__copy" data-reveal="up" data-stagger>
           <h2 class="section__title" id="barra-title">Una barra <em>para oler</em></h2>
           <p class="section__intro">De ahí viene el nombre. En el centro de cada tienda hay una barra donde se prueba con calma, sin cita y sin compromiso.</p>
-          <ul class="ritual">
+          <ul class="ritual" data-reveal="up" data-stagger>
             <li><h3>Tú eliges</h3><p>Todo lo que ves en las vitrinas se puede oler. Coge el frasco que te llame la atención.</p></li>
             <li><h3>Primero en tira, después en piel</h3><p>Un perfume cambia con el calor de la piel. Merece la pena dejarle unos minutos.</p></li>
             <li><h3>Te orientamos</h3><p>Cuéntanos qué te gusta y te proponemos alternativas de otras casas que quizá no conocías.</p></li>
@@ -160,7 +172,7 @@
     <!-- ============ HISTORIA (en progreso: ampliar con el cliente) ============ -->
     <section class="historia section" id="historia" aria-labelledby="historia-title">
       <div class="wrap historia__grid">
-        <div class="historia__intro">
+        <div class="historia__intro" data-reveal="up" data-stagger>
           <p class="eyebrow">Desde 2022</p>
           <h2 class="section__title" id="historia-title">Nuestra <em>historia</em></h2>
           <p class="section__intro">The Fragrance Bar nace de un negocio familiar de perfumería y de una idea sencilla: en Canarias faltaba una tienda dedicada solo a la perfumería nicho.</p>
@@ -169,7 +181,7 @@
             <footer>Sharan Harpalani, fundador</footer>
           </blockquote>
         </div>
-        <!-- Fuente: thefragrancebar.es (sección «Nuestra historia»). Fechas exactas y fotos de archivo: pendientes de confirmar con el negocio -->
+        <!-- Fuente: thefragrancebar.es («Nuestra historia»). PENDIENTE: fechas exactas y fotos de archivo -->
         <ol class="timeline">
           <li>
             <p class="timeline__when">El origen</p>
@@ -192,25 +204,25 @@
             <p>La primera tienda en Gran Canaria, en plena Calle Mayor de Triana, Las Palmas.</p>
           </li>
         </ol>
-        <p class="historia__note">Capítulo en desarrollo. Lo completaremos con The Fragrance Bar: fotos de archivo, las primeras tiendas y el equipo.</p>
+        <p class="historia__note" data-proto>Capítulo en desarrollo. Lo completaremos con The Fragrance Bar: fotos de archivo, las primeras tiendas y el equipo.</p>
       </div>
     </section>
 
     <!-- ============ TIENDAS ============ -->
     <section class="tienda section section--stone" id="tienda" aria-labelledby="tienda-title">
       <div class="wrap tienda__grid">
-        <div>
+        <div data-reveal="up" data-stagger>
           <p class="eyebrow">Nueva tienda</p>
           <h2 class="section__title" id="tienda-title">Triana, <em>Las Palmas</em></h2>
           <p class="section__intro">En plena calle peatonal de Triana, entre fachadas modernistas, a unos minutos del Parque de San Telmo.</p>
-          <dl class="ficha">
+          <dl class="ficha" data-reveal="up" data-stagger>
             <div><dt>Dirección</dt><dd data-bind="address"></dd></div>
             <div><dt>Horario</dt><dd data-hours></dd></div>
             <div><dt>Llegar</dt><dd data-bind="howTo"></dd></div>
           </dl>
         </div>
-        <div class="map" data-map>
-          <img src="assets/img/tienda/triana-fachada-800.webp" width="800" height="600" loading="lazy" alt="">
+        <div class="map" data-map data-reveal="clip">
+          <img src="/img/tienda/triana-fachada-800.webp" width="800" height="600" loading="lazy" alt="">
           <div class="map__overlay">
             <p>El mapa se carga desde Google Maps.</p>
             <button class="btn btn--light" type="button" data-map-load>Ver en el mapa</button>
@@ -218,17 +230,17 @@
         </div>
       </div>
       <div class="wrap">
-        <ul class="otras" data-stores></ul>
+        <ul class="otras" data-stores data-reveal="up" data-stagger></ul>
       </div>
     </section>
 
     <!-- ============ CONTACTO ============ -->
     <section class="contacto section" id="contacto" aria-labelledby="contacto-title">
       <div class="wrap contacto__grid">
-        <div>
+        <div data-reveal="up" data-stagger>
           <h2 class="section__title" id="contacto-title">Escríbenos</h2>
           <p class="section__intro">¿Buscas una fragancia concreta o quieres saber si la tenemos en tienda? Te respondemos lo antes posible.</p>
-          <dl class="ficha">
+          <dl class="ficha" data-reveal="up" data-stagger>
             <div><dt>Teléfono</dt><dd><a data-bind-href="tel" data-bind="phone"></a></dd></div>
             <div><dt>Correo</dt><dd><a data-bind-href="mailto" data-bind="email"></a></dd></div>
           </dl>
@@ -239,7 +251,7 @@
           </div>
         </div>
 
-        <div class="contacto__body">
+        <div class="contacto__body" data-reveal="up">
           <form class="form" data-form novalidate>
             <div class="field">
               <label for="f-name">Nombre</label>
@@ -262,12 +274,12 @@
               <p class="field__error" id="e-message"></p>
             </div>
             <div class="field field--wide field--check">
-              <label class="check"><input id="f-privacy" name="privacy" type="checkbox" required aria-describedby="e-privacy"> He leído y acepto la <a href="#" data-legal>política de privacidad</a></label>
+              <label class="check"><input id="f-privacy" name="privacy" type="checkbox" required aria-describedby="e-privacy"><span>He leído y acepto la <a href="legal.html#privacidad" target="_blank">política de privacidad</a></span></label>
               <p class="field__error" id="e-privacy"></p>
             </div>
             <div class="form__actions field--wide">
               <button class="btn btn--dark btn--lg" type="submit" data-submit>Enviar mensaje</button>
-              <p class="form__note">Prototipo: el mensaje no se envía.</p>
+              <p class="form__note" data-proto>Prototipo: el mensaje no se envía.</p>
             </div>
           </form>
 
@@ -283,7 +295,7 @@
 
   <!-- ============ PIE ============ -->
   <footer class="footer section--dark">
-    <div class="wrap">
+    <div class="wrap" data-reveal="up" data-stagger>
       <div class="footer__top">
         <a class="logo logo--light" href="#inicio" aria-label="The Fragrance Bar, volver arriba">
           <span class="logo__mark"><span class="logo__caps">The</span> <em>fragrance</em> <span class="logo__caps">Bar</span></span>
@@ -302,12 +314,11 @@
         <div><p class="footer__label">Triana</p><p data-bind="addressShort"></p><p data-hours-short></p></div>
         <div><p class="footer__label">Tenerife</p><ul data-stores-footer></ul></div>
         <div><p class="footer__label">Síguenos</p><ul data-social></ul></div>
-        <div><p class="footer__label">Legal</p><ul><li><a href="#" data-legal>Aviso legal</a></li><li><a href="#" data-legal>Privacidad</a></li><li><a href="#" data-legal>Cookies</a></li></ul></div>
+        <div><p class="footer__label">Legal</p><ul><li><a href="legal.html#aviso-legal">Aviso legal</a></li><li><a href="legal.html#privacidad">Privacidad</a></li><li><a href="legal.html#cookies">Cookies</a></li></ul></div>
       </div>
       <p class="footer__legal">© <span data-year></span> The Fragrance Bar. Las marcas e imágenes de producto pertenecen a sus respectivas casas.</p>
     </div>
   </footer>
 
-  <script src="main.js" defer></script>
 </body>
 </html>

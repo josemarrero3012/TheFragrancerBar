@@ -1,0 +1,14 @@
+{
+  "name": "The Fragrance Bar Triana",
+  "short_name": "Fragrance Bar",
+  "description": "Perfumería nicho en la Calle Mayor de Triana, Las Palmas de Gran Canaria.",
+  "lang": "es",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#F5F1EA",
+  "theme_color": "#161412",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

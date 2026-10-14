@@ -1,0 +1,15 @@
+# Dependencias y compilación
+node_modules/
+dist/
+
+# Editores y sistema
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Registros y entorno local
+*.log
+.env.local
+.env.*.local

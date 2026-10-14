@@ -1,0 +1,40 @@
+/* Movimiento ---------------------------------------------------------------
+   Solo con .has-motion (lo pone el <head> si no hay prefers-reduced-motion).
+   Las entradas y revelados se hacen en src/js/motion.js con Web Animations API. */
+.is-intro .hero__copy > *, .is-intro .hero__media { opacity: 0; }
+
+/* Estado de apertura: anillo que pulsa */
+.has-motion .status__dot { position: relative; }
+.has-motion .status.is-open .status__dot::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--ok);
+  animation: tfb-pulse 2400ms var(--ease) infinite;
+}
+@keyframes tfb-pulse { from { transform: scale(1); opacity: .55; } to { transform: scale(3.2); opacity: 0; } }
+
+/* Casas: la imagen nueva entra con un leve zoom */
+.has-motion .casas__img img { transition: opacity .6s var(--ease), transform 1.4s var(--ease); }
+.has-motion .casas__img img.fade:not(.is-loaded) { transform: scale(1.06); }
+
+/* Historia: línea de progreso y puntos alcanzados */
+.has-motion .timeline::after {
+  content: ""; position: absolute; left: 4px; top: .5rem; bottom: .5rem; width: 1px; background: var(--oak);
+  transform: scaleY(var(--tl, 0)); transform-origin: top;
+}
+.has-motion .timeline li::before { z-index: 1; transition: background-color .5s var(--ease), transform .5s var(--ease); }
+.has-motion .timeline li.is-reached::before { background: var(--oak); transform: scale(1.25); }
+
+/* Franja de marcas en marquesina (opcional, MOTION.marquee en src/data/site.js) */
+.brandline--marquee { overflow: hidden; }
+.brandline--marquee .brandline__list {
+  width: max-content; max-width: none; margin: 0; padding-inline: 0; gap: 0;
+  flex-wrap: nowrap; justify-content: flex-start; animation: tfb-marquee 48s linear infinite;
+}
+.brandline--marquee .brandline__list li { padding-right: 1.8rem; }
+.brandline--marquee:hover .brandline__list, .brandline--marquee:focus-within .brandline__list { animation-play-state: paused; }
+@keyframes tfb-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  .fade { opacity: 1; }
+}

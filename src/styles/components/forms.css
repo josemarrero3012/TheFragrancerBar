@@ -1,0 +1,20 @@
+/* Campos de formulario */
+.field { display: grid; gap: .35rem; grid-column: 1 / -1; min-width: 0; }
+@media (min-width: 560px) { .field { grid-column: span 1; } .field--wide { grid-column: 1 / -1; } }
+.field label { font-size: var(--t-sm); font-weight: 500; }
+.field input:not([type="checkbox"]), .field select, .field textarea {
+  width: 100%; min-height: 50px; padding: .7rem .9rem;
+  background: #FBF9F5; border: 1px solid rgba(22, 20, 18, .22); border-radius: 0;
+  font-size: var(--t-base); -webkit-appearance: none; appearance: none; transition: border-color .2s;
+}
+.field select { background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: calc(100% - 18px) 54%, calc(100% - 13px) 54%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 2.2rem; }
+.field textarea { resize: vertical; min-height: 140px; line-height: 1.5; }
+.field input:hover, .field select:hover, .field textarea:hover { border-color: rgba(22, 20, 18, .5); }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--oak); outline-offset: 0; border-color: var(--oak); }
+.field.is-invalid input, .field.is-invalid select, .field.is-invalid textarea { border-color: var(--error); }
+.field__error { min-height: 1.1em; font-size: var(--t-xs); color: var(--error); }
+
+/* Casilla con texto: el texto va en un <span> para que el enlace no se separe */
+.field .check { display: flex; align-items: flex-start; gap: .7rem; font-weight: 400; cursor: pointer; }
+.check input { width: 18px; height: 18px; margin-top: .2rem; accent-color: var(--ink); flex: none; }
+.check a { text-underline-offset: 3px; }

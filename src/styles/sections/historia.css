@@ -1,0 +1,20 @@
+/* Historia (en progreso) */
+.historia__grid { display: grid; gap: 3rem; }
+.historia__intro .section__title { margin-top: .8rem; }
+.historia__quote { margin: 2.4rem 0 0; padding-left: 1.4rem; border-left: 1px solid var(--oak); }
+.historia__quote p { font-family: var(--f-serif); font-style: italic; font-size: var(--t-h3); line-height: 1.35; }
+.historia__quote footer { margin-top: .8rem; font-size: var(--t-sm); color: var(--muted); }
+.timeline { position: relative; display: grid; gap: 2.2rem; padding-left: 1.8rem; }
+.timeline::before { content: ""; position: absolute; left: 4px; top: .5rem; bottom: .5rem; width: 1px; background: var(--line); }
+.timeline li { position: relative; display: grid; gap: .3rem; }
+.timeline li::before { content: ""; position: absolute; left: -1.8rem; top: .35rem; width: 9px; height: 9px; border-radius: 50%; background: var(--paper); border: 1px solid var(--oak); }
+.timeline li.is-now::before { background: var(--oak); }
+.timeline__when { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
+.timeline h3 { font-size: var(--t-h3); }
+.timeline p:not(.timeline__when) { color: var(--muted); max-width: 34rem; }
+.historia__note { padding: 1rem 1.2rem; border: 1px dashed rgba(22, 20, 18, .3); font-size: var(--t-sm); color: var(--muted); }
+@media (min-width: 960px) {
+  .historia__grid { grid-template-columns: .9fr 1.1fr; column-gap: 6vw; align-items: start; }
+  .historia__intro { position: sticky; top: calc(var(--header-h) + 38px); }
+  .historia__note { grid-column: 2; }
+}

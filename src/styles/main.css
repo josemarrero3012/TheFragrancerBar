@@ -1,0 +1,33 @@
+/* ==========================================================================
+   The Fragrance Bar · Triana — hoja de estilos principal
+   Paleta tomada de la propia tienda: paredes claras, rótulo negro, roble.
+   Vite resuelve los @import y genera un único CSS minificado al compilar.
+   ========================================================================== */
+
+/* Fuentes autoalojadas (sin peticiones a Google: mejor privacidad y carga) */
+@import '@fontsource/libre-caslon-display/400.css';
+@import '@fontsource/libre-caslon-text/400.css';
+@import '@fontsource/libre-caslon-text/400-italic.css';
+@import '@fontsource/libre-caslon-text/700.css';
+@import '@fontsource-variable/hanken-grotesk/wght.css';
+
+@import './base/tokens.css';
+@import './base/base.css';
+
+@import './components/buttons.css';
+@import './components/logo.css';
+@import './components/forms.css';
+
+@import './layout/header.css';
+@import './layout/footer.css';
+
+@import './sections/hero.css';
+@import './sections/casas.css';
+@import './sections/seleccion.css';
+@import './sections/invitada.css';
+@import './sections/barra.css';
+@import './sections/historia.css';
+@import './sections/tienda.css';
+@import './sections/contacto.css';
+
+@import './base/motion.css';
