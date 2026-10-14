@@ -70,11 +70,17 @@ Los textos fijos de cada sección (titulares, la historia, la casa del mes) est�
 
 ## Publicar
 
-`npm run build` genera `dist/`, que se puede subir a cualquier alojamiento estático (Netlify, Vercel, Cloudflare Pages, un hosting tradicional…).
-Para publicar en una subcarpeta, como GitHub Pages en `usuario.github.io/TheFragrancerBar/`:
+**Vista previa en línea:** https://josemarrero3012.github.io/TheFragrancerBar/
+
+Cada push a `main` compila y publica la web en GitHub Pages con `.github/workflows/deploy.yml`.
+Para activarlo (una sola vez): en el repositorio, **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+El workflow ajusta solo la subcarpeta (`--base`) y la URL pública (`SITE_URL`), así que canonical, Open Graph y sitemap apuntan a la vista previa.
+
+`npm run build` genera `dist/`, que también se puede subir a cualquier otro alojamiento estático (Netlify, Vercel, Cloudflare Pages, un hosting tradicional…).
+Para compilar a mano en una subcarpeta y con otra URL pública:
 
 ```bash
-npm run build -- --base=/TheFragrancerBar/
+SITE_URL=https://usuario.github.io/TheFragrancerBar npm run build -- --base=/TheFragrancerBar/
 ```
 
 ## Pendiente antes de publicar

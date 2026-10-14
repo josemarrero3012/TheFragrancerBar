@@ -4,6 +4,9 @@ import { defineConfig } from 'vite';
 import { SITE } from './src/data/site.js';
 import { localBusinessSchema } from './src/data/schema.js';
 
+// La variable de entorno SITE_URL sustituye a SITE.url (p. ej. al publicar en GitHub Pages)
+const SITE_URL = (process.env.SITE_URL || SITE.url).replace(/\/$/, '');
+
 /* Completa la web con los datos de src/data/site.js:
    - %SITE_URL% → URL pública (canonical, Open Graph)
    - Datos estructurados schema.org en la portada
@@ -24,21 +27,21 @@ function siteData() {
     },
     generateBundle() {
       const pages = ['', 'legal.html'];
-      this.emitFile({ type: 'asset', fileName: 'robots.txt', source: `User-agent: *\nAllow: /\n\nSitemap: ${SITE.url}/sitemap.xml\n` });
+      this.emitFile({ type: 'asset', fileName: 'robots.txt', source: `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n` });
       this.emitFile({
         type: 'asset', fileName: 'sitemap.xml',
         source: '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-          pages.map((p) => `  <url><loc>${SITE.url}/${p}</loc></url>`).join('\n') + '\n</urlset>\n'
+          pages.map((p) => `  <url><loc>${SITE_URL}/${p}</loc></url>`).join('\n') + '\n</urlset>\n'
       });
     },
     transformIndexHtml: {
       order: 'pre',
       handler(html, ctx) {
-        html = html.replaceAll('%SITE_URL%', SITE.url);
+        html = html.replaceAll('%SITE_URL%', SITE_URL);
         if (!ctx.path.endsWith('/index.html')) return html;
         return {
           html,
-          tags: [{ tag: 'script', attrs: { type: 'application/ld+json' }, children: JSON.stringify(localBusinessSchema(SITE)), injectTo: 'head' }]
+          tags: [{ tag: 'script', attrs: { type: 'application/ld+json' }, children: JSON.stringify(localBusinessSchema({ ...SITE, url: SITE_URL })), injectTo: 'head' }]
         };
       }
     }

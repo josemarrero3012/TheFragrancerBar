@@ -2,7 +2,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 4px); }
 body {
-  margin: 0; background: var(--paper); color: var(--ink);
+  margin: 0; background: var(--paper) var(--grain); color: var(--ink);
   font-family: var(--f-sans); font-size: var(--t-base); line-height: 1.6; font-weight: 400;
   -webkit-font-smoothing: antialiased; overflow-x: hidden;
 }
@@ -27,7 +27,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 /* Secciones */
 .section { padding-block: var(--section); }
 .section--dark { background: var(--ink); color: var(--paper); }
-.section--stone { background: var(--stone); }
+.section--stone { background: var(--stone) var(--grain); }
 .section__head { display: grid; gap: 1rem; margin-bottom: clamp(2.2rem, 4vw, 3.5rem); max-width: 40rem; }
 .section__head--row { max-width: none; }
 .section__title { font-size: var(--t-h2); }
