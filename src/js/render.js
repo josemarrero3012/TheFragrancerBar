@@ -2,11 +2,18 @@
 import { SITE } from '../data/site.js';
 import { $, $$, DAYS, canaryNow } from './utils.js';
 
+const tel = (phone) => `tel:${phone.replace(/\s/g, '')}`;
+const c = SITE.contact;
+const HREFS = {
+  tel: () => tel(c.phone),
+  mailto: () => `mailto:${c.email}`,
+  whatsapp: () => `https://wa.me/${c.whatsapp}?text=${encodeURIComponent(c.whatsappText)}`,
+  maps: () => c.mapsUrl
+};
+
 export function bindData() {
-  $$('[data-bind]').forEach((el) => { const v = SITE.contact[el.dataset.bind]; if (v) el.textContent = v; });
-  $$('[data-bind-href]').forEach((el) => {
-    el.href = el.dataset.bindHref === 'tel' ? `tel:${SITE.contact.phone.replace(/\s/g, '')}` : `mailto:${SITE.contact.email}`;
-  });
+  $$('[data-bind]').forEach((el) => { const v = c[el.dataset.bind]; if (v) el.textContent = v; });
+  $$('[data-bind-href]').forEach((el) => { el.href = HREFS[el.dataset.bindHref](); });
   $$('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
   $$('[data-proto]').forEach((el) => { el.hidden = !SITE.prototype; });
 
@@ -16,9 +23,9 @@ export function bindData() {
 
   const stores = $('[data-stores]');
   if (stores) stores.innerHTML = `<li><p class="label">También en Tenerife</p></li>` +
-    SITE.stores.map((t) => `<li><span class="n">${t.name}</span><span class="a">${t.detail}</span></li>`).join('');
+    SITE.stores.map((t) => `<li><span class="n">${t.name}</span><span class="a">${t.detail}</span><a class="a" href="${tel(t.phone)}">${t.phone}</a></li>`).join('');
   const storesFooter = $('[data-stores-footer]');
-  if (storesFooter) storesFooter.innerHTML = SITE.stores.map((t) => `<li>${t.name}<br>${t.detail}</li>`).join('');
+  if (storesFooter) storesFooter.innerHTML = SITE.stores.map((t) => `<li>${t.name}<br>${t.detail}<br><a href="${tel(t.phone)}">${t.phone}</a></li>`).join('');
   const brandline = $('[data-brandline]');
   if (brandline) brandline.innerHTML = SITE.casas.map((c) => `<li><a href="#casas" data-brand-jump="${c.id}">${c.name}</a></li>`).join('');
 }

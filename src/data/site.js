@@ -15,28 +15,35 @@ export const SITE = {
   prototype: true,
 
   contact: {
-    address: 'Calle Mayor de Triana (número por confirmar), 35002 Las Palmas de Gran Canaria', // PROVISIONAL
-    addressShort: 'Calle Mayor de Triana, Las Palmas de Gran Canaria',
-    street: 'Calle Mayor de Triana', postalCode: '35002', city: 'Las Palmas de Gran Canaria', region: 'Las Palmas',
-    // Contacto general publicado en thefragrancebar.es. Confirmar si Triana tendrá teléfono propio
-    phone: '+34 670 680 692',
-    email: 'info@thefragrancebar.es',
+    address: 'Calle Mayor de Triana, 32, 35002 Las Palmas de Gran Canaria',
+    addressShort: 'Calle Mayor de Triana, 32, Las Palmas de Gran Canaria',
+    street: 'Calle Mayor de Triana, 32', postalCode: '35002', city: 'Las Palmas de Gran Canaria', region: 'Las Palmas',
+    phone: '+34 828 903 088',
+    // Número de WhatsApp en formato internacional, solo dígitos. PROVISIONAL: confirmar qué número tiene WhatsApp
+    whatsapp: '34828903088',
+    whatsappText: 'Hola, os escribo desde la web de The Fragrance Bar Triana.',
+    email: 'info@evergreenperfumes.com',
     geo: { lat: 28.1035, lng: -15.4160 },     // PROVISIONAL (aprox.)
     howTo: 'A cinco minutos andando del Parque de San Telmo y su intercambiador de guaguas. Parking público en San Bernardo.',
-    mapQuery: 'Calle Mayor de Triana, Las Palmas de Gran Canaria'
+    mapQuery: 'The Fragrance Bar, Calle Mayor de Triana 32, Las Palmas de Gran Canaria',
+    // Enlace a la ficha de Google Maps («Compartir» > «Copiar enlace»). PROVISIONAL: sustituir por el enlace exacto de la ficha
+    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=The+Fragrance+Bar+Calle+Mayor+de+Triana+32+Las+Palmas+de+Gran+Canaria'
   },
 
   // Índice 0 = domingo; null = cerrado. PROVISIONAL
   hours: [null, ['10:00', '21:00'], ['10:00', '21:00'], ['10:00', '21:00'], ['10:00', '21:00'], ['10:00', '21:00'], ['10:00', '21:00']],
 
-  // Tiendas de Tenerife (fuente: thefragrancebar.es)
+  // Tiendas de Tenerife
   stores: [
-    { name: 'CC Plaza del Duque', detail: 'Local B26 · Costa Adeje, Tenerife' },
-    { name: 'CC Américas Plaza', detail: 'Playa de las Américas, Tenerife' }
+    { name: 'C. C. Plaza del Duque', detail: 'Local B26 · Costa Adeje, Tenerife', phone: '+34 822 128 563' },
+    { name: 'C. C. Américas Plaza', detail: 'Local L28 · Playa de las Américas, Tenerife', phone: '+34 822 127 365' }
   ],
 
-  // Con url '#' se muestran como texto, sin enlace. PROVISIONAL
-  social: [{ name: 'Instagram', url: '#' }, { name: 'Facebook', url: '#' }, { name: 'WhatsApp', url: '#' }],
+  // Con url '#' se muestran como texto, sin enlace
+  social: [
+    { name: 'Instagram', url: 'https://www.instagram.com/thefragrancebar0/' },
+    { name: 'WhatsApp', url: 'https://wa.me/34828903088' }
+  ],
 
   casas: [
     { id: 'creed', name: 'Creed', city: 'Londres · París', img: 'creed',

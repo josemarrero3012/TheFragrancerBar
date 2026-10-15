@@ -218,7 +218,7 @@
           <dl class="ficha" data-reveal="up" data-stagger>
             <div><dt>Dirección</dt><dd data-bind="address"></dd></div>
             <div><dt>Horario</dt><dd data-hours></dd></div>
-            <div><dt>Llegar</dt><dd data-bind="howTo"></dd></div>
+            <div><dt>Llegar</dt><dd><span data-bind="howTo"></span> <a class="link" data-bind-href="maps" target="_blank" rel="noopener">Abrir en Google Maps</a></dd></div>
           </dl>
         </div>
         <div class="map" data-map data-reveal="clip">
@@ -242,6 +242,7 @@
           <p class="section__intro">¿Buscas una fragancia concreta o quieres saber si la tenemos en tienda? Te respondemos lo antes posible.</p>
           <dl class="ficha" data-reveal="up" data-stagger>
             <div><dt>Teléfono</dt><dd><a data-bind-href="tel" data-bind="phone"></a></dd></div>
+            <div><dt>WhatsApp</dt><dd><a data-bind-href="whatsapp" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></dd></div>
             <div><dt>Correo</dt><dd><a data-bind-href="mailto" data-bind="email"></a></dd></div>
           </dl>
           <div class="picks">
@@ -319,6 +320,22 @@
       <p class="footer__legal">© <span data-year></span> The Fragrance Bar. Las marcas e imágenes de producto pertenecen a sus respectivas casas.</p>
     </div>
   </footer>
+
+  <!-- ============ BARRA DE CONTACTO (solo móvil) ============ -->
+  <nav class="quickbar" aria-label="Contacto rápido">
+    <a class="quickbar__btn" data-bind-href="whatsapp" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.2.3-1 1-1 2.3s1 2.7 1.1 2.9c.1.2 2 3.1 4.9 4.3 1.8.8 2.5.8 3.4.7.6-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg>
+      WhatsApp
+    </a>
+    <a class="quickbar__btn" data-bind-href="tel">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" d="M5 3h3.5l1.8 4.5-2.3 1.4a11 11 0 0 0 7.1 7.1l1.4-2.3L21 15.5V19a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg>
+      Llamar
+    </a>
+    <a class="quickbar__btn" data-bind-href="maps" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      Cómo llegar
+    </a>
+  </nav>
 
 </body>
 </html>

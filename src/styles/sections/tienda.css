@@ -34,3 +34,4 @@
 .otras .a { font-size: var(--t-sm); color: var(--muted); }
 .otras .label { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
 @media (min-width: 760px) { .otras { grid-template-columns: auto 1fr 1fr; column-gap: 4rem; align-items: start; } }
+.otras a.a { text-underline-offset: 3px; text-decoration-color: var(--line); }

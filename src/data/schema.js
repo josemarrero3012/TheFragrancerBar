@@ -11,6 +11,8 @@ export function localBusinessSchema(site) {
     name: `${site.brand} Triana`, description: 'Perfumería nicho en Triana, Las Palmas de Gran Canaria.',
     url: `${site.url}/`, image: `${site.url}/og-tienda.jpg`,
     telephone: c.phone, email: c.email, priceRange: '€€€',
+    sameAs: site.social.map((s) => s.url).filter((u) => u.startsWith('http')),
+    hasMap: c.mapsUrl,
     address: { '@type': 'PostalAddress', streetAddress: c.street, postalCode: c.postalCode, addressLocality: c.city, addressRegion: c.region, addressCountry: 'ES' },
     geo: { '@type': 'GeoCoordinates', latitude: c.geo.lat, longitude: c.geo.lng },
     openingHoursSpecification: site.hours
