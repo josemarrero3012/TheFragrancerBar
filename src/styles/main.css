@@ -30,4 +30,7 @@
 @import './sections/tienda.css';
 @import './sections/contacto.css';
 
+/* Debe ir tras las secciones para poder ajustarlas */
+@import './base/landscape.css';
+
 @import './base/motion.css';

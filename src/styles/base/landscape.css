@@ -1,0 +1,47 @@
+/* Móvil en horizontal: pantalla ancha pero de solo 320–430 px de alto.
+   El diseño móvil apila foto y texto a todo el ancho, así que las fotos quedaban más altas
+   que la pantalla y la cabecera y la barra de contacto se comían un tercio del alto.
+   Aquí se compactan ambas y las secciones con foto pasan a dos columnas, como en escritorio.
+   Las tablets y el escritorio no entran: tienen más de 520 px de alto o 960 px de ancho. */
+@media (orientation: landscape) and (max-height: 520px) and (max-width: 959px) {
+  :root { --header-h: 52px; --quickbar-h: 44px; --section: 56px; --avail: calc(100svh - var(--header-h) - var(--quickbar-h)); }
+
+  /* Cabecera y barra de contacto más bajas */
+  .logo { gap: .15rem; }
+  .logo__mark { font-size: 1.1rem; }
+  .quickbar__btn { flex-direction: row; gap: .55rem; min-height: var(--quickbar-h); padding-block: .25rem; }
+  .quickbar svg { width: 18px; height: 18px; }
+  body:has(.quickbar) { padding-bottom: calc(var(--quickbar-h) + env(safe-area-inset-bottom)); }
+
+  /* Menú: dos columnas para que quepan todos los enlaces sin desplazarse */
+  .mobile-menu { padding-block: 1rem; }
+  .mobile-menu nav { grid-template-columns: 1fr 1fr; column-gap: 2rem; }
+  .mobile-menu a { font-size: 1.45rem; padding: .4rem 0; }
+  .mobile-menu__foot { padding-top: 1rem; }
+
+  /* Portada: foto a la derecha y texto a la izquierda, ocupando lo que queda de pantalla */
+  .hero { grid-template-columns: 1fr 1fr; min-height: var(--avail); }
+  .hero__media { order: 0; aspect-ratio: auto; }
+  .hero__copy { padding-block: 1.4rem; }
+  .hero__title { font-size: 2.2rem; margin-top: .6rem; }
+  .hero__lede { margin-top: .8rem; font-size: var(--t-base); }
+  .hero__ctas { margin-top: 1.2rem; }
+  .status { margin-top: 1rem; }
+
+  /* Casas: imagen y descripción lado a lado, bajo la tira de pestañas */
+  .casas__panel { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; align-items: start; }
+  .casas__img { aspect-ratio: auto; height: calc(var(--avail) - 6rem); }
+  .casas__caption { padding-top: 0; }
+
+  /* Selección: cuatro columnas para que cada ficha quepa entera en pantalla */
+  .products { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem 1rem; }
+
+  /* Casa destacada y La barra: fotos que no superan la pantalla */
+  .invitada__media { aspect-ratio: auto; height: calc(var(--avail) * .8); }
+  .barra__grid { grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+  .barra__media { aspect-ratio: auto; height: calc(var(--avail) - 2rem); max-height: none; }
+
+  /* Tiendas: ficha y mapa en dos columnas */
+  .tienda__grid { grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+  .tienda__grid .map { max-height: var(--avail); }
+}
