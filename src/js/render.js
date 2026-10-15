@@ -19,7 +19,7 @@ export function bindData() {
 
   const social = $('[data-social]');
   if (social) social.innerHTML = SITE.social.map((s) =>
-    s.url && s.url !== '#' ? `<li><a href="${s.url}" rel="noopener" target="_blank">${s.name}</a></li>` : `<li>${s.name}</li>`).join('');
+    s.url && s.url !== '#' ? `<li><a href="${s.url}" rel="noopener" target="_blank">${s.name}<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a></li>` : `<li>${s.name}</li>`).join('');
 
   const stores = $('[data-stores]');
   if (stores) stores.innerHTML = `<li><p class="label">También en Tenerife</p></li>` +

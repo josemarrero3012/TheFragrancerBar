@@ -5,9 +5,15 @@
 .ficha dt { font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--oak); font-weight: 500; padding-top: .25em; }
 .ficha dd { margin: 0; }
 .ficha a { text-underline-offset: 3px; text-decoration-color: var(--line); }
-.hours { display: grid; }
-.hours > span { display: flex; justify-content: space-between; gap: 1.5rem; max-width: 19rem; }
+.hours { display: grid; grid-template-columns: max-content max-content; column-gap: 2rem; }
+.hours > span { display: contents; }
+.hours > span > span + span { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .hours .is-today { font-weight: 600; }
+/* En móviles estrechos (375 px) la etiqueta va encima del dato para que el horario quepa en una línea */
+@media (max-width: 479px) {
+  .ficha > div { grid-template-columns: 1fr; gap: .35rem; }
+  .ficha dt { padding-top: 0; }
+}
 .map { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--stone); }
 .map > img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.4) brightness(.55); }
 .map__overlay { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 1rem; color: var(--paper); text-align: center; padding: 1rem; }

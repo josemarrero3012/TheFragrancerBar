@@ -19,10 +19,10 @@ function renderProducts() {
       ${media}
       <div class="product__body">
         <p class="product__brand">${c.name}</p>
-        <h3 class="product__name">${p.name}</h3>
+        <h3 class="product__name" id="name-${p.id}">${p.name}</h3>
         <p class="product__notes">${p.notes}</p>
         <p class="product__family">${fam}</p>
-        <button class="product__try" type="button" data-pick="${p.id}" aria-pressed="false">Guardar en mi lista</button>
+        <button class="product__try" type="button" data-pick="${p.id}" aria-pressed="false" aria-describedby="name-${p.id}">Guardar en mi lista</button>
       </div>
     </li>`;
   }).join('');
@@ -35,7 +35,7 @@ function renderProducts() {
 
 function renderFilters() {
   const f = state.filter;
-  const brandChip = f.type === 'casa' ? `<button class="chip" type="button" data-filter-casa="${f.value}" aria-pressed="true" aria-label="Quitar filtro ${casaById(f.value).name}">${casaById(f.value).name} ✕</button>` : '';
+  const brandChip = f.type === 'casa' ? `<button class="chip" type="button" data-filter-casa="${f.value}" aria-pressed="true" aria-label="${casaById(f.value).name}, quitar filtro">${casaById(f.value).name} <span aria-hidden="true">✕</span></button>` : '';
   $('[data-filters]').innerHTML = brandChip + [{ id: 'todas', name: 'Todas' }, ...SITE.familias].map((x) =>
     `<button class="chip" type="button" data-filter="${x.id}" aria-pressed="${f.type === 'familia' && f.value === x.id}">${x.name}</button>`).join('');
 }

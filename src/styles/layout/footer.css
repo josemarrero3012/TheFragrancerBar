@@ -17,6 +17,9 @@
 .news__row input::placeholder { color: rgba(245, 241, 234, .5); }
 .news__row input:focus-visible { outline: 2px solid var(--oak-light); outline-offset: 0; }
 .news__msg { min-height: 1.4em; margin-top: .6rem; font-size: var(--t-sm); color: var(--oak-light); }
+.news__legal { max-width: 30rem; font-size: var(--t-xs); line-height: 1.55; color: rgba(245, 241, 234, .6); }
+.news__legal a { color: rgba(245, 241, 234, .85); text-underline-offset: 3px; }
+.news__legal a:hover { color: var(--paper); }
 .footer__cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1.5rem; padding-block: 2.6rem; font-size: var(--t-sm); color: rgba(245, 241, 234, .74); }
 .footer__cols p + p { margin-top: .5rem; }
 .footer__label { margin-bottom: .6rem; font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak-light); font-weight: 500; }

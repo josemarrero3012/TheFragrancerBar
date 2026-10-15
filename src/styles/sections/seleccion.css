@@ -36,3 +36,6 @@
 .product--more .product__media { display: grid; place-content: center; padding: 1.5rem; text-align: center; background: var(--ink); color: var(--paper); }
 .product--more p { font-family: var(--f-display); font-size: var(--t-h3); line-height: 1.25; }
 .product--more .link { margin-top: 1.2rem; justify-self: center; font-size: var(--t-sm); }
+
+.products__note { margin-top: 2.6rem; padding-top: 1.2rem; border-top: 1px solid var(--line); font-size: var(--t-sm); color: var(--muted); }
+.products__note a { color: var(--ink); text-underline-offset: 3px; white-space: nowrap; }

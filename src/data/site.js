@@ -97,7 +97,7 @@ export const SITE = {
     { id: 'tobacco-vanille', casa: 'tomford', name: 'Tobacco Vanille', familia: 'ambar', img: 'tf-tobacco-vanille', notes: 'Hoja de tabaco, vainilla, haba tonka, cacao' },
     { id: 'erba-pura', casa: 'xerjoff', name: 'Erba Pura', familia: 'frescas', img: 'xerjoff-erbapura', notes: 'Naranja siciliana, frutas, almizcle blanco, ámbar' },
     { id: 'layton', casa: 'pdm', name: 'Layton', familia: 'ambar', img: 'pdm-layton', notes: 'Manzana, lavanda, cardamomo, vainilla' },
-    { id: 'marfa', casa: 'memo', name: 'Marfa', familia: 'florales', editorial: 'img/casas/memo-560.webp', notes: 'Nardo, flor de azahar, agave, sándalo' },
+    { id: 'marfa', casa: 'memo', name: 'Marfa', familia: 'florales', img: 'memo-marfa', notes: 'Nardo, flor de azahar, agave, sándalo' },
     { id: 'guidance', casa: 'amouage', name: 'Guidance 46', familia: 'florales', img: 'amouage-guidance46', notes: 'Pera, avellana, rosa, incienso' },
     { id: 'arabians-tonka', casa: 'montale', name: 'Arabians Tonka', familia: 'ambar', img: 'montale-arabians-tonka', notes: 'Azafrán, rosa, oud, haba tonka' }
   ]
