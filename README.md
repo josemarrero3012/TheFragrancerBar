@@ -62,7 +62,7 @@ Casi todo el contenido se cambia en **`src/data/site.js`**, sin tocar el HTML:
 - **Avisos de prototipo**: `SITE.prototype = false` oculta las notas «Prototipo: el mensaje no se envía», «Capítulo en desarrollo» y el aviso de borrador de la página legal.
 - **Animaciones**: `MOTION.mode = 'sutil'` deja solo fundidos; `MOTION.marquee = true` activa la franja de casas en movimiento.
 
-Los textos fijos de cada sección (titulares, la historia, la casa del mes) están en `index.html`.
+Los textos fijos de cada sección (titulares, la historia, la casa destacada) están en `index.html`.
 
 ## SEO
 

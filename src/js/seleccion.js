@@ -1,37 +1,13 @@
-/* Selección: rejilla de fragancias, filtros por familia o por casa y «Tu lista» (guardada en el navegador) */
+/* Selección: filtros por familia o por casa y «Tu lista» (guardada en el navegador).
+   Las fichas ya vienen en el HTML (src/data/html.js) */
 import { SITE } from '../data/site.js';
-import { $, $$, reduceMotion, EASE, casaById, productById, asset, store, fadeIn } from './utils.js';
+import { $, $$, reduceMotion, EASE, casaById, productById, store, fadeIn } from './utils.js';
 import { settleReveal } from './motion.js';
 
 const state = { picks: store.get('tfb-picks', []).filter(productById), filter: { type: 'familia', value: 'todas' } };
 
 /** Fragancias guardadas, para el formulario de contacto */
 export const pickedProducts = () => state.picks.map(productById);
-
-function renderProducts() {
-  const items = SITE.seleccion.map((p, i) => {
-    const c = casaById(p.casa);
-    const fam = SITE.familias.find((f) => f.id === p.familia).name;
-    const media = p.editorial
-      ? `<figure class="product__media product__media--editorial"><img src="${asset(p.editorial)}" width="560" height="700" loading="lazy" alt="${c.name} ${p.name}, imagen de campaña"></figure>`
-      : `<figure class="product__media"><img src="${asset(`img/productos/${p.img}-400.webp`)}" srcset="${asset(`img/productos/${p.img}-400.webp`)} 400w, ${asset(`img/productos/${p.img}-800.webp`)} 800w" sizes="(min-width: 1100px) 22vw, (min-width: 760px) 30vw, 46vw" width="800" height="1000" loading="lazy" alt="Frasco de ${c.name} ${p.name}"></figure>`;
-    return `<li class="product" data-id="${p.id}" data-familia="${p.familia}" data-casa="${p.casa}" data-reveal="up" data-reveal-delay="${(i % 4) * 90}">
-      ${media}
-      <div class="product__body">
-        <p class="product__brand">${c.name}</p>
-        <h3 class="product__name" id="name-${p.id}">${p.name}</h3>
-        <p class="product__notes">${p.notes}</p>
-        <p class="product__family">${fam}</p>
-        <button class="product__try" type="button" data-pick="${p.id}" aria-pressed="false" aria-describedby="name-${p.id}">Guardar en mi lista</button>
-      </div>
-    </li>`;
-  }).join('');
-  const more = `<li class="product product--more" data-always data-reveal="up" data-reveal-delay="${(SITE.seleccion.length % 4) * 90}">
-      <div class="product__media"><p>Y muchas más casas y fragancias en tienda.</p><a class="link" href="#contacto">Pregúntanos por la tuya</a></div>
-    </li>`;
-  $('[data-products]').innerHTML = items + more;
-  $$('[data-products] img').forEach(fadeIn);
-}
 
 function renderFilters() {
   const f = state.filter;
@@ -97,7 +73,8 @@ function syncPicks() {
 }
 
 export function initSeleccion() {
-  renderProducts(); renderFilters();
+  $$('[data-products] img').forEach(fadeIn);
+  renderFilters();
   $('[data-filters]').addEventListener('click', (e) => {
     const b = e.target.closest('[data-filter]'); if (b) return applyFilter('familia', b.dataset.filter);
     if (e.target.closest('[data-filter-casa]')) applyFilter('familia', 'todas');

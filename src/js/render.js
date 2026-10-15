@@ -1,4 +1,5 @@
-/* Vuelca en el HTML los datos de SITE: contacto, tiendas, redes, franja de casas y horario */
+/* Vuelca en el HTML los datos de SITE: contacto, tiendas, redes y horario.
+   Las casas y la selección ya vienen en el HTML (src/data/html.js) */
 import { SITE } from '../data/site.js';
 import { $, $$, DAYS, canaryNow } from './utils.js';
 
@@ -26,8 +27,6 @@ export function bindData() {
     SITE.stores.map((t) => `<li><span class="n">${t.name}</span><span class="a">${t.detail}</span><a class="a" href="${tel(t.phone)}">${t.phone}</a></li>`).join('');
   const storesFooter = $('[data-stores-footer]');
   if (storesFooter) storesFooter.innerHTML = SITE.stores.map((t) => `<li>${t.name}<br>${t.detail}<br><a href="${tel(t.phone)}">${t.phone}</a></li>`).join('');
-  const brandline = $('[data-brandline]');
-  if (brandline) brandline.innerHTML = SITE.casas.map((c) => `<li><a href="#casas" data-brand-jump="${c.id}">${c.name}</a></li>`).join('');
 }
 
 /** Agrupa los días consecutivos con el mismo horario: «Lunes a sábado 10:00–21:00» */

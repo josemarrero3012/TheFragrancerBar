@@ -64,7 +64,7 @@ function initReveal() {
   });
 }
 
-/* Parallax de la casa del mes y progreso de la historia, en un único rAF por scroll */
+/* Parallax de la casa destacada y progreso de la historia, en un único rAF por scroll */
 function initScrollFx() {
   const tl = $('.timeline'), steps = $$('li', tl);
   const inv = $('.invitada');

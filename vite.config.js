@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import { SITE } from './src/data/site.js';
 import { localBusinessSchema } from './src/data/schema.js';
+import { renderBlocks } from './src/data/html.js';
 
 // La variable de entorno SITE_URL sustituye a SITE.url (p. ej. al publicar en GitHub Pages)
 const SITE_URL = (process.env.SITE_URL || SITE.url).replace(/\/$/, '');
@@ -10,6 +11,7 @@ const SITE_URL = (process.env.SITE_URL || SITE.url).replace(/\/$/, '');
 /* Completa la web con los datos de src/data/site.js:
    - %SITE_URL% → URL pública (canonical, Open Graph)
    - Datos estructurados schema.org en la portada
+   - Casas y selección escritas en el HTML (marcadores <!-- build:… -->, ver src/data/html.js)
    - robots.txt y sitemap.xml al compilar */
 function siteData() {
   return {
@@ -40,7 +42,7 @@ function siteData() {
         html = html.replaceAll('%SITE_URL%', SITE_URL);
         if (!ctx.path.endsWith('/index.html')) return html;
         return {
-          html,
+          html: renderBlocks(html, SITE),
           tags: [{ tag: 'script', attrs: { type: 'application/ld+json' }, children: JSON.stringify(localBusinessSchema({ ...SITE, url: SITE_URL })), injectTo: 'head' }]
         };
       }

@@ -1,25 +1,22 @@
 /* Casas: pestañas con el nombre de cada casa + imagen editorial y descripción.
+   Pestañas, paneles y la primera imagen ya vienen en el HTML (src/data/html.js);
+   aquí se cambia de casa y se carga su imagen.
    En escritorio es una lista vertical; en móvil, una tira horizontal sobre la imagen. */
 import { SITE } from '../data/site.js';
-import { $, $$, reduceMotion, EASE, casaById, asset } from './utils.js';
+import { $, $$, reduceMotion, EASE, casaById, asset, fadeIn } from './utils.js';
 
 export function initCasas() {
-  const list = $('[data-brands]');
-  list.innerHTML = SITE.casas.map((c) => `
-    <li role="presentation"><button class="casa" type="button" role="tab" id="tab-${c.id}" data-brand="${c.id}" aria-selected="false" aria-controls="casa-panel">
-      <span class="casa__name">${c.name}</span><span class="casa__city">${c.city}</span>
-    </button></li>`).join('');
+  const list = $('[data-brands]'), box = $('[data-brand-img]');
 
   // Precarga ligera de las imágenes editoriales
   const wide = matchMedia('(min-width: 960px)').matches;
   const src = (c) => asset(`img/casas/${c.img}-${wide ? 1000 : 560}.webp`);
-  SITE.casas.forEach((c) => { const i = new Image(); i.src = src(c); });
+  SITE.casas.slice(1).forEach((c) => { const i = new Image(); i.src = src(c); });
+  $$('img', box).forEach(fadeIn);
 
-  const box = $('[data-brand-img]');
-  let current = null;
+  let current = $('[aria-selected="true"]', list).dataset.brand;
   const select = (id, focus = false) => {
     if (id === current) return;
-    const first = current === null;
     current = id;
     const c = casaById(id);
     $$('.casa', list).forEach((b) => {
@@ -28,10 +25,10 @@ export function initCasas() {
       if (on && focus) b.focus({ preventScroll: true });
       // En la tira horizontal (móvil) se centra la casa activa sin mover la página
       if (on && list.scrollWidth > list.clientWidth) {
-        list.scrollTo({ left: b.offsetLeft - (list.clientWidth - b.offsetWidth) / 2, behavior: reduceMotion || first ? 'auto' : 'smooth' });
+        list.scrollTo({ left: b.offsetLeft - (list.clientWidth - b.offsetWidth) / 2, behavior: reduceMotion ? 'auto' : 'smooth' });
       }
     });
-    $('.casas__panel').setAttribute('aria-labelledby', `tab-${id}`);
+
     const img = new Image();
     img.src = src(c); img.alt = c.alt; img.width = 1000; img.height = 1250;
     const old = $$('img', box);
@@ -40,15 +37,10 @@ export function initCasas() {
     const show = () => { img.getBoundingClientRect(); img.classList.add('is-loaded'); old.forEach((o) => { o.classList.add('is-leaving'); setTimeout(() => o.remove(), 600); }); };
     img.decode ? img.decode().then(show, show) : img.addEventListener('load', show, { once: true });
 
-    $('[data-brand-origin]').textContent = c.city;
-    $('[data-brand-desc]').textContent = c.desc;
-    const has = SITE.seleccion.some((p) => p.casa === id);
-    $('[data-brand-icons]').innerHTML = `Emblemáticas: ${c.icons.join(', ')}.` +
-      (has ? ` <a class="link" href="#seleccion" data-filter-link="${id}">Ver en la selección</a>` : '');
-    if (!reduceMotion && !first) $$('.casas__caption > p').forEach((p, i) => {
-      p.getAnimations().forEach((a) => a.cancel());
-      p.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: 550, delay: i * 60, easing: EASE, fill: 'backwards' });
-    });
+    const panel = $(`#casa-${id}`);
+    $$('[role="tabpanel"]', list.closest('.casas__grid')).forEach((p) => { p.hidden = p !== panel; });
+    if (!reduceMotion) $$('p', panel).forEach((p, i) =>
+      p.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: 550, delay: i * 60, easing: EASE, fill: 'backwards' }));
   };
 
   list.addEventListener('click', (e) => { const b = e.target.closest('[data-brand]'); if (b) select(b.dataset.brand); });
@@ -61,5 +53,4 @@ export function initCasas() {
   document.addEventListener('click', (e) => {
     const j = e.target.closest('[data-brand-jump]'); if (j) select(j.dataset.brandJump);
   });
-  select(SITE.casas[0].id);
 }

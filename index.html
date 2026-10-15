@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Fragrance Bar Triana · Perfumería nicho en Las Palmas de Gran Canaria</title>
+  <title>The Fragrance Bar Triana · Perfumería nicho en Las Palmas</title>
   <meta name="description" content="Perfumería nicho en la Calle Mayor de Triana, Las Palmas de Gran Canaria. Creed, Amouage, Xerjoff, Parfums de Marly, Initio, Montale, Memo Paris y Tom Ford. Prueba sin compromiso en nuestra barra.">
   <meta name="theme-color" content="#161412">
   <link rel="canonical" href="%SITE_URL%/">
@@ -95,7 +95,7 @@
 
     <!-- Franja de casas -->
     <div class="brandline">
-      <ul class="brandline__list wrap" aria-label="Casas que trabajamos" data-brandline data-reveal="up" data-stagger></ul>
+      <ul class="brandline__list wrap" aria-label="Casas que trabajamos" data-brandline data-reveal="up" data-stagger><!-- build:brandline --></ul>
     </div>
 
     <!-- ============ CASAS ============ -->
@@ -107,15 +107,12 @@
         </header>
 
         <div class="casas__grid">
-          <ol class="casas__list scroller" data-reveal="up" data-stagger data-brands role="tablist" aria-label="Casas"></ol>
-          <figure class="casas__panel" id="casa-panel" role="tabpanel">
-            <div class="casas__img" data-brand-img></div>
-            <figcaption class="casas__caption">
-              <p class="casas__origin" data-brand-origin></p>
-              <p class="casas__desc" data-brand-desc></p>
-              <p class="casas__icons" data-brand-icons></p>
-            </figcaption>
-          </figure>
+          <ol class="casas__list scroller" data-reveal="up" data-stagger data-brands role="tablist" aria-label="Casas"><!-- build:casas-tabs -->
+          </ol>
+          <div class="casas__panel">
+            <div class="casas__img" data-brand-img><!-- build:casas-img --></div>
+            <!-- build:casas-panels -->
+          </div>
         </div>
       </div>
     </section>
@@ -130,12 +127,13 @@
           </div>
           <div class="filters scroller" role="group" aria-label="Filtrar por familia olfativa" data-filters data-reveal="up" data-stagger></div>
         </header>
-        <ul class="products" data-products></ul>
+        <ul class="products" data-products><!-- build:products -->
+        </ul>
         <p class="products__note">Precios y formatos disponibles en tienda. Pregúntanos por <a data-bind-href="whatsapp" target="_blank" rel="noopener">WhatsApp<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a> o llamando al <a data-bind-href="tel" data-bind="phone"></a>.</p>
       </div>
     </section>
 
-    <!-- ============ CASA INVITADA ============ -->
+    <!-- ============ CASA DESTACADA ============ -->
     <section class="invitada" aria-labelledby="invitada-title">
       <figure class="invitada__media">
         <img src="/img/casas/xerjoff-banner-1200.webp"
@@ -144,9 +142,8 @@
              alt="Frasco de Xerjoff Naxos sobre un mapa antiguo, envuelto por una cinta verde">
       </figure>
       <div class="invitada__copy wrap" data-reveal="up" data-stagger>
-        <p class="eyebrow">Casa del mes</p>
-        <h2 class="invitada__title" id="invitada-title">Xerjoff</h2>
-        <p>Cristal tallado, tapones dorados y composiciones luminosas desde Turín. Este mes destacamos Naxos, con lavanda, miel y tabaco, y Erba Pura, una de las más pedidas en tienda.</p>
+        <h2 class="invitada__title" id="invitada-title">Casa destacada: <em>Xerjoff</em></h2>
+        <p>Cristal tallado, tapones dorados y composiciones luminosas desde Turín. Destacamos Naxos, con lavanda, miel y tabaco, y Erba Pura, una de las más pedidas en tienda.</p>
         <a class="link" href="#seleccion" data-filter-link="xerjoff">Ver sus fragancias</a>
       </div>
     </section>
