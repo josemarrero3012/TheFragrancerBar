@@ -68,7 +68,13 @@ function products(site) {
           </li>`;
 }
 
-const BLOCKS = { brandline, 'casas-tabs': casasTabs, 'casas-img': casasImg, 'casas-panels': casasPanels, products };
+/** Línea de precios bajo la selección; vacía mientras SITE.priceNote sea null */
+function priceNote(site) {
+  if (!site.priceNote) return '';
+  return `<p class="products__note">${esc(site.priceNote)} Pregúntanos por <a data-bind-href="whatsapp" target="_blank" rel="noopener">WhatsApp<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a> o llamando al <a data-bind-href="tel" data-bind="phone"></a>.</p>`;
+}
+
+const BLOCKS = { brandline, 'casas-tabs': casasTabs, 'casas-img': casasImg, 'casas-panels': casasPanels, products, 'price-note': priceNote };
 
 /** Sustituye cada <!-- build:nombre --> por su bloque. Falla si falta alguno */
 export function renderBlocks(html, site) {

@@ -39,6 +39,10 @@ export const SITE = {
     { name: 'C. C. Américas Plaza', detail: 'Local L28 · Playa de las Américas, Tenerife', phone: '+34 822 127 365' }
   ],
 
+  // Línea de precios bajo la selección. PENDIENTE: confirmar con el negocio si venden online.
+  // Con null no se publica. Propuesta si solo venden en tienda: 'Precios y formatos disponibles en tienda.'
+  priceNote: null,
+
   // Con url '#' se muestran como texto, sin enlace
   social: [
     { name: 'Instagram', url: 'https://www.instagram.com/thefragrancebar0/' },
