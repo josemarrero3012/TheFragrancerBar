@@ -5,6 +5,7 @@ import { $, $$, reduceMotion, fullMotion, EASE, clamp01 } from './utils.js';
 
 /* Entrada de la portada. En móvil o en modo sutil, solo fundidos */
 function introHero() {
+  if (!$('.hero')) return;
   const soft = !fullMotion || matchMedia('(max-width: 959px)').matches;
   const media = $('.hero__media');
   if (soft) media.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1100, easing: EASE, fill: 'backwards' });
@@ -48,7 +49,10 @@ function initReveal() {
     // También lo que ya quedó por encima (recarga a mitad de página)
     if (e.isIntersecting || e.boundingClientRect.bottom < 0) playReveal(e.target);
   }), { rootMargin: '0px 0px -8% 0px' });
+  // Lo que ya está a la vista al cargar no se anima: la transición entre páginas hace de entrada
+  const fold = innerHeight * .9;
   $$('[data-reveal]').forEach((el) => {
+    if (scrollY === 0 && el.getBoundingClientRect().top < fold) return;
     const r = REVEAL[el.dataset.reveal] || REVEAL.up;
     const anims = revealTargets(el).map(([t, delay]) => {
       const a = t.animate(r.kf, { duration: r.duration, delay, easing: EASE, fill: 'backwards' });
@@ -66,9 +70,10 @@ function initReveal() {
 
 /* Parallax de la casa destacada y progreso de la historia, en un único rAF por scroll */
 function initScrollFx() {
-  const tl = $('.timeline'), steps = $$('li', tl);
+  const tl = $('.timeline'), steps = tl ? $$('li', tl) : [];
   const inv = $('.invitada');
-  const para = fullMotion && $('.invitada__media img').animate(
+  if (!tl && !inv) return;
+  const para = fullMotion && inv && $('.invitada__media img').animate(
     [{ transform: 'translateY(-7%) scale(1.16)' }, { transform: 'translateY(7%) scale(1.16)' }],
     { duration: 1000, easing: 'linear', fill: 'both' });
   if (para) para.pause();
@@ -81,6 +86,7 @@ function initScrollFx() {
       const r = inv.getBoundingClientRect();
       para.currentTime = clamp01((vh - r.top) / (vh + r.height)) * 1000;
     }
+    if (!tl) return;
     const r = tl.getBoundingClientRect(), mark = vh * .62;
     tl.style.setProperty('--tl', clamp01((mark - r.top) / r.height).toFixed(4));
     steps.forEach((li) => li.classList.toggle('is-reached', li.getBoundingClientRect().top + 10 <= mark));
@@ -93,7 +99,7 @@ function initScrollFx() {
 
 /* Opcional: franja de marcas en marquesina continua (lista duplicada, -50%) */
 function initMarquee() {
-  const list = $('[data-brandline]');
+  const list = $('[data-brandline]'); if (!list) return;
   const clones = [...list.children].map((li) => {
     const c = li.cloneNode(true);
     c.setAttribute('aria-hidden', 'true'); $('a', c).tabIndex = -1;

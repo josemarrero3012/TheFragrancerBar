@@ -1,23 +1,22 @@
-/* Contacto: mapa bajo demanda, formulario (sin envío real todavía) y boletín */
-import { SITE } from '../data/site.js';
-import { $, reduceMotion, EASE, casaById } from './utils.js';
-import { pickedProducts } from './seleccion.js';
+/* Contacto: mapas bajo demanda, formulario (sin envío real todavía) y boletín */
+import { casaById } from '../data/catalogo.js';
+import { $, $$, reduceMotion, EASE } from './utils.js';
+import { pickedProducts } from './lista.js';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 /* Mapa: se carga solo si el visitante lo pide (privacidad y rendimiento) */
 export function initMap() {
-  $('[data-map-load]').addEventListener('click', () => {
-    const q = encodeURIComponent(SITE.contact.mapQuery);
-    $('[data-map]').innerHTML = `<iframe title="Mapa de la tienda en Google Maps" src="https://www.google.com/maps?q=${q}&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
-  });
+  $$('[data-map]').forEach((box) => $('[data-map-load]', box).addEventListener('click', () => {
+    box.innerHTML = `<iframe title="Mapa de la tienda en Google Maps" src="https://www.google.com/maps?q=${encodeURIComponent(box.dataset.map)}&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+  }));
 }
 
 /* Formulario de contacto. Para conectarlo a un servicio real, sustituir el setTimeout
    del envío por un fetch() al endpoint (Formspree, Netlify Forms, API propia…) */
 export function initContacto() {
-  const form = $('[data-form]'), f = form.elements, body = $('.contacto__body');
-  f.store.innerHTML = ['Triana, Las Palmas', ...SITE.stores.map((t) => `${t.name}, Tenerife`)].map((n) => `<option>${n}</option>`).join('');
+  const form = $('[data-form]'); if (!form) return;
+  const f = form.elements, body = $('.contacto__body');
 
   const rules = {
     name: () => f.name.value.trim().length < 2 && 'Escribe tu nombre.',
@@ -68,7 +67,8 @@ export function initContacto() {
 }
 
 export function initNews() {
-  const form = $('[data-news]'), input = $('#n-email'), msg = $('#n-msg');
+  const form = $('[data-news]'); if (!form) return;
+  const input = $('#n-email'), msg = $('#n-msg');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const v = input.value.trim();

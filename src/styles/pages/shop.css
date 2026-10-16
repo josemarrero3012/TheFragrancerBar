@@ -1,0 +1,33 @@
+/* Catálogo (/comprar/): buscador, filtros y orden */
+.toolbar { display: flex; flex-wrap: wrap; gap: .8rem 1rem; align-items: end; padding-bottom: 1rem; }
+.toolbar__search { position: relative; flex: 1 1 280px; }
+.toolbar__search .icon { position: absolute; left: .9rem; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--muted); pointer-events: none; }
+.toolbar__search input {
+  width: 100%; min-height: 50px; padding: .7rem .9rem .7rem 2.7rem;
+  background: var(--card); border: 1px solid rgba(22, 20, 18, .22); border-radius: 0; font-size: var(--t-base);
+  -webkit-appearance: none; appearance: none;
+}
+.toolbar__search input:focus-visible { outline: 2px solid var(--oak); outline-offset: 0; border-color: var(--oak); }
+.toolbar__selects { display: flex; gap: .8rem; flex: 1 1 320px; }
+@media (min-width: 960px) { .toolbar__selects { flex: 0 1 auto; } }
+.select { display: grid; gap: .3rem; flex: 1; min-width: 0; }
+.select span { font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.select select {
+  width: 100%; min-height: 50px; padding: .6rem 2.2rem .6rem .9rem; border: 1px solid rgba(22, 20, 18, .22); border-radius: 0;
+  background-color: var(--card); -webkit-appearance: none; appearance: none; cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: calc(100% - 18px) 54%, calc(100% - 13px) 54%; background-size: 5px 5px; background-repeat: no-repeat;
+}
+.select select:focus-visible { outline: 2px solid var(--oak); outline-offset: 0; }
+
+/* Familias: una tira deslizable en móvil y una fila propia en escritorio (no se parte a 1080 px) */
+.filters { display: flex; gap: .4rem; padding-block: .4rem 1.2rem; border-bottom: 1px solid var(--line); }
+@media (min-width: 760px) { .filters.scroller { overflow: visible; margin: 0; padding-inline: 0; flex-wrap: wrap; } }
+.shop__count { margin-block: 1.2rem 1.8rem; font-size: var(--t-sm); color: var(--muted); }
+.shop__empty { display: grid; justify-items: center; gap: .6rem; padding: 4rem 1rem; text-align: center; }
+.shop__empty p { font-family: var(--f-display); font-size: var(--t-h3); }
+.shop__empty button { border: 0; background-color: transparent; cursor: pointer; font-size: var(--t-sm); }
+
+/* Cabeceras de sección con enlace a la derecha */
+@media (min-width: 960px) {
+  .section__head--row { grid-template-columns: 1fr auto; align-items: end; gap: 3rem; }
+}

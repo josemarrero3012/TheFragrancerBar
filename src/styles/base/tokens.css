@@ -11,6 +11,13 @@
   --ok: #5E8B4E;
   --line: rgba(22, 20, 18, .14);
   --line-dark: rgba(245, 241, 234, .16);
+  --card: #FBF9F5;       /* fondos de campos y resúmenes */
+
+  /* Tinte de cada familia olfativa (frascos dibujados) */
+  --tint-frescas: #DCE2CF;
+  --tint-florales: #ECD8D0;
+  --tint-amaderadas: #DFD0BD;
+  --tint-ambar: #E8CFA9;
 
   --f-display: "Libre Caslon Display", "Libre Caslon Text", Georgia, serif;
   --f-serif: "Libre Caslon Text", Georgia, serif;

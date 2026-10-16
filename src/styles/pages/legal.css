@@ -1,5 +1,6 @@
 /* Páginas interiores: información legal y 404 */
-.legal { display: grid; gap: 2rem; padding-block: clamp(48px, 7vw, 96px) var(--section); }
+.legal { display: grid; gap: 2rem; padding-block: clamp(32px, 5vw, 72px) var(--section); }
+.legal__head { display: grid; gap: .8rem; justify-items: start; }
 .legal__title { font-size: var(--t-h2); }
 .legal__meta { margin-top: .8rem; font-size: var(--t-sm); color: var(--muted); }
 .legal__draft { margin-top: 1.4rem; max-width: 40rem; padding: 1rem 1.2rem; border: 1px dashed rgba(22, 20, 18, .3); font-size: var(--t-sm); color: var(--muted); }
@@ -30,7 +31,7 @@
 }
 
 /* 404 */
-.notfound { display: grid; align-content: center; justify-items: start; gap: 1.2rem; min-height: calc(100svh - var(--header-h) - 90px); padding-block: var(--section); }
+.notfound { display: grid; align-content: center; justify-items: start; gap: 1.2rem; min-height: calc(80svh - var(--header-h)); padding-block: var(--section); }
 .notfound__title { font-size: var(--t-h1); max-width: 14ch; }
 .notfound p { max-width: 32rem; color: var(--muted); font-size: var(--t-lg); font-weight: 300; }
 .notfound__ctas { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1rem; }

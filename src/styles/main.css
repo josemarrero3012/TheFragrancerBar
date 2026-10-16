@@ -1,5 +1,5 @@
 /* ==========================================================================
-   The Fragrance Bar · Triana — hoja de estilos principal
+   The Fragrance Bar — hoja de estilos principal (todas las páginas)
    Paleta tomada de la propia tienda: paredes claras, rótulo negro, roble.
    Vite resuelve los @import y genera un único CSS minificado al compilar.
    ========================================================================== */
@@ -17,20 +17,28 @@
 @import './components/buttons.css';
 @import './components/logo.css';
 @import './components/forms.css';
+@import './components/ui.css';
 
 @import './layout/header.css';
 @import './layout/footer.css';
+@import './layout/drawer.css';
 
 @import './sections/hero.css';
+@import './sections/products.css';
 @import './sections/casas.css';
-@import './sections/seleccion.css';
 @import './sections/invitada.css';
 @import './sections/barra.css';
 @import './sections/historia.css';
 @import './sections/tienda.css';
 @import './sections/contacto.css';
 
+@import './pages/shop.css';
+@import './pages/pdp.css';
+@import './pages/checkout.css';
+@import './pages/legal.css';
+
 /* Debe ir tras las secciones para poder ajustarlas */
 @import './base/landscape.css';
+@import './base/landscape-pages.css';
 
 @import './base/motion.css';

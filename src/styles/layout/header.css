@@ -8,10 +8,12 @@
 .header.is-scrolled { border-bottom-color: var(--line); }
 .header__inner { display: flex; align-items: center; gap: 2rem; min-height: var(--header-h); }
 .header .logo { margin-right: auto; }
-.nav { display: none; gap: 2.2rem; }
+.header__actions { display: flex; align-items: center; gap: .4rem; }
+.nav { display: none; gap: clamp(1.1rem, 2vw, 2.2rem); }
 .nav a { position: relative; text-decoration: none; font-size: var(--t-sm); padding-block: .3em; }
 .nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
-.nav a:hover::after, .nav a[aria-current="true"]::after { transform: scaleX(1); }
+.nav a:hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
+.header__cta[aria-current="page"] { background: var(--ink-2); }
 .header__cta { display: none; }
 .burger { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; border: 0; background: none; cursor: pointer; font-size: var(--t-sm); }
 .burger__lines { position: relative; width: 20px; height: 8px; }
@@ -27,17 +29,16 @@
 }
 .mobile-menu.is-open { opacity: 1; }
 .mobile-menu nav { display: grid; }
+.mobile-menu a[aria-current="page"] { font-family: var(--f-serif); font-style: italic; color: var(--oak); }
 .mobile-menu a { display: flex; align-items: center; font-family: var(--f-display); font-size: 2rem; padding: .55rem 0; border-bottom: 1px solid var(--line); text-decoration: none; }
 .mobile-menu .badge, .burger .badge { background: var(--ink); color: var(--paper); }
 .mobile-menu .badge { margin-left: .8rem; }
-.burger .badge { margin-left: 0; }
+/* En el botón de menú el contador va sobre las líneas para no ensanchar la cabecera */
+.burger { position: relative; }
+.burger .badge { position: absolute; top: 2px; left: 12px; margin: 0; min-width: 1.15rem; height: 1.15rem; padding-inline: .25rem; font-size: .64rem; }
 .mobile-menu__foot { margin-top: auto; padding-top: 2rem; color: var(--muted); font-size: var(--t-sm); }
 
 @media (min-width: 960px) {
   .nav, .header__cta { display: flex; }
   .burger, .mobile-menu { display: none !important; }
 }
-
-/* Cabecera reducida de las páginas interiores (legal, 404) */
-.header--page .header__inner { justify-content: space-between; }
-.header--page .header__back { font-size: var(--t-sm); }

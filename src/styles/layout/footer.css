@@ -25,6 +25,7 @@
 .footer__label { margin-bottom: .6rem; font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak-light); font-weight: 500; }
 .footer__cols li + li { margin-top: .5rem; }
 .footer__cols li a { display: inline-block; text-decoration: none; }
+.footer__muted { font-size: var(--t-xs); color: rgba(245, 241, 234, .55); }
 .footer__cols li a:hover { color: var(--paper); text-decoration: underline; text-underline-offset: 3px; }
 .footer__legal { padding-top: 1.6rem; border-top: 1px solid var(--line-dark); font-size: var(--t-xs); color: rgba(245, 241, 234, .55); }
 .footer--slim { padding-block: 2rem; }

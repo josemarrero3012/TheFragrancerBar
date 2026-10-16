@@ -21,3 +21,22 @@
 .success p { max-width: 34rem; color: var(--muted); }
 .contacto__body.is-done .form { display: none; }
 @media (min-width: 960px) { .contacto__grid { grid-template-columns: .85fr 1.15fr; gap: 6vw; } }
+.picks__list a { display: inline-flex; align-items: baseline; text-decoration: none; }
+.picks__list a:hover .n { text-decoration: underline; text-underline-offset: 3px; }
+.picks__wa { margin-top: 1rem; font-size: var(--t-sm); }
+
+/* Preguntas frecuentes */
+.faq__grid { display: grid; gap: 2.4rem; }
+.faq__grid .historia__note { margin-top: 1.6rem; }
+.faq__list { border-top: 1px solid var(--line); }
+.faq__item { border-bottom: 1px solid var(--line); }
+.faq__item summary {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.2rem 0;
+  font-family: var(--f-display); font-size: clamp(1.15rem, 1.05rem + .4vw, 1.4rem); line-height: 1.25; cursor: pointer; list-style: none;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after { content: "+"; flex: none; font-family: var(--f-sans); font-size: 1.4rem; font-weight: 300; color: var(--oak); transition: transform .3s var(--ease); }
+.faq__item[open] summary::after { transform: rotate(45deg); }
+.faq__item summary:hover { color: var(--oak); }
+.faq__item p { padding-bottom: 1.3rem; max-width: 40rem; color: var(--muted); }
+@media (min-width: 960px) { .faq__grid { grid-template-columns: .8fr 1.2fr; gap: 6vw; align-items: start; } }

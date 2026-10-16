@@ -1,0 +1,29 @@
+/* Móvil en horizontal, páginas interiores: el mismo criterio que landscape.css
+   (dos columnas como en escritorio y fotos que no superan el alto de la pantalla). */
+@media (orientation: landscape) and (max-height: 520px) and (max-width: 959px) {
+  .pagehead { padding-block: 1.2rem 1rem; }
+
+  /* Ficha de fragancia: frasco a la izquierda (fijo) y compra a la derecha */
+  .pdp { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 1.6rem; align-items: start; }
+  .pdp__media { position: sticky; top: calc(var(--header-h) + 12px); }
+  .pdp__media .product__media { margin: 0; height: calc(var(--avail) - 24px); width: auto; aspect-ratio: 4 / 5; }
+  .buybar { display: none; }
+  body:has(.buybar) { padding-bottom: 0; }
+
+  /* Casa, tienda y La barra: imagen y texto en paralelo */
+  .casahero, .storehero, .barrahero__grid { grid-template-columns: auto minmax(0, 1fr); gap: 1.6rem; align-items: start; }
+  .casahero__media { margin: 0; height: calc(var(--avail) - 2rem); width: auto; aspect-ratio: 4 / 5; position: sticky; top: calc(var(--header-h) + 1rem); }
+  .casahero__title { font-size: 2.6rem; }
+  .storehero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .storehero__media img { aspect-ratio: auto; height: calc(var(--avail) - 2rem); }
+  .storehero__media--map .map { min-height: 0; height: calc(var(--avail) - 2rem); }
+  .barrahero__grid { grid-template-columns: minmax(0, 1fr) auto; }
+  .barrahero__media { height: calc(var(--avail) - 2rem); width: auto; }
+
+  /* Rejillas más densas */
+  .casagrid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.6rem 1rem; }
+  .casacard__desc { display: none; }
+  .storecards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .map { aspect-ratio: 21 / 9; }
+  .drawer { width: min(400px, 60vw); }
+}

@@ -1,0 +1,51 @@
+/* Fichas de fragancia en rejilla (portada, casas, catálogo) y frascos dibujados */
+.products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.6rem 1rem; }
+@media (min-width: 760px) { .products { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3.2rem 1.4rem; } }
+@media (min-width: 1100px) { .products { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.product { display: flex; flex-direction: column; }
+.product.is-hidden { display: none; }
+.product__link { display: block; text-decoration: none; color: inherit; }
+.product__media { position: relative; margin: 0; aspect-ratio: 4 / 5; overflow: hidden; background: var(--stone); }
+.product__media img { width: 100%; height: 100%; object-fit: contain; transition: transform .8s var(--ease), opacity .8s var(--ease); }
+.product:hover .product__media img, .product:hover .bottle { transform: scale(1.035); }
+
+.product__body { padding-top: 1rem; display: flex; flex-direction: column; align-items: flex-start; gap: .2rem; flex: 1; }
+.product__brand { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
+.product__brand a { text-decoration: none; }
+.product__brand a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.product__name { font-family: var(--f-display); font-size: var(--t-h3); line-height: 1.15; }
+.product__name a { text-decoration: none; }
+.product__name a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.product__meta { font-size: var(--t-xs); color: var(--muted); }
+.product__notes { margin-top: .2rem; font-size: var(--t-sm); color: var(--muted); line-height: 1.5; }
+.product__price { margin-top: .5rem; font-variant-numeric: tabular-nums; font-weight: 500; }
+.product__price span { font-size: var(--t-xs); font-weight: 400; color: var(--muted); }
+.product__actions { display: flex; gap: .4rem; width: 100%; margin-top: auto; padding-top: .8rem; }
+.product__add { flex: 1; padding-inline: .6rem; }
+.product__add:hover { background: var(--ink); color: var(--paper); }
+
+/* Tarjeta final «Y muchas más…» */
+.product--more .product__media { display: grid; place-content: center; padding: 1.5rem; text-align: center; background: var(--ink); color: var(--paper); }
+.product--more p { font-family: var(--f-display); font-size: var(--t-h3); line-height: 1.25; }
+.product--more .link { margin-top: 1.2rem; justify-self: center; font-size: var(--t-sm); }
+
+.products__note { margin-top: 2.6rem; padding-top: 1.2rem; border-top: 1px solid var(--line); font-size: var(--t-sm); color: var(--muted); }
+
+/* Frasco dibujado: silueta de la casa, tapón negro y cristal teñido según la familia */
+[data-familia="frescas"] { --tint: var(--tint-frescas); }
+[data-familia="florales"] { --tint: var(--tint-florales); }
+[data-familia="amaderadas"] { --tint: var(--tint-amaderadas); }
+[data-familia="ambar"] { --tint: var(--tint-ambar); }
+.product__media--drawn {
+  display: grid; grid-template-rows: minmax(0, 1fr) auto; justify-items: center; gap: 6%;
+  padding: 13% 10% 10%;
+  background: radial-gradient(110% 80% at 50% 28%, #F6F2EB 0%, var(--tint) 100%);
+}
+.bottle { height: 100%; width: auto; max-width: 100%; overflow: visible; transition: transform .8s var(--ease); }
+.bottle__glass > * { fill: color-mix(in srgb, var(--tint) 70%, #8A5A2E 30%); fill-opacity: .5; stroke: rgba(22, 20, 18, .62); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.bottle__shine { fill: #fff; opacity: .55; }
+.bottle__glass > :first-child { fill: var(--ink); fill-opacity: 1; stroke: var(--ink); }
+.bottle__glass > :nth-child(n+4) { fill: none; stroke: rgba(138, 90, 46, .7); }
+.bottle__label { display: grid; justify-items: center; gap: .25rem; text-align: center; line-height: 1.15; }
+.bottle__label span { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-2); }
+.bottle__label em { font-family: var(--f-serif); font-size: clamp(.95rem, .85rem + .4vw, 1.2rem); color: var(--ink); }

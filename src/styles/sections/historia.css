@@ -18,3 +18,9 @@
   .historia__intro { position: sticky; top: calc(var(--header-h) + 38px); }
   .historia__note { grid-column: 2; }
 }
+
+/* Cita de la portada, con enlace a la historia */
+.quoteband__inner { display: grid; justify-items: center; gap: 1.4rem; text-align: center; }
+.quoteband__quote { margin: 0; max-width: 46rem; }
+.quoteband__quote p { font-family: var(--f-serif); font-style: italic; font-size: var(--t-h2); line-height: 1.2; }
+.quoteband__quote footer { margin-top: 1rem; font-size: var(--t-sm); color: var(--muted); }

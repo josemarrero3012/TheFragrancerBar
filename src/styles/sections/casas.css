@@ -1,41 +1,35 @@
-/* Casas: pestañas + imagen editorial.
-   Escritorio: lista vertical que ocupa la misma altura que la imagen.
-   Móvil: tira horizontal encima de la imagen, para que el cambio se vea al tocar. */
-.casas__grid { display: grid; gap: 1.4rem; }
-.casas__list { position: relative; }
-.casa {
-  display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 1rem;
-  width: 100%; padding: 1.05rem 0; border: 0; background: none; text-align: left; cursor: pointer;
-  transition: padding .35s var(--ease), color .25s;
-}
-.casa__name { font-family: var(--f-display); font-size: clamp(1.5rem, 1.25rem + 1vw, 2.1rem); line-height: 1.1; }
-.casa__city { font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-.casa[aria-selected="true"] .casa__name { font-family: var(--f-serif); font-style: italic; }
-.casa:hover .casa__name { color: var(--oak); }
+/* Casas: índice en rejilla y página de cada casa */
+.casagrid { display: grid; gap: 3rem 1.4rem; }
+@media (min-width: 640px) { .casagrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .casagrid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.casacard__link { display: grid; gap: 1.1rem; text-decoration: none; }
+.casacard__media { margin: 0; aspect-ratio: 4 / 5; overflow: hidden; background: var(--stone); }
+.casacard__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.casacard__link:hover .casacard__media img { transform: scale(1.045); }
+.casacard__body { display: grid; gap: .35rem; }
+.casacard__city { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
+.casacard__name { font-family: var(--f-display); font-size: clamp(1.7rem, 1.4rem + 1vw, 2.3rem); line-height: 1.05; }
+.casacard__link:hover .casacard__name { font-family: var(--f-serif); font-style: italic; }
+.casacard__desc { font-size: var(--t-sm); color: var(--muted); line-height: 1.5; }
+.casacard__count { display: inline-flex; align-items: center; gap: .5rem; margin-top: .3rem; font-size: var(--t-sm); font-weight: 500; }
+.casacard__count .icon { width: 1rem; height: 1rem; transition: transform .35s var(--ease); }
+.casacard__link:hover .casacard__count .icon { transform: translateX(4px); }
 
-.casas__panel { margin: 0; }
-.casas__img { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--stone); }
-.casas__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .6s var(--ease); }
-.casas__img img.is-leaving { opacity: 0; }
-.casas__caption { padding-top: 1.2rem; display: grid; gap: .6rem; }
-.casas__origin { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
-.casas__desc { font-family: var(--f-serif); font-size: var(--t-lg); line-height: 1.5; max-width: 34rem; }
-.casas__icons { font-size: var(--t-sm); color: var(--muted); }
-
-@media (max-width: 959px) {
-  .casas__list { gap: 1.7rem; border-bottom: 1px solid var(--line); }
-  .casa { display: block; padding: .8rem 0; box-shadow: inset 0 -2px 0 transparent; transition: box-shadow .3s var(--ease); }
-  .casa__name { font-size: 1.4rem; white-space: nowrap; }
-  .casa__city { display: none; }
-  .casa[aria-selected="true"] { box-shadow: inset 0 -2px 0 var(--oak); }
-  .casas__img { aspect-ratio: 1 / 1; }
-}
+/* Página de una casa */
+.casahero { display: grid; gap: 2rem; padding-block: clamp(20px, 3vw, 48px) var(--section); }
+.casahero__media { margin: 0 calc(var(--gutter) * -1); aspect-ratio: 1 / 1; overflow: hidden; background: var(--stone); }
+.casahero__media img { width: 100%; height: 100%; object-fit: cover; }
+.casahero__copy { display: grid; gap: 1rem; align-content: center; justify-items: start; }
+.casahero__title { font-size: clamp(3rem, 2rem + 5vw, 6.4rem); line-height: .95; }
+.casahero__lede { font-family: var(--f-serif); font-size: var(--t-lg); line-height: 1.5; max-width: 34rem; }
+.casahero__story { max-width: 34rem; color: var(--muted); }
+.casahero__icons { padding-top: 1rem; border-top: 1px solid var(--line); width: 100%; max-width: 34rem; font-family: var(--f-serif); font-style: italic; }
+.casahero__icons span { display: block; margin-bottom: .2rem; font-family: var(--f-sans); font-style: normal; font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
+.casahero .hero__ctas { margin-top: .6rem; }
 @media (min-width: 960px) {
-  .casas__grid { grid-template-columns: 1fr minmax(0, 1fr); gap: 6vw; }
-  /* .scroller solo actúa en móvil */
-  .casas__list.scroller { display: grid; grid-auto-rows: 1fr; overflow: visible; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-  .casas__list li { display: grid; border-bottom: 1px solid var(--line); }
-  .casa { align-content: center; }
-  .casa[aria-selected="true"] { padding-left: .9rem; box-shadow: inset 2px 0 0 var(--oak); }
-  .casas__img { max-height: 72vh; }
+  .casahero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 6vw; align-items: center; }
+  .casahero__media { margin: 0; aspect-ratio: 4 / 5; max-height: calc(100svh - var(--header-h) - 48px); }
 }
+
+.brandline--foot { border-bottom: 0; }
+.brandline [aria-current] { font-family: var(--f-serif); font-size: .82rem; letter-spacing: .16em; text-transform: uppercase; color: var(--oak); }

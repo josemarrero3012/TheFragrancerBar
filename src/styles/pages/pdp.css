@@ -1,0 +1,70 @@
+/* Ficha de una fragancia: imagen, compra, notas y relacionadas */
+.pdp__crumbs { padding-block: 1.4rem 1rem; }
+.pdp { display: grid; gap: 2rem; padding-bottom: var(--section); }
+.pdp__media .product__media { margin-inline: calc(var(--gutter) * -1); }
+.pdp__media .product__media--drawn { padding: 12% 18% 9%; }
+.pdp__media .bottle__label em { font-size: clamp(1.3rem, 1rem + 1vw, 1.8rem); }
+.pdp__media .bottle__label span { font-size: .72rem; }
+.pdp__info { display: grid; gap: .9rem; align-content: start; justify-items: start; }
+.pdp__title { font-size: clamp(2.6rem, 1.8rem + 3vw, 4.4rem); line-height: 1; }
+.pdp__meta { font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.pdp__desc { max-width: 34rem; font-family: var(--f-serif); font-size: var(--t-lg); line-height: 1.5; }
+@media (min-width: 960px) {
+  .pdp { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 6vw; align-items: start; }
+  .pdp__media { position: sticky; top: calc(var(--header-h) + 24px); }
+  .pdp__media .product__media { margin: 0; }
+  .pdp__info { padding-top: 1rem; }
+}
+
+/* Compra */
+.buy { display: grid; gap: 1rem; width: 100%; max-width: 30rem; margin-top: .6rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+.sizes { display: flex; flex-wrap: wrap; gap: .6rem; margin: 0; padding: 0; border: 0; }
+.sizes legend { width: 100%; margin-bottom: .6rem; font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.size {
+  position: relative; display: grid; gap: .1rem; min-width: 7.5rem; padding: .75rem 1.1rem;
+  border: 1px solid var(--line); cursor: pointer; transition: border-color .2s, box-shadow .2s;
+}
+.size input { position: absolute; opacity: 0; pointer-events: none; }
+.size__ml { font-weight: 500; }
+.size__price { font-size: var(--t-sm); color: var(--muted); font-variant-numeric: tabular-nums; }
+.size:hover { border-color: rgba(22, 20, 18, .5); }
+.size:has(:checked) { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.size:has(:focus-visible) { outline: 2px solid var(--oak); outline-offset: 3px; }
+.buy__price { display: flex; align-items: baseline; gap: .8rem; }
+.buy__price [data-buy-price] { font-family: var(--f-display); font-size: 2.2rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.buy__tax { font-size: var(--t-xs); color: var(--muted); }
+.buy__row { display: flex; gap: .6rem; }
+.buy__add { flex: 1; }
+
+.perks { display: grid; gap: .9rem; width: 100%; max-width: 30rem; margin-top: 1rem; padding-top: 1.4rem; border-top: 1px solid var(--line); font-size: var(--t-sm); color: var(--muted); }
+.perks li { display: flex; gap: .8rem; align-items: flex-start; }
+.perks .icon { width: 22px; height: 22px; color: var(--oak); }
+.perks strong { color: var(--ink); font-weight: 500; }
+.pdp__ask { display: inline-flex; align-items: center; gap: .6rem; margin-top: .4rem; font-size: var(--t-sm); font-weight: 500; text-underline-offset: 4px; }
+.pdp__ask .icon { width: 20px; height: 20px; color: #3D7B4F; }
+
+/* Notas: salida, corazón y fondo */
+.pyramid { display: grid; gap: 2rem; margin-top: 2.4rem; counter-reset: fase; }
+.pyramid li { display: grid; gap: .4rem; padding-top: 1.2rem; border-top: 1px solid var(--ink); }
+.pyramid__when { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
+.pyramid h3 { font-size: var(--t-h3); }
+.pyramid p:last-child { font-family: var(--f-serif); font-size: var(--t-lg); line-height: 1.45; }
+@media (min-width: 760px) { .pyramid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.4rem; } }
+
+/* Barra de compra fija en móvil, cuando el botón principal sale de pantalla */
+.buybar {
+  position: fixed; inset: auto 0 0 0; z-index: 97;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .7rem var(--gutter) calc(.7rem + env(safe-area-inset-bottom));
+  background: var(--paper); border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(22, 20, 18, .08);
+  transform: translateY(110%); transition: transform .4s var(--ease);
+}
+.buybar.is-visible { transform: none; }
+.buybar__name { display: grid; min-width: 0; line-height: 1.2; }
+.buybar__name span { font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--oak); }
+.buybar__name strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--f-display); font-weight: 400; font-size: 1.15rem; }
+body:has(.buybar) { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+@media (min-width: 960px) {
+  .buybar { display: none; }
+  body:has(.buybar) { padding-bottom: 0; }
+}

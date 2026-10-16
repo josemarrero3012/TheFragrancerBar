@@ -1,16 +1,11 @@
-/* Cabecera: sombra al hacer scroll, sección activa en el menú y menú móvil */
+/* Cabecera: sombra al hacer scroll y menú móvil.
+   La sección activa ya viene marcada en el HTML (aria-current="page"). */
 import { $, $$, reduceMotion, EASE } from './utils.js';
 
 export function initHeader() {
   const header = $('[data-header]');
   const onScroll = () => header.classList.toggle('is-scrolled', scrollY > 8);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
-
-  const links = $$('.nav a');
-  const io = new IntersectionObserver((es) => es.forEach((e) => {
-    if (e.isIntersecting) links.forEach((a) => a.setAttribute('aria-current', String(a.hash === `#${e.target.id}`)));
-  }), { rootMargin: '-45% 0px -50% 0px' });
-  $$('main section[id]').forEach((s) => io.observe(s));
 
   const btn = $('.burger'), menu = $('#menu-movil'), label = $('.burger__label');
   let t;
@@ -32,4 +27,6 @@ export function initHeader() {
   addEventListener('keydown', (e) => { if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') { setOpen(false); btn.focus(); } });
   // Si se agranda la ventana con el menú abierto, se cierra para no dejar el scroll bloqueado
   matchMedia('(min-width: 960px)').addEventListener('change', (e) => { if (e.matches && btn.getAttribute('aria-expanded') === 'true') setOpen(false); });
+  // Al volver con «Atrás» (bfcache) el menú no debe quedar abierto
+  addEventListener('pageshow', () => { if (btn.getAttribute('aria-expanded') === 'true') setOpen(false); });
 }

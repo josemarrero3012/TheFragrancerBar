@@ -37,3 +37,17 @@
   margin-left: .6rem; border-radius: 999px; background: var(--paper); color: var(--ink);
   font-family: var(--f-sans); font-size: .72rem; font-weight: 600; line-height: 1; letter-spacing: 0;
 }
+
+/* Corazón de «Guardar en mi lista» */
+.pick {
+  display: inline-grid; place-items: center; width: 40px; height: 40px; flex: none;
+  border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer;
+  transition: border-color .25s, color .25s;
+}
+.pick .icon { width: 18px; height: 18px; }
+.pick:hover { border-color: var(--ink); }
+.pick[aria-pressed="true"] { color: var(--oak); border-color: var(--oak); }
+.pick[aria-pressed="true"] .icon path { fill: currentColor; }
+.pick--lg { width: 54px; height: 54px; }
+.pick--lg .icon { width: 22px; height: 22px; }
+.btn .icon { width: 1.2em; height: 1.2em; margin-right: .55em; }
