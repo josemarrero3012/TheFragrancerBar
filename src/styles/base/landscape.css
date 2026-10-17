@@ -1,47 +1,78 @@
 /* Móvil en horizontal: pantalla ancha pero de solo 320–430 px de alto.
    El diseño móvil apila foto y texto a todo el ancho, así que las fotos quedaban más altas
    que la pantalla y la cabecera y la barra de contacto se comían un tercio del alto.
-   Aquí se compactan ambas y las secciones con foto pasan a dos columnas, como en escritorio.
+   Aquí se compacta todo: letra y márgenes algo menores, cabecera baja, contacto en una
+   pastilla flotante y las secciones con foto a dos columnas, como en escritorio.
    Las tablets y el escritorio no entran: tienen más de 520 px de alto o 960 px de ancho. */
 @media (orientation: landscape) and (max-height: 520px) and (max-width: 959px) {
-  :root { --header-h: 52px; --quickbar-h: 44px; --section: 56px; --avail: calc(100svh - var(--header-h) - var(--quickbar-h)); }
+  :root {
+    --header-h: 48px; --section: 40px; --gutter: 24px;
+    --t-sm: .84rem; --t-base: .95rem; --t-lg: 1.02rem; --t-h3: 1.2rem; --t-h2: 1.75rem; --t-h1: 2rem;
+    --avail: calc(100svh - var(--header-h));
+  }
 
-  /* Cabecera y barra de contacto más bajas */
-  .logo { gap: .15rem; }
-  .logo__mark { font-size: 1.1rem; }
-  .quickbar__btn { flex-direction: row; gap: .55rem; min-height: var(--quickbar-h); padding-block: .25rem; }
-  .quickbar svg { width: 18px; height: 18px; }
-  body:has(.quickbar) { padding-bottom: calc(var(--quickbar-h) + env(safe-area-inset-bottom)); }
+  /* Cabecera más baja */
+  .logo { gap: .1rem; }
+  .logo__mark { font-size: 1.05rem; }
+  .logo__sub { font-size: .45rem; }
+  .burger { min-height: 40px; }
+
+  /* Contacto: pastilla flotante solo con iconos (cada enlace conserva su aria-label) */
+  .quickbar {
+    inset: auto calc(12px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) auto;
+    grid-template-columns: repeat(3, 44px); padding: 0;
+    border: 1px solid var(--line-dark); border-radius: 999px; overflow: hidden;
+    box-shadow: 0 6px 20px rgba(22, 20, 18, .25);
+  }
+  .quickbar__btn { min-height: 44px; padding: 0; font-size: 0; }
+  .quickbar svg { width: 19px; height: 19px; }
+  body:has(.quickbar) { padding-bottom: 0; }
+  .footer { padding-bottom: 72px; }
 
   /* Menú: dos columnas para que quepan todos los enlaces sin desplazarse */
-  .mobile-menu { padding-block: 1rem; }
+  .mobile-menu { padding-block: .8rem; }
   .mobile-menu nav { grid-template-columns: 1fr 1fr; column-gap: 2rem; }
-  .mobile-menu a { font-size: 1.45rem; padding: .4rem 0; }
-  .mobile-menu__foot { padding-top: 1rem; }
+  .mobile-menu a { font-size: 1.35rem; padding: .35rem 0; }
+  .mobile-menu__foot { padding-top: .8rem; }
 
   /* Portada: foto a la derecha y texto a la izquierda, ocupando lo que queda de pantalla */
   .hero { grid-template-columns: 1fr 1fr; min-height: var(--avail); }
   .hero__media { order: 0; aspect-ratio: auto; }
-  .hero__copy { padding-block: 1.4rem; }
-  .hero__title { font-size: 2.2rem; margin-top: .6rem; }
-  .hero__lede { margin-top: .8rem; font-size: var(--t-base); }
-  .hero__ctas { margin-top: 1.2rem; }
-  .status { margin-top: 1rem; }
+  .hero__copy { padding-block: 1rem; }
+  .hero__title { margin-top: .5rem; }
+  .hero__lede { margin-top: .6rem; }
+  .hero__ctas { margin-top: 1rem; }
+  .hero__ctas .btn { min-height: 42px; padding-block: .5em; }
+  .status { margin-top: .7rem; }
+  .brandline__list { padding-block: .8rem; }
 
-  /* Casas: imagen y descripción lado a lado, bajo la tira de pestañas */
-  .casas__panel { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; align-items: start; }
-  .casas__img { aspect-ratio: auto; height: calc(var(--avail) - 6rem); }
+  /* Cabeceras de sección más juntas */
+  .section__head { margin-bottom: 1.4rem; }
+  .section__intro { margin-top: .5rem; }
+
+  /* Casas: la foto conserva su proporción 4:5 (sin recortes) y la descripción va al lado */
+  .casas__panel { display: grid; grid-template-columns: auto 1fr; gap: 1.6rem; align-items: start; }
+  .casas__img { aspect-ratio: 4 / 5; height: calc(var(--avail) - 5rem); width: auto; }
   .casas__caption { padding-top: 0; }
+  .casa { padding-block: .55rem; }
+  .casa__name { font-size: 1.2rem; }
 
   /* Selección: cuatro columnas para que cada ficha quepa entera en pantalla */
-  .products { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem 1rem; }
+  .products { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.6rem 1rem; }
+  .product__body { padding-top: .6rem; }
+  .product__try { min-height: 36px; padding-top: .4rem; }
 
   /* Casa destacada y La barra: fotos que no superan la pantalla */
-  .invitada__media { aspect-ratio: auto; height: calc(var(--avail) * .8); }
+  .invitada__media { aspect-ratio: auto; height: calc(var(--avail) * .75); }
+  .invitada__copy { padding-top: 1.4rem; }
   .barra__grid { grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
   .barra__media { aspect-ratio: auto; height: calc(var(--avail) - 2rem); max-height: none; }
+  .ritual { margin-top: 1.2rem; }
+  .ritual li { padding-block: .8rem; }
 
   /* Tiendas: ficha y mapa en dos columnas */
   .tienda__grid { grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
   .tienda__grid .map { max-height: var(--avail); }
+  .ficha { margin-top: 1.2rem; }
+  .ficha > div { padding-block: .6rem; }
 }
