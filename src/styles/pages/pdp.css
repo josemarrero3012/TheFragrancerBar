@@ -1,7 +1,11 @@
 /* Ficha de una fragancia: imagen, compra, notas y relacionadas */
 .pdp__crumbs { padding-block: 1.4rem 1rem; }
 .pdp { display: grid; gap: 2rem; padding-bottom: var(--section); }
-.pdp__media .product__media { margin-inline: calc(var(--gutter) * -1); }
+/* El frasco en su hornacina, con la luz encendida y más perfil que en la rejilla */
+.pdp__media .product__media { --on: .75; border-width: 8px; }
+.pdp__media .product__media:hover { --on: 1; }
+.pdp__media .product__media img { padding: 8% 8% 9px; }
+.pdp__media { padding-bottom: 14px; background: var(--tex-madera) bottom / 100% 14px no-repeat; }
 .pdp__media .product__media--drawn { padding: 12% 18% 9%; }
 .pdp__media .bottle__label em { font-size: clamp(1.3rem, 1rem + 1vw, 1.8rem); }
 .pdp__media .bottle__label span { font-size: .72rem; }
@@ -43,13 +47,27 @@
 .pdp__ask { display: inline-flex; align-items: center; gap: .6rem; margin-top: .4rem; font-size: var(--t-sm); font-weight: 500; text-underline-offset: 4px; }
 .pdp__ask .icon { width: 20px; height: 20px; color: #3D7B4F; }
 
-/* Notas: salida, corazón y fondo */
-.pyramid { display: grid; gap: 2rem; margin-top: 2.4rem; counter-reset: fase; }
-.pyramid li { display: grid; gap: .4rem; padding-top: 1.2rem; border-top: 1px solid var(--ink); }
+/* Notas: salida, corazón y fondo, dibujadas como las lámparas de cuentas de cristal de la tienda.
+   Arriba la cuenta de cristal blanco (lo primero que se huele), en medio la del color de la familia
+   y abajo la más densa, que es lo que queda en la piel. */
+.pyramid { position: relative; display: grid; gap: 0; max-width: 46rem; margin-top: 2.4rem; }
+.pyramid::before { content: ""; position: absolute; left: calc(var(--bead-col) / 2); top: -2.4rem; bottom: 2rem; width: 1px; background: #8A7A62; }
+.pyramid::after { content: ""; position: absolute; left: calc(var(--bead-col) / 2 - 7px); top: -2.4rem; width: 15px; height: 11px; background: linear-gradient(#C9A55C, #9B7A3A); }
+.pyramid { --bead-col: clamp(84px, 18vw, 136px); }
+.pyramid li { display: grid; grid-template-columns: var(--bead-col) minmax(0, 1fr); gap: 1.4rem; align-items: center; min-height: calc(var(--bead-col) * .9); }
+.pyramid li > div { display: grid; gap: .3rem; padding-block: 1.2rem; border-top: 1px solid var(--line); }
+.pyramid__bead { position: relative; justify-self: center; border-radius: 50%; }
+.pyramid li:nth-child(1) .pyramid__bead { width: 78%; aspect-ratio: 1.12; background: radial-gradient(60% 55% at 40% 36%, #fff, #F3EFE6 55%, #DCD6CB 100%); box-shadow: 0 0 36px rgba(255, 236, 196, .95); }
+.pyramid li:nth-child(2) .pyramid__bead { width: 62%; aspect-ratio: 2.2; background: radial-gradient(70% 60% at 40% 35%, color-mix(in srgb, var(--tint) 45%, #fff), var(--tint) 60%, color-mix(in srgb, var(--tint) 75%, #121110)); }
+.pyramid li:nth-child(3) .pyramid__bead { width: 44%; aspect-ratio: .72; border-radius: 48%;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .2) 0 2px, transparent 2px 5px), radial-gradient(70% 60% at 40% 35%, #E6D8C4, #C9B293 70%, #A88F6E); }
 .pyramid__when { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
 .pyramid h3 { font-size: var(--t-h3); }
-.pyramid p:last-child { font-family: var(--f-serif); font-size: var(--t-lg); line-height: 1.45; }
-@media (min-width: 760px) { .pyramid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.4rem; } }
+.pyramid li > div > p:last-child { font-family: var(--f-serif); font-size: var(--t-lg); line-height: 1.45; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .pyramid:hover .pyramid__bead { animation: bead-sway 3.4s var(--ease) infinite alternate; transform-origin: 50% -240px; }
+}
+@keyframes bead-sway { from { transform: rotate(-1.4deg); } to { transform: rotate(1.4deg); } }
 
 /* Barra de compra fija en móvil, cuando el botón principal sale de pantalla */
 .buybar {
