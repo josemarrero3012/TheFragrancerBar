@@ -1,7 +1,18 @@
-/* Inicio: foto de la fachada + titular, y franja de casas */
+/* Inicio: titular y, al lado, la vitrina del mes con un solo frasco (SITE.vitrinaMes) */
 .hero { display: grid; }
-.hero__media { margin: 0; order: -1; aspect-ratio: 4 / 3; overflow: hidden; background: var(--stone); }
-.hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+/* La foto de vitrina (2:3) se recorta por arriba y se ancla abajo, en el suelo de la hornacina.
+   Sus medidas van en unidades del contenedor (cqw) porque la foto escala con el ancho. */
+.hero__media { position: relative; container-type: inline-size; margin: 0; order: -1; aspect-ratio: 4 / 5; overflow: hidden; background: #D9D5CF; }
+.hero__vitrina { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
+/* Suelo de la hornacina al 95,7 % de la foto: 6,4cqw desde abajo; base del frasco al 93,5 % de su foto 4:5 */
+.hero__frasco { --fw: 50cqw; position: absolute; left: 50%; bottom: calc(6.4cqw - var(--fw) * 1.25 * .065); width: var(--fw); transform: translateX(-50%); }
+.hero__frasco img { width: 100%; height: auto; filter: drop-shadow(0 1.2cqw 1.2cqw rgba(60, 40, 15, .25)); }
+.hero__label { position: absolute; top: 19%; left: 0; right: 0; display: grid; justify-items: center; gap: .3rem; padding-inline: 12cqw; text-align: center; }
+.hero__label .eyebrow { color: var(--oak); }
+.hero__label-name { font-family: var(--f-display); font-size: clamp(1.3rem, 1rem + 2.4cqw, 2.1rem); line-height: 1.1; text-decoration: none; }
+.hero__label-name em { font-family: var(--f-serif); }
+.hero__label-name:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.hero__label-notes { font-size: var(--t-sm); color: var(--ink-2); }
 .hero__copy { padding: 2.4rem var(--gutter) 3.4rem; display: flex; flex-direction: column; justify-content: center; }
 .hero__title { font-size: var(--t-h1); margin-top: 1.1rem; max-width: 12ch; }
 .hero__lede { margin-top: 1.4rem; max-width: 30rem; font-size: var(--t-lg); color: var(--muted); font-weight: 300; line-height: 1.55; }
@@ -12,8 +23,10 @@
 .status.is-last .status__dot { background: var(--oak); }
 
 @media (min-width: 960px) {
-  .hero { grid-template-columns: 42fr 58fr; min-height: calc(100svh - var(--header-h)); max-height: 980px; }
+  .hero { grid-template-columns: 46fr 54fr; min-height: calc(100svh - var(--header-h)); max-height: 980px; }
   .hero__media { order: 0; aspect-ratio: auto; }
+  .hero__label { top: 8%; }
+  .hero__frasco { --fw: 40cqw; }
   .hero__copy { padding-left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); padding-right: clamp(2rem, 4vw, 4.5rem); }
 }
 

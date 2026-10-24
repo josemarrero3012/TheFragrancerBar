@@ -93,6 +93,9 @@ export const SITE = {
     { name: 'Google Maps', url: 'https://www.google.com/maps/search/?api=1&query=The+Fragrance+Bar+Calle+Mayor+de+Triana+32+Las+Palmas+de+Gran+Canaria' }
   ],
 
+  // Fragancia de la vitrina del hero de la portada (se cambia cada mes; id de src/data/catalogo.js, con foto)
+  vitrinaMes: 'creed-aventus',
+
   // Casa destacada de la portada
   destacada: { casa: 'xerjoff',
     text: 'Cristal tallado, tapones dorados y composiciones luminosas desde Turín. Destacamos Naxos, con lavanda, miel y tabaco, y Erba Pura, una de las más pedidas en tienda.' },

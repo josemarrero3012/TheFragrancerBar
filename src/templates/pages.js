@@ -56,22 +56,28 @@ const mapBox = (s) => `
 
 /* ---------------------------------------------------------------- Portada */
 function home(url) {
-  const s = mainStore(), d = casaById(SITE.destacada.casa);
+  const d = casaById(SITE.destacada.casa);
+  const m = FRAGANCIAS.find((x) => x.id === SITE.vitrinaMes && x.img) || featured[0], mc = casaById(m.casa);
   const main = `
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__copy">
-        <p class="eyebrow">Calle Mayor de Triana · Las Palmas de Gran Canaria</p>
+        <p class="eyebrow">Perfumería nicho · Gran Canaria y Tenerife</p>
         <h1 class="hero__title" id="hero-title">Perfumería nicho, <em>sin prisa.</em></h1>
-        <p class="hero__lede">Las grandes casas de autor, de Creed a Xerjoff, en una tienda pensada para oler con calma y probar sobre la piel antes de elegir.</p>
+        <p class="hero__lede">Las grandes casas de autor, de Creed a Xerjoff, en tiendas pensadas para oler con calma y probar sobre la piel antes de elegir.</p>
         <div class="hero__ctas">
           <a class="btn btn--dark" href="${u('comprar/')}">Comprar fragancias</a>
-          <a class="btn btn--tienda" href="${storeUrl(s)}">Visitar la tienda</a>
+          <a class="btn btn--tienda" href="${u('tiendas/')}">Nuestras tiendas</a>
         </div>
-        ${clock(s)}
       </div>
       <figure class="hero__media">
-        <img src="/${s.img}-1448.webp" srcset="/${s.img}-800.webp 800w, /${s.img}-1448.webp 1448w"
-             sizes="(min-width: 960px) 80vw, 100vw" width="1448" height="1086" alt="${esc(s.imgAlt)}" fetchpriority="high">
+        <img class="hero__vitrina" src="/img/vitrina/vitrina-hero-1024.webp" srcset="/img/vitrina/vitrina-hero-700.webp 700w, /img/vitrina/vitrina-hero-1024.webp 1024w"
+             sizes="(min-width: 960px) 58vw, 100vw" width="1024" height="1536" alt="" fetchpriority="high">
+        <a class="hero__frasco" href="${fragUrl(m)}" tabindex="-1" aria-hidden="true"><img src="/img/productos/${m.img}-800.webp" width="800" height="1000" alt="" fetchpriority="high"></a>
+        <figcaption class="hero__label">
+          <span class="eyebrow">En la vitrina este mes</span>
+          <a class="hero__label-name" href="${fragUrl(m)}">${esc(mc.name)} <em>${esc(m.name)}</em></a>
+          <span class="hero__label-notes">${esc(m.notes[0])}</span>
+        </figcaption>
       </figure>
     </section>
 
@@ -134,7 +140,7 @@ function home(url) {
           </div>
           <a class="link section__more" href="${u('tiendas/')}" data-reveal="up">Todas las tiendas</a>
         </header>
-        <ul class="storecards" data-reveal="up" data-stagger>${SITE.stores.map((st) => storeCard(st, { photo: false })).join('')}</ul>
+        <ul class="storecards" data-reveal="up" data-stagger>${SITE.stores.map((st) => storeCard(st)).join('')}</ul>
       </div>
     </section>
 
@@ -151,7 +157,7 @@ function home(url) {
     title: 'Perfumería nicho en Triana, Las Palmas | The Fragrance Bar',
     ogTitle: 'The Fragrance Bar · Triana, Las Palmas de Gran Canaria',
     description: 'Perfumería nicho en la Calle Mayor de Triana, Las Palmas de Gran Canaria. Creed, Amouage, Xerjoff, Parfums de Marly, Initio, Montale, Memo Paris y Tom Ford.',
-    preload: `<link rel="preload" as="image" href="/${s.img}-1448.webp" imagesrcset="/${s.img}-800.webp 800w, /${s.img}-1448.webp 1448w" imagesizes="(min-width: 960px) 80vw, 100vw">`,
+    preload: `<link rel="preload" as="image" href="/img/vitrina/vitrina-hero-1024.webp" imagesrcset="/img/vitrina/vitrina-hero-700.webp 700w, /img/vitrina/vitrina-hero-1024.webp 1024w" imagesizes="(min-width: 960px) 58vw, 100vw">`,
     schema: schema.graph([
       { '@type': 'WebSite', '@id': `${url}/#web`, name: SITE.brand, url: `${url}/`, inLanguage: 'es' },
       schema.organization(SITE, url),
@@ -160,7 +166,6 @@ function home(url) {
   };
 }
 
-/* photo: false en la portada, donde la fachada ya sale arriba (no repetir la misma foto) */
 function storeCard(s, { photo = true } = {}) {
   return `
           <li class="storecard">
