@@ -3,7 +3,7 @@
 @media (min-width: 640px) { .casagrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1100px) { .casagrid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .casacard__link { display: grid; gap: 1.1rem; text-decoration: none; }
-.casacard__media { margin: 0; aspect-ratio: 4 / 5; overflow: hidden; background: var(--stone); }
+.casacard__media { margin: 0; aspect-ratio: 4 / 5; overflow: hidden; background: var(--stone); border: 6px solid var(--ink); } /* el perfil de las vitrinas */
 .casacard__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
 .casacard__link:hover .casacard__media img { transform: scale(1.045); }
 .casacard__body { display: grid; gap: .35rem; }

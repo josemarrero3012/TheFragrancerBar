@@ -334,8 +334,8 @@ function fragancia(url, p) {
     <section class="notes section section--stone" aria-labelledby="notes-title">
       <div class="wrap">
         <h2 class="section__title" id="notes-title" data-reveal="up">Cómo <em>evoluciona</em></h2>
-        <ol class="pyramid" data-reveal="up" data-stagger>
-          ${PHASES.map(([t, when], i) => `<li><p class="pyramid__when">${when}</p><h3>${t}</h3><p>${esc(p.notes[i])}</p></li>`).join('')}
+        <ol class="pyramid" data-familia="${p.familia}" data-reveal="up" data-stagger>
+          ${PHASES.map(([t, when], i) => `<li><span class="pyramid__bead" aria-hidden="true"></span><div><p class="pyramid__when">${when}</p><h3>${t}</h3><p>${esc(p.notes[i])}</p></div></li>`).join('')}
         </ol>
       </div>
     </section>
