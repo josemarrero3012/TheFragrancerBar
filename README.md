@@ -11,7 +11,7 @@ Es un prototipo: los precios son de ejemplo, la tienda online no cobra y los for
 - Una portada con la tienda de Triana, una selección de fragancias y las casas de perfumes.
 - Una página para cada casa (Creed, Xerjoff, Amouage, Tom Ford, Parfums de Marly…) con todas sus fragancias.
 - Un catálogo con buscador y filtros por casa y por familia olfativa.
-- Una ficha para cada fragancia, con sus tamaños, el precio y las notas de salida, corazón y fondo.
+- Una ficha para cada fragancia, con sus tamaños, el precio y sus notas oficiales (las que publica cada casa), cada una con su foto.
 - Una cesta y un pedido de prueba, con recogida en tienda o envío.
 - «Tu lista», para guardar favoritos y mandarlos por WhatsApp.
 - Las tres tiendas con su horario y un aviso de si están abiertas o cerradas en ese momento, que tiene en cuenta los festivos.
@@ -40,6 +40,14 @@ npm run fotos
 ```
 
 Quita el fondo, encaja el frasco como en el resto de fotos y deja en `scripts/fotos-informe.txt` de dónde salió cada una y cuáles no encontró. Las fuentes (tiendas Shopify, búsqueda de Montale y páginas concretas) están en `scripts/fotos-fuentes.js`.
+
+Las notas de cada fragancia están en `src/data/notas-oficiales.js`, copiadas de la web de su casa. Las fotos de las notas salen de Wikimedia Commons, con licencia libre:
+
+```bash
+npm run notas
+```
+
+Descarga la foto de cada nota de `src/data/notas.js` a `public/img/notas/`, apunta autor y licencia (salen en /legal/#creditos) y deja en `scripts/notas-informe.txt` las que no encontró.
 
 La parte técnica (estructura de carpetas, cómo editar el contenido, SEO y publicación) está en [docs/DESARROLLO.md](docs/DESARROLLO.md).
 

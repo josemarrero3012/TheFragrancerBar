@@ -5,9 +5,10 @@
    ========================================================================== */
 import { SITE, mainStore } from '../data/site.js';
 import { CASAS, FRAGANCIAS, FAMILIAS, CONCENTRACIONES, casaById, familiaName, fragsDeCasa, euros } from '../data/catalogo.js';
+import { NOTAS, NOTAS_FOTOS, gruposDeNotas, notasPlanas } from '../data/notas.js';
 import * as schema from '../data/schema.js';
 import { layout, whatsappHref } from './layout.js';
-import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productMedia, productCard, crumbs, pageHead, demoNote, brandStrip, clock, rotulo } from './ui.js';
+import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productMedia, productCard, crumbs, pageHead, demoNote, brandStrip, clock, rotulo, nota } from './ui.js';
 
 const DAYS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const cap = (s) => s[0].toUpperCase() + s.slice(1);
@@ -76,7 +77,7 @@ function home(url) {
         <figcaption class="hero__label">
           <span class="eyebrow">En la vitrina este mes</span>
           <a class="hero__label-name" href="${fragUrl(m)}">${esc(mc.name)} <em>${esc(m.name)}</em></a>
-          <span class="hero__label-notes">${esc(m.notes[0])}</span>
+          <span class="hero__label-notes">${esc(notasPlanas(m.notes).slice(0, 3).join(', '))}</span>
         </figcaption>
       </figure>
     </section>
@@ -304,7 +305,7 @@ function fragancia(url, p) {
   const c = casaById(p.casa), label = `${c.name} ${p.name}`;
   const related = [...fragsDeCasa(c.id).filter((x) => x.id !== p.id),
     ...FRAGANCIAS.filter((x) => x.casa !== c.id && x.familia === p.familia)].slice(0, 4);
-  const PHASES = [['Salida', 'Los primeros minutos'], ['Corazón', 'Durante las primeras horas'], ['Fondo', 'Lo que queda en la piel']];
+  const grupos = gruposDeNotas(p.notes);
   const main = `
     <div class="wrap pdp__crumbs">${crumbs([['Inicio', ''], ['Comprar', 'comprar/'], [c.name, `casas/${c.id}/`], [p.name]])}</div>
     <article class="pdp wrap" data-pdp="${p.id}">
@@ -340,10 +341,16 @@ function fragancia(url, p) {
 
     <section class="notes section section--stone" aria-labelledby="notes-title">
       <div class="wrap">
-        <h2 class="section__title" id="notes-title" data-reveal="up">Cómo <em>evoluciona</em></h2>
-        <ol class="pyramid" data-familia="${p.familia}" data-reveal="up" data-stagger>
-          ${PHASES.map(([t, when], i) => `<li><span class="pyramid__bead" aria-hidden="true"></span><div><p class="pyramid__when">${when}</p><h3>${t}</h3><p>${esc(p.notes[i])}</p></div></li>`).join('')}
-        </ol>
+        <header class="section__head">
+          <h2 class="section__title" id="notes-title" data-reveal="up">Sus <em>notas</em></h2>
+          <p class="notes__fuente" data-reveal="up">${grupos.length
+            ? `Tal como las describe ${esc(c.name)} en su <a href="${p.notes.fuente}" target="_blank" rel="noopener">web oficial${NEW_TAB}</a>.`
+            : `${esc(c.name)} guarda en secreto las notas de ${esc(p.name)}. La mejor forma de conocerlo es olerlo: pruébalo en la barra de cualquiera de nuestras tiendas.`}</p>
+        </header>
+        ${grupos.map(([t, notas]) => `<div class="notes__group" data-reveal="up">
+          <h3 class="notes__tier">${t}</h3>
+          <ul class="notes__list">${notas.map(nota).join('')}</ul>
+        </div>`).join('')}
       </div>
     </section>
 
@@ -365,7 +372,7 @@ function fragancia(url, p) {
   return {
     path: `fragancias/${p.id}/`, section: 'comprar', main, quickbar: false,
     title: `${label} · ${CONCENTRACIONES[p.conc]} | The Fragrance Bar`,
-    description: fit(`${label}, ${CONCENTRACIONES[p.conc].toLowerCase()}${p.year ? ` de ${p.year}` : ''}. ${p.desc}`, ` Notas: ${p.notes.join(', ').toLowerCase()}.`, ' En The Fragrance Bar.'),
+    description: fit(`${label}, ${CONCENTRACIONES[p.conc].toLowerCase()}${p.year ? ` de ${p.year}` : ''}. ${p.desc}`, notasPlanas(p.notes).length ? ` Notas: ${notasPlanas(p.notes).join(', ').toLowerCase()}.` : '', ' En The Fragrance Bar.'),
     ogImage: p.img ? `${url}/img/productos/${p.img}-800.webp` : undefined,
     schema: schema.graph([schema.breadcrumbs(url, bc), schema.product(SITE, url, p)])
   };
@@ -717,7 +724,7 @@ function legal() {
         <p class="legal__draft" data-proto>Borrador. Los datos entre corchetes los tiene que facilitar el negocio, y el texto debe revisarlo un profesional antes de publicar la web. Faltan también las condiciones de venta de la tienda online.</p>
       </header>
       <nav class="legal__toc" aria-label="Secciones">
-        <a href="#aviso-legal">Aviso legal</a><a href="#privacidad">Privacidad</a><a href="#cookies">Cookies</a>
+        <a href="#aviso-legal">Aviso legal</a><a href="#privacidad">Privacidad</a><a href="#cookies">Cookies</a><a href="#creditos">Créditos</a>
       </nav>
       <div class="legal__body">
         <section id="aviso-legal" aria-labelledby="t-aviso">
@@ -767,10 +774,15 @@ function legal() {
           <h3>Mapa de Google</h3>
           <p>El mapa de cada tienda solo se carga si pulsas «Ver en el mapa». En ese momento Google puede instalar sus propias cookies, según su <a href="https://policies.google.com/technologies/cookies?hl=es" rel="noopener" target="_blank">política de cookies${NEW_TAB}</a>.</p>
         </section>
+        <section id="creditos" aria-labelledby="t-creditos">
+          <h2 id="t-creditos">Créditos de las imágenes</h2>
+          <p>Las fotos de los frascos son las oficiales de cada casa. Las notas olfativas de cada fragancia son las que publica su casa en su web. Las fotos de las notas vienen de <a href="https://commons.wikimedia.org" rel="noopener" target="_blank">Wikimedia Commons${NEW_TAB}</a> y se usan según la licencia de cada una:</p>
+          ${Object.keys(NOTAS_FOTOS).length ? `<ul class="legal__credits">${Object.entries(NOTAS_FOTOS).map(([k, f]) => `<li><strong>${esc(NOTAS[k].name)}:</strong> <a href="${f.url}" rel="noopener" target="_blank">${esc(f.titulo)}${NEW_TAB}</a>, de ${esc(f.autor)}, <a href="${f.licenciaUrl}" rel="noopener" target="_blank">${esc(f.licencia)}${NEW_TAB}</a>${f.cambios ? '. Recortada' : ''}.</li>`).join('')}</ul>` : ''}
+        </section>
       </div>
     </div>`;
   return { path: 'legal/', section: 'legal', main, title: 'Información legal | The Fragrance Bar',
-    description: 'Aviso legal, política de privacidad y política de cookies de The Fragrance Bar.' };
+    description: 'Aviso legal, política de privacidad, política de cookies y créditos de las imágenes de The Fragrance Bar.' };
 }
 
 function notFound() {
