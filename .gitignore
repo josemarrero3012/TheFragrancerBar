@@ -13,3 +13,6 @@ Thumbs.db
 *.log
 .env.local
 .env.*.local
+
+# Entorno de Python para scripts/recortar.py
+.venv/

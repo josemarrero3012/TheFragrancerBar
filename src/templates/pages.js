@@ -70,8 +70,8 @@ function home(url) {
         </div>
       </div>
       <figure class="hero__media">
-        <img class="hero__vitrina" src="/img/vitrina/vitrina-hero-1024.webp" srcset="/img/vitrina/vitrina-hero-700.webp 700w, /img/vitrina/vitrina-hero-1024.webp 1024w"
-             sizes="(min-width: 960px) 58vw, 100vw" width="1024" height="1536" alt="" fetchpriority="high">
+        <img class="hero__vitrina" src="/img/vitrina/vitrina-hero-912.webp" srcset="/img/vitrina/vitrina-hero-700.webp 700w, /img/vitrina/vitrina-hero-912.webp 912w"
+             sizes="(min-width: 960px) 58vw, 100vw" width="912" height="1532" alt="" fetchpriority="high">
         <a class="hero__frasco" href="${fragUrl(m)}" tabindex="-1" aria-hidden="true"><img src="/img/productos/${m.img}-800.webp" width="800" height="1000" alt="" fetchpriority="high"></a>
         <figcaption class="hero__label">
           <span class="eyebrow">En la vitrina este mes</span>
@@ -157,7 +157,7 @@ function home(url) {
     title: 'Perfumería nicho en Triana, Las Palmas | The Fragrance Bar',
     ogTitle: 'The Fragrance Bar · Triana, Las Palmas de Gran Canaria',
     description: 'Perfumería nicho en la Calle Mayor de Triana, Las Palmas de Gran Canaria. Creed, Amouage, Xerjoff, Parfums de Marly, Initio, Montale, Memo Paris y Tom Ford.',
-    preload: `<link rel="preload" as="image" href="/img/vitrina/vitrina-hero-1024.webp" imagesrcset="/img/vitrina/vitrina-hero-700.webp 700w, /img/vitrina/vitrina-hero-1024.webp 1024w" imagesizes="(min-width: 960px) 58vw, 100vw">`,
+    preload: `<link rel="preload" as="image" href="/img/vitrina/vitrina-hero-912.webp" imagesrcset="/img/vitrina/vitrina-hero-700.webp 700w, /img/vitrina/vitrina-hero-912.webp 912w" imagesizes="(min-width: 960px) 58vw, 100vw">`,
     schema: schema.graph([
       { '@type': 'WebSite', '@id': `${url}/#web`, name: SITE.brand, url: `${url}/`, inLanguage: 'es' },
       schema.organization(SITE, url),
