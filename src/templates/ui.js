@@ -64,7 +64,7 @@ export function productCard(p, { notes = false, i = 0 } = {}) {
   const c = casaById(p.casa), from = priceFrom(p), label = `${p.name} de ${c.name}`;
   const multi = p.sizes.length > 1;
   return `
-          <li class="product" data-id="${p.id}" data-familia="${p.familia}" data-casa="${p.casa}" data-price="${from}" data-year="${p.year}" data-name="${esc(`${p.name} ${c.name}`.toLowerCase())}" data-notes="${esc(p.notes.join(', ').toLowerCase())}" data-reveal="up" data-reveal-delay="${(i % 4) * 80}">
+          <li class="product" data-id="${p.id}" data-familia="${p.familia}" data-casa="${p.casa}" data-price="${from}" data-year="${p.year || 0}" data-name="${esc(`${p.name} ${c.name}`.toLowerCase())}" data-notes="${esc(p.notes.join(', ').toLowerCase())}" data-reveal="up" data-reveal-delay="${(i % 4) * 80}">
             <a class="product__link" href="${fragUrl(p)}" tabindex="-1" aria-hidden="true">${productMedia(p)}</a>
             <div class="product__body">
               <p class="product__brand">${esc(c.name)}</p>
