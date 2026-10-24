@@ -4,7 +4,7 @@
 .toolbar__search .icon { position: absolute; left: .9rem; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--muted); pointer-events: none; }
 .toolbar__search input {
   width: 100%; min-height: 50px; padding: .7rem .9rem .7rem 2.7rem;
-  background: var(--card); border: 1px solid rgba(22, 20, 18, .22); border-radius: 0; font-size: var(--t-base);
+  background: var(--card); border: 1px solid rgba(18, 17, 16, .22); border-radius: 0; font-size: var(--t-base);
   -webkit-appearance: none; appearance: none;
 }
 .toolbar__search input:focus-visible { outline: 2px solid var(--oak); outline-offset: 0; border-color: var(--oak); }
@@ -13,7 +13,7 @@
 .select { display: grid; gap: .3rem; flex: 1; min-width: 0; }
 .select span { font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .select select {
-  width: 100%; min-height: 50px; padding: .6rem 2.2rem .6rem .9rem; border: 1px solid rgba(22, 20, 18, .22); border-radius: 0;
+  width: 100%; min-height: 50px; padding: .6rem 2.2rem .6rem .9rem; border: 1px solid rgba(18, 17, 16, .22); border-radius: 0;
   background-color: var(--card); -webkit-appearance: none; appearance: none; cursor: pointer;
   background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%); background-position: calc(100% - 18px) 54%, calc(100% - 13px) 54%; background-size: 5px 5px; background-repeat: no-repeat;
 }
@@ -31,3 +31,11 @@
 @media (min-width: 960px) {
   .section__head--row { grid-template-columns: 1fr auto; align-items: end; gap: 3rem; }
 }
+
+/* Filtros de familia con la cuenta de color de las lámparas de la tienda */
+.chip[data-familia-filter]:not([data-familia-filter=""]) { display: inline-flex; align-items: center; gap: .5rem; }
+.chip[data-familia-filter]:not([data-familia-filter=""])::before { content: ""; width: .62rem; height: .8rem; border-radius: 50%; background: var(--tint); box-shadow: inset -1px -2px 3px rgba(18, 17, 16, .18); }
+.chip[data-familia-filter="frescas"] { --tint: var(--tint-frescas); }
+.chip[data-familia-filter="florales"] { --tint: var(--tint-florales); }
+.chip[data-familia-filter="amaderadas"] { --tint: var(--tint-amaderadas); }
+.chip[data-familia-filter="ambar"] { --tint: var(--tint-ambar); }

@@ -27,7 +27,7 @@
 .size input { position: absolute; opacity: 0; pointer-events: none; }
 .size__ml { font-weight: 500; }
 .size__price { font-size: var(--t-sm); color: var(--muted); font-variant-numeric: tabular-nums; }
-.size:hover { border-color: rgba(22, 20, 18, .5); }
+.size:hover { border-color: rgba(18, 17, 16, .5); }
 .size:has(:checked) { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
 .size:has(:focus-visible) { outline: 2px solid var(--oak); outline-offset: 3px; }
 .buy__price { display: flex; align-items: baseline; gap: .8rem; }
@@ -56,7 +56,7 @@
   position: fixed; inset: auto 0 0 0; z-index: 97;
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   padding: .7rem var(--gutter) calc(.7rem + env(safe-area-inset-bottom));
-  background: var(--paper); border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(22, 20, 18, .08);
+  background: var(--paper); border-top: 1px solid var(--line); box-shadow: 0 -8px 24px rgba(18, 17, 16, .08);
   transform: translateY(110%); transition: transform .4s var(--ease);
 }
 .buybar.is-visible { transform: none; }

@@ -34,7 +34,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .section__intro { max-width: 36rem; color: var(--muted); font-size: var(--t-lg); line-height: 1.55; font-weight: 300; }
 .section__title + .section__intro { margin-top: 1rem; }
 .section__head > .section__title + .section__intro { margin-top: 0; } /* ahí ya separa el gap */
-.section--dark .section__intro { color: rgba(245, 241, 234, .74); }
+.section--dark .section__intro { color: rgba(248, 247, 244, .74); }
 .eyebrow { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
 
 /* Bandas que se desbordan hasta el borde de la pantalla y se desplazan en horizontal (móvil) */

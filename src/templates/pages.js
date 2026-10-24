@@ -65,7 +65,7 @@ function home(url) {
         <p class="hero__lede">Las grandes casas de autor, de Creed a Xerjoff, en una tienda pensada para oler con calma y probar sobre la piel antes de elegir.</p>
         <div class="hero__ctas">
           <a class="btn btn--dark" href="${u('comprar/')}">Comprar fragancias</a>
-          <a class="btn btn--line" href="${storeUrl(s)}">Visitar la tienda</a>
+          <a class="btn btn--tienda" href="${storeUrl(s)}">Visitar la tienda</a>
         </div>
         ${clock(s)}
       </div>
@@ -220,7 +220,7 @@ function casa(url, c) {
           <p class="casahero__icons"><span>Emblemáticas</span> ${c.icons.map(esc).join(' · ')}</p>
           <div class="hero__ctas">
             <a class="btn btn--dark" href="#fragancias">Ver ${items.length === 1 ? 'su fragancia' : `sus ${items.length} fragancias`}</a>
-            <a class="btn btn--line" href="${u('tiendas/')}">Probarlas en tienda</a>
+            <a class="btn btn--tienda" href="${u('tiendas/')}">Probarlas en tienda</a>
           </div>
         </div>
       </header>
@@ -513,7 +513,7 @@ function barra(url) {
           <li>${ICON.heart}<h3>Tu lista</h3><p>Guarda en la web lo que te interese y enséñanoslo al llegar, o envíanoslo por WhatsApp.</p></li>
         </ul>
         <div class="hero__ctas" data-reveal="up">
-          <a class="btn btn--dark" href="${u('tiendas/')}">Encontrar una tienda</a>
+          <a class="btn btn--tienda" href="${u('tiendas/')}">Encontrar una tienda</a>
           <a class="btn btn--line" href="${u('comprar/')}">Ver el catálogo</a>
         </div>
       </div>
@@ -584,7 +584,7 @@ function tienda(url, s) {
           ${clock(s)}
           ${storeFicha(s)}
           <div class="hero__ctas">
-            <a class="btn btn--dark" href="${s.mapsUrl}" target="_blank" rel="noopener">Cómo llegar${NEW_TAB}</a>
+            <a class="btn btn--tienda" href="${s.mapsUrl}" target="_blank" rel="noopener">Cómo llegar${NEW_TAB}</a>
             <a class="btn btn--line" href="${telHref(s.phone)}">Llamar</a>
           </div>
         </div>

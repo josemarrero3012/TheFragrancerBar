@@ -1,7 +1,8 @@
 /* Cabecera fija, navegación y menú móvil */
 .header {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(245, 241, 234, .92);
+  background: rgba(248, 247, 244, .92);
+  border-top: 3px solid var(--ink); /* el carril de focos del techo */
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent; transition: border-color .3s;
 }
@@ -9,10 +10,15 @@
 .header__inner { display: flex; align-items: center; gap: 2rem; min-height: var(--header-h); }
 .header .logo { margin-right: auto; }
 .header__actions { display: flex; align-items: center; gap: .4rem; }
-.nav { display: none; gap: clamp(1.1rem, 2vw, 2.2rem); }
-.nav a { position: relative; text-decoration: none; font-size: var(--t-sm); padding-block: .3em; }
-.nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
-.nav a:hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
+.nav { display: none; gap: clamp(1.1rem, 2vw, 2.2rem); align-self: stretch; }
+/* Cada sección cuelga del carril; la activa tiene su foco encendido, como los del techo de la tienda */
+.nav a { position: relative; isolation: isolate; display: flex; align-items: center; text-decoration: none; font-size: var(--t-sm); padding-inline: .1em; }
+.nav a::before { content: ""; position: absolute; left: 50%; top: 0; width: 8px; height: 13px; margin-left: -4px; background: var(--ink); border-radius: 0 0 3px 3px; transform: scaleY(0); transform-origin: top; transition: transform .35s var(--ease); }
+.nav a::after { content: ""; position: absolute; left: 50%; top: 6px; width: 96px; height: 70px; margin-left: -48px; z-index: -1; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(244, 214, 160, .9), rgba(246, 227, 190, 0)); opacity: 0; transition: opacity .45s var(--ease); }
+.nav a:hover::before, .nav a[aria-current="page"]::before { transform: none; }
+.nav a:hover::after, .nav a[aria-current="page"]::after { opacity: 1; }
+.nav a:focus-visible { outline-offset: -2px; }
 .header__cta[aria-current="page"] { background: var(--ink-2); }
 .header__cta { display: none; }
 .burger { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; border: 0; background: none; cursor: pointer; font-size: var(--t-sm); }

@@ -3,7 +3,7 @@
 .legal__head { display: grid; gap: .8rem; justify-items: start; }
 .legal__title { font-size: var(--t-h2); }
 .legal__meta { margin-top: .8rem; font-size: var(--t-sm); color: var(--muted); }
-.legal__draft { margin-top: 1.4rem; max-width: 40rem; padding: 1rem 1.2rem; border: 1px dashed rgba(22, 20, 18, .3); font-size: var(--t-sm); color: var(--muted); }
+.legal__draft { margin-top: 1.4rem; max-width: 40rem; padding: 1rem 1.2rem; border: 1px dashed rgba(18, 17, 16, .3); font-size: var(--t-sm); color: var(--muted); }
 
 .legal__toc { display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; padding-block: .9rem; border-block: 1px solid var(--line); font-size: var(--t-sm); }
 .legal__toc a { text-decoration: none; }
@@ -22,7 +22,7 @@
 .legal__data dd { margin: 0; }
 
 /* Dato pendiente de facilitar por el negocio */
-.pending { padding-inline: .2em; background: rgba(201, 154, 99, .22); color: var(--oak); }
+.pending { padding-inline: .2em; background: rgba(194, 122, 52, .22); color: var(--oak); }
 
 @media (min-width: 960px) {
   .legal { grid-template-columns: 14rem minmax(0, 1fr); column-gap: 6vw; align-items: start; }

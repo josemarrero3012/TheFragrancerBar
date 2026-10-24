@@ -30,7 +30,7 @@
 .option:has(:checked) { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
 .option:has(:focus-visible) { outline: 2px solid var(--oak); outline-offset: 3px; }
 
-.paybox { display: grid; gap: .5rem; padding: 1.1rem 1.2rem; border: 1px dashed rgba(22, 20, 18, .3); background: var(--card); font-size: var(--t-sm); color: var(--muted); }
+.paybox { display: grid; gap: .5rem; padding: 1.1rem 1.2rem; border: 1px dashed rgba(18, 17, 16, .3); background: var(--card); font-size: var(--t-sm); color: var(--muted); }
 .paybox strong { color: var(--ink); font-weight: 500; }
 
 .summary { display: grid; gap: 1rem; padding: 1.6rem; background: var(--card); border: 1px solid var(--line); }

@@ -3,9 +3,9 @@
   position: fixed; inset: 0 0 0 auto; margin: 0; padding: 0; border: 0;
   width: min(440px, 100vw); height: 100dvh; max-width: none; max-height: none;
   background: var(--paper) var(--grain); color: var(--ink);
-  box-shadow: -20px 0 60px rgba(22, 20, 18, .18);
+  box-shadow: -20px 0 60px rgba(18, 17, 16, .18);
 }
-.drawer::backdrop { background: rgba(22, 20, 18, .45); }
+.drawer::backdrop { background: rgba(18, 17, 16, .45); }
 .has-motion .drawer[open] { animation: drawer-in .5s var(--ease); }
 .has-motion .drawer[open]::backdrop { animation: drawer-fade .5s var(--ease); }
 .has-motion .drawer.is-closing { animation: drawer-in .3s var(--ease) reverse forwards; }
