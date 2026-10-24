@@ -2,11 +2,11 @@
 .hero { display: grid; }
 /* La foto de vitrina (2:3) se recorta por arriba y se ancla abajo, en el suelo de la hornacina.
    Sus medidas van en unidades del contenedor (cqw) porque la foto escala con el ancho. */
-.hero__media { position: relative; container-type: inline-size; margin: 0; order: -1; aspect-ratio: 4 / 5; overflow: hidden; background: #D9D5CF; }
+.hero__media { position: relative; container-type: inline-size; margin: 0; order: -1; aspect-ratio: 4 / 5; overflow: hidden; background: #121110; }
 .hero__vitrina { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
-/* Suelo de la hornacina al 95,7 % de la foto: 6,4cqw desde abajo; base del frasco al 93,5 % de su foto 4:5 */
-.hero__frasco { --fw: 50cqw; position: absolute; left: 50%; bottom: calc(6.4cqw - var(--fw) * 1.25 * .065); width: var(--fw); transform: translateX(-50%); }
-.hero__frasco img { width: 100%; height: auto; filter: drop-shadow(0 1.2cqw 1.2cqw rgba(60, 40, 15, .25)); }
+/* Suelo de la hornacina a 62 px del borde inferior de la foto de 912 px: 6,8cqw; base del frasco al 93,5 % de su foto 4:5 */
+.hero__frasco { --fw: 50cqw; position: absolute; left: 50%; bottom: calc(6.8cqw - var(--fw) * 1.25 * .065); width: var(--fw); transform: translateX(-50%); }
+.hero__frasco img { width: 100%; height: auto; }
 .hero__label { position: absolute; top: 19%; left: 0; right: 0; display: grid; justify-items: center; gap: .3rem; padding-inline: 12cqw; text-align: center; }
 .hero__label .eyebrow { color: var(--oak); }
 .hero__label-name { font-family: var(--f-display); font-size: clamp(1.3rem, 1rem + 2.4cqw, 2.1rem); line-height: 1.1; text-decoration: none; }
