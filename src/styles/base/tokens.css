@@ -1,23 +1,32 @@
-/* Tokens de diseño: color, tipografía, espaciado */
+/* Tokens de diseño: color, texturas, tipografía y espaciado.
+   Todo sale del local de Triana: pared blanca, vitrinas de perfil negro con luz cálida,
+   cortina de cadenas cobre, mostrador de azulejo azul y suelo de madera clara. */
 :root {
-  --paper: #F5F1EA;      /* pared de la tienda */
-  --stone: #ECE6DC;      /* fondo de producto */
-  --ink: #161412;        /* rótulo */
-  --ink-2: #2A2622;
-  --muted: #6B635A;      /* texto secundario (AA sobre --paper) */
-  --oak: #8A5A2E;        /* roble, para detalles y texto pequeño */
-  --oak-light: #C99A63;  /* roble sobre negro */
+  /* Colores sacados del local de Triana */
+  --paper: #F8F7F4;      /* pared blanca */
+  --stone: #F1EFEA;      /* fondo de producto */
+  --niche: #FBFAF7;      /* hornacina iluminada */
+  --ink: #121110;        /* perfil de las vitrinas y rótulo */
+  --ink-2: #26231F;
+  --muted: #5F5A54;      /* texto secundario (AA sobre --paper) */
+  --oak: #8E4F1A;        /* cobre para texto y detalles pequeños (6:1 sobre --paper) */
+  --oak-light: #D9965A;  /* cobre sobre negro */
+  --cobre: #C27A34;      /* cortina de cadenas: acento decorativo, no para texto */
+  --vidriado: #2D5B6B;   /* mostrador de azulejo azul: acciones que llevan a la tienda */
+  --vidriado-2: #234D5C; /* juntas del azulejo */
+  --luz: #F6E3BE;        /* luz cálida de las hornacinas, solo como resplandor */
+  --roble: #D2B48C;      /* suelo y zócalo */
   --error: #A3392B;
   --ok: #5E8B4E;
-  --line: rgba(22, 20, 18, .14);
-  --line-dark: rgba(245, 241, 234, .16);
-  --card: #FBF9F5;       /* fondos de campos y resúmenes */
+  --line: rgba(18, 17, 16, .14);
+  --line-dark: rgba(248, 247, 244, .16);
+  --card: #FFFFFF;       /* fondos de campos y resúmenes */
 
-  /* Tinte de cada familia olfativa (frascos dibujados) */
-  --tint-frescas: #DCE2CF;
-  --tint-florales: #ECD8D0;
-  --tint-amaderadas: #DFD0BD;
-  --tint-ambar: #E8CFA9;
+  /* Familias olfativas con los colores de las cuentas de las lámparas */
+  --tint-frescas: #A9C4D3;
+  --tint-florales: #D9B6AC;
+  --tint-amaderadas: #D6C7B0;
+  --tint-ambar: #DDA66C;
 
   --f-display: "Libre Caslon Display", "Libre Caslon Text", Georgia, serif;
   --f-serif: "Libre Caslon Text", Georgia, serif;
@@ -37,6 +46,17 @@
   --section: clamp(80px, 10vw, 140px);
   --ease: cubic-bezier(.25, .6, .2, 1);
 
-  /* Grano de papel para los fondos claros: ruido SVG en el color de la tinta */
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .086 0 0 0 0 .078 0 0 0 0 .07 0 0 0 -1.4 .7'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.09'/%3E%3C/svg%3E");
+  /* Las paredes de la tienda son lisas: sin grano */
+  --grain: none;
+
+  /* Texturas de la tienda, en CSS y SVG (sin peticiones extra) */
+  /* Azulejo blanco en chevron, en relieve */
+  --tex-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='28'%3E%3Cpath d='M0 20 L10 8 L20 20 L30 8 L40 20' fill='none' stroke='%23ffffff' stroke-width='3'/%3E%3Cpath d='M0 22 L10 10 L20 22 L30 10 L40 22' fill='none' stroke='%23C9C3B8' stroke-width='1.2' opacity='.5'/%3E%3C/svg%3E") 0 0 / 40px 28px;
+  /* El mismo chevron en blanco tenue, para fondos negros */
+  --tex-chevron-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='28'%3E%3Cpath d='M0 20 L10 8 L20 20 L30 8 L40 20' fill='none' stroke='%23ffffff' stroke-opacity='.05' stroke-width='3'/%3E%3C/svg%3E") 0 0 / 40px 28px;
+  /* Tablas del suelo, para el zócalo */
+  --tex-madera: repeating-linear-gradient(90deg, #D6BA92 0 46px, #CDAF85 46px 47px, #D9BF99 47px 96px, #CBAA7F 96px 97px, #D3B68C 97px 150px, #CBAA7F 150px 151px);
+  /* Azulejo azul vidriado del mostrador: brillo arriba y juntas verticales */
+  --tex-azulejo: linear-gradient(180deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, .1)),
+    repeating-linear-gradient(90deg, #2F6072 0 22px, var(--vidriado-2) 22px 23px, #34677A 23px 45px, var(--vidriado-2) 45px 46px, #2D5D6E 46px 68px, var(--vidriado-2) 68px 69px);
 }

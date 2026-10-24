@@ -14,6 +14,10 @@
 .btn--light:hover { background: transparent; color: var(--paper); }
 .section--dark .btn--line { border-color: var(--paper); }
 .section--dark .btn--line:hover { background: var(--paper); color: var(--ink); }
+/* Todo lo que lleva a la tienda (visitar, probar, llegar) va en el azul vidriado del mostrador */
+.btn--tienda { border-color: var(--vidriado-2); background: var(--tex-azulejo); color: #fff; text-shadow: 0 1px 0 rgba(0, 0, 0, .25); transition: filter .3s var(--ease); }
+.btn--tienda:hover { filter: brightness(1.1); }
+.section--dark .btn--tienda { border-color: var(--vidriado-2); }
 .btn--sm { min-height: 40px; padding: .5em 1.1em; font-size: var(--t-xs); }
 .btn--lg { min-height: 54px; padding-inline: 2.2em; }
 

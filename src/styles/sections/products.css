@@ -39,13 +39,13 @@
 .product__media--drawn {
   display: grid; grid-template-rows: minmax(0, 1fr) auto; justify-items: center; gap: 6%;
   padding: 13% 10% 10%;
-  background: radial-gradient(110% 80% at 50% 28%, #F6F2EB 0%, var(--tint) 100%);
+  background: radial-gradient(110% 80% at 50% 28%, #FBFAF7 0%, var(--tint) 100%);
 }
 .bottle { height: 100%; width: auto; max-width: 100%; overflow: visible; transition: transform .8s var(--ease); }
-.bottle__glass > * { fill: color-mix(in srgb, var(--tint) 70%, #8A5A2E 30%); fill-opacity: .5; stroke: rgba(22, 20, 18, .62); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.bottle__glass > * { fill: color-mix(in srgb, var(--tint) 70%, #8E4F1A 30%); fill-opacity: .5; stroke: rgba(18, 17, 16, .62); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
 .bottle__shine { fill: #fff; opacity: .55; }
 .bottle__glass > :first-child { fill: var(--ink); fill-opacity: 1; stroke: var(--ink); }
-.bottle__glass > :nth-child(n+4) { fill: none; stroke: rgba(138, 90, 46, .7); }
+.bottle__glass > :nth-child(n+4) { fill: none; stroke: rgba(142, 79, 26, .7); }
 .bottle__label { display: grid; justify-items: center; gap: .25rem; text-align: center; line-height: 1.15; }
 .bottle__label span { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-2); }
 .bottle__label em { font-family: var(--f-serif); font-size: clamp(.95rem, .85rem + .4vw, 1.2rem); color: var(--ink); }

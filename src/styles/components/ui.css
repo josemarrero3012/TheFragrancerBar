@@ -6,7 +6,7 @@
 .pagehead__inner { display: grid; gap: 1rem; justify-items: start; }
 .pagehead__title { font-size: var(--t-h1); max-width: 16ch; }
 .pagehead__intro { max-width: 40rem; color: var(--muted); font-size: var(--t-lg); font-weight: 300; line-height: 1.55; }
-.section--dark .pagehead__intro { color: rgba(245, 241, 234, .74); }
+.section--dark .pagehead__intro { color: rgba(248, 247, 244, .74); }
 .pagehead .demo-note { margin-top: .6rem; }
 .eyebrow--light { color: var(--oak-light); }
 .section--tight { padding-top: 0; }
@@ -14,16 +14,16 @@
 
 /* Migas de pan */
 .crumbs ol { display: flex; flex-wrap: wrap; gap: .2rem .5rem; font-size: var(--t-xs); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.crumbs li + li::before { content: "/"; margin-right: .5rem; color: rgba(22, 20, 18, .3); }
+.crumbs li + li::before { content: "/"; margin-right: .5rem; color: rgba(18, 17, 16, .3); }
 .crumbs a { text-decoration: none; }
 .crumbs a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 .crumbs [aria-current] { color: var(--ink-2); }
-.section--dark .crumbs ol { color: rgba(245, 241, 234, .6); }
-.section--dark .crumbs li + li::before { color: rgba(245, 241, 234, .3); }
+.section--dark .crumbs ol { color: rgba(248, 247, 244, .6); }
+.section--dark .crumbs li + li::before { color: rgba(248, 247, 244, .3); }
 .section--dark .crumbs [aria-current], .section--dark .crumbs a:hover { color: var(--paper); }
 
 /* Aviso de precios de demostración */
-.demo-note { max-width: 46rem; padding: .85rem 1.1rem; border: 1px dashed rgba(138, 90, 46, .55); background: rgba(201, 154, 99, .12); font-size: var(--t-sm); color: var(--ink-2); line-height: 1.5; }
+.demo-note { max-width: 46rem; padding: .85rem 1.1rem; border: 1px dashed rgba(142, 79, 26, .55); background: rgba(194, 122, 52, .12); font-size: var(--t-sm); color: var(--ink-2); line-height: 1.5; }
 .demo-note strong { font-weight: 600; color: var(--oak); }
 .demo-note--inline { padding: 0; border: 0; background: none; font-size: var(--t-xs); color: var(--oak); letter-spacing: .02em; }
 .demo-note--inline::before { content: "◆ "; font-size: .7em; vertical-align: .1em; }

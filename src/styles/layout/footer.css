@@ -1,11 +1,12 @@
 /* Pie de página */
 .footer { padding-block: clamp(64px, 8vw, 110px) 32px; }
 .footer:not(.footer--slim) { position: relative; isolation: isolate; }
-/* Las mismas lamas de roble que en «La barra», en espejo y desvaneciéndose hacia abajo */
+/* Zócalo de madera arriba, como la base de las vitrinas, y el chevron de la pared en negro tenue */
+.footer:not(.footer--slim) { background: var(--tex-madera) top / 100% 14px no-repeat, var(--ink); }
 .footer:not(.footer--slim)::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: repeating-linear-gradient(90deg, rgba(201, 154, 99, .04) 0 14px, transparent 14px 22px);
-  -webkit-mask-image: linear-gradient(170deg, #000, transparent 55%); mask-image: linear-gradient(170deg, #000, transparent 55%);
+  background: var(--tex-chevron-dark);
+  -webkit-mask-image: linear-gradient(170deg, #000, transparent 60%); mask-image: linear-gradient(170deg, #000, transparent 60%);
 }
 .footer__top { display: grid; gap: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--line-dark); }
 .footer .logo--light { justify-self: start; }
@@ -13,21 +14,21 @@
 .footer .logo--light .logo__sub { font-size: clamp(.6rem, .5rem + .3vw, .85rem); }
 .news label { display: block; font-family: var(--f-display); font-size: var(--t-h3); line-height: 1.25; max-width: 24rem; }
 .news__row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.2rem; max-width: 30rem; }
-.news__row input { flex: 1 1 200px; min-height: 48px; padding: .6rem .9rem; border: 1px solid rgba(245, 241, 234, .35); background: transparent; border-radius: 0; color: var(--paper); }
-.news__row input::placeholder { color: rgba(245, 241, 234, .5); }
+.news__row input { flex: 1 1 200px; min-height: 48px; padding: .6rem .9rem; border: 1px solid rgba(248, 247, 244, .35); background: transparent; border-radius: 0; color: var(--paper); }
+.news__row input::placeholder { color: rgba(248, 247, 244, .5); }
 .news__row input:focus-visible { outline: 2px solid var(--oak-light); outline-offset: 0; }
 .news__msg { min-height: 1.4em; margin-top: .6rem; font-size: var(--t-sm); color: var(--oak-light); }
-.news__legal { max-width: 30rem; font-size: var(--t-xs); line-height: 1.55; color: rgba(245, 241, 234, .6); }
-.news__legal a { color: rgba(245, 241, 234, .85); text-underline-offset: 3px; }
+.news__legal { max-width: 30rem; font-size: var(--t-xs); line-height: 1.55; color: rgba(248, 247, 244, .6); }
+.news__legal a { color: rgba(248, 247, 244, .85); text-underline-offset: 3px; }
 .news__legal a:hover { color: var(--paper); }
-.footer__cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1.5rem; padding-block: 2.6rem; font-size: var(--t-sm); color: rgba(245, 241, 234, .74); }
+.footer__cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1.5rem; padding-block: 2.6rem; font-size: var(--t-sm); color: rgba(248, 247, 244, .74); }
 .footer__cols p + p { margin-top: .5rem; }
 .footer__label { margin-bottom: .6rem; font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak-light); font-weight: 500; }
 .footer__cols li + li { margin-top: .5rem; }
 .footer__cols li a { display: inline-block; text-decoration: none; }
-.footer__muted { font-size: var(--t-xs); color: rgba(245, 241, 234, .55); }
+.footer__muted { font-size: var(--t-xs); color: rgba(248, 247, 244, .55); }
 .footer__cols li a:hover { color: var(--paper); text-decoration: underline; text-underline-offset: 3px; }
-.footer__legal { padding-top: 1.6rem; border-top: 1px solid var(--line-dark); font-size: var(--t-xs); color: rgba(245, 241, 234, .55); }
+.footer__legal { padding-top: 1.6rem; border-top: 1px solid var(--line-dark); font-size: var(--t-xs); color: rgba(248, 247, 244, .55); }
 .footer--slim { padding-block: 2rem; }
 .footer--slim .footer__legal { padding-top: 0; border-top: 0; }
 @media (min-width: 960px) {
@@ -40,8 +41,8 @@
   position: fixed; inset: auto 0 0 0; z-index: 98;
   display: grid; grid-template-columns: repeat(3, 1fr);
   padding-bottom: env(safe-area-inset-bottom);
-  background: var(--ink); color: var(--paper);
-  border-top: 1px solid var(--line-dark);
+  background: var(--tex-azulejo); color: #fff; /* el mostrador azul: todo lleva a la tienda */
+  border-top: 1px solid var(--vidriado-2);
 }
 .quickbar__btn {
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .25rem;
@@ -49,9 +50,10 @@
   font-size: var(--t-xs); font-weight: 500; letter-spacing: .04em; text-decoration: none;
   transition: background .25s var(--ease);
 }
-.quickbar__btn + .quickbar__btn { border-left: 1px solid var(--line-dark); }
-.quickbar__btn:active { background: var(--ink-2); }
-.quickbar__btn:focus-visible { outline: 2px solid var(--oak-light); outline-offset: -4px; }
+.quickbar__btn + .quickbar__btn { border-left: 1px solid rgba(255, 255, 255, .18); }
+.quickbar__btn { text-shadow: 0 1px 0 rgba(0, 0, 0, .25); }
+.quickbar__btn:active { background: rgba(0, 0, 0, .15); }
+.quickbar__btn:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
 .quickbar svg { width: 22px; height: 22px; }
 /* Hueco al final de la página para que la barra no tape el pie */
 body:has(.quickbar) { padding-bottom: calc(60px + env(safe-area-inset-bottom)); }

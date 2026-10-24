@@ -28,7 +28,7 @@
 .storecard__media--plan { position: relative; }
 .storecard__media--plan::after {
   content: ""; position: absolute; left: 46%; top: 40%; width: 14px; height: 14px; border-radius: 50% 50% 50% 0;
-  background: var(--ink); transform: rotate(-45deg); box-shadow: 0 0 0 6px rgba(22, 20, 18, .12);
+  background: var(--ink); transform: rotate(-45deg); box-shadow: 0 0 0 6px rgba(18, 17, 16, .12);
 }
 
 .storehero { display: grid; gap: 2.4rem; padding-block: clamp(20px, 3vw, 48px) var(--section); }
@@ -61,7 +61,7 @@
 @media (min-width: 760px) { .map { aspect-ratio: 21 / 9; } }
 .storehero__media--map .map { aspect-ratio: auto; }
 .map__plan { position: absolute; inset: 0; }
-.map__overlay { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 1rem; padding: 1rem; text-align: center; background: radial-gradient(closest-side, rgba(245, 241, 234, .92), rgba(245, 241, 234, .55)); }
+.map__overlay { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 1rem; padding: 1rem; text-align: center; background: radial-gradient(closest-side, rgba(248, 247, 244, .92), rgba(248, 247, 244, .55)); }
 .map__pin .icon { width: 40px; height: 40px; color: var(--oak); }
 .map__overlay p { font-size: var(--t-sm); color: var(--ink-2); }
 .map__overlay .btn--light { border-color: var(--ink); background: var(--ink); color: var(--paper); }
@@ -70,5 +70,5 @@
 
 .reviews { display: grid; gap: 2rem; }
 .reviews .link { margin-top: 1.4rem; }
-.reviews__proto { align-self: center; padding: 1.4rem 1.6rem; border: 1px dashed rgba(22, 20, 18, .3); font-size: var(--t-sm); color: var(--muted); }
+.reviews__proto { align-self: center; padding: 1.4rem 1.6rem; border: 1px dashed rgba(18, 17, 16, .3); font-size: var(--t-sm); color: var(--muted); }
 @media (min-width: 960px) { .reviews { grid-template-columns: 1fr 1fr; gap: 6vw; } }
