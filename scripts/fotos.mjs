@@ -1,7 +1,7 @@
 /* ==========================================================================
    npm run fotos              descarga la foto oficial de las fragancias que no la tienen
    npm run fotos -- --todas   vuelve a descargarlas todas
-   npm run fotos -- creed-aventus pdm-kalan   solo esas
+   npm run fotos -- creed-aventus pdm-kalan   solo esas (también vale una casa: creed)
 
    Para cada fragancia de TODAS busca la foto en la web oficial de su casa
    (scripts/fotos-fuentes.js), quita el fondo blanco, la encaja como las demás
@@ -150,25 +150,37 @@ async function recorta(buf) {
   const borde = bordeLiso(data, w, h);
   if (!borde.ok) return null;
   if (borde.mean) {
-    // Relleno desde los bordes: avanza mientras el color cambia poco de un píxel al vecino
-    // (sigue los degradados suaves del fondo pero se para en el contorno del frasco)
-    const [r, g, b] = borde.mean;
+    // Relleno desde los bordes: avanza mientras el color cambia poco de un píxel al vecino.
+    // Así sigue los degradados y las sombras suaves del fondo y se para en el contorno del frasco
+    const bg = borde.mean;
     const d = (i, j) => Math.abs(data[i * 4] - data[j * 4]) + Math.abs(data[i * 4 + 1] - data[j * 4 + 1]) + Math.abs(data[i * 4 + 2] - data[j * 4 + 2]);
-    const cerca = (i) => Math.abs(data[i * 4] - r) + Math.abs(data[i * 4 + 1] - g) + Math.abs(data[i * 4 + 2] - b) < 60;
+    const lejos = (i) => Math.abs(data[i * 4] - bg[0]) + Math.abs(data[i * 4 + 1] - bg[1]) + Math.abs(data[i * 4 + 2] - bg[2]);
     const seen = new Uint8Array(w * h), stack = [];
     for (let x = 0; x < w; x++) stack.push(x, (h - 1) * w + x);
     for (let y = 0; y < h; y++) stack.push(y * w, y * w + w - 1);
-    for (const i of stack) seen[i] = cerca(i) ? 1 : 2;
+    for (const i of stack) seen[i] = lejos(i) < 60 ? 1 : 2;
     const fondo = stack.filter((i) => seen[i] === 1);
     while (fondo.length) {
       const i = fondo.pop(), x = i % w;
       for (const j of [x > 0 && i - 1, x < w - 1 && i + 1, i >= w && i - w, i < w * (h - 1) && i + w]) {
         if (j === false || seen[j]) continue;
-        if (d(i, j) < 9 && cerca(j)) { seen[j] = 1; fondo.push(j); }
+        if (d(i, j) < 14 && lejos(j) < 120) { seen[j] = 1; fondo.push(j); }
       }
     }
-    // Se hace transparente al final para comparar siempre con los colores originales
-    for (let i = 0; i < w * h; i++) if (seen[i] === 1) data[i * 4 + 3] = 0;
+    // En esa zona el color del fondo pasa a transparencia (como «color a alfa»): el fondo
+    // desaparece y las sombras y el cristal quedan semitransparentes, sin halos blancos
+    for (let i = 0; i < w * h; i++) {
+      if (seen[i] !== 1) continue;
+      const o = i * 4;
+      let al = 0;
+      for (let c = 0; c < 3; c++) {
+        const v = data[o + c], ref = bg[c];
+        al = Math.max(al, v < ref ? (ref - v) / ref : (v - ref) / (255 - ref || 1));
+      }
+      if (al < 0.03) { data[o + 3] = 0; continue; }
+      for (let c = 0; c < 3; c++) data[o + c] = Math.max(0, Math.min(255, Math.round(bg[c] + (data[o + c] - bg[c]) / al)));
+      data[o + 3] = Math.round(al * data[o + 3]);
+    }
   }
   // Manchas opacas: se queda la mayor y las que se cruzan con ella (tapón, borla…)
   const label = new Int32Array(w * h), boxes = [];
@@ -188,15 +200,22 @@ async function recorta(buf) {
   if (!boxes.length) return null;
   const big = boxes.reduce((a, b) => (b.n > a.n ? b : a));
   const keep = new Set(boxes.filter((b) => b.x0 <= big.x1 && b.x1 >= big.x0 && b.y0 <= big.y1 && b.y1 >= big.y0).map((b) => b.id));
-  for (let i = 0; i < w * h; i++) if (!keep.has(label[i])) data[i * 4 + 3] = 0;
-  return sharp(data, { raw: info });
+  let x0 = w, y0 = h, x1 = 0, y1 = 0;
+  for (let i = 0; i < w * h; i++) {
+    if (!keep.has(label[i])) { data[i * 4 + 3] = 0; continue; }
+    const x = i % w, y = (i - x) / w;
+    if (data[i * 4 + 3] >= 60) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+  }
+  if (x1 <= x0 || y1 <= y0) return null;
+  const png = await sharp(data, { raw: info }).png().toBuffer();
+  return sharp(png).extract({ left: x0, top: y0, width: x1 - x0 + 1, height: y1 - y0 + 1 });
 }
 
 async function procesa(p, urls) {
   let img, url;
   for (url of urls.slice(0, 8)) if ((img = await recorta(await get(url, 'buffer')))) break;
   if (!img) return null;
-  const frasco = await img.trim({ threshold: 1 }).resize(BOX_W, BOX_H, { fit: 'inside', withoutEnlargement: false }).png().toBuffer({ resolveWithObject: true });
+  const frasco = await img.resize(BOX_W, BOX_H, { fit: 'inside', withoutEnlargement: false }).png().toBuffer({ resolveWithObject: true });
   const { width: fw, height: fh } = frasco.info;
   const canvas = sharp({ create: { width: W, height: H, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
     .composite([{ input: frasco.data, left: Math.round((W - fw) / 2), top: FLOOR - fh }]).png();
@@ -206,7 +225,7 @@ async function procesa(p, urls) {
   return url;
 }
 
-const lista = TODAS.filter((p) => (solo.length ? solo.includes(p.id) : todas || !conFoto.has(p.id)));
+const lista = TODAS.filter((p) => (solo.length ? solo.includes(p.id) || solo.includes(p.casa) : todas || !conFoto.has(p.id)));
 const informe = [], faltan = [];
 for (const p of lista) {
   const label = `${casaById(p.casa).name} ${p.name}`;
