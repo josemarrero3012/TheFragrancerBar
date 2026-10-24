@@ -6,10 +6,13 @@
                            y se elige el producto cuyo título coincide con el nombre
                   buscar   página de búsqueda ({q} = nombre) y patrón del enlace al
                            producto: se abre el primer resultado y se toma su og:image
+                  listado  páginas que enlazan a todos sus productos y patrón del enlace:
+                           se elige el enlace cuyo nombre coincide y se toma su og:image
+                En las dos últimas, la página tiene que nombrar el perfume.
    fragancias   por id: página oficial del producto (se toma su og:image) o la URL
                 directa de la imagen. Tiene prioridad sobre la búsqueda de la casa.
-                Sirve para las casas sin búsqueda (Creed) y para corregir una
-                coincidencia equivocada.
+                Sirve para fijar la página exacta y para corregir una coincidencia
+                equivocada. null: no buscarla (la web oficial solo tiene otra versión).
    ========================================================================== */
 
 export const CASAS = {
@@ -22,8 +25,11 @@ export const CASAS = {
   montale: {
     buscar: 'https://www.montaleparfums.com/en/search?controller=search&s={q}',
     enlace: /https:\/\/www\.montaleparfums\.com\/en\/[a-z-]+\/\d+-[a-z0-9-]+\.html/
+  },
+  creed: {
+    listado: [1, 2, 3].map((n) => `https://www.creedfragrance.com/c/fragrances/?pageNumber=${n}`),
+    enlace: /(?:https:\/\/www\.creedfragrance\.com)?\/p\/[a-z0-9-]+\/\d+\/?/
   }
-  // creed: su web no es Shopify ni tiene una búsqueda fácil de leer. Añade sus páginas en FRAGANCIAS
 };
 
 export const FRAGANCIAS = {
@@ -50,5 +56,19 @@ export const FRAGANCIAS = {
   'pdm-pegasus-exclusif': 'https://parfums-de-marly.com/products/pegasus-exclusif',
   'pdm-safanad': 'https://parfums-de-marly.com/products/safanad',
   'pdm-meliora': 'https://parfums-de-marly.com/products/meliora',
+  'creed-absolu-aventus': 'https://www.creedfragrance.com/p/absolu-aventus/14926231/',
+  'creed-centaurus': 'https://www.creedfragrance.com/p/centaurus/15396603/',
+  'creed-millesime-imperial': 'https://www.creedfragrance.com/p/millesime-imperial/12870041/',
+  'creed-aventus-for-her': 'https://www.creedfragrance.com/p/aventus-for-her/12870031/',
+  'creed-royal-oud': 'https://www.creedfragrance.com/p/royal-oud/12870045/',
+  'creed-green-irish-tweed': 'https://www.creedfragrance.com/p/green-irish-tweed/12870035/',
+  'creed-wild-vetiver': 'https://www.creedfragrance.com/p/wild-vetiver/16684202/',
+  'creed-viking': 'https://www.creedfragrance.com/p/viking/12870053/',
+  'creed-fleurissimo': 'https://www.creedfragrance.com/p/fleurissimo/12870034/',
+  'creed-erolfa': 'https://www.creedfragrance.com/p/erolfa/12870033/',
+  'creed-neroli-sauvage': 'https://www.creedfragrance.com/p/neroli-sauvage/12870042/',
+  'creed-royal-water': 'https://www.creedfragrance.com/p/royal-water/12870048/',
+  'creed-original-vetiver': 'https://www.creedfragrance.com/p/original-vetiver/12870044/',
+  'montale-black-aoud': null, // su web solo tiene Black Aoud Intense
   'montale-arabians-tonka': 'https://www.montaleparfums.com/en/oriental/282-arabians-tonka.html'
 };

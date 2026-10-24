@@ -26,8 +26,9 @@ const UA = { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWe
 
 // Lienzo de las fotos actuales: 800 × 1000, frasco de hasta 600 × 754 apoyado en y = 937
 const W = 800, H = 1000, BOX_W = 600, BOX_H = 754, FLOOR = 937;
-// Títulos de Shopify que no son el perfume (sets, muestras, cuerpo, pelo…)
-const NO_PERFUME = /\b(set|kit|coffret|duo|trio|sample|discovery|calendar|candle|body|hair|lotion|cream|shower|soap|deo|deodorant|refill|travel|mini|gift|wrapping|bag|postcard)\b|\d+\s?ml/i;
+// Productos de Shopify que no son el frasco de perfume (sets, muestras, cuerpo, pelo, minis…)
+const NO_PERFUME = /\b(set|kit|coffret|duo|trio|sample|samples|discovery|calendar|candle|body|hair|lotion|cream|gel|hand|cleansing|cleaning|shower|soap|deo|deodorant|refill|travel|mini|gift|wrapping|bag|postcard|oil|mist)\b|\b(1\.5|2|3|5|7\.5|8|10|12|15|20)\s?ml\b/i;
+const CONC_WORDS = /\b(eau de parfum|eau de toilette|extrait de parfum|extrait|parfum|edp|edt)\b/g;
 
 const args = process.argv.slice(2);
 const todas = args.includes('--todas');
@@ -46,6 +47,11 @@ const ogImage = (html, base) => {
   return m && new URL(m[1].replace(/&amp;/g, '&'), base).href;
 };
 const isImage = (url) => /\.(png|jpe?g|webp|avif)(\?|$)/i.test(url);
+// La página tiene que nombrar el perfume (og:title o <title>), para no coger otro producto
+const nombra = (html, p) => {
+  const t = norm((html.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)/i) || html.match(/<title>([^<]+)/i) || [])[1] || '');
+  return norm(p.name).split(' ').every((w) => t.includes(w));
+};
 
 /* Catálogo completo de cada tienda Shopify (se pide una vez por casa) */
 const shopify = new Map();
@@ -64,63 +70,132 @@ async function shopifyProducts(base) {
   return shopify.get(base);
 }
 
-/* URL de la foto oficial de una fragancia, o null */
+/* Elige el producto de Shopify: título igual al nombre y, entre varios, el que parece el frasco grande */
+function eligeShopify(products, p) {
+  const want = norm(p.name);
+  const puntos = (x) => {
+    const h = x.handle.replace(/-/g, ' ');
+    if ([x.title, x.product_type || '', h].some((t) => NO_PERFUME.test(t))) return -1;
+    const titulo = norm(x.title), sinConc = titulo.replace(CONC_WORDS, '').replace(/\s+/g, ' ').trim();
+    if (titulo !== want && sinConc !== want) return -1;
+    let n = 1;
+    if (/eau de parfum/.test(h) && p.conc === 'EDP') n += 2;
+    if (/(^| )parfum$/.test(h) && !/eau de parfum/.test(h) && p.conc === 'EDP') n -= 0.5;
+    if (/\b30\s?ml\b/.test(h)) n -= 0.5;
+    return n;
+  };
+  return products.filter((x) => x.images?.length).map((x) => [puntos(x), x]).filter(([n]) => n > 0).sort((a, b) => b[0] - a[0])[0]?.[1];
+}
+
+/* Páginas de producto de un listado (para casas sin Shopify ni búsqueda, como Creed) */
+const listados = new Map();
+async function enlacesDe(casa) {
+  if (!listados.has(casa.listado)) {
+    listados.set(casa.listado, (async () => {
+      const links = new Set();
+      for (const url of casa.listado) for (const m of (await get(url)).matchAll(new RegExp(casa.enlace, 'g'))) links.add(new URL(m[0], url).href.split('?')[0]);
+      return [...links];
+    })());
+  }
+  return listados.get(casa.listado);
+}
+
+/* Imágenes candidatas de una fragancia (la primera con fondo limpio será la buena) */
 async function fuente(p) {
   const fija = FRAGANCIAS[p.id];
+  if (fija === null) return null;
   if (fija) {
-    if (isImage(fija)) return { img: fija, desde: fija };
-    // Página de Shopify: su .json da la primera foto del producto; si no, og:image
+    if (isImage(fija)) return { imgs: [fija], desde: fija };
+    // Página de Shopify: su .json trae todas las fotos del producto; si no, og:image
     if (/\/products\/[^/?#]+$/.test(fija)) {
-      try { const { product } = await get(`${fija}.json`, 'json'); if (product.images?.[0]) return { img: product.images[0].src, desde: fija }; } catch { /* no es Shopify */ }
+      try { const { product } = await get(`${fija}.json`, 'json'); if (product.images?.length) return { imgs: product.images.map((i) => i.src), desde: fija }; } catch { /* no es Shopify */ }
     }
-    return { img: ogImage(await get(fija), fija), desde: fija };
+    return { imgs: [ogImage(await get(fija), fija)].filter(Boolean), desde: fija };
   }
   const casa = CASAS[p.casa];
   if (!casa) return null;
   if (casa.shopify) {
-    const products = await shopifyProducts(casa.shopify);
+    const hit = eligeShopify(await shopifyProducts(casa.shopify), p);
+    return hit && { imgs: hit.images.map((i) => i.src), desde: `${casa.shopify}/products/${hit.handle}` };
+  }
+  let link;
+  if (casa.listado) {
     const want = norm(p.name);
-    const cands = products.filter((x) => x.images?.length && !NO_PERFUME.test(x.title) && !NO_PERFUME.test(x.product_type || ''));
-    const hit = cands.find((x) => norm(x.title) === want)
-      || cands.find((x) => norm(x.title).replace(/\b(eau de parfum|eau de toilette|extrait de parfum|parfum|edp)\b/g, '').trim() === want);
-    return hit && { img: hit.images[0].src, desde: `${casa.shopify}/products/${hit.handle}` };
+    link = (await enlacesDe(casa)).find((u) => norm(new URL(u).pathname.split('/')[2] || '').replace(/^creed /, '') === want);
+  } else if (casa.buscar) {
+    link = (await get(casa.buscar.replace('{q}', encodeURIComponent(p.name)))).match(casa.enlace)?.[0];
   }
-  if (casa.buscar) {
-    const html = await get(casa.buscar.replace('{q}', encodeURIComponent(p.name)));
-    const link = html.match(casa.enlace)?.[0];
-    if (!link || !norm(link).includes(norm(p.name).split(' ')[0])) return null;
-    return { img: ogImage(await get(link), link), desde: link };
-  }
-  return null;
+  if (!link) return null;
+  const html = await get(link);
+  if (!nombra(html, p)) return null;
+  return { imgs: [ogImage(html, link)].filter(Boolean), desde: link };
 }
 
-/* Quita el fondo blanco unido a los bordes (relleno desde fuera, para no agujerear el frasco) */
-async function sinFondo(buf) {
+/* ¿El borde de la foto es liso (blanco, un color claro o transparente)? Si no, es una foto de ambiente */
+function bordeLiso(data, w, h) {
+  const px = [];
+  for (let x = 0; x < w; x += 4) px.push(x, (h - 1) * w + x);
+  for (let y = 0; y < h; y += 4) px.push(y * w, y * w + w - 1);
+  const solid = px.filter((i) => data[i * 4 + 3] > 16);
+  if (solid.length < px.length * 0.1) return { ok: true };
+  const mean = [0, 1, 2].map((c) => solid.reduce((a, i) => a + data[i * 4 + c], 0) / solid.length);
+  const dev = Math.sqrt(solid.reduce((a, i) => a + [0, 1, 2].reduce((b, c) => b + (data[i * 4 + c] - mean[c]) ** 2, 0), 0) / solid.length / 3);
+  return { ok: dev < 14 && Math.min(...mean) > 170, mean };
+}
+
+/* Quita el fondo unido a los bordes y se queda con el frasco (la mancha más grande y lo que la toca) */
+async function recorta(buf) {
   const { data, info } = await sharp(buf).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   const { width: w, height: h } = info;
-  const at = (i) => i * 4;
-  const corners = [0, w - 1, (h - 1) * w, h * w - 1];
-  // Si las esquinas ya son transparentes, la foto viene recortada
-  if (corners.every((i) => data[at(i) + 3] < 16)) return sharp(data, { raw: info });
-  const isBg = (i) => { const o = at(i); return data[o] > 238 && data[o + 1] > 238 && data[o + 2] > 238; };
-  const seen = new Uint8Array(w * h), stack = [];
-  for (let x = 0; x < w; x++) stack.push(x, (h - 1) * w + x);
-  for (let y = 0; y < h; y++) stack.push(y * w, y * w + w - 1);
-  while (stack.length) {
-    const i = stack.pop();
-    if (seen[i] || !isBg(i)) continue;
-    seen[i] = 1; data[at(i) + 3] = 0;
-    const x = i % w;
-    if (x > 0) stack.push(i - 1);
-    if (x < w - 1) stack.push(i + 1);
-    if (i >= w) stack.push(i - w);
-    if (i < w * (h - 1)) stack.push(i + w);
+  const borde = bordeLiso(data, w, h);
+  if (!borde.ok) return null;
+  if (borde.mean) {
+    // Relleno desde los bordes: avanza mientras el color cambia poco de un píxel al vecino
+    // (sigue los degradados suaves del fondo pero se para en el contorno del frasco)
+    const [r, g, b] = borde.mean;
+    const d = (i, j) => Math.abs(data[i * 4] - data[j * 4]) + Math.abs(data[i * 4 + 1] - data[j * 4 + 1]) + Math.abs(data[i * 4 + 2] - data[j * 4 + 2]);
+    const cerca = (i) => Math.abs(data[i * 4] - r) + Math.abs(data[i * 4 + 1] - g) + Math.abs(data[i * 4 + 2] - b) < 60;
+    const seen = new Uint8Array(w * h), stack = [];
+    for (let x = 0; x < w; x++) stack.push(x, (h - 1) * w + x);
+    for (let y = 0; y < h; y++) stack.push(y * w, y * w + w - 1);
+    for (const i of stack) seen[i] = cerca(i) ? 1 : 2;
+    const fondo = stack.filter((i) => seen[i] === 1);
+    while (fondo.length) {
+      const i = fondo.pop(), x = i % w;
+      for (const j of [x > 0 && i - 1, x < w - 1 && i + 1, i >= w && i - w, i < w * (h - 1) && i + w]) {
+        if (j === false || seen[j]) continue;
+        if (d(i, j) < 9 && cerca(j)) { seen[j] = 1; fondo.push(j); }
+      }
+    }
+    // Se hace transparente al final para comparar siempre con los colores originales
+    for (let i = 0; i < w * h; i++) if (seen[i] === 1) data[i * 4 + 3] = 0;
   }
+  // Manchas opacas: se queda la mayor y las que se cruzan con ella (tapón, borla…)
+  const label = new Int32Array(w * h), boxes = [];
+  for (let s0 = 0; s0 < w * h; s0++) {
+    if (label[s0] || data[s0 * 4 + 3] < 24) continue;
+    const id = boxes.length + 1, box = { id, n: 0, x0: w, y0: h, x1: 0, y1: 0 }, stack = [s0];
+    label[s0] = id;
+    while (stack.length) {
+      const i = stack.pop(), x = i % w, y = (i - x) / w;
+      box.n++; box.x0 = Math.min(box.x0, x); box.x1 = Math.max(box.x1, x); box.y0 = Math.min(box.y0, y); box.y1 = Math.max(box.y1, y);
+      for (const j of [x > 0 && i - 1, x < w - 1 && i + 1, y > 0 && i - w, y < h - 1 && i + w]) {
+        if (j !== false && !label[j] && data[j * 4 + 3] >= 24) { label[j] = id; stack.push(j); }
+      }
+    }
+    boxes.push(box);
+  }
+  if (!boxes.length) return null;
+  const big = boxes.reduce((a, b) => (b.n > a.n ? b : a));
+  const keep = new Set(boxes.filter((b) => b.x0 <= big.x1 && b.x1 >= big.x0 && b.y0 <= big.y1 && b.y1 >= big.y0).map((b) => b.id));
+  for (let i = 0; i < w * h; i++) if (!keep.has(label[i])) data[i * 4 + 3] = 0;
   return sharp(data, { raw: info });
 }
 
-async function procesa(p, url) {
-  const img = await sinFondo(await get(url, 'buffer'));
+async function procesa(p, urls) {
+  let img, url;
+  for (url of urls.slice(0, 8)) if ((img = await recorta(await get(url, 'buffer')))) break;
+  if (!img) return null;
   const frasco = await img.trim({ threshold: 1 }).resize(BOX_W, BOX_H, { fit: 'inside', withoutEnlargement: false }).png().toBuffer({ resolveWithObject: true });
   const { width: fw, height: fh } = frasco.info;
   const canvas = sharp({ create: { width: W, height: H, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
@@ -128,6 +203,7 @@ async function procesa(p, url) {
   const full = await canvas.toBuffer();
   await sharp(full).webp({ quality: 82, alphaQuality: 90 }).toFile(resolve(OUT, `${p.id}-800.webp`));
   await sharp(full).resize(400).webp({ quality: 80, alphaQuality: 90 }).toFile(resolve(OUT, `${p.id}-400.webp`));
+  return url;
 }
 
 const lista = TODAS.filter((p) => (solo.length ? solo.includes(p.id) : todas || !conFoto.has(p.id)));
@@ -136,9 +212,10 @@ for (const p of lista) {
   const label = `${casaById(p.casa).name} ${p.name}`;
   try {
     const f = await fuente(p);
-    if (!f?.img) { faltan.push(`${p.id}  (${label}): no se encontró en la web oficial`); console.log(`·  ${label}: sin foto`); continue; }
-    await procesa(p, f.img);
-    informe.push(`${p.id}  ${f.desde}  ${f.img}`);
+    if (!f?.imgs.length) { faltan.push(`${p.id}  (${label}): no se encontró en la web oficial`); console.log(`·  ${label}: sin foto`); continue; }
+    const usada = await procesa(p, f.imgs);
+    if (!usada) { faltan.push(`${p.id}  (${label}): solo hay fotos de ambiente en ${f.desde}`); console.log(`·  ${label}: solo fotos de ambiente`); continue; }
+    informe.push(`${p.id}  ${f.desde}  ${usada}`);
     console.log(`✓  ${label}`);
   } catch (e) {
     faltan.push(`${p.id}  (${label}): ${e.message}`);
