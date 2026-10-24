@@ -1,5 +1,6 @@
-Fotos descargadas (49)
+Fotos descargadas (50)
 id  página  imagen
+creed-aventus  https://www.creedfragrance.com/p/aventus/12870029  https://static.thcdn.com/productimg/original/12870029-1145337306138828.jpg
 creed-green-irish-tweed  https://www.creedfragrance.com/p/green-irish-tweed/12870035/  https://static.thcdn.com/productimg/original/12870035-8495164180496709.jpg
 creed-silver-mountain-water  https://www.creedfragrance.com/p/silver-mountain-water/12870049/  https://static.thcdn.com/productimg/original/12870049-1875303061449466.jpg
 creed-viking  https://www.creedfragrance.com/p/viking/12870053/  https://static.thcdn.com/productimg/original/12870053-1185132259235236.jpg
@@ -20,7 +21,9 @@ creed-erolfa  https://www.creedfragrance.com/p/erolfa/12870033/  https://static.
 creed-neroli-sauvage  https://www.creedfragrance.com/p/neroli-sauvage/12870042/  https://static.thcdn.com/productimg/original/12870042-8925132258008671.jpg
 creed-original-vetiver  https://www.creedfragrance.com/p/original-vetiver/12870044/  https://static.thcdn.com/productimg/original/12870044-1435216837513418.jpg
 creed-fleurissimo  https://www.creedfragrance.com/p/fleurissimo/12870034/  https://static.thcdn.com/productimg/original/12870034-1455183380630686.jpg
+amouage-interlude-man  https://amouage.com/products/interlude-man-100ml  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/INTERLUDE_MAN_100_ML.jpg?v=1758794506
 amouage-reflection-man  https://amouage.com/products/reflection-man-100ml  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/REFLECTION_100_ML.jpg?v=1758803038
+amouage-guidance-46  https://amouage.com/products/new-guidance-46  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/Amouage_CS_Photo_Bottle_Guidance46.jpg?v=1770722238
 amouage-epic-man  https://amouage.com/products/epic-man-100ml  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/EPIC_MAN_100ML.jpg?v=1758788909
 amouage-memoir-man  https://amouage.com/products/memoir-man  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/MEMOIR_MAN_100_ML.jpg?v=1758801737
 amouage-lyric-woman  https://amouage.com/products/lyricwoman  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/LYRIC_WOMAN_100_ML_copy.jpg?v=1758801374
@@ -34,23 +37,21 @@ amouage-memoir-woman  https://amouage.com/products/memoir-woman  https://cdn.sho
 amouage-journey-man  https://amouage.com/products/journey-man  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/JOURNEY_MAN_100_ML.jpg?v=1758799609
 amouage-overture-man  https://amouage.com/products/overture-man  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/OVERTURE_100ml.jpg?v=1758802175
 amouage-lilac-love  https://amouage.com/products/lilac-love  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/lilac_love_100ml_np_copy.jpg?v=1759217035
-initio-rehab  https://initioparfums.com/products/rehab  https://cdn.shopify.com/s/files/1/0583/2350/1233/files/REHAB_MasterProductPackshot_9f388441-9b6b-46c4-b64a-0f619342d822.png?v=1761237439
-initio-musk-therapy  https://initioparfums.com/products/musk-therapy  https://cdn.shopify.com/s/files/1/0583/2350/1233/files/MUSKTHERAPY_MasterProductPackshot_8466ab71-7c78-4c41-804a-186817f5fec2.png?v=1763733990
-initio-atomic-rose  https://initioparfums.com/products/atomic-rose  https://cdn.shopify.com/s/files/1/0583/2350/1233/files/ATOMICROSE_MasterProductPackshot_0_f241bb2c-4f20-4aa8-a372-34e0959ccfbc.png?v=1763734148
-initio-psychedelic-love  https://initioparfums.com/products/psychedelic-love  https://cdn.shopify.com/s/files/1/0583/2350/1233/files/PSYCHEDELIC_LOVE_MasterProductPackshot_ff9bdb4b-d939-4bd6-8173-778cced89029.png?v=1761237482
-initio-absolute-aphrodisiac  https://initioparfums.com/products/absolute-aphrodisiac  https://cdn.shopify.com/s/files/1/0583/2350/1233/files/ABSOLUTEAPHRODISIAC_MasterProductPackshot_0_d249252b-f9f9-4c18-aee2-2368739bc42a.png?v=1763734190
-initio-paragon  https://initioparfums.com/products/paragon-1  https://cdn.shopify.com/s/files/1/0583/2350/1233/files/PARAGON_1.5_e52da0d0-227e-4bfd-8a30-3953c8698786.png?v=1774455661
-initio-blessed-baraka  https://initioparfums.com/products/blessed-baraka  https://cdn.shopify.com/s/files/1/0583/2350/1233/files/BLESSEDBARAKA_MasterProductPackshot_BlessedBaraka_36174be3-b6a9-4151-b6a2-f71df965b9cb.png?v=1761236908
-initio-high-frequency  https://initioparfums.com/products/high-frequency  https://cdn.shopify.com/s/files/1/0583/2350/1233/files/HIGHFREQUENCY_MasterProductPackshot_c479e0f8-93e8-4b8c-8772-a2765b764803.png?v=1761237499
-initio-narcotic-delight  https://initioparfums.com/products/narcotic-delight  https://cdn.shopify.com/s/files/1/0583/2350/1233/files/NARCOTICDELIGHT_MasterProductPackshot_dd8c5e71-6725-4868-a26c-4b8225df9607.png?v=1761237391
-tomford-oud-wood  https://www.tomfordbeauty.com/products/oud-wood-eau-de-parfum  https://cdn.shopify.com/s/files/1/0761/9690/5173/files/tf_sku_T1XF01_2000x2000_0.png?v=1792828680
-tomford-neroli-portofino  https://www.tomfordbeauty.com/products/neroli-portofino-eau-de-parfum  https://cdn.shopify.com/s/files/1/0761/9690/5173/files/tf_sku_T0M901_2000x2000_0.png?v=1792835407
-tomford-fucking-fabulous  https://www.tomfordbeauty.com/products/fucking-fabulous-eau-de-parfum  https://cdn.shopify.com/s/files/1/0761/9690/5173/files/tfb_sku_T61501_2000x2000_0.png?v=1792828708
-tomford-oud-minerale  https://www.tomfordbeauty.com/products/oud-minerale-eau-de-parfum  https://cdn.shopify.com/s/files/1/0761/9690/5173/files/tf_sku_TCWW01_2000x2000_0.png?v=1792828720
-tomford-vanilla-sex  https://www.tomfordbeauty.com/products/vanilla-sex-eau-de-parfum  https://cdn.shopify.com/s/files/1/0761/9690/5173/files/tf_sku_TCFC01_2000x2000_0S.png?v=1792844725
-tomford-costa-azzurra  https://www.tomfordbeauty.com/products/costa-azzurra-eau-de-parfum  https://cdn.shopify.com/s/files/1/0761/9690/5173/files/tf_sku_T9AT01_2000x2000_0.png?v=1792828698
+montale-arabians-tonka  https://www.montaleparfums.com/en/oriental/282-arabians-tonka.html  https://www.montaleparfums.com/1081-product_square/arabians-tonka.jpg
+montale-intense-cafe  https://www.montaleparfums.com/en/gourmand/176-intense-cafe.html  https://www.montaleparfums.com/879-product_square/intense-cafe.jpg
+montale-roses-musk  https://www.montaleparfums.com/en/floral/68-roses-musk-rose.html  https://www.montaleparfums.com/815-product_square/roses-musk-rose.jpg
+montale-chocolate-greedy  https://www.montaleparfums.com/en/gourmand/35-chocolate-greedy-argent.html  https://www.montaleparfums.com/721-product_square/chocolate-greedy-argent.jpg
+montale-wild-pears  https://www.montaleparfums.com/en/fruity/87-wild-pears-argent.html  https://www.montaleparfums.com/869-product_square/wild-pears-argent.jpg
+montale-dark-purple  https://www.montaleparfums.com/en/fruity/41-dark-purple-prune.html  https://www.montaleparfums.com/739-product_square/dark-purple-prune.jpg
+montale-aoud-forest  https://www.montaleparfums.com/en/woody/16-aoud-forest-marron.html  https://www.montaleparfums.com/668-product_square/aoud-forest-marron.jpg
+montale-starry-nights  https://www.montaleparfums.com/en/floral/211-starry-nights.html  https://www.montaleparfums.com/917-product_square/starry-nights.jpg
+montale-vanille-absolu  https://www.montaleparfums.com/en/gourmand/80-vanille-absolu-argent.html  https://www.montaleparfums.com/848-product_square/vanille-absolu-argent.jpg
+montale-fantastic-oud  https://www.montaleparfums.com/en/oriental/258-fantastic-oud.html  https://www.montaleparfums.com/973-product_square/fantastic-oud.jpg
+montale-vanilla-cake  https://www.montaleparfums.com/en/gourmand/256-vanilla-cake.html  https://www.montaleparfums.com/966-product_square/vanilla-cake.jpg
+montale-pure-gold  https://www.montaleparfums.com/en/floral/63-pure-gold-or-brillant.html  https://www.montaleparfums.com/800-product_square/pure-gold-or-brillant.jpg
+montale-mango-manga  https://www.montaleparfums.com/en/fruity/55-mango-manga-argent.html  https://www.montaleparfums.com/779-product_square/mango-manga-argent.jpg
 
-Sin foto (16): no se publican hasta tenerla
+Sin foto (7): no se publican hasta tenerla
 creed-love-in-white  (Creed Love in White): no se encontró en la web oficial
 creed-spice-and-wood  (Creed Spice and Wood): no se encontró en la web oficial
 amouage-jubilation-xxv  (Amouage Jubilation XXV): no se encontró en la web oficial
@@ -58,12 +59,3 @@ montale-black-aoud  (Montale Black Aoud): no se encontró en la web oficial
 montale-amandes-orientales  (Montale Amandes Orientales): no se encontró en la web oficial
 montale-red-aoud  (Montale Red Aoud): no se encontró en la web oficial
 montale-roses-elixir  (Montale Roses Elixir): no se encontró en la web oficial
-memo-african-leather  (Memo Paris African Leather): solo hay fotos de ambiente en https://us.memoparis.com/products/african-leather-eau-de-parfum-75ml
-memo-irish-leather  (Memo Paris Irish Leather): solo hay fotos de ambiente en https://us.memoparis.com/products/irish-leather-eau-de-parfum-75ml
-memo-inle  (Memo Paris Inlé): solo hay fotos de ambiente en https://us.memoparis.com/products/inle-eau-de-parfum-75ml
-memo-french-leather  (Memo Paris French Leather): solo hay fotos de ambiente en https://us.memoparis.com/products/french-leather-eau-de-parfum-75ml
-memo-italian-leather  (Memo Paris Italian Leather): solo hay fotos de ambiente en https://us.memoparis.com/products/italian-leather-eau-de-parfum-75ml
-memo-lalibela  (Memo Paris Lalibela): solo hay fotos de ambiente en https://us.memoparis.com/products/lalibela-eau-de-parfum-75ml
-memo-tiger-s-nest  (Memo Paris Tiger's Nest): no se encontró en la web oficial
-memo-russian-leather  (Memo Paris Russian Leather): solo hay fotos de ambiente en https://us.memoparis.com/products/russian-leather-eau-de-parfum-200ml
-tomford-tobacco-oud  (Tom Ford Tobacco Oud): no se encontró en la web oficial
