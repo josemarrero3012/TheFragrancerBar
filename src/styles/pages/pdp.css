@@ -1,11 +1,8 @@
 /* Ficha de una fragancia: imagen, compra, notas y relacionadas */
 .pdp__crumbs { padding-block: 1.4rem 1rem; }
 .pdp { display: grid; gap: 2rem; padding-bottom: var(--section); }
-/* El frasco en su hornacina, con la luz encendida y más perfil que en la rejilla */
-.pdp__media .product__media { --on: .75; border-width: 8px; }
-.pdp__media .product__media:hover { --on: 1; }
-.pdp__media .product__media img { padding: 8% 8% 9px; }
-.pdp__media { padding-bottom: 14px; background: var(--tex-madera) bottom / 100% 14px no-repeat; }
+/* El frasco en su vitrina, a tamaño grande y con la luz encendida */
+.pdp__media .product__media::before { filter: brightness(1.02); background-image: image-set(url("/img/vitrina/vitrina-1024.webp") 1x); }
 .pdp__media .product__media--drawn { padding: 12% 18% 9%; }
 .pdp__media .bottle__label em { font-size: clamp(1.3rem, 1rem + 1vw, 1.8rem); }
 .pdp__media .bottle__label span { font-size: .72rem; }
@@ -85,4 +82,7 @@ body:has(.buybar) { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
 @media (min-width: 960px) {
   .buybar { display: none; }
   body:has(.buybar) { padding-bottom: 0; }
+}
+@media (min-width: 960px) {
+  .pdp__media .product__media { max-width: calc((100svh - var(--header-h) - 48px) * 2 / 3); margin-inline: auto; }
 }

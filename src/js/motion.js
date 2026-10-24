@@ -3,37 +3,11 @@
 import { MOTION } from '../data/site.js';
 import { $, $$, reduceMotion, fullMotion, EASE, clamp01 } from './utils.js';
 
-/* Cortina de cadenas cobre sobre la fachada: se abre una sola vez por sesión, como al entrar
-   en la tienda. Si no hay sessionStorage (navegación privada estricta), no se muestra. */
-function curtainOpens(media) {
-  if (!fullMotion) return false;
-  try {
-    if (sessionStorage.getItem('tfb-cortina')) return false;
-    sessionStorage.setItem('tfb-cortina', '1');
-  } catch { return false; }
-  ['l', 'r'].forEach((side) => {
-    const c = document.createElement('span');
-    c.className = `curtain curtain--${side}`;
-    c.setAttribute('aria-hidden', 'true');
-    media.append(c);
-    const dir = side === 'l' ? -1 : 1;
-    c.animate([{ transform: 'none' }, { transform: `translateX(${dir * 101}%) skewX(${dir * 5}deg)` }],
-      { duration: 1400, delay: 350, easing: 'cubic-bezier(.7,0,.2,1)', fill: 'forwards' }).finished.then(() => c.remove());
-  });
-  return true;
-}
-
-/* Entrada de la portada. En móvil o en modo sutil, solo fundidos */
+/* Entrada de la portada: solo un fundido de la foto y el texto, sin barridos ni zoom */
 function introHero() {
   if (!$('.hero')) return;
   const soft = !fullMotion || matchMedia('(max-width: 959px)').matches;
-  const media = $('.hero__media');
-  if (curtainOpens(media)) $('img', media).animate([{ transform: 'scale(1.08)' }, { transform: 'scale(1)' }], { duration: 2600, easing: EASE, fill: 'backwards' });
-  else if (soft) media.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1100, easing: EASE, fill: 'backwards' });
-  else {
-    media.animate([{ clipPath: 'inset(0 0 0 100%)' }, { clipPath: 'inset(0)' }], { duration: 1600, easing: 'cubic-bezier(.75,0,.2,1)', fill: 'backwards' });
-    $('img', media).animate([{ transform: 'scale(1.18)' }, { transform: 'scale(1)' }], { duration: 2800, easing: EASE, fill: 'backwards' });
-  }
+  $('.hero__media').animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1100, easing: EASE, fill: 'backwards' });
   const kf = soft ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(22px)' }, { opacity: 1, transform: 'none' }];
   [...$('.hero__copy').children].forEach((el, i) => el.animate(kf, { duration: 1100, delay: i * 110, easing: EASE, fill: 'backwards' }));
   document.documentElement.classList.remove('is-intro');
