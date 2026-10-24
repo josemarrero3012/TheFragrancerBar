@@ -5,6 +5,7 @@
    Imágenes de /public: empiezan por / y Vite les añade la base al compilar.
    ========================================================================== */
 import { CASAS, CONCENTRACIONES, casaById, familiaName, priceFrom, euros } from '../data/catalogo.js';
+import { notaFoto, notasPlanas } from '../data/notas.js';
 
 export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 export const u = (path = '') => `%BASE_URL%${path}`;
@@ -59,18 +60,27 @@ export function productMedia(p, { sizes = '(min-width: 1100px) 22vw, (min-width:
   return `<figure class="product__media product__media--drawn" data-familia="${p.familia}"${name}>${bottle(p)}<figcaption class="bottle__label"><span>${esc(c.name)}</span><em>${esc(p.name)}</em></figcaption></figure>`;
 }
 
+/** Una nota olfativa con su foto, como en Fragrantica. Sin foto todavía, su inicial */
+export function nota(texto) {
+  const k = notaFoto(texto);
+  const img = k
+    ? `<img src="/img/notas/${k}-160.webp" srcset="/img/notas/${k}-160.webp 1x, /img/notas/${k}-320.webp 2x" width="160" height="160" loading="lazy" alt="">`
+    : `<span class="nota__inicial" aria-hidden="true">${esc(texto[0])}</span>`;
+  return `<li class="nota"><span class="nota__img">${img}</span><span class="nota__name">${esc(texto)}</span></li>`;
+}
+
 /** Ficha de producto en una rejilla. Los data-* los usa el filtro de /comprar/ */
 export function productCard(p, { notes = false, i = 0 } = {}) {
   const c = casaById(p.casa), from = priceFrom(p), label = `${p.name} de ${c.name}`;
   const multi = p.sizes.length > 1;
   return `
-          <li class="product" data-id="${p.id}" data-familia="${p.familia}" data-casa="${p.casa}" data-price="${from}" data-year="${p.year || 0}" data-name="${esc(`${p.name} ${c.name}`.toLowerCase())}" data-notes="${esc(p.notes.join(', ').toLowerCase())}" data-reveal="up" data-reveal-delay="${(i % 4) * 80}">
+          <li class="product" data-id="${p.id}" data-familia="${p.familia}" data-casa="${p.casa}" data-price="${from}" data-year="${p.year || 0}" data-name="${esc(`${p.name} ${c.name}`.toLowerCase())}" data-notes="${esc(notasPlanas(p.notes).join(', ').toLowerCase())}" data-reveal="up" data-reveal-delay="${(i % 4) * 80}">
             <a class="product__link" href="${fragUrl(p)}" tabindex="-1" aria-hidden="true">${productMedia(p)}</a>
             <div class="product__body">
               <p class="product__brand">${esc(c.name)}</p>
               <h3 class="product__name"><a href="${fragUrl(p)}">${esc(p.name)}</a></h3>
               <p class="product__meta">${CONCENTRACIONES[p.conc]} · ${esc(familiaName(p.familia))}</p>
-              ${notes ? `<p class="product__notes">${esc(p.notes[0])}</p>` : ''}
+              ${notes && notasPlanas(p.notes).length ? `<p class="product__notes">${esc(notasPlanas(p.notes).slice(0, 3).join(', '))}</p>` : ''}
               <p class="product__price">${multi ? '<span>desde</span> ' : ''}${euros(from)}</p>
               <div class="product__actions">
                 <button class="btn btn--line btn--sm product__add" type="button" data-add="${p.id}" aria-label="Añadir ${esc(label)} a la cesta, ${p.sizes[0][0]} ml">Añadir</button>
