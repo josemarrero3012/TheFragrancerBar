@@ -56,6 +56,16 @@
   --tex-chevron-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='28'%3E%3Cpath d='M0 20 L10 8 L20 20 L30 8 L40 20' fill='none' stroke='%23ffffff' stroke-opacity='.05' stroke-width='3'/%3E%3C/svg%3E") 0 0 / 40px 28px;
   /* Tablas del suelo, para el zócalo */
   --tex-madera: repeating-linear-gradient(90deg, #D6BA92 0 46px, #CDAF85 46px 47px, #D9BF99 47px 96px, #CBAA7F 96px 97px, #D3B68C 97px 150px, #CBAA7F 150px 151px);
+  /* Cortina de cadenas cobre: anillas pequeñas sobre hebras verticales con brillo */
+  --tex-cadenas:
+    radial-gradient(circle at 50% 30%, transparent 1.3px, #E09A52 1.5px, #B8692C 2.5px, transparent 2.8px) 0 0 / 6px 7px,
+    linear-gradient(90deg, rgba(0, 0, 0, .2), rgba(255, 222, 170, .14) 40%, rgba(0, 0, 0, .24)) 0 0 / 18px 100%,
+    #9A5622;
+  /* Pared de azulejo azul (el frente del mostrador): piezas verticales con juntas */
+  --tex-azulejo-pared:
+    repeating-linear-gradient(0deg, transparent 0 119px, rgba(18, 17, 16, .16) 119px 120px),
+    linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(0, 0, 0, .1)),
+    repeating-linear-gradient(90deg, #2E5E70 0 33px, #26505F 33px 34px, #31627A 34px 67px, #26505F 67px 68px, #2B596B 68px 101px, #26505F 101px 102px);
   /* Azulejo azul vidriado del mostrador: brillo arriba y juntas verticales */
   --tex-azulejo: linear-gradient(180deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, .1)),
     repeating-linear-gradient(90deg, #2F6072 0 22px, var(--vidriado-2) 22px 23px, #34677A 23px 45px, var(--vidriado-2) 45px 46px, #2D5D6E 46px 68px, var(--vidriado-2) 68px 69px);

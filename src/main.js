@@ -14,6 +14,7 @@ import { initShop } from './js/shop.js';
 import { initMap, initContacto, initNews } from './js/contacto.js';
 import { initMotion } from './js/motion.js';
 import { initVitrinas } from './js/vitrinas.js';
+import { initFoco } from './js/foco.js';
 
 // Los módulos se ejecutan con el documento ya analizado (equivalen a «defer»)
 $$('[data-proto]').forEach((el) => { el.hidden = !SITE.prototype; });
@@ -26,5 +27,6 @@ initMap();
 initContacto();
 initNews();
 initVitrinas();
+initFoco();
 $$('main img:not([fetchpriority])').forEach(fadeIn);
 initMotion();

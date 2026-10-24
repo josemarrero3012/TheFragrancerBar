@@ -40,7 +40,13 @@ export const SITE = {
       mapQuery: 'The Fragrance Bar, Calle Mayor de Triana 32, Las Palmas de Gran Canaria',
       // Enlace a la ficha de Google Maps («Compartir» > «Copiar enlace»). PROVISIONAL: sustituir por el enlace exacto de la ficha
       mapsUrl: 'https://www.google.com/maps/search/?api=1&query=The+Fragrance+Bar+Calle+Mayor+de+Triana+32+Las+Palmas+de+Gran+Canaria',
-      img: 'img/tienda/triana-fachada', imgAlt: 'Fachada de The Fragrance Bar en Triana: arco de piedra, rótulo negro y un interior iluminado con vitrinas de perfumes y una barra de madera en el centro' },
+      img: 'img/tienda/triana-fachada', imgAlt: 'Fachada de The Fragrance Bar en Triana: arco de piedra, rótulo negro y un interior iluminado con vitrinas de perfumes y una barra de madera en el centro',
+      /* Fotos del interior para la página de la tienda (prototipo: confirmar con la tienda que se pueden usar) */
+      interior: [
+        { img: 'img/tienda/interior-pasillo', w: 1380, h: 1038, sizes: [800, 1380], alt: 'Pasillo de vitrinas de cristal iluminadas, llenas de frascos de perfume, con suelo de madera clara' },
+        { img: 'img/tienda/interior-mesa', w: 579, h: 1035, sizes: [800], alt: 'La barra: mesa de madera con encimera de mármol, un gran ramo de flores, frascos para probar y taburetes' },
+        { img: 'img/tienda/interior-lamparas', w: 1380, h: 1040, sizes: [800, 1380], alt: 'Lámparas de cuentas de cristal blancas, azules y rosas sobre el mostrador de azulejo azul, con las vitrinas negras y la cortina de cadenas cobre al fondo' }
+      ] },
     { id: 'plaza-del-duque', name: 'Plaza del Duque', title: 'C. C. Plaza del Duque', island: 'tenerife', islandName: 'Tenerife',
       address: 'C. C. Plaza del Duque, local B26, 38660 Costa Adeje, Santa Cruz de Tenerife', // PROVISIONAL: calle exacta
       addressShort: 'C. C. Plaza del Duque, local B26, Costa Adeje',

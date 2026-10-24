@@ -7,7 +7,7 @@ import { SITE, mainStore } from '../data/site.js';
 import { CASAS, FRAGANCIAS, FAMILIAS, CONCENTRACIONES, casaById, familiaName, fragsDeCasa, euros } from '../data/catalogo.js';
 import * as schema from '../data/schema.js';
 import { layout, whatsappHref } from './layout.js';
-import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productMedia, productCard, crumbs, pageHead, demoNote, brandStrip, clock } from './ui.js';
+import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productMedia, productCard, crumbs, pageHead, demoNote, brandStrip, clock, rotulo } from './ui.js';
 
 const DAYS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const cap = (s) => s[0].toUpperCase() + s.slice(1);
@@ -99,11 +99,13 @@ function home(url) {
 
     <section class="invitada" aria-labelledby="invitada-title">
       <figure class="invitada__media">
+        <span class="invitada__cortina invitada__cortina--l" aria-hidden="true"></span><span class="invitada__cortina invitada__cortina--r" aria-hidden="true"></span>
         <img src="/img/casas/xerjoff-banner-1200.webp" srcset="/img/casas/xerjoff-banner-1200.webp 1200w, /img/casas/xerjoff-banner-2400.webp 2400w"
              sizes="100vw" width="2400" height="1350" loading="lazy" alt="Frasco de Xerjoff Naxos sobre un mapa antiguo, envuelto por una cinta verde">
       </figure>
       <div class="invitada__copy wrap" data-reveal="up" data-stagger>
-        <h2 class="invitada__title" id="invitada-title">Casa destacada: <em>${esc(d.name)}</em></h2>
+        <p class="eyebrow invitada__eyebrow">En el escaparate</p>
+        <h2 class="invitada__title" id="invitada-title">Este mes, <em>${esc(d.name)}</em></h2>
         <p>${esc(SITE.destacada.text)}</p>
         <a class="link" href="${casaUrl(d)}">Conocer ${esc(d.name)}</a>
       </div>
@@ -112,7 +114,7 @@ function home(url) {
     <section class="barra section section--dark" aria-labelledby="barra-title">
       <div class="wrap barra__grid">
         <figure class="barra__media" data-reveal="clip">
-          <img src="/img/casas/initio-barra-888.webp" width="888" height="1110" loading="lazy" alt="Frascos de Initio Oud for Greatness alineados en penumbra, con detalles dorados">
+          <img src="/img/tienda/interior-mesa-800.webp" width="579" height="1035" loading="lazy" alt="La barra de la tienda de Triana: mesa de madera con encimera de mármol, un gran ramo de flores, frascos para probar y taburetes de madera">
         </figure>
         <div class="barra__copy" data-reveal="up" data-stagger>
           <p class="eyebrow eyebrow--light">El nombre de la casa</p>
@@ -136,7 +138,7 @@ function home(url) {
       </div>
     </section>
 
-    <section class="quoteband section section--stone" aria-labelledby="quote-title">
+    <section class="quoteband section section--stone" aria-labelledby="quote-title" data-foco>
       <div class="wrap quoteband__inner" data-reveal="up" data-stagger>
         <p class="eyebrow">Nuestra historia</p>
         <h2 class="visually-hidden" id="quote-title">Nuestra historia</h2>
@@ -484,7 +486,7 @@ function barra(url) {
           <p class="pagehead__intro">En el centro de cada tienda hay una barra de madera donde se prueba con calma, sin cita y sin compromiso. Es lo que nos diferencia de una perfumería al uso.</p>
         </div>
         <figure class="barrahero__media" data-reveal="clip">
-          <img src="/img/casas/initio-barra-888.webp" width="888" height="1110" fetchpriority="high" alt="Frascos de Initio Oud for Greatness alineados en penumbra, con detalles dorados">
+          <img src="/img/tienda/interior-mesa-800.webp" width="579" height="1035" fetchpriority="high" alt="La barra de la tienda de Triana: mesa de madera con encimera de mármol, un gran ramo de flores, frascos para probar y taburetes de madera">
         </figure>
       </div>
     </header>
@@ -529,7 +531,8 @@ function barra(url) {
 /* ---------------------------------------------------------------- Historia */
 function historia(url) {
   const main = `${pageHead({ crumbs: [['Inicio', ''], ['Historia']], eyebrow: 'Desde 2022', title: 'Nuestra <em>historia</em>',
-    intro: 'The Fragrance Bar nace de un negocio familiar de perfumería y de una idea sencilla: en Canarias faltaba una tienda dedicada solo a la perfumería nicho.' })}
+    intro: 'The Fragrance Bar nace de un negocio familiar de perfumería y de una idea sencilla: en Canarias faltaba una tienda dedicada solo a la perfumería nicho.',
+    cls: 'pagehead--pared', attrs: 'data-foco', extra: rotulo() })}
     <section class="historia section section--tight">
       <div class="wrap historia__grid">
         <div class="historia__intro" data-reveal="up" data-stagger>
@@ -592,6 +595,16 @@ function tienda(url, s) {
           ? `<figure class="storehero__media"><img src="/${s.img}-1448.webp" srcset="/${s.img}-800.webp 800w, /${s.img}-1448.webp 1448w" sizes="(min-width: 960px) 50vw, 100vw" width="1448" height="1086" fetchpriority="high" alt="${esc(s.imgAlt)}"></figure>`
           : `<div class="storehero__media storehero__media--map">${mapBox(s)}</div>`}
       </header>
+
+      ${s.interior ? `<section class="section section--tight" aria-labelledby="dentro-title">
+        <div class="wrap">
+          <h2 class="section__title" id="dentro-title" data-reveal="up">Dentro de <em>la tienda</em></h2>
+          <ul class="interior" data-reveal="up" data-stagger>${s.interior.map((x) => {
+            const set = x.sizes.map((w) => `/${x.img}-${w}.webp ${Math.min(w, x.w)}w`).join(', ');
+            return `<li><figure class="interior__media"><img src="/${x.img}-800.webp" srcset="${set}" sizes="(min-width: 960px) 40vw, 100vw" width="${x.w}" height="${x.h}" loading="lazy" alt="${esc(x.alt)}"></figure></li>`;
+          }).join('')}</ul>
+        </div>
+      </section>` : ''}
 
       ${s.img ? `<section class="section section--tight" aria-label="Mapa"><div class="wrap">${mapBox(s)}</div></section>` : ''}
 

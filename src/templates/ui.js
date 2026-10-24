@@ -87,9 +87,9 @@ export function crumbs(items) {
 }
 
 /** Cabecera editorial de las páginas interiores */
-export function pageHead({ crumbs: c, eyebrow, title, intro, extra = '', dark = false }) {
+export function pageHead({ crumbs: c, eyebrow, title, intro, extra = '', dark = false, cls = '', attrs = '' }) {
   return `
-    <header class="pagehead${dark ? ' section--dark' : ''}">
+    <header class="pagehead${dark ? ' section--dark' : ''}${cls ? ` ${cls}` : ''}"${attrs ? ` ${attrs}` : ''}>
       <div class="wrap pagehead__inner" data-reveal="up" data-stagger>
         ${c ? crumbs(c) : ''}
         ${eyebrow ? `<p class="eyebrow">${eyebrow}</p>` : ''}
@@ -99,6 +99,9 @@ export function pageHead({ crumbs: c, eyebrow, title, intro, extra = '', dark = 
       </div>
     </header>`;
 }
+
+/** El rótulo cuadrado negro de la tienda, tal como cuelga sobre la pared de chevron */
+export const rotulo = () => `<p class="rotulo" aria-hidden="true"><span class="rotulo__caps">The</span><em>fragrance</em><span class="rotulo__caps rotulo__caps--end">Bar</span><span class="rotulo__sub">Luxury perfumes</span></p>`;
 
 /** Aviso de precios inventados (solo con SITE.demoPrices) */
 export function demoNote(site, { compact = false } = {}) {
