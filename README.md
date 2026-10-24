@@ -31,7 +31,17 @@ npm install
 npm run dev
 ```
 
-Se abre en http://localhost:8765. La parte técnica (estructura de carpetas, cómo editar el contenido, SEO y publicación) está en [docs/DESARROLLO.md](docs/DESARROLLO.md).
+Se abre en http://localhost:8765.
+
+Solo se publican las fragancias que tienen foto oficial. Para descargar las que faltan desde la web de cada casa:
+
+```bash
+npm run fotos
+```
+
+Quita el fondo, encaja el frasco como en el resto de fotos y deja en `scripts/fotos-informe.txt` de dónde salió cada una y cuáles no encontró. Las fuentes (tiendas Shopify, búsqueda de Montale y páginas concretas) están en `scripts/fotos-fuentes.js`.
+
+La parte técnica (estructura de carpetas, cómo editar el contenido, SEO y publicación) está en [docs/DESARROLLO.md](docs/DESARROLLO.md).
 
 ## Lo que falta
 

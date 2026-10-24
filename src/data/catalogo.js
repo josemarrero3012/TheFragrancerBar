@@ -13,10 +13,16 @@
      familia  id de familia olfativa
      notes    [salida, corazón, fondo]
      sizes    [[ml, precio en euros], …] — el primero es el tamaño por defecto
-     img      (opcional) img/productos/<img>-400.webp y -800.webp; sin foto se dibuja un frasco
+     year     año de lanzamiento, o null si no está confirmado (entonces no se muestra)
      featured (opcional) aparece en la selección de la portada
+
+   FOTOS: solo se publican las fragancias que tienen foto oficial en
+   public/img/productos/<id>-400.webp y -800.webp. La lista la mantiene
+   `npm run fotos` en fotos.js; las demás quedan en TODAS hasta que tengan foto.
    Como site.js, no debe usar nada del navegador (lo lee también vite.config.js).
    ========================================================================== */
+
+import { FOTOS } from './fotos.js';
 
 export const FAMILIAS = [
   { id: 'frescas', name: 'Frescas y afrutadas' },
@@ -106,13 +112,15 @@ const slug = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().rep
 const vary = (id) => ([...id].reduce((h, ch) => h + ch.charCodeAt(0), 0) % 5) * 10 - 10;
 const f = (casa, name, conc, year, familia, notes, desc, extra = {}) => {
   const id = `${casa}-${slug(name)}`;
-  return { id, casa, name, conc, year, familia, notes, desc, sizes: C[casa].map(([ml, pr]) => [ml, pr + vary(id)]), ...extra };
+  return { id, casa, name, conc, year, familia, notes, desc, sizes: C[casa].map(([ml, pr]) => [ml, pr + vary(id)]),
+    ...(FOTOS.includes(id) && { img: id }), ...extra };
 };
 
-export const FRAGANCIAS = [
+/** Todas las fragancias del catálogo, tengan foto o no (las usa scripts/fotos.mjs) */
+export const TODAS = [
   // Creed
   f('creed', 'Aventus', 'EDP', 2010, 'frescas', ['Piña, bergamota, grosella negra, manzana', 'Abedul ahumado, pachulí, jazmín', 'Musgo de roble, almizcle, ámbar gris, vainilla'],
-    'El chipre afrutado que convirtió a Creed en un fenómeno: piña luminosa sobre un fondo ahumado de abedul.', { img: 'creed-aventus', featured: true }),
+    'El chipre afrutado que convirtió a Creed en un fenómeno: piña luminosa sobre un fondo ahumado de abedul.', { featured: true }),
   f('creed', 'Green Irish Tweed', 'EDP', 1985, 'frescas', ['Verbena de limón, menta', 'Hoja de violeta, iris', 'Sándalo, ámbar gris'],
     'Hierba recién cortada y hoja de violeta: el gran clásico verde de la casa.'),
   f('creed', 'Silver Mountain Water', 'EDP', 1995, 'frescas', ['Bergamota, mandarina', 'Té verde, grosella negra', 'Almizcle, sándalo, petitgrain'],
@@ -136,13 +144,35 @@ export const FRAGANCIAS = [
   f('creed', 'Wind Flowers', 'EDP', 2009, 'florales', ['Melocotón, flor de azahar', 'Jazmín, tuberosa', 'Iris, almizcle, vainilla'],
     'Jazmín y melocotón llevados por la brisa: un floral delicado.', { sizes: [[30, 175], [75, 315]] }),
 
+  f('creed', 'Absolu Aventus', 'EDP', 2023, 'frescas', ['Bergamota, limón, manzana verde', 'Piña, abedul, jazmín', 'Almizcle, musgo de roble, ámbar gris'],
+    'Aventus llevado al extremo: más ahumado, más oscuro y más persistente.'),
+  f('creed', 'Centaurus', 'EDP', 2023, 'amaderadas', ['Bergamota, limón, pomelo', 'Pimienta rosa, salvia, neroli', 'Cedro, ámbar, almizcle'],
+    'Cítricos brillantes sobre maderas ambaradas: enérgico y muy fácil de llevar.'),
+  f('creed', 'Bois du Portugal', 'EDP', 1987, 'amaderadas', ['Bergamota, lavanda', 'Cedro, sándalo', 'Vetiver, ámbar, almizcle'],
+    'Cedro y lavanda con aire de barbería clásica: elegancia sin prisa.'),
+  f('creed', 'Spice and Wood', 'EDP', 2015, 'amaderadas', ['Manzana, bergamota, pomelo', 'Canela, pimienta, ciruela', 'Cuero, vetiver, maderas'],
+    'Fruta jugosa, especias cálidas y un fondo de cuero suave.'),
+  f('creed', 'Carmina', 'EDP', 2023, 'florales', ['Cereza, azafrán, pimienta rosa', 'Rosa, violeta, peonía', 'Ámbar, almizcle, cachemira'],
+    'Una rosa aterciopelada con cereza y azafrán, rotunda y femenina.'),
+  f('creed', 'Wild Vetiver', 'EDP', 2023, 'amaderadas', ['Bergamota, lima, hojas verdes', 'Vetiver, iris, menta', 'Maderas, almizcle'],
+    'Vetiver verde y luminoso, como hierba al sol.'),
+  f('creed', 'Royal Water', 'EDP', 1997, 'frescas', ['Mandarina, bergamota, limón, menta', 'Enebro, albahaca, pimienta negra', 'Almizcle, ámbar gris'],
+    'Cítricos, menta y albahaca: un agua de colonia de verano con distinción.'),
+  f('creed', 'Erolfa', 'EDP', 1992, 'frescas', ['Lima, limón, bergamota', 'Notas marinas, melón, pimienta', 'Sándalo, vetiver, almizcle'],
+    'Brisa marina y cítricos, pensada para la vida en el mar.'),
+  f('creed', 'Néroli Sauvage', 'EDP', 1994, 'frescas', ['Neroli, limón, naranja amarga', 'Petitgrain, lavanda', 'Almizcle, menta'],
+    'Neroli puro y chispeante, limpio de principio a fin.'),
+  f('creed', 'Original Vetiver', 'EDP', 2004, 'frescas', ['Bergamota, mandarina, jengibre', 'Iris, sándalo', 'Vetiver, ámbar gris, almizcle'],
+    'Un vetiver fresco y jabonoso, de camisa blanca recién planchada.'),
+  f('creed', 'Fleurissimo', 'EDP', 1956, 'florales', ['Bergamota, mandarina', 'Tuberosa, rosa búlgara, violeta', 'Iris, almizcle, ámbar'],
+    'El ramo de novia creado para Grace Kelly: tuberosa, rosa y violeta.'),
   // Amouage
   f('amouage', 'Interlude Man', 'EDP', 2012, 'amaderadas', ['Orégano, pimienta, bergamota', 'Incienso, ámbar, opopónaco', 'Oud, cuero, pachulí, sándalo'],
-    'Caos ordenado: humo de incienso, orégano y oud, con una estela inconfundible.', { img: 'amouage-interlude', featured: true }),
+    'Caos ordenado: humo de incienso, orégano y oud, con una estela inconfundible.', { featured: true }),
   f('amouage', 'Reflection Man', 'EDP', 2007, 'florales', ['Romero, pimienta rosa, hoja de violeta', 'Jazmín, flor de azahar, raíz de lirio', 'Sándalo, vetiver, cedro, pachulí'],
     'El floral limpio y elegante de Amouage, perfecto para el día a día.'),
   f('amouage', 'Guidance 46', 'Extrait', 2023, 'florales', ['Pera, avellana', 'Rosa, flor de azahar, osmanthus', 'Incienso, sándalo, vainilla'],
-    'Pera y avellana tostada sobre incienso, en concentración de extracto.', { img: 'amouage-guidance46', featured: true, sizes: [[50, 295], [100, 415]] }),
+    'Pera y avellana tostada sobre incienso, en concentración de extracto.', { featured: true, sizes: [[50, 295], [100, 415]] }),
   f('amouage', 'Jubilation XXV', 'EDP', 2008, 'ambar', ['Naranja, cilantro, frutas oscuras', 'Incienso, mirra, rosa, miel', 'Láudano, oud, almizcle, ámbar gris'],
     'Creado para el 25 aniversario de la casa: incienso, miel y frutas oscuras.'),
   f('amouage', 'Epic Man', 'EDP', 2009, 'amaderadas', ['Comino, cardamomo, pimienta rosa', 'Incienso, geranio, té negro', 'Oud, sándalo, almizcle'],
@@ -158,11 +188,25 @@ export const FRAGANCIAS = [
   f('amouage', 'Beach Hut Man', 'EDP', 2016, 'frescas', ['Menta, hiedra', 'Mirra, pachulí', 'Musgo de roble, ámbar'],
     'Menta y hojas verdes: una cabaña de playa al atardecer.'),
 
+  f('amouage', 'Guidance', 'EDP', 2023, 'florales', ['Pera, avellana, pimienta', 'Incienso, rosa, osmanto', 'Sándalo, vainilla, ámbar'],
+    'Pera y avellana tostada sobre incienso cremoso: la versión eau de parfum de Guidance.'),
+  f('amouage', 'Honour Woman', 'EDP', 2011, 'florales', ['Pimienta negra, pimienta rosa', 'Tuberosa, gardenia, nardo', 'Benjuí, almizcle, vetiver'],
+    'Flores blancas con pimienta: luminosa, intensa y muy elegante.'),
+  f('amouage', 'Epic Woman', 'EDP', 2009, 'ambar', ['Comino, pimienta rosa, cardamomo', 'Rosa, geranio, té', 'Incienso, oud, sándalo'],
+    'La Ruta de la Seda en un frasco: especias, té ahumado e incienso.'),
+  f('amouage', 'Memoir Woman', 'EDP', 2010, 'amaderadas', ['Ajenjo, cardamomo', 'Rosa, incienso, jazmín', 'Cuero, vetiver, pachulí'],
+    'Ajenjo y rosa sobre cuero: oscura, literaria y de mucho carácter.'),
+  f('amouage', 'Journey Man', 'EDP', 2014, 'ambar', ['Cardamomo, pimienta, nuez moscada', 'Tabaco, incienso, neroli', 'Cuero, cedro, almizcle'],
+    'Tabaco, cardamomo y cuero: un viaje en un tren nocturno de los años 30.'),
+  f('amouage', 'Overture Man', 'EDP', null, 'ambar', ['Coñac, naranja, cardamomo', 'Incienso, flores', 'Ámbar, cuero, maderas'],
+    'Coñac y especias cálidas: festivo, envolvente y muy de noche.'),
+  f('amouage', 'Lilac Love', 'EDP', 2016, 'florales', ['Lila, heliotropo', 'Rosa, almendra, cacao', 'Vainilla, almizcle, sándalo'],
+    'Lila y heliotropo empolvados con un toque goloso de cacao.'),
   // Xerjoff
   f('xerjoff', 'Naxos', 'EDP', 2015, 'ambar', ['Lavanda, bergamota, limón', 'Miel, canela, jazmín', 'Tabaco, haba tonka, vainilla'],
-    'Lavanda, miel y tabaco: un homenaje a Sicilia y una de las fragancias más queridas del nicho.', { img: 'xerjoff-naxos', featured: true }),
+    'Lavanda, miel y tabaco: un homenaje a Sicilia y una de las fragancias más queridas del nicho.', { featured: true }),
   f('xerjoff', 'Erba Pura', 'EDP', 2019, 'frescas', ['Naranja siciliana, limón, bergamota', 'Frutas mediterráneas', 'Almizcle blanco, ámbar, vainilla'],
-    'Una explosión de fruta mediterránea sobre almizcles blancos. De las más pedidas en tienda.', { img: 'xerjoff-erbapura', featured: true }),
+    'Una explosión de fruta mediterránea sobre almizcles blancos. De las más pedidas en tienda.', { featured: true }),
   f('xerjoff', 'Alexandria II', 'Parfum', 2012, 'amaderadas', ['Palo de rosa, lavanda, canela', 'Rosa, lirio de los valles, cedro', 'Oud, ámbar, vainilla, almizcle'],
     'Uno de los grandes ouds de la casa, rosado y cremoso.', { sizes: [[50, 395], [100, 575]] }),
   f('xerjoff', 'Torino21', 'EDP', 2021, 'frescas', ['Limón, bergamota, menta', 'Lavanda, albahaca, tomillo', 'Almizcle, maderas'],
@@ -182,11 +226,31 @@ export const FRAGANCIAS = [
   f('xerjoff', 'Golden Dallah', 'Parfum', 2015, 'ambar', ['Café, cardamomo, azafrán', 'Rosa, oud', 'Ámbar, vainilla, almizcle'],
     'Café árabe, azafrán y oud: la hospitalidad del Golfo en un frasco.', { sizes: [[50, 425], [100, 615]] }),
 
+  f('xerjoff', 'Elle', 'EDP', null, 'florales', ['Bergamota de Calabria, gálbano, lirio de los valles, neroli', 'Rosa búlgara, iris de Florencia, jazmín sambac, pachulí', 'Ámbar, cumarina, almizcle'],
+    'Un gran floral clásico: rosa, iris y jazmín sobre un fondo ambarado.'),
+  f('xerjoff', 'Elle Anniversary', 'EDP', null, 'florales', ['Bergamota, lichi, manzana verde, frutos rojos', 'Madera de cachemira, jazmín, regaliz, peonía', 'Pachulí, ámbar, almizcle, sándalo'],
+    'Elle en versión afrutada: lichi y frutos rojos sobre peonía y jazmín.'),
+  f('xerjoff', 'Decas', 'EDP', null, 'ambar', ['Mandarina de Brasil, tuberosa, tabaco', 'Benjuí, opopónaco, iris de la Toscana', 'Almizcle, bálsamo de Tolú, vainilla Bourbon'],
+    'Tabaco y tuberosa sobre bálsamos y vainilla: cálido, rico y elegante.'),
+  f('xerjoff', 'Accento Overdose', 'EDP', null, 'florales', ['Notas afrutadas, notas verdes', 'Eucalipto, pino mediterráneo', 'Rosa búlgara, muguet, jazmín de Egipto'],
+    'Accento más verde y fresco, con pino y eucalipto entre las flores.'),
+  f('xerjoff', 'Alexandria III', 'EDP', null, 'amaderadas', ['Canela, lavanda, palo de rosa', 'Cedro, lirio de los valles, rosa búlgara', 'Ámbar, almizcle, sándalo, vainilla, oud'],
+    'La continuación de Alexandria II: especias, rosa y una mezcla de ouds de Tailandia y Laos.'),
+  f('xerjoff', 'Cruz del Sur II', 'EDP', null, 'frescas', ['Flor de manzano, mango, piña', 'Hojas verdes, flores', 'Cedro, almizcle, vetiver'],
+    'Mango y piña con flores verdes: un viaje tropical muy luminoso.'),
+  f('xerjoff', 'Oesel', 'EDP', null, 'florales', ['Limón, azahar, petitgrain de Paraguay', 'Rosa búlgara, jazmín sambac, flor de acacia', 'Ámbar, cedro, pachulí, flor de tabaco'],
+    'Azahar y jazmín con un fondo de flor de tabaco: soleado y elegante.'),
+  f('xerjoff', 'Italica', 'EDP', null, 'ambar', ['Almendra, notas lácteas, azafrán', 'Toffee, vainilla', 'Almizcle blanco, cedro, sándalo'],
+    'Almendra, leche y toffee: un gourmand cremoso e italianísimo.'),
+  f('xerjoff', "Fiore d'Ulivo", 'EDP', null, 'frescas', ['Hojas de albahaca, piel de limón, flor de loto', 'Jazmín absoluto', 'Ámbar, benjuí, almizcle'],
+    'Albahaca, limón y jazmín: la frescura de un jardín mediterráneo.'),
+  f('xerjoff', 'Quattro Pizzi', 'EDP', null, 'ambar', ['Cilantro, davana, pimienta rosa, ron', 'Coco, tuberosa', 'Tabaco rubio, heno, haba tonka'],
+    'Ron, coco y tabaco rubio: cálido, tropical y muy goloso.'),
   // Parfums de Marly
   f('pdm', 'Layton', 'EDP', 2016, 'ambar', ['Manzana, lavanda, bergamota', 'Geranio, violeta, jazmín', 'Vainilla, cardamomo, sándalo, pachulí'],
-    'Manzana, lavanda y vainilla con un toque de cardamomo. Elegante y muy versátil.', { img: 'pdm-layton', featured: true }),
+    'Manzana, lavanda y vainilla con un toque de cardamomo. Elegante y muy versátil.', { featured: true }),
   f('pdm', 'Delina', 'EDP', 2017, 'florales', ['Lichi, ruibarbo, bergamota, nuez moscada', 'Rosa turca, peonía, vainilla', 'Cachemira, cedro, incienso'],
-    'Lichi y ruibarbo sobre una rosa turca: el floral más famoso de la casa.', { img: 'pdm-delina', featured: true }),
+    'Lichi y ruibarbo sobre una rosa turca: el floral más famoso de la casa.', { featured: true }),
   f('pdm', 'Pegasus', 'EDP', 2011, 'ambar', ['Heliotropo, comino, bergamota', 'Almendra amarga, lavanda, jazmín', 'Vainilla, sándalo, ámbar'],
     'Almendra y vainilla: el gourmand elegante de la casa.'),
   f('pdm', 'Herod', 'EDP', 2012, 'amaderadas', ['Canela, pimienta', 'Hoja de tabaco, incienso, osmanthus', 'Vainilla, almizcle, cedro, vetiver'],
@@ -208,9 +272,27 @@ export const FRAGANCIAS = [
   f('pdm', 'Althaïr', 'EDP', 2023, 'ambar', ['Cardamomo, canela, flor de azahar', 'Vainilla bourbon, praliné', 'Almizcle, maderas'],
     'Vainilla bourbon y praliné con especias suaves.'),
 
+  f('pdm', 'Delina Exclusif', 'Parfum', 2018, 'florales', ['Lichi, bergamota, pimienta rosa', 'Rosa turca, incienso', 'Oud, ámbar, vetiver'],
+    'Delina más profunda y nocturna, con incienso y oud bajo la rosa.'),
+  f('pdm', 'Delina La Rosée', 'EDP', 2021, 'florales', ['Lichi, bergamota, pera', 'Rosa, peonía', 'Almizcle, maderas claras'],
+    'La Delina más ligera y acuosa: rosa con rocío de la mañana.'),
+  f('pdm', 'Layton Exclusif', 'Parfum', 2017, 'ambar', ['Bergamota, manzana', 'Rosa, especias', 'Oud, vainilla, pachulí'],
+    'Layton en clave oscura: más vainilla, más especia y un toque de oud.'),
+  f('pdm', 'Pegasus Exclusif', 'Parfum', 2019, 'ambar', ['Bergamota, almendra amarga', 'Lavanda, rosa', 'Vainilla, sándalo, ámbar'],
+    'Almendra y vainilla con más profundidad y una estela muy cálida.'),
+  f('pdm', 'Kalan', 'EDP', 2019, 'frescas', ['Naranja sanguina, bergamota, pimienta negra', 'Lavanda, salvia', 'Vetiver, haba tonka, maderas'],
+    'Naranja sanguina y lavanda: fresco, especiado y muy versátil.'),
+  f('pdm', 'Godolphin', 'EDP', 2012, 'amaderadas', ['Tomillo, ciprés, azafrán', 'Rosa, jazmín, cuero', 'Vetiver, ámbar, almizcle'],
+    'Cuero noble con tomillo y azafrán, en homenaje a un caballo árabe legendario.'),
+  f('pdm', 'Galloway', 'EDP', 2009, 'frescas', ['Bergamota, mandarina, neroli', 'Iris, lirio, heliotropo', 'Almizcle, ámbar'],
+    'Cítricos y flores empolvadas: limpio, suave y muy luminoso.'),
+  f('pdm', 'Safanad', 'EDP', 2017, 'florales', ['Pera, mandarina', 'Azahar, iris, jazmín', 'Vainilla, ámbar, sándalo'],
+    'Azahar e iris sobre vainilla: un floral dulce y sofisticado.'),
+  f('pdm', 'Meliora', 'EDP', 2016, 'florales', ['Grosella negra, frambuesa, bergamota', 'Rosa, peonía', 'Almizcle, vainilla, pachulí'],
+    'Frutos rojos y rosa: alegre, chispeante y muy femenino.'),
   // Initio
   f('initio', 'Oud for Greatness', 'EDP', 2018, 'amaderadas', ['Azafrán, nuez moscada', 'Lavanda', 'Oud, pachulí, almizcle'],
-    'Azafrán y un oud poderoso: la fragancia insignia de Initio.', { img: 'initio-ofg', featured: true }),
+    'Azafrán y un oud poderoso: la fragancia insignia de Initio.', { featured: true }),
   f('initio', 'Side Effect', 'EDP', 2016, 'ambar', ['Ron, canela', 'Tabaco', 'Vainilla'],
     'Ron, tabaco y vainilla: adictivo y nocturno.'),
   f('initio', 'Rehab', 'EDP', 2016, 'amaderadas', ['Lavanda, bergamota', 'Almizcle, sándalo', 'Haba tonka, maderas'],
@@ -234,7 +316,7 @@ export const FRAGANCIAS = [
 
   // Montale
   f('montale', 'Arabians Tonka', 'EDP', 2016, 'ambar', ['Azafrán, bergamota', 'Rosa búlgara, oud', 'Haba tonka, ámbar, almizcle'],
-    'Azafrán, rosa y oud endulzados con haba tonka. Intenso y muy duradero.', { img: 'montale-arabians-tonka', featured: true }),
+    'Azafrán, rosa y oud endulzados con haba tonka. Intenso y muy duradero.', { featured: true }),
   f('montale', 'Intense Café', 'EDP', 2013, 'ambar', ['Rosa, café', 'Flores blancas', 'Vainilla, ámbar, almizcle'],
     'Café tostado y rosa: el gourmand más famoso de Montale.'),
   f('montale', 'Black Aoud', 'EDP', 2006, 'amaderadas', ['Mandarina', 'Rosa, pachulí', 'Oud, almizcle, ládano'],
@@ -256,9 +338,21 @@ export const FRAGANCIAS = [
   f('montale', 'Fantastic Oud', 'EDP', 2016, 'amaderadas', ['Especias', 'Oud, rosa', 'Maderas ahumadas, ámbar'],
     'Oud especiado y ahumado, de los más intensos de la casa.'),
 
+  f('montale', 'Amandes Orientales', 'EDP', null, 'ambar', ['Almendra', 'Vainilla, notas de leche', 'Haba tonka, almizcle, maderas'],
+    'Almendra y vainilla cremosas: un gourmand suave y reconfortante.'),
+  f('montale', 'Vanilla Cake', 'EDP', null, 'ambar', ['Notas de pastel, azúcar', 'Vainilla, flores blancas', 'Caramelo, almizcle'],
+    'Vainilla de pastelería recién horneada, dulce y desenfadada.'),
+  f('montale', 'Pure Gold', 'EDP', null, 'ambar', ['Mandarina, flor de azahar', 'Jazmín, rosa', 'Vainilla, almizcle, ámbar'],
+    'Flores luminosas sobre vainilla y almizcle: dorado y muy envolvente.'),
+  f('montale', 'Red Aoud', 'EDP', null, 'amaderadas', ['Azafrán, pimienta rosa', 'Rosa, oud', 'Cuero, pachulí, maderas'],
+    'Oud y rosa con azafrán: intenso y muy oriental.'),
+  f('montale', 'Mango Manga', 'EDP', null, 'frescas', ['Mango, bergamota', 'Flores blancas, jazmín', 'Vainilla, almizcle'],
+    'Mango maduro y flores blancas: tropical, alegre y jugoso.'),
+  f('montale', 'Roses Elixir', 'EDP', null, 'florales', ['Bergamota, frutos rojos', 'Rosa, ylang-ylang, jazmín', 'Almizcle blanco, pachulí'],
+    'Una rosa fresca y afrutada, más ligera que Roses Musk.'),
   // Memo Paris
   f('memo', 'Marfa', 'EDP', 2016, 'florales', ['Agave, flor de azahar', 'Nardo, ylang-ylang', 'Sándalo, cedro, almizcle'],
-    'Nardo y azahar en el desierto de Texas: un floral blanco cálido y solar.', { img: 'memo-marfa', featured: true }),
+    'Nardo y azahar en el desierto de Texas: un floral blanco cálido y solar.', { featured: true }),
   f('memo', 'African Leather', 'EDP', 2015, 'amaderadas', ['Cardamomo, comino, azafrán', 'Cuero, geranio', 'Pachulí, vetiver, oud'],
     'Cuero especiado con azafrán: la sabana al atardecer.'),
   f('memo', 'Irish Leather', 'EDP', 2014, 'amaderadas', ['Enebro, pimienta rosa, mate', 'Cuero, iris', 'Haba tonka, ámbar, musgo'],
@@ -278,7 +372,7 @@ export const FRAGANCIAS = [
 
   // Tom Ford Private Blend
   f('tomford', 'Tobacco Vanille', 'EDP', 2007, 'ambar', ['Hoja de tabaco, especias', 'Vainilla, cacao, haba tonka', 'Frutos secos, maderas'],
-    'Hoja de tabaco y vainilla: un clásico cálido y envolvente de la colección Private Blend.', { img: 'tf-tobacco-vanille', featured: true }),
+    'Hoja de tabaco y vainilla: un clásico cálido y envolvente de la colección Private Blend.', { featured: true }),
   f('tomford', 'Oud Wood', 'EDP', 2007, 'amaderadas', ['Palo de rosa, cardamomo, pimienta', 'Oud, sándalo, vetiver', 'Haba tonka, vainilla, ámbar'],
     'El oud que lo empezó todo en Occidente: suave, seco y elegante.'),
   f('tomford', 'Lost Cherry', 'EDP', 2018, 'ambar', ['Cereza negra, licor de cereza, almendra amarga', 'Rosa turca, jazmín', 'Haba tonka, vainilla, sándalo'],
@@ -300,8 +394,31 @@ export const FRAGANCIAS = [
   f('tomford', 'Santal Blush', 'EDP', 2011, 'amaderadas', ['Canela, comino, fenogreco', 'Sándalo, jazmín, rosa', 'Benjuí, cedro'],
     'Sándalo cremoso y especias suaves: cálido y sensual.'),
   f('tomford', 'Noir de Noir', 'EDP', 2007, 'florales', ['Azafrán', 'Rosa negra, trufa', 'Pachulí, vainilla, oud'],
-    'Rosa negra y trufa: oscuro y aterciopelado.')
+    'Rosa negra y trufa: oscuro y aterciopelado.'),
+  f('tomford', 'Fucking Fabulous', 'EDP', 2017, 'amaderadas', ['Salvia, lavanda, almendra amarga', 'Cuero, vainilla, iris', 'Haba tonka, cachemira, ámbar'],
+    'Lavanda, almendra y cuero: provocador, cremoso y adictivo.'),
+  f('tomford', 'Oud Minérale', 'EDP', 2017, 'frescas', ['Sal marina, pimienta rosa, algas', 'Oud, notas marinas', 'Ámbar gris, maderas, almizcle'],
+    'Un oud bañado en agua de mar: salino, mineral y sorprendente.'),
+  f('tomford', 'Vanilla Sex', 'EDP', 2024, 'ambar', ['Almendra amarga, flores', 'Vainilla, haba tonka', 'Sándalo, almizcle'],
+    'Vainilla cruda y cremosa, cálida como la piel.'),
+  f('tomford', 'Tobacco Oud', 'EDP', 2013, 'ambar', ['Whisky, especias', 'Tabaco, canela, cilantro', 'Oud, sándalo, pachulí'],
+    'Tabaco y oud con un trago de whisky: oscuro y lujoso.'),
+  f('tomford', 'Costa Azzurra', 'EDP', 2014, 'frescas', ['Limón, apio, enebro', 'Algas, ciprés, mirto', 'Madera flotante, ámbar, vainilla'],
+    'Madera arrastrada por el mar y hierbas mediterráneas.'),
+  f('tomford', 'Mandarino di Amalfi', 'EDP', 2014, 'frescas', ['Mandarina, limón, pomelo', 'Menta, albahaca, estragón', 'Ládano, almizcle'],
+    'Mandarina y hierbas frescas de la costa de Amalfi.'),
+  f('tomford', 'Jasmin Rouge', 'EDP', 2011, 'florales', ['Mandarina, clavo, cardamomo', 'Jazmín sambac, ylang-ylang', 'Cuero, vainilla, sándalo'],
+    'Jazmín especiado y sensual, con un fondo de cuero.'),
+  f('tomford', 'Grey Vetiver', 'EDP', 2009, 'frescas', ['Pomelo, salvia, naranja', 'Iris, nuez moscada, pimienta', 'Vetiver, musgo de roble, ámbar'],
+    'Vetiver pulido y elegante, de traje gris.'),
+  f('tomford', 'Electric Cherry', 'EDP', 2022, 'florales', ['Cereza, pimienta rosa', 'Jazmín sambac', 'Almizcle, ámbar'],
+    'La cereza más luminosa de la casa: chispeante, ligera y floral.'),
+  f('tomford', 'Cherry Smoke', 'EDP', 2022, 'ambar', ['Cereza, azafrán', 'Cuero, osmanto', 'Madera ahumada, ciprés'],
+    'Cereza y humo de madera: oscuro, ahumado y muy seductor.')
 ];
+
+/** Las que se publican: solo las que tienen foto oficial */
+export const FRAGANCIAS = TODAS.filter((p) => p.img);
 
 /* Utilidades de datos (sirven al navegador y al compilar) */
 export const casaById = (id) => CASAS.find((c) => c.id === id);

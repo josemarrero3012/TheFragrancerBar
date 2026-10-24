@@ -12,6 +12,7 @@ import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productMedi
 const DAYS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const cap = (s) => s[0].toUpperCase() + s.slice(1);
 const featured = FRAGANCIAS.filter((p) => p.featured);
+const nFrag = (n) => `${n} ${n === 1 ? 'fragancia' : 'fragancias'}`;
 /** Meta description de 160 caracteres como máximo: añade el primer complemento que quepa */
 const fit = (base, ...extras) => base + (extras.find((x) => (base + x).length <= 160) || '');
 
@@ -188,7 +189,7 @@ function casas(url) {
               <span class="casacard__city">${esc(c.city)}</span>
               <span class="casacard__name">${esc(c.name)}</span>
               <span class="casacard__desc">${esc(c.desc)}</span>
-              <span class="casacard__count">${fragsDeCasa(c.id).length} fragancias ${ICON.arrow}</span>
+              <span class="casacard__count">${nFrag(fragsDeCasa(c.id).length)} ${ICON.arrow}</span>
             </span>
           </a>
         </li>`).join('')}
@@ -218,7 +219,7 @@ function casa(url, c) {
           ${c.story.map((t) => `<p class="casahero__story">${esc(t)}</p>`).join('')}
           <p class="casahero__icons"><span>Emblemáticas</span> ${c.icons.map(esc).join(' · ')}</p>
           <div class="hero__ctas">
-            <a class="btn btn--dark" href="#fragancias">Ver sus ${items.length} fragancias</a>
+            <a class="btn btn--dark" href="#fragancias">Ver ${items.length === 1 ? 'su fragancia' : `sus ${items.length} fragancias`}</a>
             <a class="btn btn--line" href="${u('tiendas/')}">Probarlas en tienda</a>
           </div>
         </div>
@@ -243,7 +244,7 @@ function casa(url, c) {
   return {
     path: `casas/${c.id}/`, section: 'casas', main,
     title: `${c.name} en Las Palmas y Tenerife | The Fragrance Bar`,
-    description: fit(`${c.desc}`, ` ${items.length} fragancias de ${c.name} para probar en The Fragrance Bar Triana.`, ` ${items.length} fragancias en The Fragrance Bar.`),
+    description: fit(`${c.desc}`, ` ${nFrag(items.length)} de ${c.name} para probar en The Fragrance Bar Triana.`, ` ${nFrag(items.length)} en The Fragrance Bar.`),
     ogImage: `${url}/img/casas/${c.img}-1000.webp`,
     preload: `<link rel="preload" as="image" href="/img/casas/${c.img}-1000.webp" imagesrcset="/img/casas/${c.img}-560.webp 560w, /img/casas/${c.img}-1000.webp 1000w" imagesizes="(min-width: 960px) 45vw, 100vw">`,
     schema: schema.graph([schema.breadcrumbs(url, bc), { '@type': 'CollectionPage', name: `${c.name} · The Fragrance Bar`, url: `${url}/casas/${c.id}/`, mainEntity: schema.itemList(url, items) }])
@@ -304,7 +305,7 @@ function fragancia(url, p) {
       <div class="pdp__info">
         <p class="product__brand"><a href="${casaUrl(c)}">${esc(c.name)}</a></p>
         <h1 class="pdp__title">${esc(p.name)}</h1>
-        <p class="pdp__meta">${CONCENTRACIONES[p.conc]} · ${p.year} · ${esc(familiaName(p.familia))}</p>
+        <p class="pdp__meta">${[CONCENTRACIONES[p.conc], p.year, esc(familiaName(p.familia))].filter(Boolean).join(' · ')}</p>
         <p class="pdp__desc">${esc(p.desc)}</p>
 
         <form class="buy" data-buy="${p.id}">
@@ -357,7 +358,7 @@ function fragancia(url, p) {
   return {
     path: `fragancias/${p.id}/`, section: 'comprar', main, quickbar: false,
     title: `${label} · ${CONCENTRACIONES[p.conc]} | The Fragrance Bar`,
-    description: fit(`${label}, ${CONCENTRACIONES[p.conc].toLowerCase()} de ${p.year}. ${p.desc}`, ` Notas: ${p.notes.join(', ').toLowerCase()}.`, ' En The Fragrance Bar.'),
+    description: fit(`${label}, ${CONCENTRACIONES[p.conc].toLowerCase()}${p.year ? ` de ${p.year}` : ''}. ${p.desc}`, ` Notas: ${p.notes.join(', ').toLowerCase()}.`, ' En The Fragrance Bar.'),
     ogImage: p.img ? `${url}/img/productos/${p.img}-800.webp` : undefined,
     schema: schema.graph([schema.breadcrumbs(url, bc), schema.product(SITE, url, p)])
   };

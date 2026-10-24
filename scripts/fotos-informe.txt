@@ -1,0 +1,61 @@
+Fotos descargadas (50)
+id  página  imagen
+creed-aventus  https://www.creedfragrance.com/p/aventus/12870029  https://static.thcdn.com/productimg/original/12870029-1145337306138828.jpg
+creed-green-irish-tweed  https://www.creedfragrance.com/p/green-irish-tweed/12870035/  https://static.thcdn.com/productimg/original/12870035-8495164180496709.jpg
+creed-silver-mountain-water  https://www.creedfragrance.com/p/silver-mountain-water/12870049/  https://static.thcdn.com/productimg/original/12870049-1875303061449466.jpg
+creed-viking  https://www.creedfragrance.com/p/viking/12870053/  https://static.thcdn.com/productimg/original/12870053-1185132259235236.jpg
+creed-royal-oud  https://www.creedfragrance.com/p/royal-oud/12870045/  https://static.thcdn.com/productimg/original/12870045-8805322012183012.jpg
+creed-original-santal  https://www.creedfragrance.com/p/original-santal/12870043/  https://static.thcdn.com/productimg/original/12870043-4695216837490450.jpg
+creed-millesime-imperial  https://www.creedfragrance.com/p/millesime-imperial/12870041/  https://static.thcdn.com/productimg/original/12870041-1825216837468022.jpg
+creed-himalaya  https://www.creedfragrance.com/p/himalaya/12870036/  https://static.thcdn.com/productimg/original/12870036-1615132257249503.jpg
+creed-virgin-island-water  https://www.creedfragrance.com/p/virgin-island-water/12870055/  https://static.thcdn.com/productimg/original/12870055-2035281296935484.jpg
+creed-aventus-for-her  https://www.creedfragrance.com/p/aventus-for-her/12870031/  https://static.thcdn.com/productimg/original/12870031-9665337306355095.jpg
+creed-wind-flowers  https://www.creedfragrance.com/p/wind-flowers/14942229/  https://static.thcdn.com/productimg/original/14942229-1165164978868709.jpg
+creed-absolu-aventus  https://www.creedfragrance.com/p/absolu-aventus/14926231/  https://static.thcdn.com/productimg/original/14926231-2535132254807488.jpg
+creed-centaurus  https://www.creedfragrance.com/p/centaurus/15396603/  https://static.thcdn.com/productimg/original/15396603-6745176117708254.jpg
+creed-bois-du-portugal  https://www.creedfragrance.com/p/bois-du-portugal/12870032/  https://static.thcdn.com/productimg/original/12870032-1965164180191960.jpg
+creed-carmina  https://www.creedfragrance.com/p/carmina/14882499/  https://static.thcdn.com/productimg/original/14882499-2465132254479546.jpg
+creed-wild-vetiver  https://www.creedfragrance.com/p/wild-vetiver/16684202/  https://static.thcdn.com/productimg/original/16684202-1125319455659968.jpg
+creed-royal-water  https://www.creedfragrance.com/p/royal-water/12870048/  https://static.thcdn.com/productimg/original/12870048-1715132258729676.jpg
+creed-erolfa  https://www.creedfragrance.com/p/erolfa/12870033/  https://static.thcdn.com/productimg/original/12870033-1265132260251345.jpg
+creed-neroli-sauvage  https://www.creedfragrance.com/p/neroli-sauvage/12870042/  https://static.thcdn.com/productimg/original/12870042-8925132258008671.jpg
+creed-original-vetiver  https://www.creedfragrance.com/p/original-vetiver/12870044/  https://static.thcdn.com/productimg/original/12870044-1435216837513418.jpg
+creed-fleurissimo  https://www.creedfragrance.com/p/fleurissimo/12870034/  https://static.thcdn.com/productimg/original/12870034-1455183380630686.jpg
+amouage-interlude-man  https://amouage.com/products/interlude-man-100ml  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/INTERLUDE_MAN_100_ML.jpg?v=1758794506
+amouage-reflection-man  https://amouage.com/products/reflection-man-100ml  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/REFLECTION_100_ML.jpg?v=1758803038
+amouage-guidance-46  https://amouage.com/products/new-guidance-46  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/Amouage_CS_Photo_Bottle_Guidance46.jpg?v=1770722238
+amouage-epic-man  https://amouage.com/products/epic-man-100ml  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/EPIC_MAN_100ML.jpg?v=1758788909
+amouage-memoir-man  https://amouage.com/products/memoir-man  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/MEMOIR_MAN_100_ML.jpg?v=1758801737
+amouage-lyric-woman  https://amouage.com/products/lyricwoman  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/LYRIC_WOMAN_100_ML_copy.jpg?v=1758801374
+amouage-gold-woman  https://amouage.com/products/gold-woman-100ml  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/GOLD_WOMAN_100_ML_copy.jpg?v=1758790692
+amouage-honour-man  https://amouage.com/products/honour-man  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/HONOUR_MAN.jpg?v=1758790986
+amouage-beach-hut-man  https://amouage.com/products/beach-hut-man-100ml-eau-de-parfum  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/BEACH_HUT_100_ML.jpg?v=1758785360
+amouage-guidance  https://amouage.com/products/100ml-guidance  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/GUIDANCE_100_ML.jpg?v=1758540475
+amouage-honour-woman  https://amouage.com/products/honour-woman-100ml  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/HONOUR_WOMAN_100_ML.jpg?v=1758540357
+amouage-epic-woman  https://amouage.com/products/epic-woman  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/EPIC_WOMAN_100_ML.jpg?v=1758789368
+amouage-memoir-woman  https://amouage.com/products/memoir-woman  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/MEMOIR_WOMAN_100_ML_copy.jpg?v=1758801933
+amouage-journey-man  https://amouage.com/products/journey-man  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/JOURNEY_MAN_100_ML.jpg?v=1758799609
+amouage-overture-man  https://amouage.com/products/overture-man  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/OVERTURE_100ml.jpg?v=1758802175
+amouage-lilac-love  https://amouage.com/products/lilac-love  https://cdn.shopify.com/s/files/1/0823/5099/7796/files/lilac_love_100ml_np_copy.jpg?v=1759217035
+montale-arabians-tonka  https://www.montaleparfums.com/en/oriental/282-arabians-tonka.html  https://www.montaleparfums.com/1081-product_square/arabians-tonka.jpg
+montale-intense-cafe  https://www.montaleparfums.com/en/gourmand/176-intense-cafe.html  https://www.montaleparfums.com/879-product_square/intense-cafe.jpg
+montale-roses-musk  https://www.montaleparfums.com/en/floral/68-roses-musk-rose.html  https://www.montaleparfums.com/815-product_square/roses-musk-rose.jpg
+montale-chocolate-greedy  https://www.montaleparfums.com/en/gourmand/35-chocolate-greedy-argent.html  https://www.montaleparfums.com/721-product_square/chocolate-greedy-argent.jpg
+montale-wild-pears  https://www.montaleparfums.com/en/fruity/87-wild-pears-argent.html  https://www.montaleparfums.com/869-product_square/wild-pears-argent.jpg
+montale-dark-purple  https://www.montaleparfums.com/en/fruity/41-dark-purple-prune.html  https://www.montaleparfums.com/739-product_square/dark-purple-prune.jpg
+montale-aoud-forest  https://www.montaleparfums.com/en/woody/16-aoud-forest-marron.html  https://www.montaleparfums.com/668-product_square/aoud-forest-marron.jpg
+montale-starry-nights  https://www.montaleparfums.com/en/floral/211-starry-nights.html  https://www.montaleparfums.com/917-product_square/starry-nights.jpg
+montale-vanille-absolu  https://www.montaleparfums.com/en/gourmand/80-vanille-absolu-argent.html  https://www.montaleparfums.com/848-product_square/vanille-absolu-argent.jpg
+montale-fantastic-oud  https://www.montaleparfums.com/en/oriental/258-fantastic-oud.html  https://www.montaleparfums.com/973-product_square/fantastic-oud.jpg
+montale-vanilla-cake  https://www.montaleparfums.com/en/gourmand/256-vanilla-cake.html  https://www.montaleparfums.com/966-product_square/vanilla-cake.jpg
+montale-pure-gold  https://www.montaleparfums.com/en/floral/63-pure-gold-or-brillant.html  https://www.montaleparfums.com/800-product_square/pure-gold-or-brillant.jpg
+montale-mango-manga  https://www.montaleparfums.com/en/fruity/55-mango-manga-argent.html  https://www.montaleparfums.com/779-product_square/mango-manga-argent.jpg
+
+Sin foto (7): no se publican hasta tenerla
+creed-love-in-white  (Creed Love in White): no se encontró en la web oficial
+creed-spice-and-wood  (Creed Spice and Wood): no se encontró en la web oficial
+amouage-jubilation-xxv  (Amouage Jubilation XXV): no se encontró en la web oficial
+montale-black-aoud  (Montale Black Aoud): no se encontró en la web oficial
+montale-amandes-orientales  (Montale Amandes Orientales): no se encontró en la web oficial
+montale-red-aoud  (Montale Red Aoud): no se encontró en la web oficial
+montale-roses-elixir  (Montale Roses Elixir): no se encontró en la web oficial
