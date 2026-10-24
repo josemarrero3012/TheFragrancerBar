@@ -173,10 +173,8 @@ async function recorta(buf) {
       if (seen[i] !== 1) continue;
       const o = i * 4;
       let al = 0;
-      for (let c = 0; c < 3; c++) {
-        const v = data[o + c], ref = bg[c];
-        al = Math.max(al, v < ref ? (ref - v) / ref : (v - ref) / (255 - ref || 1));
-      }
+      // Solo cuenta lo que es más oscuro que el fondo (sombras, contornos); lo más claro son brillos del propio fondo
+      for (let c = 0; c < 3; c++) al = Math.max(al, Math.max(0, bg[c] - data[o + c]) / (bg[c] || 1));
       if (al < 0.03) { data[o + 3] = 0; continue; }
       for (let c = 0; c < 3; c++) data[o + c] = Math.max(0, Math.min(255, Math.round(bg[c] + (data[o + c] - bg[c]) / al)));
       data[o + 3] = Math.round(al * data[o + 3]);
