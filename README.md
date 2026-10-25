@@ -41,6 +41,14 @@ npm run fotos
 
 Quita el fondo, encaja el frasco como en el resto de fotos y deja en `scripts/fotos-informe.txt` de dónde salió cada una y cuáles no encontró. Las fuentes (tiendas Shopify, búsqueda de Montale y páginas concretas) están en `scripts/fotos-fuentes.js`.
 
+Prueba con las fragancias más populares de Creed: su foto original, tal cual la publica la casa (sin quitar el fondo), y la que Creed enseña al pasar el ratón:
+
+```bash
+npm run originales
+```
+
+Deja las fotos en `public/img/originales/`, una hoja con todas las candidatas en `scripts/originales-revision.jpg` y el informe en `scripts/originales-informe.txt`. Si la foto elegida no es la buena, se fija en `ELEGIDAS` dentro de `scripts/originales.mjs`.
+
 Las notas de cada fragancia están en `src/data/notas-oficiales.js`, copiadas de la web de su casa. Las fotos de las notas salen de Wikimedia Commons, con licencia libre:
 
 ```bash
