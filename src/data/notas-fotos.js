@@ -50,11 +50,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "almizcle": {
-    "titulo": "Muskus",
-    "url": "https://commons.wikimedia.org/wiki/File:Muskus.jpg",
-    "autor": "The original uploader was Pethr at English Wikipedia.",
+    "titulo": "Cotton boll",
+    "url": "https://commons.wikimedia.org/wiki/File:Cotton_boll.jpg",
+    "autor": "ChriKo",
     "licencia": "CC BY-SA 3.0",
-    "licenciaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "cambios": true
   },
   "ambar": {
@@ -1098,11 +1098,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "sandalo": {
-    "titulo": "Santalum paniculatum 1326",
-    "url": "https://commons.wikimedia.org/wiki/File:Santalum_paniculatum_1326.jpg",
-    "autor": "KarlM (talk)",
-    "licencia": "CC BY-SA 3.0",
-    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "titulo": "Chandanam (Tamil சந்தனம்) (31074714746)",
+    "url": "https://commons.wikimedia.org/wiki/File:Chandanam_(Tamil_%E0%AE%9A%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AE%A9%E0%AE%AE%E0%AF%8D)_(31074714746).jpg",
+    "autor": "Dinesh Valke from Thane, India",
+    "licencia": "CC BY-SA 2.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0",
     "cambios": true
   },
   "shiso": {
@@ -1162,11 +1162,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "vetiver": {
-    "titulo": "Vetiver grass",
-    "url": "https://commons.wikimedia.org/wiki/File:Vetiver_grass.jpg",
-    "autor": "Ratel",
-    "licencia": "CC BY-SA 4.0",
-    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "titulo": "Vetiveria zizanoides dsc07810",
+    "url": "https://commons.wikimedia.org/wiki/File:Vetiveria_zizanoides_dsc07810.jpg",
+    "autor": "Copyright © 2005 David Monniaux",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
     "cambios": true
   },
   "violeta": {
