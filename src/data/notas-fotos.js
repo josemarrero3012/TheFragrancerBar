@@ -1098,11 +1098,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "sandalo": {
-    "titulo": "Sandalwood harvest",
-    "url": "https://commons.wikimedia.org/wiki/File:Sandalwood_harvest.jpg",
-    "autor": "Government Photographer",
+    "titulo": "SandalwoodEssOil",
+    "url": "https://commons.wikimedia.org/wiki/File:SandalwoodEssOil.png",
+    "autor": "Itineranttrader",
     "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Sandalwood_harvest.jpg",
+    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:SandalwoodEssOil.png",
     "cambios": true
   },
   "shiso": {
