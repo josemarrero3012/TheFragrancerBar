@@ -286,7 +286,7 @@ function comprar(url) {
           ${[{ id: '', name: 'Todas' }, ...FAMILIAS].map((x) => `<button class="chip" type="button" data-familia-filter="${x.id}" aria-pressed="${x.id === ''}">${x.name}</button>`).join('')}
         </div>
         <p class="shop__count" data-count aria-live="polite">${FRAGANCIAS.length} fragancias</p>
-        <ul class="products products--shop" data-products>${FRAGANCIAS.map((p, i) => productCard(p, { i })).join('')}</ul>
+        <ul class="products products--shop" data-products>${FRAGANCIAS.map((p, i) => productCard(p, { i, vitrina: true })).join('')}</ul>
         <div class="shop__empty" data-empty hidden>
           <p>No hay fragancias con estos filtros.</p>
           <button class="link" type="button" data-reset-filters>Quitar los filtros</button>
