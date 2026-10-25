@@ -55,6 +55,10 @@ export function bottle(p) {
 export function productMedia(p, { sizes = '(min-width: 1100px) 22vw, (min-width: 760px) 30vw, 46vw', eager = false, vt = true, vitrina = false } = {}) {
   const c = casaById(p.casa);
   const name = vt ? ` style="view-transition-name: f-${p.id}"` : '';
+  if (vitrina && p.vitrinaFoto) {
+    const { w, h } = p.vitrinaFoto;
+    return `<figure class="product__media product__media--vitrinafoto"${name}><img src="/img/vitrina/${p.id}-800.webp" srcset="/img/vitrina/${p.id}-800.webp 800w, /img/vitrina/${p.id}-${w}.webp ${w}w" sizes="${sizes}" width="${w}" height="${h}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} alt="${esc(`${c.name} ${p.name}`)} en su vitrina"></figure>`;
+  }
   if (p.orig && !(vitrina && p.img)) {
     const { w, h, hover } = p.orig;
     const img = (k, attrs) => `<img src="/img/originales/${p.id}-${k}-800.webp" srcset="/img/originales/${p.id}-${k}-800.webp 800w, /img/originales/${p.id}-${k}-1600.webp 1600w" sizes="${sizes}" width="${w}" height="${h}"${attrs}>`;

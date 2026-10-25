@@ -43,7 +43,8 @@ export function initShop() {
     });
     grid.append(...[...items].sort(SORTS[state.orden]).map((it) => it.li));
     chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.familiaFilter === state.familia)));
-    count.textContent = n === items.length ? `${n} fragancias` : `${n} de ${items.length} fragancias`;
+    const fr = (k) => (k === 1 ? 'fragancia' : 'fragancias');
+    count.textContent = n === items.length ? `${n} ${fr(n)}` : `${n} de ${items.length} ${fr(items.length)}`;
     empty.hidden = n > 0;
 
     const p = new URLSearchParams();

@@ -260,6 +260,9 @@ function casa(url, c) {
 }
 
 /* ---------------------------------------------------------------- Comprar */
+// En /comprar/ de momento solo las fragancias con su foto de vitrina (public/img/vitrina/<id>-*.webp)
+const EN_VITRINA = FRAGANCIAS.filter((p) => p.vitrinaFoto);
+
 function comprar(url) {
   const main = `${pageHead({
     crumbs: [['Inicio', ''], ['Comprar']],
@@ -285,8 +288,8 @@ function comprar(url) {
         <div class="filters scroller" role="group" aria-label="Filtrar por familia olfativa" data-filters>
           ${[{ id: '', name: 'Todas' }, ...FAMILIAS].map((x) => `<button class="chip" type="button" data-familia-filter="${x.id}" aria-pressed="${x.id === ''}">${x.name}</button>`).join('')}
         </div>
-        <p class="shop__count" data-count aria-live="polite">${FRAGANCIAS.length} fragancias</p>
-        <ul class="products products--shop" data-products>${FRAGANCIAS.map((p, i) => productCard(p, { i, vitrina: true })).join('')}</ul>
+        <p class="shop__count" data-count aria-live="polite">${EN_VITRINA.length} ${EN_VITRINA.length === 1 ? 'fragancia' : 'fragancias'}</p>
+        <ul class="products products--shop" data-products>${EN_VITRINA.map((p, i) => productCard(p, { i, vitrina: true })).join('')}</ul>
         <div class="shop__empty" data-empty hidden>
           <p>No hay fragancias con estos filtros.</p>
           <button class="link" type="button" data-reset-filters>Quitar los filtros</button>
