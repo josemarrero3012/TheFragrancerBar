@@ -158,7 +158,7 @@ for (const id of ids) {
     let b = null;
     if (eb >= 0) b = await aWeb(fotos[eb].file, id, 'b');
     else for (const w of [800, 1600]) rmSync(resolve(OUT, `${id}-b-${w}.webp`), { force: true });
-    filas.push({ id, fotos, a: ea, b: eb });
+    filas.push({ id, fotos: fotos.slice(0, Math.max(16, ea + 1, eb + 1)), a: ea, b: eb }); // más allá salen productos recomendados
     informe.push(`${id}  ${pagina}\n  principal: ${fotos[ea].url}  ${a.width}×${a.height}\n  ratón:     ${b ? `${fotos[eb].url}  ${b.width}×${b.height}` : '—'}\n  candidatas: ${fotos.length} (${deFicha.length} de la ficha del listado)`);
     console.log(`✓  ${id}: ${fotos.length} fotos, ${b ? 'con' : 'sin'} foto de ratón`);
   } catch (e) {
