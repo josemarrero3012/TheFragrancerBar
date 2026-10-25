@@ -26,5 +26,5 @@ initMap();
 initContacto();
 initNews();
 initGaleria();
-$$('main img:not([fetchpriority])').forEach(fadeIn);
+$$('main img:not([fetchpriority]):not(.product__hover)').forEach(fadeIn);
 initMotion();

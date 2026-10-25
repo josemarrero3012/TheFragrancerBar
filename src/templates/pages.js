@@ -355,7 +355,7 @@ function fragancia(url, p) {
     path: `fragancias/${p.id}/`, section: 'comprar', main, quickbar: false,
     title: `${label} · ${CONCENTRACIONES[p.conc]} | The Fragrance Bar`,
     description: fit(`${label}, ${CONCENTRACIONES[p.conc].toLowerCase()}${p.year ? ` de ${p.year}` : ''}. ${p.desc}`, notasPlanas(p.notes).length ? ` Notas: ${notasPlanas(p.notes).join(', ').toLowerCase()}.` : '', ' En The Fragrance Bar.'),
-    ogImage: p.img ? `${url}/img/productos/${p.img}-800.webp` : undefined,
+    ogImage: p.orig ? `${url}/img/originales/${p.id}-a-1600.webp` : `${url}/img/productos/${p.img}-800.webp`,
     schema: schema.graph([schema.breadcrumbs(url, bc), schema.product(SITE, url, p)])
   };
 }

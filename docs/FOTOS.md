@@ -1,25 +1,19 @@
 # Fotos de la web
 
-La web solo enseña fotos reales: una foto de producto por fragancia, todas con el mismo encuadre y el mismo fondo, y fotos de las tiendas. No hay nada dibujado.
+La web solo enseña fotos reales: las fotos originales de cada casa, tal cual las publica en su web, y fotos de las tiendas. No hay nada dibujado.
 
 ## Estado hoy
 
-| | Fragancias |
+La web enseña un catálogo de muestra: las cinco fragancias más conocidas de cada casa, 40 en total (`MUESTRA` en `src/data/catalogo.js`). El catálogo completo se carga cuando se prepare con el negocio.
+
+| Catálogo de muestra | Fragancias |
 |---|---|
+| Con las fotos originales de la casa | 5 (las de Creed) |
+| Solo con el frasco recortado de la foto de la marca, a falta de descargar las originales | 31 |
+| Sin foto ni notas oficiales, no se publican todavía | 4 (Memo Paris: African Leather, Irish Leather, Inlé, French Leather) |
 | Con foto propia, hecha en la tienda | 0 |
-| Con foto descargada de la web de la marca (provisional) | 122 |
-| Sin foto, no se publican todavía | 19 |
 
-Las 122 fotos descargadas valen para el prototipo, pero antes de publicar la web hace falta una de dos cosas por cada una: permiso por escrito de la marca o del distribuidor, o una foto propia. El estado al día lo da `scripts/fotos-informe.txt` cada vez que se ejecuta `npm run fotos`.
-
-Faltan estas 19, porque no se encontró su foto en la web de la marca (y a casi todas les faltan también las notas oficiales para la ficha):
-
-- **Creed:** Love in White, Spice and Wood, Wild Vetiver, Fleurissimo
-- **Amouage:** Jubilation XXV
-- **Initio:** Paragon
-- **Montale:** Black Aoud, Amandes Orientales, Red Aoud, Roses Elixir
-- **Memo Paris:** African Leather, Irish Leather, Inlé, French Leather, Italian Leather, Lalibela, Tiger's Nest, Russian Leather
-- **Tom Ford:** Tobacco Oud
+Las fotos de las marcas valen para el prototipo, pero antes de publicar la web hace falta una de dos cosas por cada una: permiso por escrito de la marca o del distribuidor, o una foto propia. El estado al día lo dan `scripts/originales-informe.txt` (`npm run originales`) y `scripts/fotos-informe.txt` (`npm run fotos`).
 
 Tienda sin foto: **C. C. Plaza del Duque** y **C. C. Américas Plaza** (Tenerife). Mientras no la tengan, su tarjeta enseña la isla y la ciudad en letra.
 
@@ -48,6 +42,15 @@ Por cada tienda, en horizontal y de día, con la tienda recogida y sin clientes 
 La web las recorta a 4:3 desde el centro, así que lo importante tiene que ir en el medio.
 
 ## Para quien mantiene la web
+
+**Fotos originales de las casas:**
+
+```bash
+npm run originales              # todas las de la muestra
+npm run originales -- amouage   # una casa, o una fragancia por su id
+```
+
+Por cada fragancia guarda en `public/img/originales/` la foto principal (`a`, la de las rejillas), la que sale al pasar el ratón (`b`) y, si se eligen más en `ELEGIDAS`, otras que solo se ven en la ficha (`c`, `d`…). Todas quedan cuadradas sin cortar el frasco: si la foto de la casa no es cuadrada y tiene fondo de estudio, se alarga ese fondo; si es una foto de ambiente, se recorta desde el centro. Revisa `scripts/originales-revision.jpg` y fija en `ELEGIDAS` las buenas si las dos primeras no lo son.
 
 **Fotos de producto propias:**
 

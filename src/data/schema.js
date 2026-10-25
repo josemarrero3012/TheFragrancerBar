@@ -39,7 +39,7 @@ export function product(site, url, p) {
   return {
     '@type': 'Product', name: `${c.name} ${p.name}`, url: `${url}/fragancias/${p.id}/`,
     description: p.desc, category: 'Perfume', brand: { '@type': 'Brand', name: c.name },
-    ...(p.img && { image: `${url}/img/productos/${p.img}-800.webp` }),
+    ...((p.orig || p.img) && { image: p.orig ? `${url}/img/originales/${p.id}-a-1600.webp` : `${url}/img/productos/${p.img}-800.webp` }),
     ...(!site.demoPrices && { offers: { '@type': 'AggregateOffer', priceCurrency: 'EUR', lowPrice: Math.min(...prices), highPrice: Math.max(...prices), offerCount: prices.length } })
   };
 }
