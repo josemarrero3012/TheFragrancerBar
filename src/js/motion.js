@@ -3,13 +3,19 @@
 import { MOTION } from '../data/site.js';
 import { $, $$, reduceMotion, fullMotion, EASE, clamp01 } from './utils.js';
 
-/* Entrada de la portada: solo un fundido de la foto y el texto, sin barridos ni zoom */
+/* Entrada de la portada: la vitrina se enciende, el frasco sube a la balda y el texto llega en cascada */
 function introHero() {
-  if (!$('.hero')) return;
+  const hero = $('.escaparate');
+  if (!hero) return;
   const soft = !fullMotion || matchMedia('(max-width: 959px)').matches;
-  $('.hero__media').animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1100, easing: EASE, fill: 'backwards' });
+  const slide = $('.slide.is-active', hero);
+  $('.escaparate__decor', hero).animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1100, easing: EASE, fill: 'backwards' });
+  $('.slide__frasco img', slide).animate(soft
+    ? [{ opacity: 0 }, { opacity: 1 }]
+    : [{ opacity: 0, transform: 'translateX(-50%) translateY(40px)' }, { opacity: 1, transform: 'translateX(-50%)' }],
+  { duration: 1400, delay: 250, easing: EASE, fill: 'backwards' });
   const kf = soft ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(22px)' }, { opacity: 1, transform: 'none' }];
-  [...$('.hero__copy').children].forEach((el, i) => el.animate(kf, { duration: 1100, delay: i * 110, easing: EASE, fill: 'backwards' }));
+  [...$('.slide__copy', slide).children].forEach((el, i) => el.animate(kf, { duration: 1100, delay: 150 + i * 90, easing: EASE, fill: 'backwards' }));
   document.documentElement.classList.remove('is-intro');
 }
 

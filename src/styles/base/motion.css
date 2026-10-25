@@ -1,7 +1,7 @@
 /* Movimiento ---------------------------------------------------------------
    Solo con .has-motion (lo pone el <head> si no hay prefers-reduced-motion).
    Las entradas y revelados se hacen en src/js/motion.js con Web Animations API. */
-.is-intro .hero__copy > *, .is-intro .hero__media { opacity: 0; }
+.is-intro .escaparate .slide.is-active { opacity: 0; }
 
 /* Estado de apertura: anillo que pulsa */
 .has-motion .status__dot { position: relative; }

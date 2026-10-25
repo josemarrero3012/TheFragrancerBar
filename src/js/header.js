@@ -15,6 +15,8 @@ export function initHeader() {
     label.textContent = open ? 'Cerrar' : 'Menú';
     document.body.style.overflow = open ? 'hidden' : '';
     if (open) {
+      // El menú empieza bajo la cabecera, esté o no a la vista la franja de avisos
+      menu.style.top = `${header.getBoundingClientRect().bottom}px`;
       menu.hidden = false; menu.getBoundingClientRect(); // fuerza el estilo inicial para que el fundido se vea
       requestAnimationFrame(() => menu.classList.add('is-open')); $('a', menu).focus({ preventScroll: true });
       if (!reduceMotion) $$('a', menu).forEach((a, i) => a.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'none' }],

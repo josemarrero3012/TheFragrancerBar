@@ -20,7 +20,7 @@ Cada sección es una página con su propia URL. Todas se generan desde los datos
 
 | Ruta | Página |
 |---|---|
-| `/` | Portada: tienda de Triana, selección, casa destacada, la barra, tiendas |
+| `/` | Portada: escaparate de fragancias destacadas (`SITE.escaparate`), selección por pestañas, familias olfativas, casa destacada, la barra, tiendas |
 | `/casas/` · `/casas/<casa>/` | Las 8 casas y una página por casa con todas sus fragancias |
 | `/comprar/` | Catálogo con buscador, filtros por casa y familia, y orden (los filtros van en la URL: `?casa=xerjoff&familia=ambar`) |
 | `/fragancias/<id>/` | Ficha de cada fragancia: tamaños, precio, notas de salida, corazón y fondo, relacionadas |

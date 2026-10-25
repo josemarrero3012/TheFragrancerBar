@@ -8,7 +8,7 @@ Es un prototipo: los precios son de ejemplo, la tienda online no cobra y los for
 
 ## Qué tiene
 
-- Una portada con la tienda de Triana, una selección de fragancias y las casas de perfumes.
+- Una portada con un escaparate que va mostrando las fragancias destacadas, una selección por pestañas, las familias olfativas y las casas de perfumes.
 - Una página para cada casa (Creed, Xerjoff, Amouage, Tom Ford, Parfums de Marly…) con todas sus fragancias.
 - Un catálogo con buscador y filtros por casa y por familia olfativa.
 - Una ficha para cada fragancia, con sus tamaños, el precio y sus notas oficiales (las que publica cada casa), cada una con su foto.

@@ -15,9 +15,15 @@ const badge = (attr, label) => `<span class="badge" ${attr} hidden><span data-n>
 const whatsappHref = (text = SITE.contact.whatsappText) => `https://wa.me/${SITE.contact.whatsapp}?text=${encodeURIComponent(text)}`;
 export { whatsappHref };
 
+/* Franja de avisos sobre la cabecera (SITE.avisos): rotan uno tras otro (src/js/avisos.js) */
+const avisos = () => SITE.avisos?.length ? `
+  <div class="avisos" data-avisos>
+    <ul class="avisos__list wrap" aria-label="Avisos">${SITE.avisos.map((a, i) => `<li${i ? ' class="is-next"' : ' class="is-on"'}>${esc(a)}</li>`).join('')}</ul>
+  </div>` : '';
+
 function header(section) {
   const links = NAV.map((n) => `<a href="${u(n.path)}"${n.id === section ? ' aria-current="page"' : ''}>${n.label}</a>`).join('\n        ');
-  return `
+  return `${avisos()}
   <header class="header" data-header>
     <div class="header__inner wrap">${logo()}
       <nav class="nav" aria-label="Principal">
