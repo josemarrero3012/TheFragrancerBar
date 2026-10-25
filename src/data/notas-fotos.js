@@ -50,11 +50,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "almizcle": {
-    "titulo": "Naturalists Library - Mammalia - Volume III - The Thibetian Musk",
-    "url": "https://commons.wikimedia.org/wiki/File:Naturalists_Library_-_Mammalia_-_Volume_III_-_The_Thibetian_Musk.jpg",
-    "autor": "James Hope Stewart",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Naturalists_Library_-_Mammalia_-_Volume_III_-_The_Thibetian_Musk.jpg",
+    "titulo": "Muskus",
+    "url": "https://commons.wikimedia.org/wiki/File:Muskus.jpg",
+    "autor": "The original uploader was Pethr at English Wikipedia.",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
     "cambios": true
   },
   "ambar": {
@@ -74,27 +74,27 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "ambreta": {
-    "titulo": "Abelmoschus moschatus Blanco2.245",
-    "url": "https://commons.wikimedia.org/wiki/File:Abelmoschus_moschatus_Blanco2.245.png",
-    "autor": "Francisco Manuel Blanco (O.S.A.)",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Abelmoschus_moschatus_Blanco2.245.png",
+    "titulo": "Abelmoschus moschatus subsp. tuberosus",
+    "url": "https://commons.wikimedia.org/wiki/File:Abelmoschus_moschatus_subsp._tuberosus.jpg",
+    "autor": "Nativeplants garden",
+    "licencia": "CC BY-SA 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "cambios": true
   },
   "angelica": {
-    "titulo": "Koehler1887-GardenAngelica",
-    "url": "https://commons.wikimedia.org/wiki/File:Koehler1887-GardenAngelica.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Koehler1887-GardenAngelica.jpg",
+    "titulo": "Angelica archangelica 002",
+    "url": "https://commons.wikimedia.org/wiki/File:Angelica_archangelica_002.JPG",
+    "autor": "H. Zell",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "cambios": true
   },
   "anis": {
-    "titulo": "Koehler1887-PimpinellaAnisum",
-    "url": "https://commons.wikimedia.org/wiki/File:Koehler1887-PimpinellaAnisum.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Koehler1887-PimpinellaAnisum.jpg",
+    "titulo": "Aniseed p1160018",
+    "url": "https://commons.wikimedia.org/wiki/File:Aniseed_p1160018.jpg",
+    "autor": "David Monniaux",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
     "cambios": true
   },
   "avellana": {
@@ -217,6 +217,14 @@ export const NOTAS_FOTOS = {
     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "cambios": true
   },
+  "cedro": {
+    "titulo": "Cedar lumber cedarsolutions.ca",
+    "url": "https://commons.wikimedia.org/wiki/File:Cedar_lumber_cedarsolutions.ca.jpg",
+    "autor": "nmai.si.eu",
+    "licencia": "CC0",
+    "licenciaUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "cambios": true
+  },
   "cereza": {
     "titulo": "Cherry season (48216568227)",
     "url": "https://commons.wikimedia.org/wiki/File:Cherry_season_(48216568227).jpg",
@@ -226,19 +234,19 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "cilantro": {
-    "titulo": "Coriandrum sativum - Köhler–s Medizinal-Pflanzen-193",
-    "url": "https://commons.wikimedia.org/wiki/File:Coriandrum_sativum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-193.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Coriandrum_sativum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-193.jpg",
+    "titulo": "Coriander Seeds",
+    "url": "https://commons.wikimedia.org/wiki/File:Coriander_Seeds.jpg",
+    "autor": "Sanjay Acharya",
+    "licencia": "CC BY-SA 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "cambios": true
   },
   "cipres": {
-    "titulo": "Εθνικός Δρυμός Σαμαριάς",
-    "url": "https://commons.wikimedia.org/wiki/File:%CE%95%CE%B8%CE%BD%CE%B9%CE%BA%CF%8C%CF%82_%CE%94%CF%81%CF%85%CE%BC%CF%8C%CF%82_%CE%A3%CE%B1%CE%BC%CE%B1%CF%81%CE%B9%CE%AC%CF%82.jpg",
-    "autor": "Andloukakis",
-    "licencia": "CC BY-SA 4.0",
-    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "titulo": "Cupressus sempervirens 002",
+    "url": "https://commons.wikimedia.org/wiki/File:Cupressus_sempervirens_002.JPG",
+    "autor": "H. Zell",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "cambios": true
   },
   "ciruela": {
@@ -274,27 +282,27 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "clavo": {
-    "titulo": "Syzygium aromaticum - Köhler–s Medizinal-Pflanzen-030",
-    "url": "https://commons.wikimedia.org/wiki/File:Syzygium_aromaticum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-030.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Syzygium_aromaticum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-030.jpg",
+    "titulo": "Cloves-spice",
+    "url": "https://commons.wikimedia.org/wiki/File:Cloves-spice.jpg",
+    "autor": "autor desconocido",
+    "licencia": "CC BY-SA 1.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/1.0",
     "cambios": true
   },
   "coco": {
-    "titulo": "Cocos nucifera - Köhler–s Medizinal-Pflanzen-187",
-    "url": "https://commons.wikimedia.org/wiki/File:Cocos_nucifera_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-187.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Cocos_nucifera_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-187.jpg",
+    "titulo": "Coconuts - single and cracked open",
+    "url": "https://commons.wikimedia.org/wiki/File:Coconuts_-_single_and_cracked_open.jpg",
+    "autor": "Ivar Leidus",
+    "licencia": "CC BY-SA 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "cambios": true
   },
   "comino": {
-    "titulo": "Cuminum cyminum - Köhler–s Medizinal-Pflanzen-198",
-    "url": "https://commons.wikimedia.org/wiki/File:Cuminum_cyminum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-198.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Cuminum_cyminum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-198.jpg",
+    "titulo": "Cumin Seeds",
+    "url": "https://commons.wikimedia.org/wiki/File:Cumin_Seeds.jpg",
+    "autor": "Sugeesh",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "cambios": true
   },
   "conac": {
@@ -345,6 +353,14 @@ export const NOTAS_FOTOS = {
     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "cambios": true
   },
+  "elemi": {
+    "titulo": "Elemi (Canarium luzonicum) essential oil in clear glass vial",
+    "url": "https://commons.wikimedia.org/wiki/File:Elemi_(Canarium_luzonicum)_essential_oil_in_clear_glass_vial.png",
+    "autor": "Itineranttrader",
+    "licencia": "Public domain",
+    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Elemi_(Canarium_luzonicum)_essential_oil_in_clear_glass_vial.png",
+    "cambios": true
+  },
   "enebro": {
     "titulo": "Juniperus communis fruits - Keila",
     "url": "https://commons.wikimedia.org/wiki/File:Juniperus_communis_fruits_-_Keila.jpg",
@@ -378,11 +394,19 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "fenogreco": {
-    "titulo": "Illustration Trigonella foenum-graecum0 clean",
-    "url": "https://commons.wikimedia.org/wiki/File:Illustration_Trigonella_foenum-graecum0_clean.jpg",
-    "autor": "Prof. Dr. Otto Wilhelm Thomé derivative work: Ninjatacoshell (talk)",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Illustration_Trigonella_foenum-graecum0_clean.jpg",
+    "titulo": "Fenugreek seeds",
+    "url": "https://commons.wikimedia.org/wiki/File:Fenugreek_seeds.jpg",
+    "autor": "Sanjay Acharya",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "cambios": true
+  },
+  "flor-de-manzano": {
+    "titulo": "Apple blossom (Malus domestica) 11",
+    "url": "https://commons.wikimedia.org/wiki/File:Apple_blossom_(Malus_domestica)_11.JPG",
+    "autor": "Kor!An (Андрей Корзун)",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "cambios": true
   },
   "flor-de-tabaco": {
@@ -434,11 +458,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "galbano": {
-    "titulo": "Ferula gummosa - Köhler–s Medizinal-Pflanzen-205",
-    "url": "https://commons.wikimedia.org/wiki/File:Ferula_gummosa_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-205.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Ferula_gummosa_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-205.jpg",
+    "titulo": "Galbanum1",
+    "url": "https://commons.wikimedia.org/wiki/File:Galbanum1.JPG",
+    "autor": "Maša Sinreih in Valentina Vivod",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "cambios": true
   },
   "gardenia": {
@@ -466,19 +490,19 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "guayaco": {
-    "titulo": "Guaiacum officinale - Köhler–s Medizinal-Pflanzen-069",
-    "url": "https://commons.wikimedia.org/wiki/File:Guaiacum_officinale_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-069.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Guaiacum_officinale_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-069.jpg",
+    "titulo": "Guaiaci lignum1",
+    "url": "https://commons.wikimedia.org/wiki/File:Guaiaci_lignum1.JPG",
+    "autor": "Maša Sinreih in Valentina Vivod",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "cambios": true
   },
   "haba-tonka": {
-    "titulo": "Flowering Tonka Bean tree (Dipteryx odorata)",
-    "url": "https://commons.wikimedia.org/wiki/File:Flowering_Tonka_Bean_tree_(Dipteryx_odorata).jpg",
-    "autor": "Tatters ✾",
-    "licencia": "CC0",
-    "licenciaUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "titulo": "Tonka Beans",
+    "url": "https://commons.wikimedia.org/wiki/File:Tonka_Beans.jpg",
+    "autor": "Mecredis / Fred Benenson",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "cambios": true
   },
   "heliotropo": {
@@ -570,19 +594,19 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "jengibre": {
-    "titulo": "Koeh-146-no text",
-    "url": "https://commons.wikimedia.org/wiki/File:Koeh-146-no_text.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Koeh-146-no_text.jpg",
+    "titulo": "Ginger rhizome",
+    "url": "https://commons.wikimedia.org/wiki/File:Ginger_rhizome.jpg",
+    "autor": "Mk2010",
+    "licencia": "CC BY-SA 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "cambios": true
   },
   "lavanda": {
-    "titulo": "Lavandula angustifolia - Köhler–s Medizinal-Pflanzen-087",
-    "url": "https://commons.wikimedia.org/wiki/File:Lavandula_angustifolia_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-087.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Lavandula_angustifolia_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-087.jpg",
+    "titulo": "Lavandula angustifolia lavender Lavendel 01",
+    "url": "https://commons.wikimedia.org/wiki/File:Lavandula_angustifolia_lavender_Lavendel_01.jpg",
+    "autor": "Norbert Nagel, Mörfelden-Walldorf, Germany",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "cambios": true
   },
   "leche": {
@@ -698,11 +722,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "mantequilla": {
-    "titulo": "Chocolate Cupcakes with Raspberry Buttercream",
-    "url": "https://commons.wikimedia.org/wiki/File:Chocolate_Cupcakes_with_Raspberry_Buttercream.jpg",
-    "autor": "Whitney",
-    "licencia": "CC BY 2.0",
-    "licenciaUrl": "https://creativecommons.org/licenses/by/2.0",
+    "titulo": "Butter block",
+    "url": "https://commons.wikimedia.org/wiki/File:Butter_block.JPG",
+    "autor": "Meanos",
+    "licencia": "Public domain",
+    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Butter_block.JPG",
     "cambios": true
   },
   "manzana": {
@@ -722,11 +746,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "melocoton": {
-    "titulo": "Illustration Prunus persica clean no descr",
-    "url": "https://commons.wikimedia.org/wiki/File:Illustration_Prunus_persica_clean_no_descr.jpg",
-    "autor": "File:Illustration Prunus persica0.jpg: PLEASE COMPLETE AUTHOR INFORMATION derivative work: Kenraiz",
+    "titulo": "Autumn Red peaches",
+    "url": "https://commons.wikimedia.org/wiki/File:Autumn_Red_peaches.jpg",
+    "autor": "Jack Dykinga, USDA",
     "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Illustration_Prunus_persica_clean_no_descr.jpg",
+    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Autumn_Red_peaches.jpg",
     "cambios": true
   },
   "melon": {
@@ -810,11 +834,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "neroli": {
-    "titulo": "Citrus aurantium - Köhler–s Medizinal-Pflanzen-042",
-    "url": "https://commons.wikimedia.org/wiki/File:Citrus_aurantium_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-042.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Citrus_aurantium_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-042.jpg",
+    "titulo": "Orange Blossom",
+    "url": "https://commons.wikimedia.org/wiki/File:Orange_Blossom.JPG",
+    "autor": "Alexander Hardin",
+    "licencia": "CC BY 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by/3.0",
     "cambios": true
   },
   "notas-marinas": {
@@ -831,6 +855,14 @@ export const NOTAS_FOTOS = {
     "autor": "Herusutimbul",
     "licencia": "CC BY-SA 4.0",
     "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "cambios": true
+  },
+  "opoponaco": {
+    "titulo": "Opoponax1",
+    "url": "https://commons.wikimedia.org/wiki/File:Opoponax1.JPG",
+    "autor": "Maša Sinreih in Valentina Vivod",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "cambios": true
   },
   "oregano": {
@@ -906,19 +938,19 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "pimienta-blanca": {
-    "titulo": "Piper nigrum - Köhler–s Medizinal-Pflanzen-107",
-    "url": "https://commons.wikimedia.org/wiki/File:Piper_nigrum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-107.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Piper_nigrum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-107.jpg",
+    "titulo": "Bangka White Pepper",
+    "url": "https://commons.wikimedia.org/wiki/File:Bangka_White_Pepper.JPG",
+    "autor": "Taman Renyah",
+    "licencia": "CC BY 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by/3.0",
     "cambios": true
   },
   "pimienta-de-jamaica": {
-    "titulo": "Pimenta dioica - Köhler–s Medizinal-Pflanzen-239",
-    "url": "https://commons.wikimedia.org/wiki/File:Pimenta_dioica_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-239.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Pimenta_dioica_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-239.jpg",
+    "titulo": "AllspiceSeeds",
+    "url": "https://commons.wikimedia.org/wiki/File:AllspiceSeeds.jpg",
+    "autor": "autor desconocido",
+    "licencia": "CC BY 2.5",
+    "licenciaUrl": "https://creativecommons.org/licenses/by/2.5",
     "cambios": true
   },
   "pimienta-de-sichuan": {
@@ -930,11 +962,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "pimienta-negra": {
-    "titulo": "Piper nigrum - Köhler–s Medizinal-Pflanzen-107",
-    "url": "https://commons.wikimedia.org/wiki/File:Piper_nigrum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-107.jpg",
-    "autor": "Franz Eugen Köhler, Köhler's Medizinal-Pflanzen",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Piper_nigrum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-107.jpg",
+    "titulo": "BlackPeppercorns",
+    "url": "https://commons.wikimedia.org/wiki/File:BlackPeppercorns.JPG",
+    "autor": "Jonathunder",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "cambios": true
   },
   "pimienta-rosa": {
@@ -954,11 +986,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "pino": {
-    "titulo": "Pinus jeffreyi at Lassen Volcanic National Park",
-    "url": "https://commons.wikimedia.org/wiki/File:Pinus_jeffreyi_at_Lassen_Volcanic_National_Park.jpg",
-    "autor": "Vlad &amp; Marina Butsky on Flickr",
-    "licencia": "CC BY 2.0",
-    "licenciaUrl": "https://creativecommons.org/licenses/by/2.0",
+    "titulo": "Pine cones, male and female",
+    "url": "https://commons.wikimedia.org/wiki/File:Pine_cones,_male_and_female.jpg",
+    "autor": "Menchi (talk · contribs)",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
     "cambios": true
   },
   "pistacho": {
@@ -994,11 +1026,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "regaliz": {
-    "titulo": "Illustration Glycyrrhiza glabra0",
-    "url": "https://commons.wikimedia.org/wiki/File:Illustration_Glycyrrhiza_glabra0.jpg",
-    "autor": "autor desconocido",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Illustration_Glycyrrhiza_glabra0.jpg",
+    "titulo": "Sections of liquorice root",
+    "url": "https://commons.wikimedia.org/wiki/File:Sections_of_liquorice_root.jpg",
+    "autor": "Salil Kumar Mukherjee",
+    "licencia": "CC BY-SA 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "cambios": true
   },
   "roble": {
@@ -1034,11 +1066,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "rosa-centifolia": {
-    "titulo": "Rosa centifolia foliacea 17",
-    "url": "https://commons.wikimedia.org/wiki/File:Rosa_centifolia_foliacea_17.jpg",
-    "autor": "Pierre-Joseph Redouté",
-    "licencia": "Public domain",
-    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:Rosa_centifolia_foliacea_17.jpg",
+    "titulo": "Rosa centifolia 002",
+    "url": "https://commons.wikimedia.org/wiki/File:Rosa_centifolia_002.JPG",
+    "autor": "Llez",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
     "cambios": true
   },
   "rosa-damascena": {
@@ -1098,11 +1130,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "teca": {
-    "titulo": "Starr 010304-0485 Tectona grandis",
-    "url": "https://commons.wikimedia.org/wiki/File:Starr_010304-0485_Tectona_grandis.jpg",
-    "autor": "Forest &amp; Kim Starr",
-    "licencia": "CC BY 3.0",
-    "licenciaUrl": "https://creativecommons.org/licenses/by/3.0",
+    "titulo": "Teak Holz",
+    "url": "https://commons.wikimedia.org/wiki/File:Teak_Holz.JPG",
+    "autor": "autor desconocido",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
     "cambios": true
   },
   "tomillo": {
@@ -1146,11 +1178,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "ylang-ylang": {
-    "titulo": "Cananga odorata 01",
-    "url": "https://commons.wikimedia.org/wiki/File:Cananga_odorata_01.JPG",
-    "autor": "Vinayaraj",
+    "titulo": "Cananga odorata flowers",
+    "url": "https://commons.wikimedia.org/wiki/File:Cananga_odorata_flowers.jpg",
+    "autor": "User:B.navez",
     "licencia": "CC BY-SA 3.0",
-    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "licenciaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
     "cambios": true
   },
   "zanahoria": {
