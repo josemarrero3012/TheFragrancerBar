@@ -159,7 +159,7 @@ export const NOTAS = {
   'rosa-damascena': { name: 'Rosa damascena', wiki: 'Rosa × damascena' },
   ruibarbo: { name: 'Ruibarbo', wiki: 'Rhubarb', alias: ['Hojas de ruibarbo'] },
   salvia: { name: 'Salvia', wiki: 'Salvia sclarea', alias: ['Salvia esclarea'] },
-  sandalo: { name: 'Sándalo', wiki: 'Sandalwood', alias: ['Sándalo blanco', 'Sándalo de Mysore'] },
+  sandalo: { name: 'Sándalo', wiki: 'Sandalwood', file: 'Chandanam_(Tamil_சந்தனம்)_(31074714746).jpg', alias: ['Sándalo blanco', 'Sándalo de Mysore'] },
   shiso: { name: 'Shiso', wiki: 'Perilla frutescens var. crispa' },
   tabaco: { name: 'Tabaco', wiki: 'Tobacco', alias: ['Hoja de tabaco', 'Hojas de tabaco', 'Tabaco rubio'] },
   te: { name: 'Té', wiki: 'Tea', alias: ['Té de jazmín'] },
@@ -167,7 +167,7 @@ export const NOTAS = {
   tomillo: { name: 'Tomillo', wiki: 'Thyme' },
   trufa: { name: 'Trufa negra', wiki: 'Tuber melanosporum' },
   vainilla: { name: 'Vainilla', wiki: 'Vanilla', alias: ['Vainilla Bourbon', 'Vainilla de Madagascar'] },
-  vetiver: { name: 'Vetiver', wiki: 'Chrysopogon zizanioides', alias: ['Vetiver de Haití'] },
+  vetiver: { name: 'Vetiver', wiki: 'Chrysopogon zizanioides', file: 'Vetiveria_zizanoides_dsc07810.jpg', alias: ['Vetiver de Haití'] },
   violeta: { name: 'Violeta', wiki: 'Viola odorata' },
   'ylang-ylang': { name: 'Ylang-ylang', wiki: 'Cananga odorata', file: 'Cananga_odorata_flowers.jpg' },
   zanahoria: { name: 'Zanahoria', wiki: 'Carrot', alias: ['Semilla de zanahoria'] }
