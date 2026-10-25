@@ -12,7 +12,7 @@
    3. Elige la foto principal y la del ratón: por defecto las dos primeras de la ficha del
       listado, que es lo que enseña la web de Creed; ELEGIDAS las fija si sale otra cosa.
    4. Las pasa a WebP de alta calidad (q 92, sin recortar ni cambiar la proporción) en
-      public/img/originales/<id>-a|b-800|1600.webp y rehace src/data/originales.js.
+      public/img/originales/<id>-a|b-160|800|1600.webp (160: miniatura de la ficha) y rehace src/data/originales.js.
    5. Hace una hoja de contacto con todas las candidatas numeradas en
       scripts/originales-revision.jpg y un informe en scripts/originales-informe.txt.
    Sube la hoja y el informe con las fotos para revisarlas.
@@ -123,7 +123,7 @@ async function hojaDeContacto(filas) {
 async function aWeb(file, id, letra) {
   const m = MARCO[`${id}-${letra}`] || 0, meta = await sharp(file).metadata();
   const width = meta.width - 2 * m, height = meta.height - 2 * m;
-  for (const w of [800, 1600]) {
+  for (const w of [160, 800, 1600]) {
     await sharp(file).extract({ left: m, top: m, width, height }).resize({ width: Math.min(w, width), withoutEnlargement: true })
       .webp({ quality: 92, smartSubsample: true }).toFile(resolve(OUT, `${id}-${letra}-${w}.webp`));
   }
@@ -157,7 +157,7 @@ for (const id of ids) {
     const a = await aWeb(fotos[ea].file, id, 'a');
     let b = null;
     if (eb >= 0) b = await aWeb(fotos[eb].file, id, 'b');
-    else for (const w of [800, 1600]) rmSync(resolve(OUT, `${id}-b-${w}.webp`), { force: true });
+    else for (const w of [160, 800, 1600]) rmSync(resolve(OUT, `${id}-b-${w}.webp`), { force: true });
     filas.push({ id, fotos: fotos.slice(0, Math.max(16, ea + 1, eb + 1)), a: ea, b: eb }); // más allá salen productos recomendados
     informe.push(`${id}  ${pagina}\n  principal: ${fotos[ea].url}  ${a.width}×${a.height}\n  ratón:     ${b ? `${fotos[eb].url}  ${b.width}×${b.height}` : '—'}\n  candidatas: ${fotos.length} (${deFicha.length} de la ficha del listado)`);
     console.log(`✓  ${id}: ${fotos.length} fotos, ${b ? 'con' : 'sin'} foto de ratón`);

@@ -3,7 +3,6 @@
    de pago y al sistema de pedidos en lugar de mostrarse directamente como confirmado. */
 import { SITE, storeById } from '../data/site.js';
 import { fragById, casaById, euros } from '../data/catalogo.js';
-import { bottle } from '../templates/ui.js';
 import { $, $$, reduceMotion, EASE, store, esc, asset } from './utils.js';
 
 const KEY = 'tfb-cart';
@@ -31,10 +30,8 @@ function setQty(i, qty) {
   save();
 }
 
-/* Miniatura: la foto si existe o el frasco dibujado */
-const thumb = (p) => p.img
-  ? `<img src="${asset(`img/productos/${p.img}-400.webp`)}" width="80" height="100" alt="" loading="lazy">`
-  : `<span class="cartline__drawn" data-familia="${p.familia}">${bottle(p)}</span>`;
+/* Miniatura: la foto de producto (todas las fragancias publicadas la tienen) */
+const thumb = (p) => `<img src="${asset(`img/productos/${p.img}-400.webp`)}" width="80" height="100" alt="" loading="lazy">`;
 
 function lineHtml(l, i, { readonly = false } = {}) {
   const p = fragById(l.id), c = casaById(p.casa), unit = priceOf(l);

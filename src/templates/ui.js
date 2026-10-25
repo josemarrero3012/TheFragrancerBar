@@ -34,40 +34,30 @@ export const ICON = {
   whatsapp: svg('<path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.2.3-1 1-1 2.3s1 2.7 1.1 2.9c.1.2 2 3.1 4.9 4.3 1.8.8 2.5.8 3.4.7.6-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/>')
 };
 
-/* Frasco dibujado para las fragancias sin foto: una silueta por casa,
-   con el «líquido» teñido según la familia olfativa (ver .bottle en products.css) */
-const BOTTLES = {
-  creed: '<rect x="84" y="28" width="32" height="40" rx="2"/><rect x="92" y="68" width="16" height="10"/><rect x="58" y="78" width="84" height="142" rx="10"/>',
-  amouage: '<path d="M100 18c-12 0-20 10-20 22s8 26 20 26 20-14 20-26-8-22-20-22Z"/><rect x="92" y="66" width="16" height="12"/><path d="M60 98c0-12 18-20 40-20s40 8 40 20v112a10 10 0 0 1-10 10H70a10 10 0 0 1-10-10Z"/>',
-  xerjoff: '<circle cx="100" cy="46" r="22"/><rect x="92" y="68" width="16" height="12"/><path d="M74 80h52l22 26v88l-22 26H74l-22-26v-88Z"/>',
-  pdm: '<rect x="76" y="40" width="48" height="30" rx="3"/><rect x="92" y="70" width="16" height="10"/><rect x="54" y="80" width="92" height="140" rx="16"/><circle cx="100" cy="130" r="14"/>',
-  initio: '<rect x="84" y="20" width="32" height="52" rx="16"/><rect x="92" y="72" width="16" height="10"/><rect x="66" y="82" width="68" height="138" rx="30"/>',
-  montale: '<rect x="80" y="34" width="40" height="38" rx="4"/><rect x="74" y="72" width="52" height="148" rx="6"/><path d="M74 92h52"/>',
-  memo: '<rect x="78" y="30" width="44" height="46" rx="6"/><rect x="92" y="76" width="16" height="8"/><ellipse cx="100" cy="152" rx="46" ry="68"/>',
-  tomford: '<rect x="80" y="40" width="40" height="34" rx="2"/><rect x="92" y="74" width="16" height="8"/><rect x="56" y="82" width="88" height="138" rx="4"/><path d="M56 200h88"/>'
-};
-export function bottle(p) {
-  return `<svg class="bottle" viewBox="0 0 200 240" aria-hidden="true"><g class="bottle__glass">${BOTTLES[p.casa]}</g><rect class="bottle__shine" x="80" y="104" width="5" height="84" rx="2.5"/></svg>`;
-}
-
-/** Foto original de la casa (y la de al pasar el ratón), el frasco recortado o, si no hay foto, el frasco dibujado.
-    vitrina: el frasco recortado aunque haya foto original, para ponerlo en su vitrina (rejilla de /comprar/) */
-export function productMedia(p, { sizes = '(min-width: 1100px) 22vw, (min-width: 760px) 30vw, 46vw', eager = false, vt = true, vitrina = false } = {}) {
+/** Foto de producto en la rejilla: el frasco recortado, siempre con el mismo encuadre (4:5 dentro
+    de un cuadrado) y sobre el mismo fondo, para que todas las fichas se vean iguales.
+    Solo se publican las fragancias con foto (FRAGANCIAS en catalogo.js), así que siempre hay p.img */
+export function productMedia(p, { sizes = '(min-width: 1100px) 22vw, (min-width: 760px) 30vw, 46vw', eager = false, vt = true, attrs = '' } = {}) {
   const c = casaById(p.casa);
   const name = vt ? ` style="view-transition-name: f-${p.id}"` : '';
-  if (vitrina && p.vitrinaFoto) {
-    const { w, h } = p.vitrinaFoto;
-    return `<figure class="product__media product__media--vitrinafoto"${name}><img src="/img/vitrina/${p.id}-800.webp" srcset="/img/vitrina/${p.id}-800.webp 800w, /img/vitrina/${p.id}-${w}.webp ${w}w" sizes="${sizes}" width="${w}" height="${h}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} alt="${esc(`${c.name} ${p.name}`)} en su vitrina"></figure>`;
-  }
-  if (p.orig && !(vitrina && p.img)) {
-    const { w, h, hover } = p.orig;
-    const img = (k, attrs) => `<img src="/img/originales/${p.id}-${k}-800.webp" srcset="/img/originales/${p.id}-${k}-800.webp 800w, /img/originales/${p.id}-${k}-1600.webp 1600w" sizes="${sizes}" width="${w}" height="${h}"${attrs}>`;
-    return `<figure class="product__media product__media--orig${hover ? ' has-hover' : ''}"${name}>${img('a', `${eager ? ' fetchpriority="high"' : ' loading="lazy"'} alt="${esc(`${c.name} ${p.name}`)}"`)}${hover ? img('b', ' class="product__hover" loading="lazy" alt=""') : ''}</figure>`;
-  }
-  if (p.img) {
-    return `<figure class="product__media"${name}><img src="/img/productos/${p.img}-400.webp" srcset="/img/productos/${p.img}-400.webp 400w, /img/productos/${p.img}-800.webp 800w" sizes="${sizes}" width="800" height="1000"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} alt="Frasco de ${esc(`${c.name} ${p.name}`)}"></figure>`;
-  }
-  return `<figure class="product__media product__media--drawn" data-familia="${p.familia}"${name}>${bottle(p)}<figcaption class="bottle__label"><span>${esc(c.name)}</span><em>${esc(p.name)}</em></figcaption></figure>`;
+  return `<figure class="product__media"${name}${attrs}><img src="/img/productos/${p.img}-400.webp" srcset="/img/productos/${p.img}-400.webp 400w, /img/productos/${p.img}-800.webp 800w" sizes="${sizes}" width="800" height="1000"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} alt="Frasco de ${esc(`${c.name} ${p.name}`)}"></figure>`;
+}
+
+/** Fotos de la ficha: primero la de producto, como en la rejilla, y después las originales de la casa
+    (p.orig: la principal y la de ambiente), que solo se ven aquí. Las miniaturas las activa src/js/galeria.js */
+export function productGallery(p, { sizes = '(min-width: 960px) 50vw, 100vw' } = {}) {
+  const c = casaById(p.casa), label = `${c.name} ${p.name}`;
+  const origs = p.orig ? ['a', ...(p.orig.hover ? ['b'] : [])] : [];
+  if (!origs.length) return productMedia(p, { sizes, eager: true });
+  const orig = (k, i) => {
+    const src = (w) => `/img/originales/${p.id}-${k}-${w}.webp`;
+    return `<figure class="product__media product__media--foto" data-slide hidden><img src="${src(800)}" srcset="${src(800)} 800w, ${src(1600)} 1600w" sizes="${sizes}" width="${p.orig.w}" height="${p.orig.h}" loading="lazy" alt="${esc(label)}, foto ${i + 2}"></figure>`;
+  };
+  const thumb = (src, i) => `<li><button class="gallery__thumb" type="button" data-thumb="${i}" aria-pressed="${i === 0}" aria-label="Ver la foto ${i + 1} de ${origs.length + 1}"><img src="${src}" width="80" height="80" loading="lazy" alt=""></button></li>`;
+  return `<div class="gallery" data-gallery>
+        <div class="gallery__main">${productMedia(p, { sizes, eager: true, attrs: ' data-slide' })}${origs.map(orig).join('')}</div>
+        <ul class="gallery__thumbs" data-thumbs hidden>${thumb(`/img/productos/${p.img}-400.webp`, 0)}${origs.map((k, i) => thumb(`/img/originales/${p.id}-${k}-160.webp`, i + 1)).join('')}</ul>
+      </div>`;
 }
 
 /** Una nota olfativa con su foto, como en Fragrantica. Sin foto todavía, su inicial */
@@ -80,12 +70,12 @@ export function nota(texto) {
 }
 
 /** Ficha de producto en una rejilla. Los data-* los usa el filtro de /comprar/ */
-export function productCard(p, { notes = false, i = 0, vitrina = false } = {}) {
+export function productCard(p, { notes = false, i = 0 } = {}) {
   const c = casaById(p.casa), from = priceFrom(p), label = `${p.name} de ${c.name}`;
   const multi = p.sizes.length > 1;
   return `
           <li class="product" data-id="${p.id}" data-familia="${p.familia}" data-casa="${p.casa}" data-price="${from}" data-year="${p.year || 0}" data-name="${esc(`${p.name} ${c.name}`.toLowerCase())}" data-notes="${esc(notasPlanas(p.notes).join(', ').toLowerCase())}" data-reveal="up" data-reveal-delay="${(i % 4) * 80}">
-            <a class="product__link" href="${fragUrl(p)}" tabindex="-1" aria-hidden="true">${productMedia(p, { vitrina })}</a>
+            <a class="product__link" href="${fragUrl(p)}" tabindex="-1" aria-hidden="true">${productMedia(p)}</a>
             <div class="product__body">
               <p class="product__brand">${esc(c.name)}</p>
               <h3 class="product__name"><a href="${fragUrl(p)}">${esc(p.name)}</a></h3>
@@ -119,9 +109,6 @@ export function pageHead({ crumbs: c, eyebrow, title, intro, extra = '', dark = 
       </div>
     </header>`;
 }
-
-/** El rótulo cuadrado negro de la tienda, tal como cuelga sobre la pared de chevron */
-export const rotulo = () => `<p class="rotulo" aria-hidden="true"><span class="rotulo__caps">The</span><em>fragrance</em><span class="rotulo__caps rotulo__caps--end">Bar</span><span class="rotulo__sub">Luxury perfumes</span></p>`;
 
 /** Aviso de precios inventados (solo con SITE.demoPrices) */
 export function demoNote(site, { compact = false } = {}) {

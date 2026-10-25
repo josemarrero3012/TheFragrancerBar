@@ -1,11 +1,17 @@
 /* Ficha de una fragancia: imagen, compra, notas y relacionadas */
 .pdp__crumbs { padding-block: 1.4rem 1rem; }
 .pdp { display: grid; gap: 2rem; padding-bottom: var(--section); }
-/* En grande, el frasco recortado algo más pequeño para que respire (la foto original va entera) */
-.pdp__media .product__media:not(.product__media--orig) img { padding: 6% 9%; }
-.pdp__media .product__media--drawn { padding: 12% 18% 9%; }
-.pdp__media .bottle__label em { font-size: clamp(1.3rem, 1rem + 1vw, 1.8rem); }
-.pdp__media .bottle__label span { font-size: .72rem; }
+/* En grande, el frasco recortado algo más pequeño para que respire (las fotos originales van enteras) */
+.pdp__media .product__media:not(.product__media--foto) img { padding: 6% 9%; }
+.product__media--foto img { object-fit: cover; }
+/* Galería: la foto grande y, debajo, las miniaturas (src/js/galeria.js) */
+.gallery { display: grid; gap: .8rem; }
+.gallery__thumbs { display: flex; gap: .6rem; }
+.gallery__thumb { display: block; width: 72px; aspect-ratio: 1; padding: 0; border: 1px solid var(--line); background: var(--stone); cursor: pointer; transition: border-color .2s; }
+.gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.gallery__thumbs li:first-child img { object-fit: contain; padding: 6%; } /* la de producto, entera como en la rejilla */
+.gallery__thumb:hover { border-color: rgba(18, 17, 16, .5); }
+.gallery__thumb[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
 .pdp__info { display: grid; gap: .9rem; align-content: start; justify-items: start; }
 .pdp__title { font-size: clamp(2.6rem, 1.8rem + 3vw, 4.4rem); line-height: 1; }
 .pdp__meta { font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
@@ -53,10 +59,10 @@
 .nota { display: grid; justify-items: center; align-content: start; gap: .55rem; width: 6.4rem; text-align: center; }
 .nota__img {
   display: grid; place-items: center; width: 4.6rem; aspect-ratio: 1; overflow: hidden;
-  border-radius: 14px; background: var(--niche); box-shadow: inset 0 0 0 1px var(--line), 0 6px 16px -10px rgba(18, 17, 16, .35);
+  border-radius: 14px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line), 0 6px 16px -10px rgba(18, 17, 16, .35);
 }
 .nota__img img { width: 100%; height: 100%; object-fit: cover; }
-.nota__inicial { font-family: var(--f-display); font-size: 1.9rem; line-height: 1; color: var(--cobre); }
+.nota__inicial { font-family: var(--f-display); font-size: 1.9rem; line-height: 1; color: var(--oak); }
 .nota__name { font-size: var(--t-sm); line-height: 1.3; color: var(--ink-2); }
 @media (min-width: 760px) {
   .notes__group { grid-template-columns: 9rem minmax(0, 1fr); align-items: start; gap: 2rem; }
