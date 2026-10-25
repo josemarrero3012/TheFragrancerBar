@@ -15,14 +15,13 @@
      sizes    [[ml, precio en euros], …] — el primero es el tamaño por defecto
      year     año de lanzamiento, o null si no está confirmado (entonces no se muestra)
      featured (opcional) aparece en la selección de la portada
-     vitrinaFoto (opcional) { w, h } de su foto dentro de la vitrina (public/img/vitrina/<id>-800 y -<w>.webp).
-              De momento /comprar/ solo enseña las que la tienen
 
    FOTOS: solo se publican las fragancias que tienen foto oficial en
    public/img/productos/<id>-400.webp y -800.webp. La lista la mantiene
    `npm run fotos` en fotos.js; las demás quedan en TODAS hasta que tengan foto.
-   ORIGINALES: las que además tienen la foto original de la casa, sin recortar, y la
-   que la casa enseña al pasar el ratón (`npm run originales`, en originales.js).
+   ORIGINALES: las que además tienen las fotos originales de la casa, sin recortar
+   (`npm run originales`, en originales.js). Solo se ven en la ficha, después de la de producto:
+   en las rejillas todas las fragancias usan la foto recortada, para que se vean iguales.
    Como site.js, no debe usar nada del navegador (lo lee también vite.config.js).
    ========================================================================== */
 
@@ -126,7 +125,7 @@ const f = (casa, name, conc, year, familia, desc, extra = {}) => {
 export const TODAS = [
   // Creed
   f('creed', 'Aventus', 'EDP', 2010, 'frescas',
-    'El chipre afrutado que convirtió a Creed en un fenómeno: piña luminosa sobre un fondo ahumado de abedul.', { featured: true, vitrinaFoto: { w: 1213, h: 1181 } }),
+    'El chipre afrutado que convirtió a Creed en un fenómeno: piña luminosa sobre un fondo ahumado de abedul.', { featured: true }),
   f('creed', 'Green Irish Tweed', 'EDP', 1985, 'frescas',
     'Hierba recién cortada y hoja de violeta: el gran clásico verde de la casa.'),
   f('creed', 'Silver Mountain Water', 'EDP', 1995, 'frescas',

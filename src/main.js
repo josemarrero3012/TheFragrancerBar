@@ -13,8 +13,7 @@ import { initCart } from './js/cart.js';
 import { initShop } from './js/shop.js';
 import { initMap, initContacto, initNews } from './js/contacto.js';
 import { initMotion } from './js/motion.js';
-import { initVitrinas } from './js/vitrinas.js';
-import { initFoco } from './js/foco.js';
+import { initGaleria } from './js/galeria.js';
 
 // Los módulos se ejecutan con el documento ya analizado (equivalen a «defer»)
 $$('[data-proto]').forEach((el) => { el.hidden = !SITE.prototype; });
@@ -26,7 +25,6 @@ initShop();
 initMap();
 initContacto();
 initNews();
-initVitrinas();
-initFoco();
+initGaleria();
 $$('main img:not([fetchpriority])').forEach(fadeIn);
 initMotion();

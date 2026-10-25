@@ -32,9 +32,9 @@
   .section__head--row { grid-template-columns: 1fr auto; align-items: end; gap: 3rem; }
 }
 
-/* Filtros de familia con la cuenta de color de las lámparas de la tienda */
+/* Filtros de familia: un punto con el color de cada familia */
 .chip[data-familia-filter]:not([data-familia-filter=""]) { display: inline-flex; align-items: center; gap: .5rem; }
-.chip[data-familia-filter]:not([data-familia-filter=""])::before { content: ""; width: .62rem; height: .8rem; border-radius: 50%; background: var(--tint); box-shadow: inset -1px -2px 3px rgba(18, 17, 16, .18); }
+.chip[data-familia-filter]:not([data-familia-filter=""])::before { content: ""; width: .6rem; height: .6rem; border-radius: 50%; background: var(--tint); }
 .chip[data-familia-filter="frescas"] { --tint: var(--tint-frescas); }
 .chip[data-familia-filter="florales"] { --tint: var(--tint-florales); }
 .chip[data-familia-filter="amaderadas"] { --tint: var(--tint-amaderadas); }

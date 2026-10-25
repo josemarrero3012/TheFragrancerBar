@@ -20,6 +20,11 @@
   .barrahero__grid { grid-template-columns: minmax(0, 1fr) auto; }
   .barrahero__media { height: calc(var(--avail) - 2rem); width: auto; }
 
+  /* Historia: la foto del rótulo al lado del texto, sin pasar del alto de la pantalla */
+  .pagehead--foto .pagehead__inner { grid-template-columns: minmax(0, 1fr) auto; column-gap: 1.6rem; }
+  .pagehead--foto .pagehead__inner > :not(.pagehead__media) { grid-column: 1; }
+  .pagehead--foto .pagehead__media { grid-column: 2; grid-row: 1 / span 4; margin: 0; height: calc(var(--avail) - 2rem); width: auto; }
+
   /* Rejillas más densas */
   .casagrid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.6rem 1rem; }
   .casacard__desc { display: none; }

@@ -1,28 +1,21 @@
-/* Tokens de diseño: color, texturas, tipografía y espaciado.
-   Todo sale del local de Triana: pared blanca, vitrinas de perfil negro con luz cálida,
-   cortina de cadenas cobre, mostrador de azulejo azul y suelo de madera clara. */
+/* Tokens de diseño: color, tipografía y espaciado.
+   Paleta corta y sobria: papel, tinta y un acento cobre. El color de la tienda
+   (el azul del mostrador, la madera, la cortina de cadenas) se ve en las fotos, no se dibuja. */
 :root {
-  /* Colores sacados del local de Triana */
-  --paper: #F8F7F4;      /* pared blanca */
-  --stone: #F1EFEA;      /* fondo de producto */
-  --niche: #FBFAF7;      /* hornacina iluminada */
-  --ink: #121110;        /* perfil de las vitrinas y rótulo */
+  --paper: #F8F7F4;      /* fondo general */
+  --stone: #F1EFEA;      /* fondo de las fotos de producto y de las secciones alternas */
+  --ink: #121110;        /* texto y fondos oscuros */
   --ink-2: #26231F;
   --muted: #5F5A54;      /* texto secundario (AA sobre --paper) */
   --oak: #8E4F1A;        /* cobre para texto y detalles pequeños (6:1 sobre --paper) */
   --oak-light: #D9965A;  /* cobre sobre negro */
-  --cobre: #C27A34;      /* cortina de cadenas: acento decorativo, no para texto */
-  --vidriado: #2D5B6B;   /* mostrador de azulejo azul: acciones que llevan a la tienda */
-  --vidriado-2: #234D5C; /* juntas del azulejo */
-  --luz: #F6E3BE;        /* luz cálida de las hornacinas, solo como resplandor */
-  --roble: #D2B48C;      /* suelo y zócalo */
   --error: #A3392B;
   --ok: #5E8B4E;
   --line: rgba(18, 17, 16, .14);
   --line-dark: rgba(248, 247, 244, .16);
-  --card: #FFFFFF;       /* fondos de campos y resúmenes */
+  --card: #FFFFFF;       /* fondos de campos, resúmenes y fotos de notas */
 
-  /* Familias olfativas con los colores de las cuentas de las lámparas */
+  /* Familias olfativas: el punto de color de los filtros del catálogo */
   --tint-frescas: #A9C4D3;
   --tint-florales: #D9B6AC;
   --tint-amaderadas: #D6C7B0;
@@ -45,28 +38,4 @@
   --max: 1320px;
   --section: clamp(80px, 10vw, 140px);
   --ease: cubic-bezier(.25, .6, .2, 1);
-
-  /* Las paredes de la tienda son lisas: sin grano */
-  --grain: none;
-
-  /* Texturas de la tienda, en CSS y SVG (sin peticiones extra) */
-  /* Azulejo blanco en chevron, en relieve */
-  --tex-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='28'%3E%3Cpath d='M0 20 L10 8 L20 20 L30 8 L40 20' fill='none' stroke='%23ffffff' stroke-width='3'/%3E%3Cpath d='M0 22 L10 10 L20 22 L30 10 L40 22' fill='none' stroke='%23C9C3B8' stroke-width='1.2' opacity='.5'/%3E%3C/svg%3E") 0 0 / 40px 28px;
-  /* El mismo chevron en blanco tenue, para fondos negros */
-  --tex-chevron-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='28'%3E%3Cpath d='M0 20 L10 8 L20 20 L30 8 L40 20' fill='none' stroke='%23ffffff' stroke-opacity='.05' stroke-width='3'/%3E%3C/svg%3E") 0 0 / 40px 28px;
-  /* Tablas del suelo, para el zócalo */
-  --tex-madera: repeating-linear-gradient(90deg, #D6BA92 0 46px, #CDAF85 46px 47px, #D9BF99 47px 96px, #CBAA7F 96px 97px, #D3B68C 97px 150px, #CBAA7F 150px 151px);
-  /* Cortina de cadenas cobre: anillas pequeñas sobre hebras verticales con brillo */
-  --tex-cadenas:
-    radial-gradient(circle at 50% 30%, transparent 1.3px, #E09A52 1.5px, #B8692C 2.5px, transparent 2.8px) 0 0 / 6px 7px,
-    linear-gradient(90deg, rgba(0, 0, 0, .2), rgba(255, 222, 170, .14) 40%, rgba(0, 0, 0, .24)) 0 0 / 18px 100%,
-    #9A5622;
-  /* Pared de azulejo azul (el frente del mostrador): piezas verticales con juntas */
-  --tex-azulejo-pared:
-    repeating-linear-gradient(0deg, transparent 0 119px, rgba(18, 17, 16, .16) 119px 120px),
-    linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(0, 0, 0, .1)),
-    repeating-linear-gradient(90deg, #2E5E70 0 33px, #26505F 33px 34px, #31627A 34px 67px, #26505F 67px 68px, #2B596B 68px 101px, #26505F 101px 102px);
-  /* Azulejo azul vidriado del mostrador: brillo arriba y juntas verticales */
-  --tex-azulejo: linear-gradient(180deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, .1)),
-    repeating-linear-gradient(90deg, #2F6072 0 22px, var(--vidriado-2) 22px 23px, #34677A 23px 45px, var(--vidriado-2) 45px 46px, #2D5D6E 46px 68px, var(--vidriado-2) 68px 69px);
 }

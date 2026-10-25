@@ -8,7 +8,7 @@ import { CASAS, FRAGANCIAS, FAMILIAS, CONCENTRACIONES, casaById, familiaName, fr
 import { NOTAS, NOTAS_FOTOS, gruposDeNotas, notasPlanas } from '../data/notas.js';
 import * as schema from '../data/schema.js';
 import { layout, whatsappHref } from './layout.js';
-import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productMedia, productCard, crumbs, pageHead, demoNote, brandStrip, clock, rotulo, nota } from './ui.js';
+import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productGallery, productCard, crumbs, pageHead, demoNote, brandStrip, clock, nota } from './ui.js';
 
 const DAYS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const cap = (s) => s[0].toUpperCase() + s.slice(1);
@@ -44,10 +44,9 @@ const storeFicha = (s) => `
             <div><dt>Llegar</dt><dd>${esc(s.howTo)} <a class="link" href="${s.mapsUrl}" target="_blank" rel="noopener">Abrir en Google Maps${NEW_TAB}</a></dd></div>
           </dl>`;
 
-/** Mapa bajo demanda: un plano dibujado hasta que el visitante lo pide (privacidad) */
+/** Mapa bajo demanda: Google Maps solo se carga cuando el visitante lo pide (privacidad) */
 const mapBox = (s) => `
         <div class="map" data-map="${esc(s.mapQuery)}">
-          <div class="map__plan" aria-hidden="true"></div>
           <div class="map__overlay">
             <span class="map__pin">${ICON.pin}</span>
             <p>El mapa se carga desde Google Maps.</p>
@@ -57,8 +56,7 @@ const mapBox = (s) => `
 
 /* ---------------------------------------------------------------- Portada */
 function home(url) {
-  const d = casaById(SITE.destacada.casa);
-  const m = FRAGANCIAS.find((x) => x.id === SITE.vitrinaMes && x.img) || featured[0], mc = casaById(m.casa);
+  const d = casaById(SITE.destacada.casa), t = mainStore();
   const main = `
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__copy">
@@ -67,18 +65,14 @@ function home(url) {
         <p class="hero__lede">Las grandes casas de autor, de Creed a Xerjoff, en tiendas pensadas para oler con calma y probar sobre la piel antes de elegir.</p>
         <div class="hero__ctas">
           <a class="btn btn--dark" href="${u('comprar/')}">Comprar fragancias</a>
-          <a class="btn btn--tienda" href="${u('tiendas/')}">Nuestras tiendas</a>
+          <a class="btn btn--line" href="${storeUrl(t)}">Visitar la tienda</a>
         </div>
+        <p class="hero__where">${ICON.pin}<span>${esc(t.addressShort)}</span></p>
+        ${clock(t)}
       </div>
       <figure class="hero__media">
-        <img class="hero__vitrina" src="/img/vitrina/vitrina-hero-912.webp" srcset="/img/vitrina/vitrina-hero-700.webp 700w, /img/vitrina/vitrina-hero-912.webp 912w"
-             sizes="(min-width: 960px) 58vw, 100vw" width="912" height="973" alt="" fetchpriority="high">
-        <a class="hero__frasco" href="${fragUrl(m)}" tabindex="-1" aria-hidden="true"><img src="/img/productos/${m.img}-800.webp" width="800" height="1000" alt="" fetchpriority="high"></a>
-        <figcaption class="hero__label">
-          <span class="eyebrow">En la vitrina este mes</span>
-          <a class="hero__label-name" href="${fragUrl(m)}">${esc(mc.name)} <em>${esc(m.name)}</em></a>
-          <span class="hero__label-notes">${esc(notasPlanas(m.notes).slice(0, 3).join(', '))}</span>
-        </figcaption>
+        <img src="/${t.img}-1448.webp" srcset="/${t.img}-800.webp 800w, /${t.img}-1448.webp 1448w"
+             sizes="(min-width: 960px) 54vw, 100vw" width="1448" height="1086" alt="${esc(t.imgAlt)}" fetchpriority="high">
       </figure>
     </section>
 
@@ -95,18 +89,14 @@ function home(url) {
           </div>
           <a class="link section__more" href="${u('comprar/')}" data-reveal="up">Ver las ${FRAGANCIAS.length} fragancias</a>
         </header>
-        <ul class="products">${featured.map((p, i) => productCard(p, { notes: true, i })).join('')}
-          <li class="product product--more" data-reveal="up">
-            <div class="product__media"><p>Y muchas más en el catálogo y en tienda.</p><a class="link" href="${u('comprar/')}">Ver todo el catálogo</a></div>
-          </li>
-        </ul>
+        <ul class="products">${featured.slice(0, 8).map((p, i) => productCard(p, { notes: true, i })).join('')}</ul>
+        <p class="seleccion__more"><a class="btn btn--line" href="${u('comprar/')}">Ver todo el catálogo</a></p>
         ${SITE.demoPrices ? '<p class="products__note">Los precios de esta demo son inventados. En la tienda online verás cómo funcionaría la compra.</p>' : ''}
       </div>
     </section>
 
     <section class="invitada" aria-labelledby="invitada-title">
       <figure class="invitada__media">
-        <span class="invitada__cortina invitada__cortina--l" aria-hidden="true"></span><span class="invitada__cortina invitada__cortina--r" aria-hidden="true"></span>
         <img src="/img/casas/xerjoff-banner-1200.webp" srcset="/img/casas/xerjoff-banner-1200.webp 1200w, /img/casas/xerjoff-banner-2400.webp 2400w"
              sizes="100vw" width="2400" height="1350" loading="lazy" alt="Frasco de Xerjoff Naxos sobre un mapa antiguo, envuelto por una cinta verde">
       </figure>
@@ -143,22 +133,13 @@ function home(url) {
         </header>
         <ul class="storecards" data-reveal="up" data-stagger>${SITE.stores.map((st) => storeCard(st)).join('')}</ul>
       </div>
-    </section>
-
-    <section class="quoteband section section--stone" aria-labelledby="quote-title" data-foco>
-      <div class="wrap quoteband__inner" data-reveal="up" data-stagger>
-        <p class="eyebrow">Nuestra historia</p>
-        <h2 class="visually-hidden" id="quote-title">Nuestra historia</h2>
-        <blockquote class="quoteband__quote"><p>«El lujo no está en el precio, sino en cómo te hace sentir.»</p><footer>Sharan Harpalani, fundador</footer></blockquote>
-        <a class="link" href="${u('historia/')}">De Evergreen Perfumes a Triana</a>
-      </div>
     </section>`;
   return {
     path: '', section: 'home', intro: true, main,
     title: 'Perfumería nicho en Triana, Las Palmas | The Fragrance Bar',
     ogTitle: 'The Fragrance Bar · Triana, Las Palmas de Gran Canaria',
     description: 'Perfumería nicho en la Calle Mayor de Triana, Las Palmas de Gran Canaria. Creed, Amouage, Xerjoff, Parfums de Marly, Initio, Montale, Memo Paris y Tom Ford.',
-    preload: `<link rel="preload" as="image" href="/img/vitrina/vitrina-hero-912.webp" imagesrcset="/img/vitrina/vitrina-hero-700.webp 700w, /img/vitrina/vitrina-hero-912.webp 912w" imagesizes="(min-width: 960px) 58vw, 100vw">`,
+    preload: `<link rel="preload" as="image" href="/${t.img}-1448.webp" imagesrcset="/${t.img}-800.webp 800w, /${t.img}-1448.webp 1448w" imagesizes="(min-width: 960px) 54vw, 100vw">`,
     schema: schema.graph([
       { '@type': 'WebSite', '@id': `${url}/#web`, name: SITE.brand, url: `${url}/`, inLanguage: 'es' },
       schema.organization(SITE, url),
@@ -170,7 +151,8 @@ function home(url) {
 function storeCard(s, { photo = true } = {}) {
   return `
           <li class="storecard">
-            ${s.img && photo ? `<figure class="storecard__media"><img src="/${s.img}-800.webp" width="800" height="600" loading="lazy" alt=""></figure>` : '<div class="storecard__media storecard__media--plan" aria-hidden="true"></div>'}
+            ${s.img && photo ? `<figure class="storecard__media"><img src="/${s.cardImg || s.img}-800.webp" width="800" height="600" loading="lazy" alt=""></figure>`
+              : `<div class="storecard__media storecard__media--sinfoto" aria-hidden="true"><span>${esc(s.islandName)}</span><em>${esc(s.city)}</em></div>`}
             <div class="storecard__body">
               <p class="eyebrow">${esc(s.islandName)}${s.isNew ? ' · Nueva tienda' : ''}</p>
               <h3 class="storecard__title"><a href="${storeUrl(s)}">${esc(s.title)}</a></h3>
@@ -228,7 +210,7 @@ function casa(url, c) {
           <p class="casahero__icons"><span>Emblemáticas</span> ${c.icons.map(esc).join(' · ')}</p>
           <div class="hero__ctas">
             <a class="btn btn--dark" href="#fragancias">Ver ${items.length === 1 ? 'su fragancia' : `sus ${items.length} fragancias`}</a>
-            <a class="btn btn--tienda" href="${u('tiendas/')}">Probarlas en tienda</a>
+            <a class="btn btn--line" href="${u('tiendas/')}">Probarlas en tienda</a>
           </div>
         </div>
       </header>
@@ -260,9 +242,6 @@ function casa(url, c) {
 }
 
 /* ---------------------------------------------------------------- Comprar */
-// En /comprar/ de momento solo las fragancias con su foto de vitrina (public/img/vitrina/<id>-*.webp)
-const EN_VITRINA = FRAGANCIAS.filter((p) => p.vitrinaFoto);
-
 function comprar(url) {
   const main = `${pageHead({
     crumbs: [['Inicio', ''], ['Comprar']],
@@ -288,8 +267,8 @@ function comprar(url) {
         <div class="filters scroller" role="group" aria-label="Filtrar por familia olfativa" data-filters>
           ${[{ id: '', name: 'Todas' }, ...FAMILIAS].map((x) => `<button class="chip" type="button" data-familia-filter="${x.id}" aria-pressed="${x.id === ''}">${x.name}</button>`).join('')}
         </div>
-        <p class="shop__count" data-count aria-live="polite">${EN_VITRINA.length} ${EN_VITRINA.length === 1 ? 'fragancia' : 'fragancias'}</p>
-        <ul class="products products--shop" data-products>${EN_VITRINA.map((p, i) => productCard(p, { i, vitrina: true })).join('')}</ul>
+        <p class="shop__count" data-count aria-live="polite">${nFrag(FRAGANCIAS.length)}</p>
+        <ul class="products" data-products>${FRAGANCIAS.map((p, i) => productCard(p, { i })).join('')}</ul>
         <div class="shop__empty" data-empty hidden>
           <p>No hay fragancias con estos filtros.</p>
           <button class="link" type="button" data-reset-filters>Quitar los filtros</button>
@@ -312,7 +291,7 @@ function fragancia(url, p) {
   const main = `
     <div class="wrap pdp__crumbs">${crumbs([['Inicio', ''], ['Comprar', 'comprar/'], [c.name, `casas/${c.id}/`], [p.name]])}</div>
     <article class="pdp wrap" data-pdp="${p.id}">
-      <div class="pdp__media">${productMedia(p, { sizes: '(min-width: 960px) 50vw, 100vw', eager: true })}</div>
+      <div class="pdp__media">${productGallery(p)}</div>
       <div class="pdp__info">
         <p class="product__brand"><a href="${casaUrl(c)}">${esc(c.name)}</a></p>
         <h1 class="pdp__title">${esc(p.name)}</h1>
@@ -530,7 +509,7 @@ function barra(url) {
           <li>${ICON.heart}<h3>Tu lista</h3><p>Guarda en la web lo que te interese y enséñanoslo al llegar, o envíanoslo por WhatsApp.</p></li>
         </ul>
         <div class="hero__ctas" data-reveal="up">
-          <a class="btn btn--tienda" href="${u('tiendas/')}">Encontrar una tienda</a>
+          <a class="btn btn--dark" href="${u('tiendas/')}">Encontrar una tienda</a>
           <a class="btn btn--line" href="${u('comprar/')}">Ver el catálogo</a>
         </div>
       </div>
@@ -544,10 +523,16 @@ function barra(url) {
 }
 
 /* ---------------------------------------------------------------- Historia */
+// El rótulo de verdad, en la pared de la tienda de Triana (foto del interior)
+function historiaFoto() {
+  const f = mainStore().interior.find((x) => x.img.endsWith('lamparas'));
+  return `<figure class="pagehead__media"><img src="/${f.img}-800.webp" srcset="${f.sizes.map((w) => `/${f.img}-${w}.webp ${Math.min(w, f.w)}w`).join(', ')}" sizes="(min-width: 960px) 40vw, 100vw" width="${f.w}" height="${f.h}" fetchpriority="high" alt="${esc(f.alt)}"></figure>`;
+}
+
 function historia(url) {
   const main = `${pageHead({ crumbs: [['Inicio', ''], ['Historia']], eyebrow: 'Desde 2022', title: 'Nuestra <em>historia</em>',
     intro: 'The Fragrance Bar nace de un negocio familiar de perfumería y de una idea sencilla: en Canarias faltaba una tienda dedicada solo a la perfumería nicho.',
-    cls: 'pagehead--pared', attrs: 'data-foco', extra: rotulo() })}
+    cls: 'pagehead--foto', extra: historiaFoto() })}
     <section class="historia section section--tight">
       <div class="wrap historia__grid">
         <div class="historia__intro" data-reveal="up" data-stagger>
@@ -602,7 +587,7 @@ function tienda(url, s) {
           ${clock(s)}
           ${storeFicha(s)}
           <div class="hero__ctas">
-            <a class="btn btn--tienda" href="${s.mapsUrl}" target="_blank" rel="noopener">Cómo llegar${NEW_TAB}</a>
+            <a class="btn btn--dark" href="${s.mapsUrl}" target="_blank" rel="noopener">Cómo llegar${NEW_TAB}</a>
             <a class="btn btn--line" href="${telHref(s.phone)}">Llamar</a>
           </div>
         </div>

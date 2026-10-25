@@ -40,7 +40,8 @@ export const SITE = {
       mapQuery: 'The Fragrance Bar, Calle Mayor de Triana 32, Las Palmas de Gran Canaria',
       // Enlace a la ficha de Google Maps («Compartir» > «Copiar enlace»). PROVISIONAL: sustituir por el enlace exacto de la ficha
       mapsUrl: 'https://www.google.com/maps/search/?api=1&query=The+Fragrance+Bar+Calle+Mayor+de+Triana+32+Las+Palmas+de+Gran+Canaria',
-      img: 'img/tienda/triana-fachada', imgAlt: 'Fachada de The Fragrance Bar en Triana: arco de piedra, rótulo negro y un interior iluminado con vitrinas de perfumes y una barra de madera en el centro',
+      // img: foto principal (portada y página de la tienda) · cardImg: la de su tarjeta, para no repetir la fachada en la portada
+      img: 'img/tienda/triana-fachada', cardImg: 'img/tienda/interior-pasillo', imgAlt: 'Fachada de The Fragrance Bar en Triana: arco de piedra, rótulo negro y un interior iluminado con vitrinas de perfumes y una barra de madera en el centro',
       /* Fotos del interior para la página de la tienda (prototipo: confirmar con la tienda que se pueden usar) */
       interior: [
         { img: 'img/tienda/interior-pasillo', w: 1380, h: 1038, sizes: [800, 1380], alt: 'Pasillo de vitrinas de cristal iluminadas, llenas de frascos de perfume, con suelo de madera clara' },
@@ -92,9 +93,6 @@ export const SITE = {
     { name: 'WhatsApp', url: 'https://wa.me/34828903088' },
     { name: 'Google Maps', url: 'https://www.google.com/maps/search/?api=1&query=The+Fragrance+Bar+Calle+Mayor+de+Triana+32+Las+Palmas+de+Gran+Canaria' }
   ],
-
-  // Fragancia de la vitrina del hero de la portada (se cambia cada mes; id de src/data/catalogo.js, con foto)
-  vitrinaMes: 'creed-aventus',
 
   // Casa destacada de la portada
   destacada: { casa: 'xerjoff',

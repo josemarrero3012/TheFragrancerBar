@@ -1,8 +1,6 @@
-/* Fichas de fragancia en rejilla (portada, casas, catálogo) y frascos dibujados.
-   Imagen cuadrada, como en las webs de las casas. Con foto original de la casa (product__media--orig)
-   se ve tal cual y, al pasar el ratón, cambia a la segunda foto que enseña la casa (.product__hover).
-   Sin ella, el frasco recortado sobre fondo claro.
-   En /comprar/ (.products--shop) cada ficha es una vitrina de la tienda: más abajo. */
+/* Fichas de fragancia en rejilla (portada, casas, catálogo y relacionadas).
+   Todas iguales: el frasco recortado (4:5, con la base al 93,5 %) entero y centrado
+   en un cuadrado sobre el fondo de piedra, como en las webs de las casas. */
 .products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.6rem 1rem; }
 @media (min-width: 760px) { .products { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3.2rem 1.4rem; } }
 @media (min-width: 1100px) { .products { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
@@ -10,32 +8,11 @@
 .product.is-hidden { display: none; }
 .product__link { display: block; text-decoration: none; color: inherit; }
 .product__media { position: relative; margin: 0; aspect-ratio: 1; overflow: hidden; background: var(--stone); }
-/* Frasco recortado (4:5 con la base al 93,5 %): entero y centrado en el cuadrado */
 .product__media img { display: block; width: 100%; height: 100%; object-fit: contain; }
-/* Foto original: llena el cuadrado (las de Creed ya son cuadradas) y la segunda aparece encima con el ratón */
-.product__media--orig img { object-fit: cover; }
-.product__hover { position: absolute; inset: 0; opacity: 0; transition: opacity .6s var(--ease); }
-@media (hover: hover) {
-  .product:hover .product__hover, .pdp__media:hover .product__hover { opacity: 1; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .product__link .product__media img { transition: transform .8s var(--ease); }
+  .product:hover .product__link .product__media img { transform: scale(1.04); }
 }
-
-/* Rejilla de /comprar/: cada ficha es una vitrina de la tienda, una foto de vitrina vacía (public/img/vitrina)
-   con el frasco recortado encima, apoyado en el suelo de la hornacina. La luz está algo baja y sube al pasar
-   el cursor (en táctil, cuando la ficha llega al centro de la pantalla: src/js/vitrinas.js). */
-.products--shop .product__media { isolation: isolate; aspect-ratio: 4 / 5; background: #121110; }
-.products--shop .product__media::before {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  background: image-set(url("/img/vitrina/vitrina-480.webp") 1x, url("/img/vitrina/vitrina-720.webp") 2x) center / cover no-repeat;
-  filter: brightness(.93); transition: filter .8s var(--ease);
-}
-.products--shop .product:hover .product__media::before, .products--shop .product__media.is-on::before { filter: brightness(1.04); }
-/* El frasco apoya en el suelo de la hornacina (93 % de la altura de la foto 4:5).
-   Las fotos de producto son 4:5 con la base del frasco al 93,5 %: con un 94 % de ancho, bottom 0,9 %. */
-.products--shop .product__media img { position: absolute; left: 3%; bottom: .9%; width: 94%; height: auto; object-fit: fill; }
-/* Foto ya hecha del frasco en su vitrina (vitrinaFoto): la foto entera, con su marco negro */
-.products--shop .product__media--vitrinafoto { aspect-ratio: auto; background: none; }
-.products--shop .product__media--vitrinafoto::before { display: none; }
-.products--shop .product__media--vitrinafoto img { position: static; width: 100%; }
 
 .product__body { padding-top: 1rem; display: flex; flex-direction: column; align-items: flex-start; gap: .2rem; flex: 1; }
 .product__brand { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
@@ -52,28 +29,7 @@
 .product__add { flex: 1; padding-inline: .6rem; }
 .product__add:hover { background: var(--ink); color: var(--paper); }
 
-/* Tarjeta final «Y muchas más…» */
-.product--more .product__media { display: grid; place-content: center; padding: 1.5rem; text-align: center; background: var(--ink); color: var(--paper); }
-.product--more p { font-family: var(--f-display); font-size: var(--t-h3); line-height: 1.25; }
-.product--more .link { margin-top: 1.2rem; justify-self: center; font-size: var(--t-sm); }
-
 .products__note { margin-top: 2.6rem; padding-top: 1.2rem; border-top: 1px solid var(--line); font-size: var(--t-sm); color: var(--muted); }
-
-/* Frasco dibujado: silueta de la casa, tapón negro y cristal teñido según la familia */
-[data-familia="frescas"] { --tint: var(--tint-frescas); }
-[data-familia="florales"] { --tint: var(--tint-florales); }
-[data-familia="amaderadas"] { --tint: var(--tint-amaderadas); }
-[data-familia="ambar"] { --tint: var(--tint-ambar); }
-.product__media--drawn {
-  display: grid; grid-template-rows: minmax(0, 1fr) auto; justify-items: center; gap: 6%;
-  padding: 13% 10% 10%;
-  background: radial-gradient(110% 80% at 50% 28%, #FBFAF7 0%, var(--tint) 100%);
-}
-.bottle { height: 100%; width: auto; max-width: 100%; overflow: visible; transition: transform .8s var(--ease); }
-.bottle__glass > * { fill: color-mix(in srgb, var(--tint) 70%, #8E4F1A 30%); fill-opacity: .5; stroke: rgba(18, 17, 16, .62); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
-.bottle__shine { fill: #fff; opacity: .55; }
-.bottle__glass > :first-child { fill: var(--ink); fill-opacity: 1; stroke: var(--ink); }
-.bottle__glass > :nth-child(n+4) { fill: none; stroke: rgba(142, 79, 26, .7); }
-.bottle__label { display: grid; justify-items: center; gap: .25rem; text-align: center; line-height: 1.15; }
-.bottle__label span { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-2); }
-.bottle__label em { font-family: var(--f-serif); font-size: clamp(.95rem, .85rem + .4vw, 1.2rem); color: var(--ink); }
+/* Enlace al catálogo bajo la selección de la portada (en escritorio ya está en la cabecera) */
+.seleccion__more { margin-top: 2.4rem; text-align: center; }
+@media (min-width: 960px) { .seleccion__more { display: none; } }

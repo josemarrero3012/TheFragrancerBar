@@ -19,41 +19,11 @@
   .historia__note { grid-column: 2; }
 }
 
-/* Cita de la portada, con enlace a la historia */
-.quoteband__inner { display: grid; justify-items: center; gap: 1.4rem; text-align: center; }
-.quoteband__quote { margin: 0; max-width: 46rem; }
-.quoteband__quote p { font-family: var(--f-serif); font-style: italic; font-size: var(--t-h2); line-height: 1.2; }
-.quoteband__quote footer { margin-top: 1rem; font-size: var(--t-sm); color: var(--muted); }
-
-/* La cita va sobre la pared de azulejo chevron del rótulo, con la luz de un foco desde arriba */
-.quoteband.section--stone {
-  background:
-    radial-gradient(60% 75% at var(--fx, 50%) var(--fy, 0%), rgba(255, 246, 228, .95), rgba(255, 246, 228, 0) 70%),
-    var(--tex-chevron),
-    linear-gradient(#ECEAE5, #E4E1DB);
-}
-
-/* Cabecera de la historia: la pared de chevron con el rótulo de la tienda.
-   El foco sigue al cursor (src/js/foco.js); sin cursor se queda arriba, sobre el rótulo. */
-.pagehead--pared {
-  background:
-    radial-gradient(520px 420px at var(--fx, 76%) var(--fy, 22%), rgba(255, 244, 222, .95), rgba(255, 244, 222, 0) 70%),
-    var(--tex-chevron),
-    linear-gradient(#ECEAE5, #E4E1DB);
-}
-.pagehead--pared .pagehead__intro { color: var(--ink-2); }
-.rotulo {
-  display: grid; justify-items: center; align-content: center; gap: .1rem; margin-top: 1.4rem;
-  width: clamp(170px, 40vw, 260px); aspect-ratio: 1.12; padding: 1.2rem;
-  background: var(--ink); color: #fff; font-family: var(--f-serif); line-height: 1;
-  box-shadow: 0 24px 40px -24px rgba(18, 17, 16, .7);
-}
-.rotulo__caps { justify-self: start; margin-left: 14%; font-weight: 700; text-transform: uppercase; font-size: clamp(.85rem, .7rem + .5vw, 1.15rem); }
-.rotulo__caps--end { justify-self: end; margin: 0 14% 0 0; }
-.rotulo em { font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.6rem); }
-.rotulo__sub { margin-top: .5rem; font-size: clamp(.45rem, .4rem + .2vw, .6rem); letter-spacing: .24em; text-transform: uppercase; }
+/* Cabecera de la historia: el texto y, al lado, la foto del rótulo real en la tienda de Triana */
+.pagehead__media { margin: 1.4rem 0 0; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; background: var(--stone); }
+.pagehead__media img { width: 100%; height: 100%; object-fit: cover; }
 @media (min-width: 960px) {
-  .pagehead--pared .pagehead__inner { grid-template-columns: minmax(0, 1fr) auto; column-gap: 6vw; }
-  .pagehead--pared .pagehead__inner > :not(.rotulo) { grid-column: 1; }
-  .pagehead--pared .rotulo { grid-column: 2; grid-row: 1 / span 4; align-self: center; margin-top: 0; }
+  .pagehead--foto .pagehead__inner { grid-template-columns: minmax(0, 1fr) minmax(0, .85fr); column-gap: 6vw; }
+  .pagehead--foto .pagehead__inner > :not(.pagehead__media) { grid-column: 1; }
+  .pagehead--foto .pagehead__media { grid-column: 2; grid-row: 1 / span 4; align-self: center; margin-top: 0; }
 }
