@@ -50,11 +50,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "almizcle": {
-    "titulo": "Cotton boll",
-    "url": "https://commons.wikimedia.org/wiki/File:Cotton_boll.jpg",
-    "autor": "ChriKo",
-    "licencia": "CC BY-SA 3.0",
-    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "titulo": "COTTON open boll (48948566212)",
+    "url": "https://commons.wikimedia.org/wiki/File:COTTON_open_boll_(48948566212).jpg",
+    "autor": "Alabama Extension",
+    "licencia": "CC0",
+    "licenciaUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
     "cambios": true
   },
   "ambar": {
@@ -1098,11 +1098,11 @@ export const NOTAS_FOTOS = {
     "cambios": true
   },
   "sandalo": {
-    "titulo": "Chandanam (Tamil சந்தனம்) (31074714746)",
-    "url": "https://commons.wikimedia.org/wiki/File:Chandanam_(Tamil_%E0%AE%9A%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AE%A9%E0%AE%AE%E0%AF%8D)_(31074714746).jpg",
-    "autor": "Dinesh Valke from Thane, India",
-    "licencia": "CC BY-SA 2.0",
-    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "titulo": "SandalwoodEssOil",
+    "url": "https://commons.wikimedia.org/wiki/File:SandalwoodEssOil.png",
+    "autor": "Itineranttrader",
+    "licencia": "Public domain",
+    "licenciaUrl": "https://commons.wikimedia.org/wiki/File:SandalwoodEssOil.png",
     "cambios": true
   },
   "shiso": {
