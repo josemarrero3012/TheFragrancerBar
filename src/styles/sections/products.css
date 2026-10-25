@@ -1,7 +1,8 @@
 /* Fichas de fragancia en rejilla (portada, casas, catálogo) y frascos dibujados.
    Imagen cuadrada, como en las webs de las casas. Con foto original de la casa (product__media--orig)
    se ve tal cual y, al pasar el ratón, cambia a la segunda foto que enseña la casa (.product__hover).
-   Sin ella, el frasco recortado sobre fondo claro. */
+   Sin ella, el frasco recortado sobre fondo claro.
+   En /comprar/ (.products--shop) cada ficha es una vitrina de la tienda: más abajo. */
 .products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.6rem 1rem; }
 @media (min-width: 760px) { .products { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3.2rem 1.4rem; } }
 @media (min-width: 1100px) { .products { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
@@ -17,6 +18,24 @@
 @media (hover: hover) {
   .product:hover .product__hover, .pdp__media:hover .product__hover { opacity: 1; }
 }
+
+/* Rejilla de /comprar/: cada ficha es una vitrina de la tienda, una foto de vitrina vacía (public/img/vitrina)
+   con el frasco recortado encima, apoyado en el suelo de la hornacina. La luz está algo baja y sube al pasar
+   el cursor (en táctil, cuando la ficha llega al centro de la pantalla: src/js/vitrinas.js). */
+.products--shop .product__media { isolation: isolate; aspect-ratio: 4 / 5; background: #121110; }
+.products--shop .product__media::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: image-set(url("/img/vitrina/vitrina-480.webp") 1x, url("/img/vitrina/vitrina-720.webp") 2x) center / cover no-repeat;
+  filter: brightness(.93); transition: filter .8s var(--ease);
+}
+.products--shop .product:hover .product__media::before, .products--shop .product__media.is-on::before { filter: brightness(1.04); }
+/* El frasco apoya en el suelo de la hornacina (93 % de la altura de la foto 4:5).
+   Las fotos de producto son 4:5 con la base del frasco al 93,5 %: con un 94 % de ancho, bottom 0,9 %. */
+.products--shop .product__media img { position: absolute; left: 3%; bottom: .9%; width: 94%; height: auto; object-fit: fill; }
+/* Foto ya hecha del frasco en su vitrina (vitrinaFoto): la foto entera, con su marco negro */
+.products--shop .product__media--vitrinafoto { aspect-ratio: auto; background: none; }
+.products--shop .product__media--vitrinafoto::before { display: none; }
+.products--shop .product__media--vitrinafoto img { position: static; width: 100%; }
 
 .product__body { padding-top: 1rem; display: flex; flex-direction: column; align-items: flex-start; gap: .2rem; flex: 1; }
 .product__brand { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }

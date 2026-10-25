@@ -50,11 +50,16 @@ export function bottle(p) {
   return `<svg class="bottle" viewBox="0 0 200 240" aria-hidden="true"><g class="bottle__glass">${BOTTLES[p.casa]}</g><rect class="bottle__shine" x="80" y="104" width="5" height="84" rx="2.5"/></svg>`;
 }
 
-/** Foto original de la casa (y la de al pasar el ratón), el frasco recortado o, si no hay foto, el frasco dibujado */
-export function productMedia(p, { sizes = '(min-width: 1100px) 22vw, (min-width: 760px) 30vw, 46vw', eager = false, vt = true } = {}) {
+/** Foto original de la casa (y la de al pasar el ratón), el frasco recortado o, si no hay foto, el frasco dibujado.
+    vitrina: el frasco recortado aunque haya foto original, para ponerlo en su vitrina (rejilla de /comprar/) */
+export function productMedia(p, { sizes = '(min-width: 1100px) 22vw, (min-width: 760px) 30vw, 46vw', eager = false, vt = true, vitrina = false } = {}) {
   const c = casaById(p.casa);
   const name = vt ? ` style="view-transition-name: f-${p.id}"` : '';
-  if (p.orig) {
+  if (vitrina && p.vitrinaFoto) {
+    const { w, h } = p.vitrinaFoto;
+    return `<figure class="product__media product__media--vitrinafoto"${name}><img src="/img/vitrina/${p.id}-800.webp" srcset="/img/vitrina/${p.id}-800.webp 800w, /img/vitrina/${p.id}-${w}.webp ${w}w" sizes="${sizes}" width="${w}" height="${h}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} alt="${esc(`${c.name} ${p.name}`)} en su vitrina"></figure>`;
+  }
+  if (p.orig && !(vitrina && p.img)) {
     const { w, h, hover } = p.orig;
     const img = (k, attrs) => `<img src="/img/originales/${p.id}-${k}-800.webp" srcset="/img/originales/${p.id}-${k}-800.webp 800w, /img/originales/${p.id}-${k}-1600.webp 1600w" sizes="${sizes}" width="${w}" height="${h}"${attrs}>`;
     return `<figure class="product__media product__media--orig${hover ? ' has-hover' : ''}"${name}>${img('a', `${eager ? ' fetchpriority="high"' : ' loading="lazy"'} alt="${esc(`${c.name} ${p.name}`)}"`)}${hover ? img('b', ' class="product__hover" loading="lazy" alt=""') : ''}</figure>`;
@@ -75,12 +80,12 @@ export function nota(texto) {
 }
 
 /** Ficha de producto en una rejilla. Los data-* los usa el filtro de /comprar/ */
-export function productCard(p, { notes = false, i = 0 } = {}) {
+export function productCard(p, { notes = false, i = 0, vitrina = false } = {}) {
   const c = casaById(p.casa), from = priceFrom(p), label = `${p.name} de ${c.name}`;
   const multi = p.sizes.length > 1;
   return `
           <li class="product" data-id="${p.id}" data-familia="${p.familia}" data-casa="${p.casa}" data-price="${from}" data-year="${p.year || 0}" data-name="${esc(`${p.name} ${c.name}`.toLowerCase())}" data-notes="${esc(notasPlanas(p.notes).join(', ').toLowerCase())}" data-reveal="up" data-reveal-delay="${(i % 4) * 80}">
-            <a class="product__link" href="${fragUrl(p)}" tabindex="-1" aria-hidden="true">${productMedia(p)}</a>
+            <a class="product__link" href="${fragUrl(p)}" tabindex="-1" aria-hidden="true">${productMedia(p, { vitrina })}</a>
             <div class="product__body">
               <p class="product__brand">${esc(c.name)}</p>
               <h3 class="product__name"><a href="${fragUrl(p)}">${esc(p.name)}</a></h3>

@@ -15,6 +15,8 @@
      sizes    [[ml, precio en euros], …] — el primero es el tamaño por defecto
      year     año de lanzamiento, o null si no está confirmado (entonces no se muestra)
      featured (opcional) aparece en la selección de la portada
+     vitrinaFoto (opcional) { w, h } de su foto dentro de la vitrina (public/img/vitrina/<id>-800 y -<w>.webp).
+              De momento /comprar/ solo enseña las que la tienen
 
    FOTOS: solo se publican las fragancias que tienen foto oficial en
    public/img/productos/<id>-400.webp y -800.webp. La lista la mantiene
@@ -124,7 +126,7 @@ const f = (casa, name, conc, year, familia, desc, extra = {}) => {
 export const TODAS = [
   // Creed
   f('creed', 'Aventus', 'EDP', 2010, 'frescas',
-    'El chipre afrutado que convirtió a Creed en un fenómeno: piña luminosa sobre un fondo ahumado de abedul.', { featured: true }),
+    'El chipre afrutado que convirtió a Creed en un fenómeno: piña luminosa sobre un fondo ahumado de abedul.', { featured: true, vitrinaFoto: { w: 1213, h: 1181 } }),
   f('creed', 'Green Irish Tweed', 'EDP', 1985, 'frescas',
     'Hierba recién cortada y hoja de violeta: el gran clásico verde de la casa.'),
   f('creed', 'Silver Mountain Water', 'EDP', 1995, 'frescas',
