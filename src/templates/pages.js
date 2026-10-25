@@ -4,8 +4,8 @@
    Añadir una casa o una fragancia en src/data/catalogo.js crea su página sola.
    ========================================================================== */
 import { SITE, mainStore } from '../data/site.js';
-import { CASAS, FRAGANCIAS, FAMILIAS, CONCENTRACIONES, casaById, familiaName, fragsDeCasa, euros } from '../data/catalogo.js';
-import { NOTAS, NOTAS_FOTOS, gruposDeNotas, notasPlanas } from '../data/notas.js';
+import { CASAS, FRAGANCIAS, FAMILIAS, CONCENTRACIONES, casaById, familiaName, fragsDeCasa, priceFrom, euros } from '../data/catalogo.js';
+import { NOTAS, NOTAS_FOTOS, gruposDeNotas, notasPlanas, notaFoto } from '../data/notas.js';
 import * as schema from '../data/schema.js';
 import { layout, whatsappHref } from './layout.js';
 import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productMedia, productCard, crumbs, pageHead, demoNote, brandStrip, clock, rotulo, nota } from './ui.js';
@@ -13,6 +13,19 @@ import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productMedi
 const DAYS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const cap = (s) => s[0].toUpperCase() + s.slice(1);
 const featured = FRAGANCIAS.filter((p) => p.featured);
+/* Pestañas de la selección de la portada */
+const SELECCION = [
+  { id: 'pedidas', label: 'Más pedidas', items: featured },
+  { id: 'novedades', label: 'Novedades', items: [...FRAGANCIAS].sort((a, b) => (b.year || 0) - (a.year || 0)).slice(0, 10) },
+  { id: 'extractos', label: 'Extractos', items: FRAGANCIAS.filter((p) => p.conc === 'Extrait' || p.conc === 'Parfum').slice(0, 10) }
+];
+/* Cada familia olfativa con la foto de una nota que la representa (fotos de Wikimedia, como en las fichas) */
+const FAMILIA_NOTA = {
+  frescas: { foto: 'bergamota', texto: 'Cítricos, fruta y aire libre' },
+  florales: { foto: 'rosa', texto: 'Rosa, jazmín y flores blancas' },
+  amaderadas: { foto: 'sandalo', texto: 'Sándalo, cedro y vetiver' },
+  ambar: { foto: 'vainilla', texto: 'Vainilla, especias y resinas' }
+};
 const nFrag = (n) => `${n} ${n === 1 ? 'fragancia' : 'fragancias'}`;
 /** Meta description de 160 caracteres como máximo: añade el primer complemento que quepa */
 const fit = (base, ...extras) => base + (extras.find((x) => (base + x).length <= 160) || '');
@@ -55,31 +68,59 @@ const mapBox = (s) => `
           </div>
         </div>`;
 
+/** Una fragancia del escaparate de la portada: texto a un lado y el frasco en la vitrina iluminada */
+function escaparateSlide(p, tag, claim, i, n) {
+  const c = casaById(p.casa), from = priceFrom(p), first = i === 0;
+  const notas = notasPlanas(p.notes).slice(0, 3);
+  return `
+        <article class="slide${first ? ' is-active' : ''}" id="escaparate-${i}" data-familia="${p.familia}" aria-roledescription="diapositiva" aria-label="${i + 1} de ${Number(n)}: ${esc(`${c.name} ${p.name}`)}">
+          <div class="slide__copy">
+            <p class="slide__tag"><span class="slide__count">${String(i + 1).padStart(2, '0')} / ${n}</span>${esc(tag)}</p>
+            <p class="slide__brand"><a href="${casaUrl(c)}">${esc(c.name)}</a></p>
+            <h2 class="slide__name"><a href="${fragUrl(p)}">${esc(p.name)}</a></h2>
+            <p class="slide__claim">${esc(claim)}</p>
+            <ul class="slide__notas" aria-label="Notas principales">${notas.map((t) => {
+              const k = notaFoto(t);
+              return `<li>${k ? `<img src="/img/notas/${k}-160.webp" width="160" height="160" alt="" loading="${first ? 'eager' : 'lazy'}">` : ''}<span>${esc(t)}</span></li>`;
+            }).join('')}</ul>
+            <p class="slide__meta">${CONCENTRACIONES[p.conc]} · <span>${p.sizes.length > 1 ? 'desde ' : ''}${euros(from)}</span></p>
+            <div class="slide__ctas">
+              <a class="btn btn--dark" href="${fragUrl(p)}">Descubrir ${esc(p.name)}</a>
+              <button class="btn btn--line" type="button" data-add="${p.id}" aria-label="Añadir ${esc(`${p.name} de ${c.name}`)} a la cesta, ${p.sizes[0][0]} ml">Añadir a la cesta</button>
+            </div>
+          </div>
+          <a class="slide__frasco" href="${fragUrl(p)}" tabindex="-1" aria-hidden="true">
+            <img src="/img/productos/${p.img}-800.webp" srcset="/img/productos/${p.img}-400.webp 400w, /img/productos/${p.img}-800.webp 800w" sizes="(min-width: 960px) 34vw, 70vw" width="800" height="1000" alt=""${first ? ' fetchpriority="high"' : ' loading="lazy"'}>
+          </a>
+        </article>`;
+}
+
 /* ---------------------------------------------------------------- Portada */
 function home(url) {
   const d = casaById(SITE.destacada.casa);
-  const m = FRAGANCIAS.find((x) => x.id === SITE.vitrinaMes && x.img) || featured[0], mc = casaById(m.casa);
+  const slides = SITE.escaparate.map((e) => ({ ...e, p: FRAGANCIAS.find((x) => x.id === e.id) })).filter((e) => e.p);
+  const n = String(slides.length).padStart(2, '0');
   const main = `
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero__copy">
-        <p class="eyebrow">Perfumería nicho · Gran Canaria y Tenerife</p>
-        <h1 class="hero__title" id="hero-title">Perfumería nicho, <em>sin prisa.</em></h1>
-        <p class="hero__lede">Las grandes casas de autor, de Creed a Xerjoff, en tiendas pensadas para oler con calma y probar sobre la piel antes de elegir.</p>
-        <div class="hero__ctas">
-          <a class="btn btn--dark" href="${u('comprar/')}">Comprar fragancias</a>
-          <a class="btn btn--tienda" href="${u('tiendas/')}">Nuestras tiendas</a>
-        </div>
+    <section class="escaparate" aria-labelledby="escaparate-title" aria-roledescription="carrusel" data-escaparate data-seconds="${SITE.escaparateSegundos}" data-familia="${slides[0].p.familia}">
+      <h1 class="escaparate__kicker" id="escaparate-title"><span>The Fragrance Bar</span> Perfumería nicho en Gran Canaria y Tenerife</h1>
+      <div class="escaparate__stage">
+        <div class="escaparate__decor" aria-hidden="true">
+          <span class="escaparate__foco"></span>
+          <span class="escaparate__vitrina"><span class="escaparate__luz"></span><span class="escaparate__balda"></span></span>
+          <span class="escaparate__cadenas"></span>
+        </div>${slides.map(({ p, tag, claim }, i) => escaparateSlide(p, tag, claim, i, n)).join('')}
       </div>
-      <figure class="hero__media">
-        <img class="hero__vitrina" src="/img/vitrina/vitrina-hero-912.webp" srcset="/img/vitrina/vitrina-hero-700.webp 700w, /img/vitrina/vitrina-hero-912.webp 912w"
-             sizes="(min-width: 960px) 58vw, 100vw" width="912" height="973" alt="" fetchpriority="high">
-        <a class="hero__frasco" href="${fragUrl(m)}" tabindex="-1" aria-hidden="true"><img src="/img/productos/${m.img}-800.webp" width="800" height="1000" alt="" fetchpriority="high"></a>
-        <figcaption class="hero__label">
-          <span class="eyebrow">En la vitrina este mes</span>
-          <a class="hero__label-name" href="${fragUrl(m)}">${esc(mc.name)} <em>${esc(m.name)}</em></a>
-          <span class="hero__label-notes">${esc(notasPlanas(m.notes).slice(0, 3).join(', '))}</span>
-        </figcaption>
-      </figure>
+      <div class="escaparate__nav wrap">
+        <ol class="escaparate__tabs" aria-label="Fragancias del escaparate">${slides.map(({ p }, i) => `
+          <li><button class="escaparate__tab" type="button" data-go="${i}" aria-controls="escaparate-${i}"${i === 0 ? ' aria-current="true"' : ''}>
+            <span class="escaparate__num">${String(i + 1).padStart(2, '0')}</span>
+            <span class="escaparate__tabtext"><span>${esc(casaById(p.casa).name)}</span> <em>${esc(p.name)}</em></span>
+            <span class="escaparate__progreso" aria-hidden="true"></span>
+          </button></li>`).join('')}
+        </ol>
+        <button class="escaparate__pausa" type="button" data-pausa aria-pressed="false" hidden><span class="visually-hidden">Pausar el escaparate</span></button>
+      </div>
+      <span class="escaparate__zocalo" aria-hidden="true"></span>
     </section>
 
     <div class="brandline">
@@ -91,16 +132,46 @@ function home(url) {
         <header class="section__head section__head--row">
           <div data-reveal="up" data-stagger>
             <h2 class="section__title" id="seleccion-title">Selección de la casa</h2>
-            <p class="section__intro">Algunas de las fragancias más pedidas en nuestras tiendas. Cómpralas online o guárdalas en tu lista y pruébalas antes en la barra.</p>
+            <p class="section__intro">Lo más pedido en nuestras tiendas, lo último que ha llegado y los extractos para quien busca más intensidad. Cómpralos online o pruébalos antes en la barra.</p>
           </div>
           <a class="link section__more" href="${u('comprar/')}" data-reveal="up">Ver las ${FRAGANCIAS.length} fragancias</a>
         </header>
-        <ul class="products">${featured.map((p, i) => productCard(p, { notes: true, i })).join('')}
-          <li class="product product--more" data-reveal="up">
-            <div class="product__media"><p>Y muchas más en el catálogo y en tienda.</p><a class="link" href="${u('comprar/')}">Ver todo el catálogo</a></div>
-          </li>
-        </ul>
+        <div class="pestanas" data-pestanas>
+          <div class="pestanas__bar">
+            <div class="pestanas__list" role="tablist" aria-label="Selección">${SELECCION.map((t, i) => `
+              <button class="pestana" type="button" role="tab" id="tab-${t.id}" aria-controls="panel-${t.id}" aria-selected="${i === 0}"${i ? ' tabindex="-1"' : ''}>${t.label}</button>`).join('')}
+            </div>
+            <div class="rail-nav" aria-hidden="true">
+              <button class="rail-nav__btn" type="button" data-rail="-1" tabindex="-1">${ICON.arrow}</button>
+              <button class="rail-nav__btn" type="button" data-rail="1" tabindex="-1">${ICON.arrow}</button>
+            </div>
+          </div>${SELECCION.map((t, i) => `
+          <div class="pestanas__panel" role="tabpanel" id="panel-${t.id}" aria-labelledby="tab-${t.id}"${i ? ' hidden' : ''}>
+            <ul class="products products--rail">${t.items.map((p, j) => productCard(p, { notes: true, i: j })).join('')}</ul>
+          </div>`).join('')}
+        </div>
         ${SITE.demoPrices ? '<p class="products__note">Los precios de esta demo son inventados. En la tienda online verás cómo funcionaría la compra.</p>' : ''}
+      </div>
+    </section>
+
+    <section class="familias section section--tight" aria-labelledby="familias-title">
+      <div class="wrap">
+        <header class="section__head" data-reveal="up" data-stagger>
+          <h2 class="section__title" id="familias-title">Elige por <em>lo que te gusta oler</em></h2>
+        </header>
+        <ul class="familias__grid" data-reveal="up" data-stagger>${FAMILIAS.map((f) => {
+          const k = FAMILIA_NOTA[f.id], count = FRAGANCIAS.filter((p) => p.familia === f.id).length;
+          return `
+          <li class="familia" data-familia="${f.id}">
+            <a href="${u(`comprar/?familia=${f.id}`)}">
+              <span class="familia__img"><img src="/img/notas/${k.foto}-320.webp" width="320" height="320" loading="lazy" alt=""></span>
+              <span class="familia__name">${esc(f.name)}</span>
+              <span class="familia__desc">${esc(k.texto)}</span>
+              <span class="familia__count">${nFrag(count)}</span>
+            </a>
+          </li>`;
+        }).join('')}
+        </ul>
       </div>
     </section>
 
@@ -158,7 +229,7 @@ function home(url) {
     title: 'Perfumería nicho en Triana, Las Palmas | The Fragrance Bar',
     ogTitle: 'The Fragrance Bar · Triana, Las Palmas de Gran Canaria',
     description: 'Perfumería nicho en la Calle Mayor de Triana, Las Palmas de Gran Canaria. Creed, Amouage, Xerjoff, Parfums de Marly, Initio, Montale, Memo Paris y Tom Ford.',
-    preload: `<link rel="preload" as="image" href="/img/vitrina/vitrina-hero-912.webp" imagesrcset="/img/vitrina/vitrina-hero-700.webp 700w, /img/vitrina/vitrina-hero-912.webp 912w" imagesizes="(min-width: 960px) 58vw, 100vw">`,
+    preload: `<link rel="preload" as="image" href="/img/productos/${slides[0].p.img}-800.webp">`,
     schema: schema.graph([
       { '@type': 'WebSite', '@id': `${url}/#web`, name: SITE.brand, url: `${url}/`, inLanguage: 'es' },
       schema.organization(SITE, url),

@@ -35,14 +35,18 @@
   .mobile-menu a { font-size: 1.35rem; padding: .35rem 0; }
   .mobile-menu__foot { padding-top: .8rem; }
 
-  /* Portada: foto a la derecha y texto a la izquierda, ocupando lo que queda de pantalla */
-  .hero { grid-template-columns: 1fr 1fr; min-height: var(--avail); }
-  .hero__media { order: 0; aspect-ratio: auto; }
-  .hero__copy { padding-block: 1rem; }
-  .hero__title { margin-top: .5rem; }
-  .hero__lede { margin-top: .6rem; }
-  .hero__ctas { margin-top: 1rem; }
-  .hero__ctas .btn { min-height: 42px; padding-block: .5em; }
+  /* Portada: la vitrina a la derecha y el texto a la izquierda, en lo que queda de pantalla */
+  .escaparate__decor, .slide { grid-template-columns: var(--gutter) minmax(0, 1fr) 38vw 26px var(--gutter); grid-template-rows: calc(var(--avail) - 5rem); }
+  .escaparate__vitrina, .slide__frasco { grid-column: 3; grid-row: 1; margin-top: .8rem; }
+  .escaparate__cadenas { grid-column: 4; margin-left: 8px; }
+  .slide__copy { grid-column: 2; grid-row: 1; align-content: center; padding: .6rem 1.4rem .6rem 0; }
+  .slide__brand { margin-top: .5rem; }
+  .slide__name { font-size: 2.6rem; }
+  .slide__claim { margin-top: .5rem; font-size: var(--t-sm); }
+  .slide__notas { display: none; }
+  .slide__ctas { margin-top: .8rem; }
+  .slide__ctas .btn { min-height: 42px; padding-block: .5em; }
+  .avisos { display: none; }
   .status { margin-top: .7rem; }
   .brandline__list { padding-block: .8rem; }
 

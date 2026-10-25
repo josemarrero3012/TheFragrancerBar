@@ -93,8 +93,25 @@ export const SITE = {
     { name: 'Google Maps', url: 'https://www.google.com/maps/search/?api=1&query=The+Fragrance+Bar+Calle+Mayor+de+Triana+32+Las+Palmas+de+Gran+Canaria' }
   ],
 
-  // Fragancia de la vitrina del hero de la portada (se cambia cada mes; id de src/data/catalogo.js, con foto)
-  vitrinaMes: 'creed-aventus',
+  /* Escaparate de la portada: las fragancias que se promocionan en el hero, en este orden.
+     id de src/data/catalogo.js (con foto); tag es la etiqueta corta y claim la frase de la diapositiva.
+     Se cambia cuando el negocio quiera empujar una novedad o una campaña. */
+  escaparate: [
+    { id: 'creed-aventus', tag: 'El más pedido', claim: 'La fragancia que llevó a Creed a todas partes. Piña, abedul ahumado y una estela que se reconoce al pasar.' },
+    { id: 'xerjoff-naxos', tag: 'Casa invitada', claim: 'Lavanda, miel y tabaco en cristal tallado de Turín. El homenaje de Xerjoff a Sicilia.' },
+    { id: 'pdm-delina', tag: 'Para regalar', claim: 'Lichi, ruibarbo y rosa damascena en el frasco rosa más fotografiado de Parfums de Marly.' },
+    { id: 'initio-oud-for-greatness', tag: 'Intenso', claim: 'Azafrán, nuez moscada y un oud que llena la habitación. La insignia de Initio.' },
+    { id: 'amouage-guidance-46', tag: 'En extracto', claim: 'Guidance en concentración de extracto: pera, avellana tostada e incienso, más profunda y más cercana a la piel.' }
+  ],
+  // Segundos que se queda cada fragancia del escaparate antes de pasar a la siguiente
+  escaparateSegundos: 7,
+
+  // Avisos de la franja superior (rotan uno tras otro). PROVISIONAL: confirmar condiciones de envío
+  avisos: [
+    'Envío en 24–48 h a todas las islas, gratis desde 120 €',
+    'Recoge tu pedido en cualquiera de nuestras tres tiendas',
+    'Muestras para probar en casa: pídelas en tienda o por WhatsApp'
+  ],
 
   // Casa destacada de la portada
   destacada: { casa: 'xerjoff',
