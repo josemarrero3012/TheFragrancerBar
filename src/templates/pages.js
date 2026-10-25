@@ -72,7 +72,7 @@ function home(url) {
       </div>
       <figure class="hero__media">
         <img class="hero__vitrina" src="/img/vitrina/vitrina-hero-912.webp" srcset="/img/vitrina/vitrina-hero-700.webp 700w, /img/vitrina/vitrina-hero-912.webp 912w"
-             sizes="(min-width: 960px) 58vw, 100vw" width="912" height="1532" alt="" fetchpriority="high">
+             sizes="(min-width: 960px) 58vw, 100vw" width="912" height="973" alt="" fetchpriority="high">
         <a class="hero__frasco" href="${fragUrl(m)}" tabindex="-1" aria-hidden="true"><img src="/img/productos/${m.img}-800.webp" width="800" height="1000" alt="" fetchpriority="high"></a>
         <figcaption class="hero__label">
           <span class="eyebrow">En la vitrina este mes</span>

@@ -1,13 +1,13 @@
 /* Inicio: titular y, al lado, la vitrina del mes con un solo frasco (SITE.vitrinaMes) */
 .hero { display: grid; }
-/* La foto de vitrina (2:3) se recorta por arriba y se ancla abajo, en el suelo de la hornacina.
-   Sus medidas van en unidades del contenedor (cqw) porque la foto escala con el ancho. */
-.hero__media { position: relative; container-type: inline-size; margin: 0; order: -1; aspect-ratio: 4 / 5; overflow: hidden; background: #121110; }
-.hero__vitrina { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
+/* La vitrina entera, con su marco, en la proporción de la foto (912 × 973).
+   Las medidas van en unidades del contenedor (cqw) porque la foto escala con el ancho. */
+.hero__media { position: relative; container-type: inline-size; margin: 0; order: -1; aspect-ratio: 912 / 973; overflow: hidden; background: #121110; }
+.hero__vitrina { position: absolute; inset: 0; width: 100%; height: 100%; }
 /* Suelo de la hornacina a 62 px del borde inferior de la foto de 912 px: 6,8cqw; base del frasco al 93,5 % de su foto 4:5 */
-.hero__frasco { --fw: 50cqw; position: absolute; left: 50%; bottom: calc(6.8cqw - var(--fw) * 1.25 * .065); width: var(--fw); transform: translateX(-50%); }
+.hero__frasco { --fw: 54cqw; position: absolute; left: 50%; bottom: calc(6.8cqw - var(--fw) * 1.25 * .065); width: var(--fw); transform: translateX(-50%); }
 .hero__frasco img { width: 100%; height: auto; }
-.hero__label { position: absolute; top: 19%; left: 0; right: 0; display: grid; justify-items: center; gap: .3rem; padding-inline: 12cqw; text-align: center; }
+.hero__label { position: absolute; top: 9%; left: 0; right: 0; display: grid; justify-items: center; gap: .3rem; padding-inline: 12cqw; text-align: center; }
 .hero__label .eyebrow { color: var(--oak); }
 .hero__label-name { font-family: var(--f-display); font-size: clamp(1.3rem, 1rem + 2.4cqw, 2.1rem); line-height: 1.1; text-decoration: none; }
 .hero__label-name em { font-family: var(--f-serif); }
@@ -24,9 +24,8 @@
 
 @media (min-width: 960px) {
   .hero { grid-template-columns: 46fr 54fr; min-height: calc(100svh - var(--header-h)); max-height: 980px; }
-  .hero__media { order: 0; aspect-ratio: auto; }
-  .hero__label { top: 8%; }
-  .hero__frasco { --fw: 40cqw; }
+  /* Nunca más alta que la pantalla: si no cabe, se estrecha y se pega a la derecha */
+  .hero__media { order: 0; align-self: center; justify-self: end; width: min(100%, calc((100svh - var(--header-h)) * 912 / 973)); }
   .hero__copy { padding-left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); padding-right: clamp(2rem, 4vw, 4.5rem); }
 }
 

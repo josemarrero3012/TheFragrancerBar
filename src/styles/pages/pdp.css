@@ -3,6 +3,8 @@
 .pdp { display: grid; gap: 2rem; padding-bottom: var(--section); }
 /* El frasco en su vitrina, a tamaño grande y con la luz encendida */
 .pdp__media .product__media::before { filter: brightness(1.02); background-image: image-set(url("/img/vitrina/vitrina-720.webp") 1x); }
+/* En grande, el frasco algo más pequeño para que respire dentro de la vitrina */
+.pdp__media .product__media img { left: 9%; bottom: 1.7%; width: 82%; }
 .pdp__media .product__media--drawn { padding: 12% 18% 9%; }
 .pdp__media .bottle__label em { font-size: clamp(1.3rem, 1rem + 1vw, 1.8rem); }
 .pdp__media .bottle__label span { font-size: .72rem; }
@@ -87,5 +89,5 @@ body:has(.buybar) { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
   body:has(.buybar) { padding-bottom: 0; }
 }
 @media (min-width: 960px) {
-  .pdp__media .product__media { max-width: calc((100svh - var(--header-h) - 48px) * 2 / 3); margin-inline: auto; }
+  .pdp__media .product__media { max-width: calc((100svh - var(--header-h) - 48px) * 4 / 5); margin-inline: auto; }
 }
