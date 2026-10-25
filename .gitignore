@@ -16,3 +16,6 @@ Thumbs.db
 
 # Entorno de Python para scripts/recortar.py
 .venv/
+
+# Fotos originales sin tocar que descarga scripts/originales.mjs
+fotos-originales/

@@ -19,10 +19,13 @@
    FOTOS: solo se publican las fragancias que tienen foto oficial en
    public/img/productos/<id>-400.webp y -800.webp. La lista la mantiene
    `npm run fotos` en fotos.js; las demás quedan en TODAS hasta que tengan foto.
+   ORIGINALES: las que además tienen la foto original de la casa, sin recortar, y la
+   que la casa enseña al pasar el ratón (`npm run originales`, en originales.js).
    Como site.js, no debe usar nada del navegador (lo lee también vite.config.js).
    ========================================================================== */
 
 import { FOTOS } from './fotos.js';
+import { ORIGINALES } from './originales.js';
 import { NOTAS_OFICIALES } from './notas-oficiales.js';
 
 export const FAMILIAS = [
@@ -114,7 +117,7 @@ const vary = (id) => ([...id].reduce((h, ch) => h + ch.charCodeAt(0), 0) % 5) * 
 const f = (casa, name, conc, year, familia, desc, extra = {}) => {
   const id = `${casa}-${slug(name)}`;
   return { id, casa, name, conc, year, familia, notes: NOTAS_OFICIALES[id], desc, sizes: C[casa].map(([ml, pr]) => [ml, pr + vary(id)]),
-    ...(FOTOS.includes(id) && { img: id }), ...extra };
+    ...(FOTOS.includes(id) && { img: id }), ...(ORIGINALES[id] && { orig: ORIGINALES[id] }), ...extra };
 };
 
 /** Todas las fragancias del catálogo, tengan foto o no (las usa scripts/fotos.mjs) */

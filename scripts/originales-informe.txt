@@ -1,0 +1,49 @@
+creed-aventus  https://www.creedfragrance.com/p/aventus/12870029/
+  principal: https://static.thcdn.com/productimg/original/12870029-1145337306138828.jpg  2000×2000
+  ratón:     https://static.thcdn.com/productimg/original/12870029-1435337540953241.jpg  2000×2000
+  candidatas: 62 (7 de la ficha del listado)
+
+creed-absolu-aventus  https://www.creedfragrance.com/p/absolu-aventus/14926231/
+  principal: https://static.thcdn.com/productimg/original/14926231-2535132254807488.jpg  2000×2000
+  ratón:     https://static.thcdn.com/productimg/original/14926231-7445132254832883.jpg  2000×2000
+  candidatas: 46 (2 de la ficha del listado)
+
+creed-aventus-for-her  https://www.creedfragrance.com/p/aventus-for-her/12870031/
+  principal: https://static.thcdn.com/productimg/original/12870031-9665337306355095.jpg  2000×2000
+  ratón:     https://static.thcdn.com/productimg/original/12870031-1975337540681204.jpg  2000×2000
+  candidatas: 46 (6 de la ficha del listado)
+
+creed-green-irish-tweed  https://www.creedfragrance.com/p/green-irish-tweed/12870035/
+  principal: https://static.thcdn.com/productimg/original/12852873-1885132263991832.jpg  2000×2000
+  ratón:     https://static.thcdn.com/productimg/original/12870035-9055132257128375.jpg  1600×1600
+  candidatas: 57 (6 de la ficha del listado)
+
+creed-silver-mountain-water  https://www.creedfragrance.com/p/silver-mountain-water/12870049/
+  principal: https://static.thcdn.com/productimg/original/12870049-1875303061449466.jpg  2000×2000
+  ratón:     https://static.thcdn.com/productimg/original/12870049-6535303061494865.jpg  2000×2000
+  candidatas: 56 (6 de la ficha del listado)
+
+creed-millesime-imperial  https://www.creedfragrance.com/p/millesime-imperial/12870041/
+  principal: https://static.thcdn.com/productimg/original/12870041-1825216837468022.jpg  2000×2000
+  ratón:     https://static.thcdn.com/productimg/original/12870041-6615322013892406.jpg  2000×2000
+  candidatas: 62 (6 de la ficha del listado)
+
+creed-viking  https://www.creedfragrance.com/p/viking/12870053/
+  principal: https://static.thcdn.com/productimg/original/12870053-1185132259235236.jpg  1600×1600
+  ratón:     https://static.thcdn.com/productimg/original/12870053-1905132259284823.jpg  1600×1600
+  candidatas: 60 (5 de la ficha del listado)
+
+creed-royal-oud  https://www.creedfragrance.com/p/royal-oud/12870045/
+  principal: https://static.thcdn.com/productimg/original/12870045-8805322012183012.jpg  2000×2000
+  ratón:     https://static.thcdn.com/productimg/original/12870045-2015322012310899.jpg  2000×2000
+  candidatas: 50 (6 de la ficha del listado)
+
+creed-original-santal  https://www.creedfragrance.com/p/original-santal/12870043/
+  principal: https://static.thcdn.com/productimg/original/12870043-4695216837490450.jpg  2000×2000
+  ratón:     https://static.thcdn.com/productimg/original/12870043-1965280313286268.jpg  1984×1984
+  candidatas: 59 (6 de la ficha del listado)
+
+creed-himalaya  https://www.creedfragrance.com/p/himalaya/12870036/
+  principal: https://static.thcdn.com/productimg/original/12852882-1515132264675217.jpg  2000×2000
+  ratón:     https://static.thcdn.com/productimg/original/12870036-1165132257281414.jpg  1600×1600
+  candidatas: 60 (6 de la ficha del listado)

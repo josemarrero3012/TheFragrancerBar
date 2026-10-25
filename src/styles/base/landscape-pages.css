@@ -6,7 +6,7 @@
   /* Ficha de fragancia: frasco a la izquierda (fijo) y compra a la derecha */
   .pdp { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 1.6rem; align-items: start; }
   .pdp__media { position: sticky; top: calc(var(--header-h) + 12px); }
-  .pdp__media .product__media { margin: 0; height: calc(var(--avail) - 24px); width: auto; aspect-ratio: 4 / 5; }
+  .pdp__media .product__media { margin: 0; height: calc(var(--avail) - 24px); width: auto; aspect-ratio: 1; }
   .buybar { display: none; }
   body:has(.buybar) { padding-bottom: 0; }
 
