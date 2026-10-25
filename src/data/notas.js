@@ -159,7 +159,7 @@ export const NOTAS = {
   'rosa-damascena': { name: 'Rosa damascena', wiki: 'Rosa × damascena' },
   ruibarbo: { name: 'Ruibarbo', wiki: 'Rhubarb', alias: ['Hojas de ruibarbo'] },
   salvia: { name: 'Salvia', wiki: 'Salvia sclarea', alias: ['Salvia esclarea'] },
-  sandalo: { name: 'Sándalo', wiki: 'Sandalwood', file: 'Sandalwood_harvest.jpg', alias: ['Sándalo blanco', 'Sándalo de Mysore'] },
+  sandalo: { name: 'Sándalo', wiki: 'Sandalwood', file: 'SandalwoodEssOil.png', alias: ['Sándalo blanco', 'Sándalo de Mysore'] },
   shiso: { name: 'Shiso', wiki: 'Perilla frutescens var. crispa' },
   tabaco: { name: 'Tabaco', wiki: 'Tobacco', alias: ['Hoja de tabaco', 'Hojas de tabaco', 'Tabaco rubio'] },
   te: { name: 'Té', wiki: 'Tea', alias: ['Té de jazmín'] },
