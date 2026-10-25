@@ -8,6 +8,8 @@
      name   nombre de la nota
      wiki   artículo de la Wikipedia en inglés cuya foto principal se usa
      file   (opcional) archivo concreto de Wikimedia Commons; manda sobre wiki
+     recorte (opcional) qué parte conservar al recortar en cuadrado (centre, north…);
+            por defecto, la zona con más detalle
      alias  otros nombres con los que aparece en las fichas
 
    `npm run notas` descarga las fotos a public/img/notas/<clave>.webp y apunta
@@ -26,7 +28,7 @@ export const NOTAS = {
   ajenjo: { name: 'Ajenjo', wiki: 'Artemisia absinthium', alias: ['Absenta'] },
   albahaca: { name: 'Albahaca', wiki: 'Basil', alias: ['Hojas de albahaca'] },
   almendra: { name: 'Almendra', wiki: 'Almond', alias: ['Almendra amarga', 'Almendra en polvo'] },
-  almizcle: { name: 'Almizcle', wiki: 'Musk', file: 'Muskus.jpg', alias: ['Almizcle blanco', 'Almizcle rosa', 'Almizcles', 'Almizcles blancos'] },
+  almizcle: { name: 'Almizcle', wiki: 'Musk', file: 'Cotton_boll.jpg', alias: ['Almizcle blanco', 'Almizcle rosa', 'Almizcles', 'Almizcles blancos'] },
   ambar: { name: 'Ámbar', wiki: 'Amber', alias: ['Ámbar salado'] },
   'ambar-gris': { name: 'Ámbar gris', wiki: 'Ambergris', alias: ['Ambrox'] },
   ambreta: { name: 'Ambreta', wiki: 'Abelmoschus moschatus', file: 'Abelmoschus_moschatus_subsp._tuberosus.jpg' },
@@ -64,7 +66,7 @@ export const NOTAS = {
   cypriol: { name: 'Cypriol', wiki: 'Cyperus scariosus' },
   davana: { name: 'Davana', wiki: 'Artemisia pallens' },
   ebano: { name: 'Ébano', wiki: 'Ebony' },
-  elemi: { name: 'Elemí', wiki: 'Elemi', file: 'Elemi_(Canarium_luzonicum)_essential_oil_in_clear_glass_vial.png' },
+  elemi: { name: 'Elemí', wiki: 'Elemi', file: 'Elemi_(Canarium_luzonicum)_essential_oil_in_clear_glass_vial.png', recorte: 'centre' },
   enebro: { name: 'Enebro', wiki: 'Juniper berry', alias: ['Baya de enebro', 'Bayas de enebro'] },
   especias: { name: 'Especias', wiki: 'Spice' },
   estoraque: { name: 'Estoraque', wiki: 'Storax balsam' },

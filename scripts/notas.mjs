@@ -86,7 +86,7 @@ for (const [k, n] of pendientes) {
     if (!res.ok) throw new Error(`${res.status} al bajar ${thumb}`);
     const buf = Buffer.from(await res.arrayBuffer());
     for (const s of SIZES) {
-      await sharp(buf).rotate().resize(s, s, { fit: 'cover', position: sharp.strategy.attention }).webp({ quality: 82 }).toFile(resolve(OUT, `${k}-${s}.webp`));
+      await sharp(buf).rotate().resize(s, s, { fit: 'cover', position: n.recorte || sharp.strategy.attention }).webp({ quality: 82 }).toFile(resolve(OUT, `${k}-${s}.webp`));
     }
     fotos[k] = datos;
     console.log(`✓ ${k}  ${file}`);
