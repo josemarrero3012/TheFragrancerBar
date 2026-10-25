@@ -42,8 +42,23 @@ export const ORIGINALES = {
   'creed-himalaya': 'https://www.creedfragrance.com/p/himalaya/12870036/'
 };
 
-/* Tras revisar la hoja de contacto: [principal, ratón] con los números de la hoja (null: sin foto de ratón) */
-const ELEGIDAS = {};
+/* Tras revisar la hoja de contacto: [principal, ratón] con los números de la hoja (null: sin foto de ratón).
+   La ficha del listado no trae la foto de ratón, así que se fija aquí: el frasco de 100 ml sobre fondo
+   gris y la composición con sus ingredientes, como en la web de Creed. */
+const ELEGIDAS = {
+  'creed-aventus': [2, 7], // Aventus no tiene composición sobre gris: la de piña y bergamota
+  'creed-absolu-aventus': [1, 2],
+  'creed-aventus-for-her': [2, 6],
+  'creed-green-irish-tweed': [1, 6],
+  'creed-silver-mountain-water': [2, 6],
+  'creed-millesime-imperial': [2, 6],
+  'creed-viking': [2, 5],
+  'creed-royal-oud': [2, 6],
+  'creed-original-santal': [2, 6],
+  'creed-himalaya': [1, 6]
+};
+/* Fotos con una línea de marco en el borde: píxeles que se quitan por cada lado antes de pasarlas a WebP */
+const MARCO = { 'creed-original-santal-b': 8 };
 
 const args = process.argv.slice(2).filter((a) => !a.startsWith('--'));
 const ids = Object.keys(ORIGINALES).filter((id) => !args.length || args.includes(id));
@@ -104,11 +119,12 @@ async function hojaDeContacto(filas) {
     .composite([...capas, { input: svg, left: 0, top: 0 }]).jpeg({ quality: 80 }).toFile(resolve(ROOT, 'scripts/originales-revision.jpg'));
 }
 
-/* WebP de alta calidad, sin recortar ni ampliar */
+/* WebP de alta calidad, sin recortar ni ampliar (salvo la línea de MARCO) */
 async function aWeb(file, id, letra) {
-  const { width, height } = await sharp(file).metadata();
+  const m = MARCO[`${id}-${letra}`] || 0, meta = await sharp(file).metadata();
+  const width = meta.width - 2 * m, height = meta.height - 2 * m;
   for (const w of [800, 1600]) {
-    await sharp(file).resize({ width: Math.min(w, width), withoutEnlargement: true })
+    await sharp(file).extract({ left: m, top: m, width, height }).resize({ width: Math.min(w, width), withoutEnlargement: true })
       .webp({ quality: 92, smartSubsample: true }).toFile(resolve(OUT, `${id}-${letra}-${w}.webp`));
   }
   return { width, height };
