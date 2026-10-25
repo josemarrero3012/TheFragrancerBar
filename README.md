@@ -33,7 +33,7 @@ npm run dev
 
 Se abre en http://localhost:8765.
 
-Solo se publican las fragancias que tienen foto oficial. Para descargar las que faltan desde la web de cada casa:
+Solo se publican las fragancias que tienen foto. Cómo hacer fotos propias en la tienda y cómo meterlas en la web: [docs/FOTOS.md](docs/FOTOS.md). Para descargar las que faltan desde la web de cada casa:
 
 ```bash
 npm run fotos

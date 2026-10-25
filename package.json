@@ -9,6 +9,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "fotos": "node scripts/fotos.mjs",
+    "foto-tienda": "node scripts/foto-tienda.mjs",
     "notas": "node scripts/notas.mjs",
     "originales": "node scripts/originales.mjs"
   },
