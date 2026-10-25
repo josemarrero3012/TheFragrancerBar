@@ -8,16 +8,16 @@
 .product { display: flex; flex-direction: column; }
 .product.is-hidden { display: none; }
 .product__link { display: block; text-decoration: none; color: inherit; }
-.product__media { position: relative; isolation: isolate; margin: 0; aspect-ratio: 2 / 3; overflow: hidden; background: #121110; }
+.product__media { position: relative; isolation: isolate; margin: 0; aspect-ratio: 4 / 5; overflow: hidden; background: #121110; }
 .product__media::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
   background: image-set(url("/img/vitrina/vitrina-480.webp") 1x, url("/img/vitrina/vitrina-720.webp") 2x) center / cover no-repeat;
   filter: brightness(.93); transition: filter .8s var(--ease);
 }
 .product:hover .product__media::before, .product__media.is-on::before { filter: brightness(1.04); }
-/* El frasco apoya en el suelo de la hornacina (93 % de la altura de la foto).
-   Las fotos de producto son 4:5 con la base del frasco al 93,5 %: con un 68 % de ancho, bottom 3,2 %. */
-.product__media img { position: absolute; left: 14%; bottom: 1.9%; width: 72%; height: auto; transition: transform .8s var(--ease), opacity .8s var(--ease); }
+/* El frasco apoya en el suelo de la hornacina (93 % de la altura de la foto 4:5).
+   Las fotos de producto son 4:5 con la base del frasco al 93,5 %: con un 94 % de ancho, bottom 0,9 %. */
+.product__media img { position: absolute; left: 3%; bottom: .9%; width: 94%; height: auto; transition: transform .8s var(--ease), opacity .8s var(--ease); }
 
 .product__body { padding-top: 1rem; display: flex; flex-direction: column; align-items: flex-start; gap: .2rem; flex: 1; }
 .product__brand { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
