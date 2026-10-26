@@ -1,12 +1,12 @@
 /* ==========================================================================
-   npm run originales                       descarga las fotos originales del catálogo de muestra
+   npm run originales                       descarga las fotos originales de las fragancias a publicar
    npm run originales -- creed-aventus      solo esa (o varias; también vale una casa: amouage)
 
    Las fotos de cada fragancia tal cual las publica su casa, en la mayor resolución que
    ofrece: la principal (a), la que sale al pasar el ratón por la rejilla (b) y, si se
    eligen más, otras que solo se ven en la ficha (c, d…).
 
-   Para cada fragancia de MUESTRA (src/data/catalogo.js):
+   Para cada fragancia marcada en «publicar» en la hoja catalogo/fragancias.csv (A_PUBLICAR en src/data/catalogo.js):
    1. Busca su página de producto en la web de la casa (PAGINAS, scripts/fotos-fuentes.js o
       por su nombre, como `npm run fotos`) y saca todas sus fotos:
         Creed     las de su ficha en el listado y las de la página (static.thcdn.com/productimg/original/…)
@@ -27,7 +27,7 @@
 import { mkdirSync, readdirSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { TODAS, MUESTRA_IDS, casaById } from '../src/data/catalogo.js';
+import { TODAS, A_PUBLICAR, casaById } from '../src/data/catalogo.js';
 import { CASAS, FRAGANCIAS as FUENTES } from './fotos-fuentes.js';
 import { get, norm, nombra, ogImage, isImage, shopifyProducts, eligeShopify, enlacesDe } from './marcas.mjs';
 
@@ -109,7 +109,7 @@ const ELEGIDAS = {
 const MARCO = { 'creed-original-santal-b': 8 };
 
 const args = process.argv.slice(2).filter((a) => !a.startsWith('--'));
-const lista = MUESTRA_IDS.map((id) => TODAS.find((p) => p.id === id))
+const lista = A_PUBLICAR
   .filter((p) => !args.length || args.includes(p.id) || args.includes(p.casa));
 
 // Las URLs pueden venir escapadas en JSON (/) o dentro de /images?url=https%3A%2F%2F…
@@ -315,5 +315,5 @@ const datos = TODAS.map((p) => [p.id, cuantas(p.id)]).filter(([, n]) => n > 0);
 writeFileSync(resolve(ROOT, 'src/data/originales.js'),
   `// Generado por \`npm run originales\`: fotos originales de la casa en public/img/originales, cuadradas (n fotos: a = principal, b = al pasar el ratón, c… solo en la ficha). No editar a mano.\nexport const ORIGINALES = {\n${datos.map(([id, n]) => `  '${id}': { n: ${n} }`).join(',\n')}\n};\n`);
 writeFileSync(resolve(ROOT, 'scripts/originales-informe.txt'), `${informe.join('\n\n')}\n`);
-const sin = MUESTRA_IDS.filter((id) => !datos.some(([x]) => x === id));
-console.log(`\n${MUESTRA_IDS.length - sin.length} de ${MUESTRA_IDS.length} fragancias de la muestra con foto original${sin.length ? ` (faltan: ${sin.join(', ')})` : ''}. Revisa scripts/originales-revision.jpg`);
+const sin = A_PUBLICAR.map((p) => p.id).filter((id) => !datos.some(([x]) => x === id));
+console.log(`\n${A_PUBLICAR.length - sin.length} de ${A_PUBLICAR.length} fragancias a publicar con foto original${sin.length ? ` (faltan: ${sin.join(', ')})` : ''}. Revisa scripts/originales-revision.jpg`);

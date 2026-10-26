@@ -1,18 +1,19 @@
 /* ==========================================================================
    Páginas de la web. pages(url) devuelve { 'ruta/index.html': html, … }
    y vite.config.js las sirve en desarrollo y las escribe en dist/ al compilar.
-   Añadir una casa o una fragancia en src/data/catalogo.js crea su página sola.
+   Una casa nueva en src/data/casas.js o una fragancia publicada en catalogo/fragancias.csv crea su página sola.
    ========================================================================== */
 import { SITE, mainStore } from '../data/site.js';
-import { CASAS, FRAGANCIAS, FAMILIAS, CONCENTRACIONES, casaById, familiaName, fragsDeCasa, euros } from '../data/catalogo.js';
+import { CASAS, FRAGANCIAS, FAMILIAS, CONCENTRACIONES, PRECIOS, casaById, familiaName, fragsDeCasa, euros } from '../data/catalogo.js';
 import { NOTAS, NOTAS_FOTOS, gruposDeNotas, notasPlanas } from '../data/notas.js';
 import * as schema from '../data/schema.js';
 import { layout, whatsappHref } from './layout.js';
-import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productGallery, productCard, crumbs, pageHead, demoNote, brandStrip, clock, nota } from './ui.js';
+import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productGallery, productCard, moreButton, crumbs, pageHead, demoNote, brandStrip, clock, nota } from './ui.js';
 
 const DAYS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const cap = (s) => s[0].toUpperCase() + s.slice(1);
-const featured = FRAGANCIAS.filter((p) => p.featured);
+// Selección de la portada: las destacadas y, si no llegan a 8, las primeras del catálogo
+const featured = [...FRAGANCIAS.filter((p) => p.featured), ...FRAGANCIAS.filter((p) => !p.featured)];
 const nFrag = (n) => `${n} ${n === 1 ? 'fragancia' : 'fragancias'}`;
 /** Meta description de 160 caracteres como máximo: añade el primer complemento que quepa */
 const fit = (base, ...extras) => base + (extras.find((x) => (base + x).length <= 160) || '');
@@ -179,7 +180,7 @@ function casas(url) {
               <span class="casacard__city">${esc(c.city)}</span>
               <span class="casacard__name">${esc(c.name)}</span>
               <span class="casacard__desc">${esc(c.desc)}</span>
-              <span class="casacard__count">${nFrag(fragsDeCasa(c.id).length)} ${ICON.arrow}</span>
+              <span class="casacard__count">${fragsDeCasa(c.id).length ? nFrag(fragsDeCasa(c.id).length) : 'Pruébalas en tienda'} ${ICON.arrow}</span>
             </span>
           </a>
         </li>`).join('')}
@@ -209,22 +210,23 @@ function casa(url, c) {
           ${c.story.map((t) => `<p class="casahero__story">${esc(t)}</p>`).join('')}
           <p class="casahero__icons"><span>Emblemáticas</span> ${c.icons.map(esc).join(' · ')}</p>
           <div class="hero__ctas">
-            <a class="btn btn--dark" href="#fragancias">Ver ${items.length === 1 ? 'su fragancia' : `sus ${items.length} fragancias`}</a>
+            ${items.length ? `<a class="btn btn--dark" href="#fragancias">Ver ${items.length === 1 ? 'su fragancia' : `sus ${items.length} fragancias`}</a>` : ''}
             <a class="btn btn--line" href="${u('tiendas/')}">Probarlas en tienda</a>
           </div>
         </div>
       </header>
 
-      <section class="section" id="fragancias" aria-labelledby="frag-title">
-        <div class="wrap">
+      ${items.length ? `<section class="section" id="fragancias" aria-labelledby="frag-title">
+        <div class="wrap" data-paged>
           <header class="section__head section__head--row">
             <h2 class="section__title" id="frag-title" data-reveal="up">Fragancias de <em>${esc(c.name)}</em></h2>
             <a class="link section__more" href="${u(`comprar/?casa=${c.id}`)}" data-reveal="up">Filtrar en la tienda</a>
           </header>
           <ul class="products">${items.map((p, i) => productCard(p, { notes: true, i })).join('')}</ul>
+          ${moreButton()}
           ${demoNote(SITE)}
         </div>
-      </section>
+      </section>` : ''}
 
       <nav class="brandline brandline--foot" aria-label="Otras casas">
         <ul class="brandline__list wrap">${brandStrip(c.id)}</ul>
@@ -243,14 +245,15 @@ function casa(url, c) {
 
 /* ---------------------------------------------------------------- Comprar */
 function comprar(url) {
+  const enVenta = CASAS.filter((c) => fragsDeCasa(c.id).length);
   const main = `${pageHead({
     crumbs: [['Inicio', ''], ['Comprar']],
     eyebrow: 'Tienda online',
     title: 'Comprar <em>fragancias</em>',
-    intro: `${FRAGANCIAS.length} fragancias de ${CASAS.length} casas de autor. Envío en ${SITE.shipping.days}, gratis desde ${euros(SITE.shipping.freeFrom)}, o recogida en tienda.`,
+    intro: `${FRAGANCIAS.length} fragancias de ${enVenta.length} casas de autor. Envío en ${SITE.shipping.days}, gratis desde ${euros(SITE.shipping.freeFrom)}, o recogida en tienda.`,
     extra: demoNote(SITE)
   })}
-    <section class="shop section section--tight" data-shop>
+    <section class="shop section section--tight" data-shop data-paged>
       <div class="wrap">
         <div class="toolbar" role="search" aria-label="Buscar y filtrar fragancias">
           <div class="toolbar__search">
@@ -258,17 +261,19 @@ function comprar(url) {
             ${ICON.search}<input id="q" type="search" placeholder="Buscar: Aventus, vainilla, Xerjoff…" autocomplete="off" data-q>
           </div>
           <div class="toolbar__selects">
-            <label class="select"><span>Casa</span><select data-casa-filter><option value="">Todas</option>${CASAS.map((c) => `<option value="${c.id}">${esc(c.name)}</option>`).join('')}</select></label>
+            <label class="select"><span>Casa</span><select data-casa-filter>${[{ id: '', name: 'Todas' }, ...enVenta].map((c) => `<option value="${c.id}" data-label="${esc(c.name)}">${esc(c.name)}</option>`).join('')}</select></label>
+            <label class="select"><span>Precio</span><select data-precio-filter>${[{ id: '', name: 'Todos' }, ...PRECIOS].map((r) => `<option value="${r.id}" data-label="${esc(r.name)}"${r.min ? ` data-min="${r.min}"` : ''}${r.max ? ` data-max="${r.max}"` : ''}>${esc(r.name)}</option>`).join('')}</select></label>
             <label class="select"><span>Ordenar</span><select data-sort>
               <option value="destacadas">Destacadas</option><option value="precio-asc">Precio: de menor a mayor</option><option value="precio-desc">Precio: de mayor a menor</option><option value="nombre">Nombre</option><option value="nuevas">Más recientes</option>
             </select></label>
           </div>
         </div>
         <div class="filters scroller" role="group" aria-label="Filtrar por familia olfativa" data-filters>
-          ${[{ id: '', name: 'Todas' }, ...FAMILIAS].map((x) => `<button class="chip" type="button" data-familia-filter="${x.id}" aria-pressed="${x.id === ''}">${x.name}</button>`).join('')}
+          ${[{ id: '', name: 'Todas' }, ...FAMILIAS].map((x) => `<button class="chip" type="button" data-familia-filter="${x.id}" aria-pressed="${x.id === ''}">${x.name} <span class="chip__n" data-n>${FRAGANCIAS.filter((p) => !x.id || p.familia === x.id).length}</span></button>`).join('')}
         </div>
         <p class="shop__count" data-count aria-live="polite">${nFrag(FRAGANCIAS.length)}</p>
         <ul class="products" data-products>${FRAGANCIAS.map((p, i) => productCard(p, { i })).join('')}</ul>
+        ${moreButton()}
         <div class="shop__empty" data-empty hidden>
           <p>No hay fragancias con estos filtros.</p>
           <button class="link" type="button" data-reset-filters>Quitar los filtros</button>

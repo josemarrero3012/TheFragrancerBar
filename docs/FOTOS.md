@@ -4,7 +4,7 @@ La web solo enseña fotos reales: las fotos originales de cada casa, tal cual la
 
 ## Estado hoy
 
-La web enseña un catálogo de muestra: las cinco fragancias más conocidas de cada casa, 40 en total (`MUESTRA` en `src/data/catalogo.js`). El catálogo completo se carga cuando se prepare con el negocio.
+La web enseña un catálogo de muestra: las cinco fragancias más conocidas de cada casa, 40 en total (las marcadas en «publicar» en la hoja `catalogo/fragancias.csv`, ver [CATALOGO.md](CATALOGO.md)). Para publicar más basta con marcarlas en la hoja y conseguir sus fotos como se explica aquí.
 
 | Catálogo de muestra | Fragancias |
 |---|---|
@@ -46,7 +46,7 @@ La web las recorta a 4:3 desde el centro, así que lo importante tiene que ir en
 **Fotos originales de las casas:**
 
 ```bash
-npm run originales              # todas las de la muestra
+npm run originales              # todas las marcadas para publicar en la hoja
 npm run originales -- amouage   # una casa, o una fragancia por su id
 ```
 

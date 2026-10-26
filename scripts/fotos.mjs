@@ -213,7 +213,10 @@ const ids = TODAS.map((p) => p.id);
 const files = new Set(readdirSync(OUT));
 const fotos = ids.filter((id) => files.has(`${id}-400.webp`) && files.has(`${id}-800.webp`)).sort();
 writeFileSync(resolve(ROOT, 'src/data/fotos.js'),
-  `// Generado por \`npm run fotos\`: fragancias con foto en public/img/productos (-400 y -800.webp). No editar a mano.\nexport const FOTOS = [\n${fotos.map((id) => `  '${id}'`).join(',\n')}\n];\n`);
+  `// Generado por \`npm run fotos\`: fragancias con foto en public/img/productos (-400 y -800.webp). No editar a mano.\n` +
+  `// PROPIAS: las que tienen foto hecha en la tienda; el resto de FOTOS son de la web de la marca.\n` +
+  `export const PROPIAS = [${fotos.filter((id) => propias.has(id)).map((id) => `'${id}'`).join(', ')}];\n` +
+  `export const FOTOS = [\n${fotos.map((id) => `  '${id}'`).join(',\n')}\n];\n`);
 // Estado de todo el catálogo, no solo de esta pasada: qué fotos son propias, cuáles siguen siendo de la marca y cuáles faltan
 const conMarca = fotos.filter((id) => !propias.has(id)), sinFoto = ids.filter((id) => !fotos.includes(id));
 writeFileSync(resolve(ROOT, 'scripts/fotos-informe.txt'),

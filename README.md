@@ -10,7 +10,7 @@ Es un prototipo: los precios son de ejemplo, la tienda online no cobra y los for
 
 - Una portada con la tienda de Triana, una selección de fragancias y las casas de perfumes.
 - Una página para cada casa (Creed, Xerjoff, Amouage, Tom Ford, Parfums de Marly…) con sus fragancias.
-- Un catálogo de muestra con buscador y filtros por casa y por familia olfativa: las cinco fragancias más conocidas de cada casa, con las fotos originales de la marca. El catálogo completo se carga cuando lo preparemos con el negocio.
+- Un catálogo con buscador, filtros por casa, familia olfativa y precio, y un botón «Ver más», preparado para cientos de fragancias. De momento enseña una muestra: las cinco fragancias más conocidas de cada casa, con las fotos originales de la marca.
 - Una ficha para cada fragancia, con sus tamaños, el precio y sus notas oficiales (las que publica cada casa), cada una con su foto.
 - Una cesta y un pedido de prueba, con recogida en tienda o envío.
 - «Tu lista», para guardar favoritos y mandarlos por WhatsApp.
@@ -20,7 +20,7 @@ Es un prototipo: los precios son de ejemplo, la tienda online no cobra y los for
 
 No usé ningún framework: es HTML, CSS y JavaScript, con Vite para el servidor de desarrollo y para generar la web final.
 
-Separé el contenido del diseño. Las casas y las fragancias están en un archivo de datos (`src/data/catalogo.js`) y la información de las tiendas en otro (`src/data/site.js`). El archivo guarda 141 fragancias, pero la web enseña solo las de `MUESTRA`, cinco por casa. Si añado una fragancia a la muestra, se crea su página y aparece en el catálogo, en su casa y en el sitemap sin tocar nada más.
+Separé el contenido del diseño. Las fragancias están en una hoja de cálculo (`catalogo/fragancias.csv`) que el negocio puede abrir y rellenar en Excel o Google Sheets, las casas en `src/data/casas.js` y la información de las tiendas en `src/data/site.js`. La hoja guarda 141 fragancias y una columna «publicar» dice cuáles salen en la web (ahora, cinco por casa). Si marco una más, se crea su página y aparece en el catálogo, en su casa y en el sitemap sin tocar nada más, siempre que tenga sus fotos originales y sus notas oficiales. Cómo rellenar la hoja: [docs/CATALOGO.md](docs/CATALOGO.md).
 
 Todo el contenido va en el HTML que llega al navegador, así que se puede leer aunque falle el JavaScript y los buscadores lo ven entero.
 

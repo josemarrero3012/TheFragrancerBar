@@ -102,6 +102,12 @@ export function productCard(p, { notes = false, i = 0 } = {}) {
           </li>`;
 }
 
+/** «Ver más» bajo una rejilla larga (lo activa src/js/shop.js; sin JavaScript se ven todas) */
+export const moreButton = () => `<div class="more" data-more hidden>
+          <p class="more__status" data-more-status></p>
+          <button class="btn btn--line" type="button" data-more-btn>Ver más</button>
+        </div>`;
+
 /** Migas de pan: [['Inicio', ''], ['Casas', 'casas/'], ['Creed']] (la última es la página actual) */
 export function crumbs(items) {
   return `<nav class="crumbs" aria-label="Estás en"><ol>${items.map(([name, path], i) =>

@@ -1,7 +1,7 @@
 /* ==========================================================================
    The Fragrance Bar — punto de entrada común a todas las páginas.
    Cada módulo comprueba si su parte existe en la página antes de actuar.
-   Contenido editable: src/data/site.js y src/data/catalogo.js
+   Contenido editable: src/data/site.js, catalogo/fragancias.csv y src/data/casas.js
    Marcado: src/templates · Estilos: src/styles/main.css
    ========================================================================== */
 import { SITE } from './data/site.js';
@@ -10,7 +10,7 @@ import { initHeader } from './js/header.js';
 import { initClock } from './js/clock.js';
 import { initLista } from './js/lista.js';
 import { initCart } from './js/cart.js';
-import { initShop } from './js/shop.js';
+import { initShop, initMore } from './js/shop.js';
 import { initMap, initContacto, initNews } from './js/contacto.js';
 import { initMotion } from './js/motion.js';
 import { initGaleria } from './js/galeria.js';
@@ -22,6 +22,7 @@ initClock();
 initLista();
 initCart();
 initShop();
+initMore();
 initMap();
 initContacto();
 initNews();

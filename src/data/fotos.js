@@ -1,4 +1,6 @@
 // Generado por `npm run fotos`: fragancias con foto en public/img/productos (-400 y -800.webp). No editar a mano.
+// PROPIAS: las que tienen foto hecha en la tienda; el resto de FOTOS son de la web de la marca.
+export const PROPIAS = [];
 export const FOTOS = [
   'amouage-beach-hut-man',
   'amouage-epic-man',
