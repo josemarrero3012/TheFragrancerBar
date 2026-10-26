@@ -109,9 +109,13 @@ export const SITE = {
     { name: 'Google Maps', url: 'https://www.google.com/maps/search/?api=1&query=The+Fragrance+Bar+Calle+Mayor+de+Triana+32+Las+Palmas+de+Gran+Canaria' }
   ],
 
-  // Casa destacada de la portada
-  destacada: { casa: 'xerjoff',
-    text: 'Cristal tallado, tapones dorados y composiciones luminosas desde Turín. Destacamos Naxos, con lavanda, miel y tabaco, y Erba Pura, una de las más pedidas en tienda.' },
+  // Escaparate del mes: la foto de campaña de una casa a toda la pantalla en el hero de la portada,
+  // con la tarjeta de una de sus fragancias publicadas. Para cambiarlo cada mes basta con la casa,
+  // la fragancia y una foto horizontal de la campaña en img/casas/<img>-1200|2400.webp (16:9).
+  // focus: el punto de la foto que no se puede cortar (el frasco), en % horizontal y vertical.
+  destacada: { casa: 'xerjoff', frag: 'xerjoff-naxos',
+    img: 'img/casas/xerjoff-banner', focus: '50% 50%',
+    alt: 'Frasco de Xerjoff Naxos sobre un mapa antiguo de Sicilia, envuelto por una cinta verde' },
 
   // Preguntas frecuentes (página de contacto). PROVISIONAL: respuestas de ejemplo, a confirmar con el negocio
   faq: [
