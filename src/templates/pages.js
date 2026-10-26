@@ -4,11 +4,12 @@
    Una casa nueva en src/data/casas.js o una fragancia publicada en catalogo/fragancias.csv crea su página sola.
    ========================================================================== */
 import { SITE, mainStore } from '../data/site.js';
-import { CASAS, FRAGANCIAS, FAMILIAS, CONCENTRACIONES, PRECIOS, casaById, familiaName, fragsDeCasa, euros } from '../data/catalogo.js';
+import { CASAS, FRAGANCIAS, FAMILIAS, CONCENTRACIONES, PRECIOS, casaById, fragById, familiaName, fragsDeCasa, euros } from '../data/catalogo.js';
 import { NOTAS, NOTAS_FOTOS, gruposDeNotas, notasPlanas } from '../data/notas.js';
+import { GUIAS } from '../data/guias.js';
 import * as schema from '../data/schema.js';
 import { layout, whatsappHref } from './layout.js';
-import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productGallery, productCard, moreButton, crumbs, pageHead, demoNote, brandStrip, clock, nota } from './ui.js';
+import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productGallery, productMedia, productCard, moreButton, crumbs, pageHead, demoNote, brandStrip, clock, nota } from './ui.js';
 
 const DAYS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const cap = (s) => s[0].toUpperCase() + s.slice(1);
@@ -137,9 +138,9 @@ function home(url) {
     </section>`;
   return {
     path: '', section: 'home', intro: true, main,
-    title: 'Perfumería nicho en Triana, Las Palmas | The Fragrance Bar',
+    title: 'Perfumería nicho en Las Palmas y Tenerife | The Fragrance Bar',
     ogTitle: 'The Fragrance Bar · Triana, Las Palmas de Gran Canaria',
-    description: 'Perfumería nicho en la Calle Mayor de Triana, Las Palmas de Gran Canaria. Creed, Amouage, Xerjoff, Parfums de Marly, Initio, Montale, Memo Paris y Tom Ford.',
+    description: 'Perfumería nicho en la Calle Mayor de Triana (Las Palmas de Gran Canaria), Costa Adeje y Playa de las Américas. Creed, Xerjoff, Amouage, Initio y más.',
     preload: `<link rel="preload" as="image" href="/${t.img}-1448.webp" imagesrcset="/${t.img}-800.webp 800w, /${t.img}-1448.webp 1448w" imagesizes="(min-width: 960px) 54vw, 100vw">`,
     schema: schema.graph([
       { '@type': 'WebSite', '@id': `${url}/#web`, name: SITE.brand, url: `${url}/`, inLanguage: 'es' },
@@ -162,6 +163,17 @@ function storeCard(s, { photo = true } = {}) {
             </div>
           </li>`;
 }
+
+/** Las tiendas al pie de una casa o de una guía: dónde oler lo que se acaba de ver (SEO local) */
+const dondeProbar = (title, intro) => `<section class="section probar" aria-labelledby="probar-title">
+        <div class="wrap">
+          <header class="section__head" data-reveal="up" data-stagger>
+            <h2 class="section__title" id="probar-title">${title}</h2>
+            <p class="section__intro">${intro}</p>
+          </header>
+          <ul class="storecards">${SITE.stores.map((x) => storeCard(x)).join('')}</ul>
+        </div>
+      </section>`;
 
 /* ---------------------------------------------------------------- Casas */
 function casas(url) {
@@ -228,6 +240,9 @@ function casa(url, c) {
         </div>
       </section>` : ''}
 
+      ${dondeProbar(`Prueba <em>${esc(c.name)}</em> en Las Palmas y Tenerife`,
+        `Las fragancias de ${esc(c.name)} se huelen en la barra de nuestras tiendas: Triana, en Las Palmas de Gran Canaria, y Plaza del Duque y Américas Plaza, en el sur de Tenerife. Si buscas una en concreto, escríbenos antes y te decimos en qué tienda está.`)}
+
       <nav class="brandline brandline--foot" aria-label="Otras casas">
         <ul class="brandline__list wrap">${brandStrip(c.id)}</ul>
       </nav>
@@ -236,7 +251,7 @@ function casa(url, c) {
   return {
     path: `casas/${c.id}/`, section: 'casas', main,
     title: `${c.name} en Las Palmas y Tenerife | The Fragrance Bar`,
-    description: fit(`${c.desc}`, ` ${nFrag(items.length)} de ${c.name} para probar en The Fragrance Bar Triana.`, ` ${nFrag(items.length)} en The Fragrance Bar.`),
+    description: fit(`${c.desc}`, ` Pruébala en Triana (Las Palmas), Costa Adeje y Playa de las Américas.`, ` Pruébala en Las Palmas y Tenerife.`, ` En The Fragrance Bar.`),
     ogImage: `${url}/img/casas/${c.img}-1000.webp`,
     preload: `<link rel="preload" as="image" href="/img/casas/${c.img}-1000.webp" imagesrcset="/img/casas/${c.img}-560.webp 560w, /img/casas/${c.img}-1000.webp 1000w" imagesizes="(min-width: 960px) 45vw, 100vw">`,
     schema: schema.graph([schema.breadcrumbs(url, bc), { '@type': 'CollectionPage', name: `${c.name} · The Fragrance Bar`, url: `${url}/casas/${c.id}/`, mainEntity: schema.itemList(url, items) }])
@@ -517,6 +532,7 @@ function barra(url) {
           <a class="btn btn--dark" href="${u('tiendas/')}">Encontrar una tienda</a>
           <a class="btn btn--line" href="${u('comprar/')}">Ver el catálogo</a>
         </div>
+        <p class="barra__guia" data-reveal="up">¿Primera vez? Lee <a href="${u('guias/como-elegir-un-perfume/')}">cómo elegir un perfume sin equivocarte</a>.</p>
       </div>
     </section>`;
   return {
@@ -565,12 +581,18 @@ function historia(url) {
 }
 
 /* ---------------------------------------------------------------- Tiendas */
+/** Las tiendas agrupadas por isla, en el orden de SITE.stores: [['Gran Canaria', [triana]], ['Tenerife', […]]] */
+const islas = () => [...SITE.stores.reduce((m, s) => m.set(s.islandName, [...(m.get(s.islandName) || []), s]), new Map())];
+
 function tiendas(url) {
   const main = `${pageHead({ crumbs: [['Inicio', ''], ['Tiendas']], eyebrow: 'Gran Canaria y Tenerife', title: 'Nuestras <em>tiendas</em>',
     intro: 'Tres tiendas con barra para oler y probar con calma. Ven sin cita.' })}
-    <section class="section section--tight">
-      <div class="wrap"><ul class="storecards storecards--big" data-reveal="up" data-stagger>${SITE.stores.map((x) => storeCard(x)).join('')}</ul></div>
-    </section>`;
+    ${islas().map(([isla, list]) => `<section class="section section--tight isla" aria-labelledby="isla-${list[0].island}">
+      <div class="wrap">
+        <h2 class="isla__title" id="isla-${list[0].island}" data-reveal="up">Perfumería nicho en <em>${esc(isla)}</em></h2>
+        <ul class="storecards storecards--big" data-reveal="up" data-stagger>${list.map((x) => storeCard(x)).join('')}</ul>
+      </div>
+    </section>`).join('')}`;
   return {
     path: 'tiendas/', section: 'tiendas', main,
     title: 'Tiendas en Las Palmas y Tenerife | The Fragrance Bar',
@@ -613,12 +635,23 @@ function tienda(url, s) {
 
       ${s.img ? `<section class="section section--tight" aria-label="Mapa"><div class="wrap">${mapBox(s)}</div></section>` : ''}
 
+      <section class="section" aria-labelledby="casas-tienda-title">
+        <div class="wrap localseo">
+          <div data-reveal="up" data-stagger>
+            <h2 class="section__title" id="casas-tienda-title">Perfumería nicho en <em>${esc(s.city)}</em></h2>
+            <p class="section__intro">Si vienes desde ${esc(s.near)}, en The Fragrance Bar ${esc(s.name)} puedes oler y probar en piel las casas de autor que trabajamos, sin cita. Te orientamos y te llevas muestras para decidir en casa.</p>
+            <a class="link" href="${u('la-barra/')}">Cómo es una visita a la barra</a>
+          </div>
+          <ul class="localseo__casas" data-reveal="up" data-stagger>${CASAS.map((c) => `<li><a href="${casaUrl(c)}"><span>${esc(c.name)}</span><small>${esc(c.icons.slice(0, 2).join(' · '))}</small></a></li>`).join('')}</ul>
+        </div>
+      </section>
+
       <section class="section section--stone" aria-labelledby="opiniones-title">
         <div class="wrap reviews">
           <div data-reveal="up" data-stagger>
             <h2 class="section__title" id="opiniones-title">Opiniones en <em>Google</em></h2>
             <p class="section__intro">Lo que dicen quienes ya han pasado por la barra.</p>
-            <a class="link" href="${s.mapsUrl}" target="_blank" rel="noopener">Ver las reseñas y dejar la tuya${NEW_TAB}</a>
+            <a class="link" href="${s.gbp || s.mapsUrl}" target="_blank" rel="noopener">Ver las reseñas y dejar la tuya${NEW_TAB}</a>
           </div>
           <p class="reviews__proto" data-proto>Prototipo: aquí se mostrarán las reseñas reales de la ficha de Google Business Profile de la tienda, con su valoración media.</p>
         </div>
@@ -636,6 +669,86 @@ function tienda(url, s) {
     title: `Perfumería nicho en ${s.name}, ${s.islandName} | The Fragrance Bar`.replace('Triana, Gran Canaria', 'Triana, Las Palmas'),
     description: fit(`The Fragrance Bar ${s.name}: ${s.addressShort}. Horario, teléfono y cómo llegar.`, ' Creed, Xerjoff, Initio, Parfums de Marly y más.', ' Creed, Xerjoff, Initio y más.'),
     schema: schema.graph([schema.breadcrumbs(url, [['Inicio', ''], ['Tiendas', 'tiendas/'], [s.name, `tiendas/${s.id}/`]]), schema.store(SITE, url, s)])
+  };
+}
+
+/* ---------------------------------------------------------------- Guías */
+/** Párrafo de una guía: texto plano con enlaces internos [texto](ruta) */
+const prosa = (t) => esc(t).replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, txt, path) => `<a href="${u(path)}">${txt}</a>`);
+const fechaLarga = (d) => new Date(`${d}T12:00:00`).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+/** Las fragancias publicadas de las que habla la guía (portada de su tarjeta: la primera) */
+const fragsDe = (ids = []) => ids.map(fragById).filter(Boolean);
+const fragsGuia = (g) => fragsDe(g.sections.flatMap((x) => x.frags || []));
+
+function guiaCard(g, i = 0) {
+  const p = fragsGuia(g)[0];
+  return `
+          <li class="guiacard" data-reveal="up" data-reveal-delay="${(i % 3) * 80}">
+            <a class="guiacard__link" href="${u(`guias/${g.id}/`)}">
+              ${p ? productMedia(p, { sizes: '(min-width: 1100px) 30vw, (min-width: 640px) 46vw, 100vw', vt: false, hover: false }) : ''}
+              <span class="eyebrow">${esc(g.eyebrow)}</span>
+              <span class="guiacard__title">${esc(g.title)}</span>
+              <span class="guiacard__desc">${esc(g.lede)}</span>
+            </a>
+          </li>`;
+}
+
+function guias(url) {
+  const main = `${pageHead({ crumbs: [['Inicio', ''], ['Guías']], eyebrow: 'Aprende a oler', title: 'Guías de <em>perfumería nicho</em>',
+    intro: 'Lo que nos preguntan cada día en la barra, por escrito: qué es el nicho, cómo elegir, qué llevar con el calor de Canarias y cómo acertar con un regalo.' })}
+    <section class="section section--tight">
+      <ul class="wrap guiagrid">${GUIAS.map(guiaCard).join('')}</ul>
+    </section>`;
+  return {
+    path: 'guias/', section: 'guias', main,
+    title: 'Guías de perfumería nicho | The Fragrance Bar',
+    description: 'Guías de The Fragrance Bar: qué es la perfumería nicho, cómo elegir un perfume, perfumes para el calor de Canarias, concentraciones y regalos.',
+    schema: schema.graph([schema.breadcrumbs(url, [['Inicio', ''], ['Guías', 'guias/']]),
+      { '@type': 'CollectionPage', name: 'Guías de perfumería nicho', url: `${url}/guias/`,
+        mainEntity: { '@type': 'ItemList', itemListElement: GUIAS.map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: `${url}/guias/${g.id}/` })) } }])
+  };
+}
+
+function guia(url, g) {
+  const otras = GUIAS.filter((x) => x.id !== g.id).slice(0, 3);
+  const portada = fragsGuia(g)[0];
+  const main = `
+    <article class="guia">
+      ${pageHead({ crumbs: [['Inicio', ''], ['Guías', 'guias/'], [g.title]], eyebrow: esc(g.eyebrow), title: g.h1, intro: esc(g.lede),
+        extra: `<p class="guia__meta">The Fragrance Bar · <time datetime="${g.updated || g.date}">${fechaLarga(g.updated || g.date)}</time></p>` })}
+      <div class="wrap guia__body">${g.sections.map((x) => {
+        const fr = fragsDe(x.frags);
+        return `
+        <section class="guia__section">
+          <h2>${esc(x.h)}</h2>
+          ${x.p.map((t) => `<p>${prosa(t)}</p>`).join('\n          ')}
+          ${fr.length ? `<ul class="products guia__products">${fr.map((p, i) => productCard(p, { i })).join('')}</ul>` : ''}
+        </section>`;
+      }).join('')}
+        ${fragsGuia(g).length ? demoNote(SITE) : ''}
+      </div>
+
+      ${dondeProbar('Ven a <em>olerlas</em>', 'Todo lo que cuenta esta guía se entiende mejor en la barra. Ven sin cita a cualquiera de nuestras tiendas, en Las Palmas de Gran Canaria o en el sur de Tenerife.')}
+
+      <section class="section" aria-labelledby="otras-guias-title">
+        <div class="wrap">
+          <header class="section__head section__head--row">
+            <h2 class="section__title" id="otras-guias-title" data-reveal="up">Otras <em>guías</em></h2>
+            <a class="link section__more" href="${u('guias/')}" data-reveal="up">Todas las guías</a>
+          </header>
+          <ul class="guiagrid">${otras.map(guiaCard).join('')}</ul>
+        </div>
+      </section>
+    </article>`;
+  const bc = [['Inicio', ''], ['Guías', 'guias/'], [g.title, `guias/${g.id}/`]];
+  return {
+    path: `guias/${g.id}/`, section: 'guias', main,
+    // Sin la marca si el título ya es largo (Google corta hacia los 60 caracteres)
+    title: g.title.length > 46 ? g.title : `${g.title} | The Fragrance Bar`,
+    description: g.description,
+    ...(portada?.orig && { ogImage: `${url}/img/originales/${portada.id}-a-1600.webp` }),
+    schema: schema.graph([schema.breadcrumbs(url, bc), schema.organization(SITE, url),
+      schema.article(SITE, url, { ...g, img: portada?.orig ? `img/originales/${portada.id}-a-1600.webp` : '', about: fragsGuia(g).map((p) => ({ '@type': 'Product', name: `${casaById(p.casa).name} ${p.name}`, url: `${url}/fragancias/${p.id}/` })) })])
   };
 }
 
@@ -798,6 +911,7 @@ export function pages(url) {
     home(url), casas(url), ...CASAS.map((c) => casa(url, c)),
     comprar(url), ...FRAGANCIAS.map((p) => fragancia(url, p)), cesta(),
     barra(url), historia(url), tiendas(url), ...SITE.stores.map((s) => tienda(url, s)),
+    guias(url), ...GUIAS.map((g) => guia(url, g)),
     contacto(url), legal(), notFound()
   ];
   return Object.fromEntries(list.map((p) => [p.path.endsWith('.html') ? p.path : `${p.path}index.html`, layout(p, url)]));

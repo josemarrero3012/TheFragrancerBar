@@ -15,6 +15,8 @@ Es un prototipo: los precios son de ejemplo, la tienda online no cobra y los for
 - Una cesta y un pedido de prueba, con recogida en tienda o envío.
 - «Tu lista», para guardar favoritos y mandarlos por WhatsApp.
 - Las tres tiendas con su horario y un aviso de si están abiertas o cerradas en ese momento, que tiene en cuenta los festivos.
+- Cinco guías (qué es la perfumería nicho, perfumes para el calor de Canarias, concentraciones, cómo elegir y regalos) para atraer a quien busca en Google antes de venir.
+- SEO local para las tres tiendas: la ciudad en los títulos de la portada, las casas y las tiendas, las tiendas agrupadas por isla, «dónde probarla» al pie de cada casa y datos estructurados de cada tienda. La vista previa de GitHub Pages no se indexa, para no competir con la web real del negocio.
 
 ## Cómo la hice
 

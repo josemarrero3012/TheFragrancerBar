@@ -32,3 +32,4 @@
 .services h3 { font-size: var(--t-h3); }
 .services p { color: var(--muted); }
 .barra__copy .btn { margin-top: 2rem; }
+.barra__guia { margin-top: 1.6rem; font-size: var(--t-sm); color: var(--muted); }

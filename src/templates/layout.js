@@ -62,7 +62,7 @@ function footer() {
       <div class="footer__cols">
         <div><p class="footer__label">Tiendas</p><ul>${SITE.stores.map((s) =>
           `<li><a href="${storeUrl(s)}">${esc(s.title)}</a><br><span class="footer__muted">${esc(s.islandName)} · <a href="${telHref(s.phone)}">${esc(s.phone)}</a></span></li>`).join('')}</ul></div>
-        <div><p class="footer__label">Explorar</p><ul>${NAV.map((n) => `<li><a href="${u(n.path)}">${n.label}</a></li>`).join('')}<li><a href="${u('contacto/#preguntas')}">Preguntas frecuentes</a></li></ul></div>
+        <div><p class="footer__label">Explorar</p><ul>${NAV.map((n) => `<li><a href="${u(n.path)}">${n.label}</a></li>`).join('')}<li><a href="${u('guias/')}">Guías</a></li><li><a href="${u('contacto/#preguntas')}">Preguntas frecuentes</a></li></ul></div>
         <div><p class="footer__label">Síguenos</p><ul>${social}</ul></div>
         <div><p class="footer__label">Legal</p><ul><li><a href="${u('legal/#aviso-legal')}">Aviso legal</a></li><li><a href="${u('legal/#privacidad')}">Privacidad</a></li><li><a href="${u('legal/#cookies')}">Cookies</a></li></ul></div>
       </div>
@@ -105,6 +105,10 @@ const drawer = () => `
     </div>
   </dialog>`;
 
+/* La vista previa (GitHub Pages) no se indexa: si Google la encontrara, competiría con la web
+   real del negocio por las mismas búsquedas. Con el dominio definitivo (SITE.url) sí se indexa */
+const preview = (url) => /\.github\.io(\/|$)/.test(url);
+
 /**
  * Documento completo.
  * page: { path, section, title, description, main, schema?, preload?, intro?, quickbar?, store?, ogImage?, noindex? }
@@ -121,6 +125,8 @@ export function layout(page, url) {
   <meta name="description" content="${esc(page.description)}">
   <meta name="theme-color" content="#161412">
   ${page.noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${canonical}">`}
+  ${preview(url) && !page.noindex ? '<meta name="robots" content="noindex">' : ''}
+  ${SITE.seo.googleVerification ? `<meta name="google-site-verification" content="${esc(SITE.seo.googleVerification)}">` : ''}
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="${canonical}">
