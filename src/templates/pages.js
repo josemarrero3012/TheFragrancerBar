@@ -57,33 +57,83 @@ const mapBox = (s) => `
         </div>`;
 
 /* ---------------------------------------------------------------- Portada */
-function home(url) {
-  const e = SITE.destacada, d = casaById(e.casa), f = fragById(e.frag), t = mainStore();
-  // En móvil la foto 16:9 llena un marco cuadrado: se ve 1,8 veces más ancha que la pantalla
-  const heroImg = { src: `/${e.img}-2400.webp`, srcset: `/${e.img}-1200.webp 1200w, /${e.img}-2400.webp 2400w`, sizes: '(min-width: 960px) 100vw, 178vw' };
-  const main = `
-    <section class="hero" aria-labelledby="hero-title">
-      <figure class="hero__media">
-        <img src="${heroImg.src}" srcset="${heroImg.srcset}" sizes="${heroImg.sizes}" width="2400" height="1350"
-             style="object-position: ${e.focus}" alt="${esc(e.alt)}" fetchpriority="high">
-      </figure>
-      <div class="hero__copy">
-        <p class="eyebrow">Perfumería nicho · Gran Canaria y Tenerife</p>
-        <h1 class="hero__title" id="hero-title">Perfumería nicho, <em>sin prisa.</em></h1>
-        <p class="hero__lede">Las grandes casas de autor, de Creed a Xerjoff, en tiendas pensadas para oler con calma y probar sobre la piel antes de elegir.</p>
-        <div class="hero__ctas">
-          <a class="btn btn--dark" href="${u('comprar/')}">Comprar fragancias</a>
-          <a class="btn btn--line" href="${storeUrl(t)}">Visitar la tienda</a>
-        </div>
-      </div>
-      <p class="hero__tag">En el escaparate · <a href="${casaUrl(d)}">${esc(d.name)}</a></p>
-      ${f ? `<a class="hero__card" href="${fragUrl(f)}">
-        <img src="${f.orig ? origSrc(f, 0, 160) : `/img/productos/${f.img}-400.webp`}" width="160" height="160" alt="">
-        <span class="hero__card-brand">${esc(d.name)}</span>
+/* Escaparate: una diapositiva por campaña (SITE.escaparate). Sin JavaScript se ve la primera, con su foto.
+   src/js/escaparate.js las pasa, reproduce la película de la que está delante y mueve las pestañas */
+// En móvil la foto 16:9 llena un marco 4:5: se ve 2,2 veces más ancha que la pantalla
+const SLIDE_SIZES = '(min-width: 960px) 100vw, 222vw';
+const slideSrcset = (e) => e.widths.map((w) => `/${e.media}-${w}.webp ${w}w`).join(', ');
+
+const slideStore = (e) => SITE.stores.find((s) => s.id === e.tienda);
+const slideName = (e) => (e.tienda ? 'La tienda' : casaById(e.casa).name);
+const slideCredit = (e) => (e.tienda ? e.credit : `${slideName(e)} · ${e.credit}`);
+
+function heroSlide(e, i) {
+  const first = i === 0, pos = ` style="object-position: ${e.focus}"`;
+  const img = `<img src="/${e.media}-${e.widths[e.widths.length - 1]}.webp" srcset="${slideSrcset(e)}" sizes="${SLIDE_SIZES}" width="${e.w}" height="${e.h}"${pos} alt="${esc(e.alt)}"${first ? ' fetchpriority="high"' : ' loading="lazy" fetchpriority="low"'}>`;
+  // La película se carga solo cuando le toca (preload="none"); hasta entonces se ve la foto de debajo
+  const video = e.video ? `<video muted playsinline loop preload="none" aria-hidden="true" tabindex="-1"${pos}>
+          <source src="/${e.media}-960.mp4" type="video/mp4" media="(max-width: 959px)">
+          <source src="/${e.media}-1600.mp4" type="video/mp4">
+        </video>` : '';
+  return `<figure class="hero__slide${first ? ' is-active' : ''}" data-slide data-tone="${e.tone}" data-dur="${e.dur}" data-credit="${esc(slideCredit(e))}"${first ? '' : ' aria-hidden="true"'}>
+        ${img}${video}
+      </figure>`;
+}
+
+function heroCard(e, i) {
+  const attrs = `class="hero__card${i === 0 ? ' is-active' : ''}" data-card${i === 0 ? '' : ' hidden'}`;
+  if (e.tienda) {
+    const st = slideStore(e);
+    return `<a ${attrs} href="${storeUrl(st)}">
+        <img src="/${st.cardImg || st.img}-800.webp" width="800" height="600" loading="lazy" alt="">
+        <span class="hero__card-brand">${esc(st.islandName)}</span>
+        <span class="hero__card-name">${esc(st.title)}</span>
+        <span class="hero__card-price">${esc(st.street)}</span>
+        <span class="hero__card-go">Ver la tienda y el horario</span>
+      </a>`;
+  }
+  const c = casaById(e.casa), f = e.frag && fragById(e.frag);
+  if (f) return `<a ${attrs} href="${fragUrl(f)}">
+        <img src="${f.orig ? origSrc(f, 0, 160) : `/img/productos/${f.img}-400.webp`}" width="160" height="160" loading="lazy" alt="">
+        <span class="hero__card-brand">${esc(c.name)}</span>
         <span class="hero__card-name">${esc(f.name)}</span>
         <span class="hero__card-price">${f.sizes.length > 1 ? 'desde ' : ''}${euros(priceFrom(f))}</span>
         <span class="hero__card-go">Ver fragancia</span>
-      </a>` : ''}
+      </a>`;
+  return `<a ${attrs} href="${casaUrl(c)}">
+        <img src="/img/casas/${c.img}-560.webp" width="560" height="700" loading="lazy" alt="">
+        <span class="hero__card-brand">${esc(c.city)}</span>
+        <span class="hero__card-name">${esc(c.name)}</span>
+        <span class="hero__card-price">${nFrag(fragsDeCasa(c.id).length)} en la web</span>
+        <span class="hero__card-go">Ver la casa</span>
+      </a>`;
+}
+
+function home(url) {
+  const t = mainStore(), E = SITE.escaparate, n = String(E.length).padStart(2, '0');
+  const first = E[0];
+  const main = `
+    <section class="hero" data-hero data-tone="${first.tone}" aria-labelledby="hero-title" aria-roledescription="escaparate">
+      <div class="hero__stage">
+      ${E.map(heroSlide).join('\n      ')}
+      </div>
+      <p class="hero__credit" data-credit aria-live="polite"><span data-count>01</span> / ${n} · <span data-credit-text>${esc(slideCredit(first))}</span></p>
+      <div class="hero__copy">
+        <p class="eyebrow hero__eyebrow">Perfumería nicho · Gran Canaria y Tenerife</p>
+        <h1 class="hero__title" id="hero-title"><span class="hero__line"><span>Perfumería nicho,</span></span> <span class="hero__line"><span><em>sin prisa.</em></span></span></h1>
+        <p class="hero__lede">Las grandes casas de autor, en tiendas pensadas para oler con calma y probar sobre la piel antes de elegir.</p>
+        <div class="hero__ctas">
+          <a class="btn hero__btn" href="${u('comprar/')}">Comprar fragancias</a>
+          <a class="link hero__link" href="${storeUrl(t)}">Visitar la tienda de Triana</a>
+        </div>
+      </div>
+      ${E.map(heroCard).join('\n      ')}
+      <div class="hero__nav" data-hero-nav hidden>
+        <div class="hero__tabs" role="tablist" aria-label="Casas del escaparate">
+          ${E.map((e, i) => `<button class="hero__tab" type="button" role="tab" data-tab aria-selected="${i === 0}"><span class="hero__bar"><i></i></span><span class="hero__tab-n">${String(i + 1).padStart(2, '0')}</span> ${esc(slideName(e))}</button>`).join('\n          ')}
+        </div>
+        <button class="hero__pause" type="button" data-pause aria-pressed="false">${ICON.pause}${ICON.play}<span class="visually-hidden">Pausar el escaparate</span></button>
+      </div>
     </section>
 
     <div class="brandline">
@@ -137,7 +187,7 @@ function home(url) {
     title: 'Perfumería nicho en Las Palmas y Tenerife | The Fragrance Bar',
     ogTitle: 'The Fragrance Bar · Triana, Las Palmas de Gran Canaria',
     description: 'Perfumería nicho en la Calle Mayor de Triana (Las Palmas de Gran Canaria), Costa Adeje y Playa de las Américas. Creed, Xerjoff, Amouage, Initio y más.',
-    preload: `<link rel="preload" as="image" href="${heroImg.src}" imagesrcset="${heroImg.srcset}" imagesizes="${heroImg.sizes}">`,
+    preload: `<link rel="preload" as="image" href="/${first.media}-${first.widths[first.widths.length - 1]}.webp" imagesrcset="${slideSrcset(first)}" imagesizes="${SLIDE_SIZES}">`,
     schema: schema.graph([
       { '@type': 'WebSite', '@id': `${url}/#web`, name: SITE.brand, url: `${url}/`, inLanguage: 'es' },
       schema.organization(SITE, url),

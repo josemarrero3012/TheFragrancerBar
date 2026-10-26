@@ -71,3 +71,20 @@ npm run foto-tienda -- ~/Descargas/duque-fachada.jpg plaza-del-duque-fachada
 ```
 
 Deja `public/img/tienda/plaza-del-duque-fachada-800.webp` y `-1448.webp`. Después, en `SITE.stores` (`src/data/site.js`), se añade a la tienda `img: 'img/tienda/plaza-del-duque-fachada'` y un `imgAlt` que describa la foto. Con eso la tarjeta y la página de la tienda pasan a usarla; `cardImg` sirve para poner en la tarjeta otra foto distinta de la principal, como en Triana.
+
+## Escaparate de la portada
+
+El hero de la portada pasa varias campañas a pantalla completa (`SITE.escaparate` en `src/data/site.js`). Cada una es una foto horizontal o una película de la casa, más la foto de la tienda de Triana. Van en `public/escaparate/`.
+
+**Foto:** horizontal, de 2400 px de ancho como mínimo, en `<nombre>-1200.webp` y `<nombre>-2400.webp`.
+
+**Película:** de 8 a 12 segundos sin sonido, que se vea bien en bucle. Se recorta y comprime con ffmpeg en dos tamaños, y su primer fotograma se guarda como foto (se ve mientras carga y con «reducir movimiento»):
+
+```bash
+ffmpeg -ss 8.5 -t 8 -i campaña.mp4 -an -vf "scale=1600:-2,fps=25" -c:v libx264 -pix_fmt yuv420p -crf 27 -preset slow -movflags +faststart public/escaparate/creed-1600.mp4
+ffmpeg -ss 8.5 -t 8 -i campaña.mp4 -an -vf "scale=960:-2,fps=25" -c:v libx264 -pix_fmt yuv420p -crf 28 -preset slow -movflags +faststart public/escaparate/creed-960.mp4
+ffmpeg -ss 8.5 -i campaña.mp4 -frames:v 1 primer-fotograma.png   # y de ahí creed-1200.webp y creed-1920.webp
+```
+
+Así cada película pesa entre 1 y 2 MB (unos 0,6 MB en móvil). Las películas y fotos de campaña son de las casas, y necesitan el mismo permiso que el resto de fotos de marca.
+

@@ -1,21 +1,34 @@
-/* Inicio: la foto de campaña del escaparate del mes a toda la pantalla, como las webs de las casas.
-   El titular va a la izquierda, sobre un velo del color del papel que solo aclara ese lado de la foto
-   para que se lea; la tarjeta de la fragancia, abajo a la derecha. En móvil, foto arriba y texto debajo. */
-.hero { position: relative; display: flex; flex-direction: column; background: var(--stone); }
-.hero__media { position: relative; margin: 0; aspect-ratio: 1; overflow: hidden; }
-.hero__media img { width: 100%; height: 100%; object-fit: cover; }
-.hero__copy { padding: 2.2rem var(--gutter) 1.4rem; }
-.hero__title { font-size: var(--t-h1); margin-top: 1rem; max-width: 12ch; line-height: 1.02; }
-.hero__lede { margin-top: 1.2rem; max-width: 30rem; font-size: var(--t-lg); color: var(--ink-2); font-weight: 300; line-height: 1.55; }
-.hero__ctas { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
-.hero__tag { padding: 0 var(--gutter) .7rem; font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
-.hero__tag a { font-weight: 600; color: inherit; text-decoration: none; }
-.hero__tag a:hover { color: var(--oak); }
+/* Inicio: el escaparate. Las campañas de las casas (película o foto) a pantalla completa, una tras otra,
+   con pestañas de progreso, créditos de revista y la tarjeta de la fragancia. Encima de cada foto, un velo
+   suave del lado del texto: del color del papel si la foto es clara (data-tone="light") y de tinta si es oscura.
+   El cambio entre diapositivas lo anima src/js/escaparate.js; sin JavaScript se ve la primera.
+   En móvil: foto arriba, pestañas y texto debajo, sobre la piedra. */
+.hero { --h-ink: var(--ink); --h-soft: var(--ink-2); --h-accent: var(--oak); position: relative; display: flex; flex-direction: column; background: var(--stone); color: var(--h-ink); }
+.hero__stage { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--ink); }
+.hero__slide { position: absolute; inset: 0; margin: 0; visibility: hidden; z-index: 0; }
+.hero__slide.is-active { visibility: visible; z-index: 2; }
+.hero__slide.is-leaving { visibility: visible; z-index: 1; }
+.hero__slide img, .hero__slide video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero__slide video { opacity: 0; transition: opacity .8s var(--ease); }
+.hero__slide.is-playing video { opacity: 1; }
+
+.hero__credit { position: absolute; z-index: 4; top: 1rem; left: var(--gutter); padding: .35rem .7rem; background: rgba(18, 17, 16, .55); color: var(--paper); font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+.hero__copy { order: 2; padding: 1.6rem var(--gutter) 1.4rem; }
+.hero__title { font-size: var(--t-h1); margin-top: .9rem; line-height: 1; }
+.hero__line { display: block; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; }
+.hero__line > span { display: inline-block; }
+.hero__lede { margin-top: 1.1rem; max-width: 30rem; font-size: var(--t-lg); color: var(--h-soft); font-weight: 300; line-height: 1.55; }
+.hero__ctas { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.6rem; margin-top: 1.8rem; }
+.hero__btn { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.hero__btn:hover { background: transparent; color: var(--ink); }
+.hero__link { color: inherit; }
+
 .hero__card {
-  display: grid; grid-template-columns: 76px 1fr; column-gap: 1rem; align-items: center;
+  order: 3; display: grid; grid-template-columns: 76px 1fr; column-gap: 1rem; align-items: center;
   margin: 0 var(--gutter) 2.6rem; padding: .8rem 1.4rem .8rem .8rem;
   background: var(--card); color: var(--ink); text-decoration: none;
 }
+.hero__card[hidden] { display: none; }
 .hero__card img { grid-row: 1 / 5; width: 76px; height: 76px; object-fit: cover; background: #fff; }
 .hero__card-brand { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .hero__card-name { font-family: var(--f-serif); font-size: 1.15rem; }
@@ -23,19 +36,53 @@
 .hero__card-go { margin-top: .2rem; font-size: var(--t-sm); text-decoration: underline; text-underline-offset: 3px; }
 .hero__card:hover .hero__card-go { color: var(--oak); }
 
+/* Pestañas: una barra fina por casa que se llena mientras está delante, como las «stories» */
+.hero__nav { order: 1; display: flex; align-items: center; gap: 1rem; padding: 1rem var(--gutter) 0; }
+.hero__nav[hidden] { display: none; }
+.hero__tabs { flex: 1; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: .6rem; }
+.hero__tab { display: block; padding: .6rem 0 .4rem; background: none; border: 0; color: inherit; font: inherit; font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; text-align: left; cursor: pointer; opacity: .55; transition: opacity .4s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hero__tab[aria-selected="true"], .hero__tab:hover { opacity: 1; }
+.hero__bar { position: relative; display: block; height: 2px; margin-bottom: .6rem; background: color-mix(in srgb, currentColor 25%, transparent); overflow: hidden; }
+.hero__bar i { position: absolute; inset: 0; background: currentColor; transform: scaleX(0); transform-origin: 0 50%; }
+.hero__tab-n { font-variant-numeric: tabular-nums; color: var(--h-accent); margin-right: .3rem; }
+.hero__pause { flex: none; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid color-mix(in srgb, currentColor 40%, transparent); border-radius: 50%; background: none; color: inherit; cursor: pointer; }
+.hero__pause .icon { width: 14px; height: 14px; }
+.hero__pause .icon:nth-of-type(2), .hero__pause[aria-pressed="true"] .icon:nth-of-type(1) { display: none; }
+.hero__pause[aria-pressed="true"] .icon:nth-of-type(2) { display: block; }
+@media (max-width: 599px) { .hero__tab { font-size: 0; } .hero__tab .hero__bar { margin-bottom: 0; } }
+
 @media (min-width: 960px) {
-  .hero { display: block; height: calc(100svh - var(--header-h)); min-height: 600px; max-height: 960px; overflow: hidden; }
-  .hero__media { position: absolute; inset: 0; aspect-ratio: auto; }
-  /* La foto algo ampliada y desplazada a la derecha deja sitio al titular sin tapar el frasco */
-  .hero__media img { transform: scale(1.12); transform-origin: 20% 50%; }
-  .hero__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(248, 247, 244, .94), rgba(248, 247, 244, .86) 30%, rgba(248, 247, 244, 0) 52%); }
-  .hero__copy, .hero__tag { position: absolute; left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); padding: 0; }
-  .hero__copy { top: 50%; transform: translateY(-50%); max-width: 34rem; }
-  .hero__title { font-size: clamp(3rem, 1.6rem + 3.6vw, 5.2rem); max-width: none; }
-  .hero__lede { max-width: 25rem; }
-  .hero__tag { bottom: 2.2rem; }
-  .hero__card { position: absolute; right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); bottom: 2.2rem; margin: 0; min-width: 290px; background: rgba(255, 255, 255, .94); }
+  .hero { display: block; height: calc(100svh - var(--header-h)); min-height: 620px; max-height: 980px; overflow: hidden; background: var(--paper); transition: color .8s var(--ease); }
+  .hero[data-tone="dark"] { --h-ink: var(--paper); --h-soft: rgba(248, 247, 244, .86); --h-accent: var(--oak-light); }
+  .hero__stage { position: absolute; inset: 0; aspect-ratio: auto; }
+  /* Los dos velos, uno por tono; se cruzan al cambiar de diapositiva */
+  .hero__stage::before, .hero__stage::after { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; transition: opacity 1s var(--ease); }
+  .hero__stage::before { background: linear-gradient(90deg, rgba(248, 247, 244, .93), rgba(248, 247, 244, .8) 30%, rgba(248, 247, 244, 0) 55%), linear-gradient(0deg, rgba(248, 247, 244, .75), rgba(248, 247, 244, 0) 22%); }
+  .hero__stage::after { background: linear-gradient(90deg, rgba(18, 17, 16, .86), rgba(18, 17, 16, .66) 38%, rgba(18, 17, 16, 0) 66%), linear-gradient(0deg, rgba(18, 17, 16, .65), rgba(18, 17, 16, 0) 30%); opacity: 0; }
+  .hero[data-tone="dark"] .hero__stage::before { opacity: 0; }
+  .hero[data-tone="dark"] .hero__stage::after { opacity: 1; }
+  .hero[data-tone="dark"] :is(.hero__title, .hero__lede, .hero__eyebrow, .hero__link, .hero__credit) { text-shadow: 0 1px 18px rgba(18, 17, 16, .55); }
+
+  .hero__copy, .hero__nav, .hero__credit, .hero__card { position: absolute; z-index: 4; }
+  .hero__copy { left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); bottom: 7.4rem; max-width: 40rem; padding: 0; }
+  .hero__eyebrow { color: var(--h-accent); transition: color .8s var(--ease); }
+  .hero__title { font-size: clamp(3.4rem, 1.2rem + 4.6vw, 6.6rem); letter-spacing: -.01em; }
+  .hero__lede { max-width: 27rem; transition: color .8s var(--ease); }
+  .hero__btn { background: var(--h-ink); color: var(--paper); border-color: var(--h-ink); transition: background .8s var(--ease), color .8s var(--ease), border-color .8s var(--ease); }
+  .hero[data-tone="dark"] .hero__btn { color: var(--ink); }
+  .hero__btn:hover { background: transparent; color: var(--h-ink); }
+  .hero[data-tone="dark"] .hero__btn:hover { color: var(--paper); }
+  .hero__credit { top: 1.6rem; left: auto; right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); padding: 0; background: none; color: var(--h-ink); transition: color .8s var(--ease); }
+  .hero__card { right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); bottom: 7.4rem; margin: 0; min-width: 300px; background: rgba(255, 255, 255, .94); }
+  .hero__nav { left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); bottom: 1.6rem; padding: 0; gap: 2rem; }
+  .hero__tabs { gap: 1.6rem; }
+
+  /* Al bajar, el escaparate se recoge un poco y se redondea, como en las webs de las casas */
+  @supports (animation-timeline: view()) {
+    .has-motion .hero__stage { animation: hero-salida linear both; animation-timeline: view(); animation-range: exit 0% exit 90%; }
+  }
 }
+@keyframes hero-salida { to { transform: scale(.93); border-radius: 24px; } }
 
 /* Horario de cada tienda (tarjetas y fichas de tienda) */
 .status { display: inline-flex; align-items: center; gap: .6rem; margin-top: 2rem; font-size: var(--t-sm); color: var(--muted); }
