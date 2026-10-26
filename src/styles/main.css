@@ -36,6 +36,7 @@
 @import './pages/pdp.css';
 @import './pages/checkout.css';
 @import './pages/legal.css';
+@import './pages/guias.css';
 
 /* Debe ir tras las secciones para poder ajustarlas */
 @import './base/landscape.css';

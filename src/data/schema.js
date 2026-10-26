@@ -20,10 +20,13 @@ export function organization(site, url) {
 export function store(site, url, s) {
   return {
     '@type': 'Store', '@id': storeId(url, s),
-    name: `${site.brand} ${s.name}`, url: `${url}/tiendas/${s.id}/`,
-    image: `${url}/og-tienda.jpg`, telephone: s.phone, priceRange: '€€€',
+    name: `${site.brand} ${s.name}`, url: `${url}/tiendas/${s.id}/`, description: s.intro,
+    // La foto de la propia tienda; sin ella, la de Triana que usa toda la web para compartir
+    image: s.img ? `${url}/${s.img}-1448.webp` : `${url}/og-tienda.jpg`, telephone: s.phone, priceRange: '€€€',
     parentOrganization: { '@id': orgId(url) },
-    hasMap: s.mapsUrl,
+    hasMap: s.gbp || s.mapsUrl,
+    ...(s.gbp && { sameAs: [s.gbp] }),
+    ...(s.areaServed && { areaServed: s.areaServed.map((name) => ({ '@type': 'Place', name })) }),
     brand: CASAS.map((c) => ({ '@type': 'Brand', name: c.name })),
     address: { '@type': 'PostalAddress', streetAddress: s.street, postalCode: s.postalCode, addressLocality: s.city, addressRegion: s.region, addressCountry: 'ES' },
     geo: { '@type': 'GeoCoordinates', latitude: s.geo.lat, longitude: s.geo.lng },
@@ -58,6 +61,15 @@ export const faqPage = (site) => ({
 export const breadcrumbs = (url, items) => ({
   '@type': 'BreadcrumbList',
   itemListElement: items.map(([name, path], i) => ({ '@type': 'ListItem', position: i + 1, name, item: `${url}/${path}` }))
+});
+
+/** Guía (src/data/guias.js) */
+export const article = (site, url, g) => ({
+  '@type': 'Article', '@id': `${url}/guias/${g.id}/#guia`, headline: g.title, description: g.description,
+  url: `${url}/guias/${g.id}/`, inLanguage: 'es', datePublished: g.date, dateModified: g.updated || g.date,
+  image: g.img ? `${url}/${g.img}` : `${url}/og-tienda.jpg`,
+  author: { '@id': orgId(url) }, publisher: { '@id': orgId(url) },
+  about: g.about
 });
 
 export const graph = (nodes) => ({ '@context': 'https://schema.org', '@graph': nodes });

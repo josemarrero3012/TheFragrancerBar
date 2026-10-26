@@ -17,6 +17,10 @@ export const SITE = {
   // true: los precios son inventados. Se avisa en la tienda y no se publican en schema.org
   demoPrices: true,
 
+  /* SEO. googleVerification: el código de la etiqueta «HTML» de Google Search Console (solo el content).
+     La web no se indexa mientras se publique en una vista previa (*.github.io): ver vite.config.js */
+  seo: { googleVerification: '' },
+
   // Contacto general (el de la tienda de Triana)
   contact: {
     email: 'info@evergreenperfumes.com',
@@ -40,6 +44,11 @@ export const SITE = {
       mapQuery: 'The Fragrance Bar, Calle Mayor de Triana 32, Las Palmas de Gran Canaria',
       // Enlace a la ficha de Google Maps («Compartir» > «Copiar enlace»). PROVISIONAL: sustituir por el enlace exacto de la ficha
       mapsUrl: 'https://www.google.com/maps/search/?api=1&query=The+Fragrance+Bar+Calle+Mayor+de+Triana+32+Las+Palmas+de+Gran+Canaria',
+      // Ficha de Google Business Profile (el enlace «Compartir» de la ficha). PROVISIONAL: vacío hasta tener acceso a la ficha
+      gbp: '',
+      // SEO local: zonas desde las que se viene a la tienda (schema.org areaServed y el texto de la página)
+      areaServed: ['Las Palmas de Gran Canaria', 'Gran Canaria'],
+      near: 'Triana, Vegueta, San Telmo y el centro de Las Palmas de Gran Canaria',
       // img: foto principal (portada y página de la tienda) · cardImg: la de su tarjeta, para no repetir la fachada en la portada
       img: 'img/tienda/triana-fachada', cardImg: 'img/tienda/interior-pasillo', imgAlt: 'Fachada de The Fragrance Bar en Triana: arco de piedra, rótulo negro y un interior iluminado con vitrinas de perfumes y una barra de madera en el centro',
       /* Fotos del interior para la página de la tienda (prototipo: confirmar con la tienda que se pueden usar) */
@@ -58,7 +67,10 @@ export const SITE = {
       intro: 'En el centro comercial de lujo de Costa Adeje, a un paso de la Playa del Duque y de los grandes hoteles del sur de Tenerife.',
       howTo: 'Dentro del centro comercial, junto a la Playa del Duque. Aparcamiento en el propio centro.',
       mapQuery: 'The Fragrance Bar, Centro Comercial Plaza del Duque, Costa Adeje',
-      mapsUrl: 'https://www.google.com/maps/search/?api=1&query=The+Fragrance+Bar+Plaza+del+Duque+Costa+Adeje' },
+      mapsUrl: 'https://www.google.com/maps/search/?api=1&query=The+Fragrance+Bar+Plaza+del+Duque+Costa+Adeje',
+      gbp: '', // PROVISIONAL
+      areaServed: ['Costa Adeje', 'Adeje', 'Tenerife'],
+      near: 'Costa Adeje, la Playa del Duque, La Caleta y Playa Fañabé' },
     { id: 'americas-plaza', name: 'Américas Plaza', title: 'C. C. Américas Plaza', island: 'tenerife', islandName: 'Tenerife',
       address: 'C. C. Américas Plaza, local L28, 38650 Playa de las Américas, Santa Cruz de Tenerife', // PROVISIONAL: calle exacta
       addressShort: 'C. C. Américas Plaza, local L28, Playa de las Américas',
@@ -69,7 +81,10 @@ export const SITE = {
       intro: 'En el corazón de Playa de las Américas, en uno de los centros comerciales más concurridos del sur de Tenerife.',
       howTo: 'En la Avenida de las Américas, a pocos pasos del paseo marítimo.',
       mapQuery: 'The Fragrance Bar, Centro Comercial Américas Plaza, Playa de las Américas',
-      mapsUrl: 'https://www.google.com/maps/search/?api=1&query=The+Fragrance+Bar+Americas+Plaza+Playa+de+las+Americas' }
+      mapsUrl: 'https://www.google.com/maps/search/?api=1&query=The+Fragrance+Bar+Americas+Plaza+Playa+de+las+Americas',
+      gbp: '', // PROVISIONAL
+      areaServed: ['Playa de las Américas', 'Los Cristianos', 'Arona', 'Adeje', 'Tenerife'],
+      near: 'Playa de las Américas, Los Cristianos y el sur de Tenerife' }
   ],
 
   /* Festivos y horarios especiales para «Abierto ahora» (AAAA-MM-DD). PROVISIONAL: revisar cada año.

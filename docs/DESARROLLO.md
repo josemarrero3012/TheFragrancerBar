@@ -16,7 +16,7 @@ npm run preview   # sirve dist/ para revisarla antes de publicar
 
 ## Páginas
 
-Cada sección es una página con su propia URL. Todas se generan desde los datos al compilar (unas 110):
+Cada sección es una página con su propia URL. Todas se generan desde los datos al compilar (unas 65 con la muestra del catálogo):
 
 | Ruta | Página |
 |---|---|
@@ -27,6 +27,7 @@ Cada sección es una página con su propia URL. Todas se generan desde los datos
 | `/cesta/` | Cesta y pedido (recogida en tienda o envío) |
 | `/la-barra/` · `/historia/` | El concepto de la barra y la historia de la marca |
 | `/tiendas/` · `/tiendas/<tienda>/` | Triana, Plaza del Duque y Américas Plaza, con horario, mapa y datos estructurados |
+| `/guias/` · `/guias/<guía>/` | Guías para quien busca antes de venir: qué es el nicho, perfumes para el calor, concentraciones, cómo elegir y regalos (`src/data/guias.js`) |
 | `/contacto/` | Formulario, «Tu lista» y preguntas frecuentes |
 | `/legal/` · `404.html` | Información legal y página no encontrada |
 
@@ -46,6 +47,7 @@ Al pasar de una página a otra hay una transición suave (View Transitions) en l
     ├── data/
     │   ├── site.js         ★ Negocio: tiendas, horarios, festivos, contacto, envíos, FAQ, menú
     │   ├── casas.js        ★ Casas, familias olfativas y concentraciones
+    │   ├── guias.js        ★ Textos de las guías
     │   ├── catalogo.js     Fragancias de la hoja con sus fotos y notas, y qué se publica
     │   ├── fragancias.js   La hoja catalogo/fragancias.csv pasada a datos (lo genera npm run catalogo)
     │   └── schema.js       Datos estructurados schema.org
@@ -88,8 +90,24 @@ No hay archivos `.html` en el proyecto: las páginas salen de `src/templates` y 
 ## SEO
 
 `SITE.url` es la dirección pública. Al compilar se usa para la URL canónica, Open Graph, `robots.txt`, `sitemap.xml` (con `lastmod`) y los datos estructurados:
-una `Organization` con un `Store` por tienda (`parentOrganization`, `hasMap`, `brand`, horario), `Product` y `BreadcrumbList` en cada ficha, `CollectionPage` en cada casa y `FAQPage` en contacto.
-Todo el contenido (casas, fragancias, notas) está en el HTML que entrega el servidor, sin depender de JavaScript.
+una `Organization` con un `Store` por tienda (`parentOrganization`, `hasMap`, `brand`, horario, `areaServed`, su foto y, cuando exista, su ficha de Google en `sameAs`), `Product` y `BreadcrumbList` en cada ficha, `CollectionPage` en cada casa, `Article` en cada guía y `FAQPage` en contacto.
+Todo el contenido (casas, fragancias, notas, guías) está en el HTML que entrega el servidor, sin depender de JavaScript.
+
+**SEO local.** Lo que se busca es «perfumería nicho Las Palmas», «perfumería Costa Adeje» o «Creed Tenerife». Por eso:
+
+- La portada, cada casa y cada tienda llevan la ciudad en el título y la descripción («Creed en Las Palmas y Tenerife»).
+- `/tiendas/` agrupa las tiendas por isla, y cada tienda tiene un bloque «Perfumería nicho en <ciudad>» con las zonas de alrededor (`near` en `SITE.stores`) y enlaces a todas las casas.
+- Cada casa y cada guía terminan con las tres tiendas («Prueba Creed en Las Palmas y Tenerife»).
+- Nombre, dirección y teléfono salen de `SITE.stores` en todas partes: tienen que ser exactamente los de la ficha de Google Business Profile de cada tienda.
+
+**Vista previa sin indexar.** Si `SITE_URL` es de `*.github.io`, todas las páginas llevan `<meta name="robots" content="noindex">` para que la vista previa no compita en Google con la web real del negocio. Con el dominio definitivo desaparece sola.
+
+**Al publicar con el dominio definitivo:**
+
+1. Poner el dominio en `SITE.url` y comprobar que el sitemap apunta a él.
+2. Dar de alta la web en [Google Search Console](https://search.google.com/search-console) con la verificación por etiqueta HTML: el código va en `SITE.seo.googleVerification`. Después, enviar `sitemap.xml`.
+3. En cada ficha de Google Business Profile: la web de la tienda (`/tiendas/<tienda>/`, no la portada), categoría «Perfumería», horario igual que en `SITE.stores` y fotos de la tienda. Copiar el enlace de la ficha en `gbp` de su tienda.
+4. Pedir reseñas en tienda con el enlace de la ficha; el bloque «Opiniones en Google» de cada tienda ya enlaza a ella.
 
 ## Publicar
 
@@ -116,7 +134,8 @@ Todo lo marcado `PROVISIONAL` en `src/data/site.js` y los datos entre corchetes 
 - [ ] Precios reales, tamaños, gastos de envío y condiciones de venta; después, `SITE.demoPrices = false`
 - [ ] Conectar la pasarela de pago y los pedidos (ver `initCheckout()` en `src/js/cart.js`)
 - [ ] Conectar el formulario de contacto y el boletín a un servicio real (ver `src/js/contacto.js`)
-- [ ] Reseñas de Google Business Profile, enlace a Facebook si lo hay
+- [ ] Acceso a las fichas de Google Business Profile, su enlace en `gbp` de cada tienda y las reseñas; enlace a Facebook si lo hay
+- [ ] Alta en Google Search Console (`SITE.seo.googleVerification`) y envío del sitemap
 - [ ] El catálogo real con el negocio en `catalogo/fragancias.csv` (ahora se publica una muestra de cinco fragancias por casa) y permiso para usar las imágenes oficiales de las marcas, o fotos propias (guía y estado en [FOTOS.md](FOTOS.md))
 - [ ] Fotos de las tiendas de Tenerife (`npm run foto-tienda`, ver [FOTOS.md](FOTOS.md))
 - [ ] Confirmar las respuestas de las preguntas frecuentes (muestras, tarjeta regalo, envíos)
