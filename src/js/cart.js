@@ -30,8 +30,10 @@ function setQty(i, qty) {
   save();
 }
 
-/* Miniatura: la foto de producto (todas las fragancias publicadas la tienen) */
-const thumb = (p) => `<img src="${asset(`img/productos/${p.img}-400.webp`)}" width="80" height="100" alt="" loading="lazy">`;
+/* Miniatura: la foto original de la casa o, si no la tiene, la de producto (las publicadas tienen una de las dos) */
+const thumb = (p) => p.orig
+  ? `<img src="${asset(`img/originales/${p.id}-a-160.webp`)}" width="80" height="80" alt="" loading="lazy">`
+  : `<img src="${asset(`img/productos/${p.img}-400.webp`)}" width="80" height="100" alt="" loading="lazy">`;
 
 function lineHtml(l, i, { readonly = false } = {}) {
   const p = fragById(l.id), c = casaById(p.casa), unit = priceOf(l);

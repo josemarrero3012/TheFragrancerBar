@@ -66,14 +66,14 @@ No hay archivos `.html` en el proyecto: las páginas salen de `src/templates` y 
 
 ## Diseño
 
-- El producto manda: una foto por fragancia, mismo encuadre y mismo fondo en todas las rejillas.
+- El producto manda: en las rejillas, una foto cuadrada por fragancia, la original de su casa (y la segunda al pasar el ratón). Pocas fragancias y bien fotografiadas antes que muchas a medias.
 - La tienda se enseña con fotos reales (`public/img/tienda/`), nunca dibujada con CSS: nada de texturas de azulejo, madera o cadenas, ni planos de mapa.
 - Paleta corta (`src/styles/base/tokens.css`): papel, tinta y un acento cobre para detalles pequeños.
 - Una tienda sin foto (de momento las de Tenerife) se muestra con su isla y ciudad en tipografía sobre el fondo de piedra, hasta que haya foto: basta con añadir `img` (y `imgAlt`) en `SITE.stores`.
 
 ## Editar el contenido
 
-- **Fragancias**: `FRAGANCIAS` en `src/data/catalogo.js`. Añadir una crea su página, la añade al catálogo, a su casa y al sitemap. Solo se publican las que tienen foto: `img/productos/<id>-400.webp` y `-800.webp` (4:5, frasco recortado sobre fondo transparente, con la base siempre a la misma altura; las genera `npm run fotos`). Todas las rejillas usan esa foto sobre el mismo fondo, para que el catálogo se vea homogéneo aunque tenga cientos de referencias. Las fotos originales de la casa (`npm run originales`) solo se ven en la ficha, como fotos adicionales. `featured: true` la pone en la portada (se ven las 8 primeras).
+- **Fragancias**: `TODAS` en `src/data/catalogo.js` guarda el catálogo entero y `MUESTRA` dice cuáles se publican (ahora, cinco por casa). Añadir una a `MUESTRA` crea su página y la añade al catálogo, a su casa y al sitemap. Solo se publican las que tienen foto y notas oficiales. La foto puede ser de dos tipos: las originales de la casa (`npm run originales`: `img/originales/<id>-a|b|c…-160|800|1600.webp`, cuadradas; la `a` se ve en las rejillas, la `b` al pasar el ratón y todas en la ficha) o, si no las tiene, el frasco recortado (`npm run fotos`: `img/productos/<id>-400.webp` y `-800.webp`, 4:5 sobre fondo transparente, con la base siempre a la misma altura). Las fotos propias de la tienda entran con `npm run fotos -- --carpeta <carpeta>` ([FOTOS.md](FOTOS.md)). `featured: true` la pone en la portada (se ven las 8 primeras).
 - **Casas**: `CASAS` en `src/data/catalogo.js`. Cada casa necesita `img/casas/<img>-560.webp` y `-1000.webp` (4:5).
 - **Tiendas, horarios y festivos**: `SITE.stores` y `SITE.calendar` en `src/data/site.js` (índice 0 = domingo, `null` = cerrado).
 - **Envíos y preguntas frecuentes**: `SITE.shipping` y `SITE.faq`.
@@ -113,7 +113,8 @@ Todo lo marcado `PROVISIONAL` en `src/data/site.js` y los datos entre corchetes 
 - [ ] Conectar la pasarela de pago y los pedidos (ver `initCheckout()` en `src/js/cart.js`)
 - [ ] Conectar el formulario de contacto y el boletín a un servicio real (ver `src/js/contacto.js`)
 - [ ] Reseñas de Google Business Profile, enlace a Facebook si lo hay
-- [ ] Fotos de producto del resto del catálogo y permiso para usar las imágenes oficiales de las marcas
+- [ ] El catálogo real con el negocio (ahora es una muestra de cinco fragancias por casa) y permiso para usar las imágenes oficiales de las marcas, o fotos propias (guía y estado en [FOTOS.md](FOTOS.md))
+- [ ] Fotos de las tiendas de Tenerife (`npm run foto-tienda`, ver [FOTOS.md](FOTOS.md))
 - [ ] Confirmar las respuestas de las preguntas frecuentes (muestras, tarjeta regalo, envíos)
 - [ ] Dominio definitivo (`SITE.url`)
 - [ ] Datos del titular para el aviso legal y revisión profesional de los textos legales

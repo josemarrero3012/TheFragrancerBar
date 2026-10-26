@@ -31,7 +31,7 @@
 /* Líneas de la cesta (lateral, página de cesta y confirmación) */
 .cartlines { display: grid; }
 .cartline { display: grid; grid-template-columns: 64px 1fr auto; gap: 1rem; align-items: start; padding-block: 1.1rem; border-bottom: 1px solid var(--line); }
-.cartline__media { display: block; aspect-ratio: 4 / 5; background: var(--stone); overflow: hidden; }
+.cartline__media { display: block; aspect-ratio: 1; background: var(--stone); overflow: hidden; }
 .cartline__media img { width: 100%; height: 100%; object-fit: contain; }
 .cartline__brand { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
 .cartline__name { font-family: var(--f-display); font-size: 1.2rem; line-height: 1.2; text-decoration: none; }

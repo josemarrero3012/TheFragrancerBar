@@ -521,6 +521,14 @@ export const NOTAS_FOTOS = {
     "licenciaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
     "cambios": true
   },
+  "higo": {
+    "titulo": "Fig (Ficus carica) fruit halved",
+    "url": "https://commons.wikimedia.org/wiki/File:Fig_(Ficus_carica)_fruit_halved.jpg",
+    "autor": "Ivar Leidus",
+    "licencia": "CC BY-SA 4.0",
+    "licenciaUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "cambios": true
+  },
   "hiedra": {
     "titulo": "Hedera helix Dover",
     "url": "https://commons.wikimedia.org/wiki/File:Hedera_helix_Dover.jpg",
@@ -735,6 +743,14 @@ export const NOTAS_FOTOS = {
     "autor": "fir0002 flagstaffotos [at] gmail.com Canon 20D + Sigma 150mm f/2.8",
     "licencia": "GFDL 1.2",
     "licenciaUrl": "http://www.gnu.org/licenses/old-licenses/fdl-1.2.html",
+    "cambios": true
+  },
+  "mate": {
+    "titulo": "Ilex paraguariensis - Yerba mate - desc-leaves",
+    "url": "https://commons.wikimedia.org/wiki/File:Ilex_paraguariensis_-_Yerba_mate_-_desc-leaves.jpg",
+    "autor": "autor desconocido",
+    "licencia": "CC BY-SA 3.0",
+    "licenciaUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
     "cambios": true
   },
   "manzana-verde": {

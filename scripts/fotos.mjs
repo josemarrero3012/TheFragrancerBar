@@ -2,6 +2,8 @@
    npm run fotos              descarga la foto oficial de las fragancias que no la tienen
    npm run fotos -- --todas   vuelve a descargarlas todas
    npm run fotos -- creed-aventus pdm-kalan   solo esas (también vale una casa: creed)
+   npm run fotos -- --carpeta fotos-tienda/   fotos propias hechas en la tienda (ver docs/FOTOS.md):
+                              cada archivo se llama como la fragancia (creed-aventus.jpg)
 
    Para cada fragancia de TODAS busca la foto en la web oficial de su casa
    (scripts/fotos-fuentes.js), quita el fondo blanco, la encaja como las demás
@@ -12,93 +14,35 @@
 
    Revisa siempre el resultado: una coincidencia por nombre puede traer un set
    de regalo o el tamaño de viaje. Si pasa, fija la página buena en fotos-fuentes.js.
+
+   Las fotos propias pasan por el mismo recorte y encaje, así que quedan igual que
+   las demás. Se apuntan en scripts/fotos-propias.json y las descargas no las vuelven
+   a pisar (salvo que se pida esa fragancia por su id). El informe dice al final cuántas
+   fotos son propias, cuántas siguen siendo de la web de la marca (provisionales hasta
+   tener permiso) y cuáles faltan.
    ========================================================================== */
 
-import { readdirSync, writeFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { extname, resolve } from 'node:path';
 import sharp from 'sharp';
 import { TODAS, casaById } from '../src/data/catalogo.js';
 import { CASAS, FRAGANCIAS } from './fotos-fuentes.js';
+import { get, ogImage, isImage, nombra, norm, shopifyProducts, eligeShopify, enlacesDe } from './marcas.mjs';
 
 const ROOT = resolve(import.meta.dirname, '..');
 const OUT = resolve(ROOT, 'public/img/productos');
-const UA = { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36' };
 
 // Lienzo de las fotos actuales: 800 × 1000, frasco de hasta 600 × 754 apoyado en y = 937
 const W = 800, H = 1000, BOX_W = 600, BOX_H = 754, FLOOR = 937;
-// Productos de Shopify que no son el frasco de perfume (sets, muestras, cuerpo, pelo, minis…)
-const NO_PERFUME = /\b(set|kit|coffret|duo|trio|sample|samples|discovery|calendar|candle|body|hair|lotion|cream|gel|hand|cleansing|cleaning|shower|soap|deo|deodorant|refill|travel|mini|gift|wrapping|bag|postcard|oil|mist)\b|\b(1\.5|2|3|5|7\.5|8|10|12|15|20)\s?ml\b/i;
-const CONC_WORDS = /\b(eau de parfum|eau de toilette|extrait de parfum|extrait|parfum|edp|edt)\b/g;
 
 const args = process.argv.slice(2);
 const todas = args.includes('--todas');
-const solo = args.filter((a) => !a.startsWith('--'));
+const carpeta = args.includes('--carpeta') ? args[args.indexOf('--carpeta') + 1] : null;
+const solo = args.filter((a, i) => !a.startsWith('--') && args[i - 1] !== '--carpeta');
 const conFoto = new Set(readdirSync(OUT).filter((f) => f.endsWith('-800.webp')).map((f) => f.slice(0, -9)));
-
-const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, ' ').trim();
-const get = async (url, as = 'text') => {
-  const res = await fetch(url, { headers: UA, redirect: 'follow' });
-  if (!res.ok) throw new Error(`${res.status} en ${url}`);
-  return as === 'buffer' ? Buffer.from(await res.arrayBuffer()) : as === 'json' ? res.json() : res.text();
-};
-const ogImage = (html, base) => {
-  const m = html.match(/<meta[^>]+property=["']og:image(?::secure_url)?["'][^>]+content=["']([^"']+)["']/i)
-    || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
-  return m && new URL(m[1].replace(/&amp;/g, '&'), base).href;
-};
-const isImage = (url) => /\.(png|jpe?g|webp|avif)(\?|$)/i.test(url);
-// La página tiene que nombrar el perfume (og:title o <title>), para no coger otro producto
-const nombra = (html, p) => {
-  const t = norm((html.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)/i) || html.match(/<title>([^<]+)/i) || [])[1] || '');
-  return norm(p.name).split(' ').every((w) => t.includes(w));
-};
-
-/* Catálogo completo de cada tienda Shopify (se pide una vez por casa) */
-const shopify = new Map();
-async function shopifyProducts(base) {
-  if (!shopify.has(base)) {
-    shopify.set(base, (async () => {
-      const all = [];
-      for (let page = 1; page <= 20; page++) {
-        const { products } = await get(`${base}/products.json?limit=250&page=${page}`, 'json');
-        all.push(...products);
-        if (products.length < 250) break;
-      }
-      return all;
-    })());
-  }
-  return shopify.get(base);
-}
-
-/* Elige el producto de Shopify: título igual al nombre y, entre varios, el que parece el frasco grande */
-function eligeShopify(products, p) {
-  const want = norm(p.name);
-  const puntos = (x) => {
-    const h = x.handle.replace(/-/g, ' ');
-    if ([x.title, x.product_type || '', h].some((t) => NO_PERFUME.test(t))) return -1;
-    const titulo = norm(x.title), sinConc = titulo.replace(CONC_WORDS, '').replace(/\s+/g, ' ').trim();
-    if (titulo !== want && sinConc !== want) return -1;
-    let n = 1;
-    if (/eau de parfum/.test(h) && p.conc === 'EDP') n += 2;
-    if (/(^| )parfum$/.test(h) && !/eau de parfum/.test(h) && p.conc === 'EDP') n -= 0.5;
-    if (/\b30\s?ml\b/.test(h)) n -= 0.5;
-    return n;
-  };
-  return products.filter((x) => x.images?.length).map((x) => [puntos(x), x]).filter(([n]) => n > 0).sort((a, b) => b[0] - a[0])[0]?.[1];
-}
-
-/* Páginas de producto de un listado (para casas sin Shopify ni búsqueda, como Creed) */
-const listados = new Map();
-async function enlacesDe(casa) {
-  if (!listados.has(casa.listado)) {
-    listados.set(casa.listado, (async () => {
-      const links = new Set();
-      for (const url of casa.listado) for (const m of (await get(url)).matchAll(new RegExp(casa.enlace, 'g'))) links.add(new URL(m[0], url).href.split('?')[0]);
-      return [...links];
-    })());
-  }
-  return listados.get(casa.listado);
-}
+// Fragancias con foto propia (hecha en la tienda): las descargas no las pisan
+const PROPIAS_FILE = resolve(ROOT, 'scripts/fotos-propias.json');
+const propias = new Set(existsSync(PROPIAS_FILE) ? JSON.parse(readFileSync(PROPIAS_FILE, 'utf8')) : []);
 
 /* Imágenes candidatas de una fragancia (la primera con fondo limpio será la buena) */
 async function fuente(p) {
@@ -143,8 +87,10 @@ function bordeLiso(data, w, h) {
   return { ok: dev < 14 && Math.min(...mean) > 170, mean };
 }
 
-/* Quita el fondo unido a los bordes y se queda con el frasco (la mancha más grande y lo que la toca) */
-async function recorta(buf) {
+/* Quita el fondo unido a los bordes y se queda con el frasco (la mancha más grande y lo que la toca).
+   apilar: también lo que está justo encima o debajo, en la misma vertical. En las fotos propias sobre
+   fondo blanco el cuello de cristal transparente desaparece con el fondo y deja el tapón suelto */
+async function recorta(buf, { apilar = false } = {}) {
   const { data, info } = await sharp(buf).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   const { width: w, height: h } = info;
   const borde = bordeLiso(data, w, h);
@@ -197,7 +143,10 @@ async function recorta(buf) {
   }
   if (!boxes.length) return null;
   const big = boxes.reduce((a, b) => (b.n > a.n ? b : a));
-  const keep = new Set(boxes.filter((b) => b.x0 <= big.x1 && b.x1 >= big.x0 && b.y0 <= big.y1 && b.y1 >= big.y0).map((b) => b.id));
+  const toca = (b) => b.x0 <= big.x1 && b.x1 >= big.x0 && b.y0 <= big.y1 && b.y1 >= big.y0;
+  const gap = h * 0.06, cx = (big.x0 + big.x1) / 2;
+  const encima = (b) => b.n > big.n * 0.01 && b.x0 <= cx && b.x1 >= cx && b.y1 >= big.y0 - gap && b.y0 <= big.y1 + gap;
+  const keep = new Set(boxes.filter((b) => toca(b) || (apilar && encima(b))).map((b) => b.id));
   let x0 = w, y0 = h, x1 = 0, y1 = 0;
   for (let i = 0; i < w * h; i++) {
     if (!keep.has(label[i])) { data[i * 4 + 3] = 0; continue; }
@@ -209,9 +158,9 @@ async function recorta(buf) {
   return sharp(png).extract({ left: x0, top: y0, width: x1 - x0 + 1, height: y1 - y0 + 1 });
 }
 
-async function procesa(p, urls) {
+async function procesa(p, urls, leer = (url) => get(url, 'buffer'), opciones) {
   let img, url;
-  for (url of urls.slice(0, 8)) if ((img = await recorta(await get(url, 'buffer')))) break;
+  for (url of urls.slice(0, 8)) if ((img = await recorta(await leer(url), opciones))) break;
   if (!img) return null;
   const frasco = await img.resize(BOX_W, BOX_H, { fit: 'inside', withoutEnlargement: false }).png().toBuffer({ resolveWithObject: true });
   const { width: fw, height: fh } = frasco.info;
@@ -223,21 +172,40 @@ async function procesa(p, urls) {
   return url;
 }
 
-const lista = TODAS.filter((p) => (solo.length ? solo.includes(p.id) || solo.includes(p.casa) : todas || !conFoto.has(p.id)));
 const informe = [], faltan = [];
-for (const p of lista) {
-  const label = `${casaById(p.casa).name} ${p.name}`;
-  try {
-    const f = await fuente(p);
-    if (!f?.imgs.length) { faltan.push(`${p.id}  (${label}): no se encontró en la web oficial`); console.log(`·  ${label}: sin foto`); continue; }
-    const usada = await procesa(p, f.imgs);
-    if (!usada) { faltan.push(`${p.id}  (${label}): solo hay fotos de ambiente en ${f.desde}`); console.log(`·  ${label}: solo fotos de ambiente`); continue; }
-    informe.push(`${p.id}  ${f.desde}  ${usada}`);
-    console.log(`✓  ${label}`);
-  } catch (e) {
-    faltan.push(`${p.id}  (${label}): ${e.message}`);
-    console.log(`✗  ${label}: ${e.message}`);
+if (carpeta) {
+  /* Fotos propias: <id>.jpg|png|webp en la carpeta. Se gira según el EXIF (fotos de móvil) y se reduce antes de recortar */
+  const dir = resolve(process.cwd(), carpeta);
+  const leer = (file) => sharp(file).rotate().resize({ width: 2000, height: 2000, fit: 'inside', withoutEnlargement: true }).png().toBuffer();
+  for (const f of readdirSync(dir).filter((x) => /\.(jpe?g|png|webp)$/i.test(x)).sort()) {
+    const id = f.slice(0, -extname(f).length).toLowerCase(), p = TODAS.find((x) => x.id === id);
+    if (!p) { faltan.push(`${f}: no hay ninguna fragancia con el id «${id}» (míralo en la dirección de su ficha, /fragancias/<id>/)`); console.log(`✗  ${f}: id desconocido`); continue; }
+    const label = `${casaById(p.casa).name} ${p.name}`;
+    if (!(await procesa(p, [resolve(dir, f)], leer, { apilar: true }))) { faltan.push(`${f}  (${label}): el fondo no es liso, repítela sobre fondo blanco`); console.log(`·  ${label}: fondo no liso`); continue; }
+    propias.add(id);
+    informe.push(`${id}  foto propia  ${f}`);
+    console.log(`✓  ${label} (foto propia)`);
   }
+  writeFileSync(PROPIAS_FILE, `${JSON.stringify([...propias].sort(), null, 2)}\n`);
+} else {
+  // Una foto propia solo se sustituye si se pide esa fragancia por su id (no al pedir toda su casa ni con --todas)
+  const lista = TODAS.filter((p) => solo.includes(p.id) || (!propias.has(p.id) && (solo.length ? solo.includes(p.casa) : todas || !conFoto.has(p.id))));
+  for (const p of lista) {
+    const label = `${casaById(p.casa).name} ${p.name}`;
+    try {
+      const f = await fuente(p);
+      if (!f?.imgs.length) { faltan.push(`${p.id}  (${label}): no se encontró en la web oficial`); console.log(`·  ${label}: sin foto`); continue; }
+      const usada = await procesa(p, f.imgs);
+      if (!usada) { faltan.push(`${p.id}  (${label}): solo hay fotos de ambiente en ${f.desde}`); console.log(`·  ${label}: solo fotos de ambiente`); continue; }
+      propias.delete(p.id);
+      informe.push(`${p.id}  ${f.desde}  ${usada}`);
+      console.log(`✓  ${label}`);
+    } catch (e) {
+      faltan.push(`${p.id}  (${label}): ${e.message}`);
+      console.log(`✗  ${label}: ${e.message}`);
+    }
+  }
+  if (informe.length) writeFileSync(PROPIAS_FILE, `${JSON.stringify([...propias].sort(), null, 2)}\n`);
 }
 
 // fotos.js: las fragancias que tienen las dos medidas
@@ -246,6 +214,12 @@ const files = new Set(readdirSync(OUT));
 const fotos = ids.filter((id) => files.has(`${id}-400.webp`) && files.has(`${id}-800.webp`)).sort();
 writeFileSync(resolve(ROOT, 'src/data/fotos.js'),
   `// Generado por \`npm run fotos\`: fragancias con foto en public/img/productos (-400 y -800.webp). No editar a mano.\nexport const FOTOS = [\n${fotos.map((id) => `  '${id}'`).join(',\n')}\n];\n`);
+// Estado de todo el catálogo, no solo de esta pasada: qué fotos son propias, cuáles siguen siendo de la marca y cuáles faltan
+const conMarca = fotos.filter((id) => !propias.has(id)), sinFoto = ids.filter((id) => !fotos.includes(id));
 writeFileSync(resolve(ROOT, 'scripts/fotos-informe.txt'),
-  `Fotos descargadas (${informe.length})\nid  página  imagen\n${informe.join('\n')}\n\nSin foto (${faltan.length}): no se publican hasta tenerla\n${faltan.join('\n')}\n`);
+  `Esta pasada: ${informe.length} fotos nuevas\nid  origen\n${informe.join('\n')}\n\nNo se pudo (${faltan.length})\n${faltan.join('\n')}\n\n` +
+  `Estado del catálogo (${ids.length} fragancias)\n` +
+  `- Con foto propia: ${fotos.length - conMarca.length}\n` +
+  `- Con foto de la web de la marca, provisional hasta tener permiso o foto propia: ${conMarca.length}\n` +
+  `- Sin foto, no se publican: ${sinFoto.length}${sinFoto.length ? `\n  ${sinFoto.join('\n  ')}` : ''}\n`);
 console.log(`\n${fotos.length} de ${ids.length} fragancias con foto. Informe en scripts/fotos-informe.txt`);

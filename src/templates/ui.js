@@ -34,29 +34,41 @@ export const ICON = {
   whatsapp: svg('<path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.2.3-1 1-1 2.3s1 2.7 1.1 2.9c.1.2 2 3.1 4.9 4.3 1.8.8 2.5.8 3.4.7.6-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/>')
 };
 
-/** Foto de producto en la rejilla: el frasco recortado, siempre con el mismo encuadre (4:5 dentro
-    de un cuadrado) y sobre el mismo fondo, para que todas las fichas se vean iguales.
-    Solo se publican las fragancias con foto (FRAGANCIAS en catalogo.js), así que siempre hay p.img */
-export function productMedia(p, { sizes = '(min-width: 1100px) 22vw, (min-width: 760px) 30vw, 46vw', eager = false, vt = true, attrs = '' } = {}) {
-  const c = casaById(p.casa);
+/** Foto de producto en la rejilla. Con fotos originales de la casa (p.orig), la primera llena el
+    cuadrado y la segunda aparece encima al pasar el ratón, como en las webs de las casas. Sin ellas,
+    el frasco recortado (4:5 dentro del cuadrado) sobre el fondo de piedra.
+    Solo se publican las fragancias con foto (FRAGANCIAS en catalogo.js): si no hay p.orig, hay p.img */
+export function productMedia(p, { sizes = '(min-width: 1100px) 22vw, (min-width: 760px) 30vw, 46vw', eager = false, vt = true, hover = true, attrs = '' } = {}) {
+  const c = casaById(p.casa), label = `${c.name} ${p.name}`;
   const name = vt ? ` style="view-transition-name: f-${p.id}"` : '';
-  return `<figure class="product__media"${name}${attrs}><img src="/img/productos/${p.img}-400.webp" srcset="/img/productos/${p.img}-400.webp 400w, /img/productos/${p.img}-800.webp 800w" sizes="${sizes}" width="800" height="1000"${eager ? ' fetchpriority="high"' : ' loading="lazy"'} alt="Frasco de ${esc(`${c.name} ${p.name}`)}"></figure>`;
+  const load = eager ? ' fetchpriority="high"' : ' loading="lazy"';
+  if (p.orig) {
+    const segunda = hover && p.orig.n > 1 ? origImg(p, 1, sizes, ' class="product__hover" loading="lazy" alt=""') : '';
+    return `<figure class="product__media product__media--orig"${name}${attrs}>${origImg(p, 0, sizes, `${load} alt="${esc(label)}"`)}${segunda}</figure>`;
+  }
+  return `<figure class="product__media"${name}${attrs}><img src="/img/productos/${p.img}-400.webp" srcset="/img/productos/${p.img}-400.webp 400w, /img/productos/${p.img}-800.webp 800w" sizes="${sizes}" width="800" height="1000"${load} alt="Frasco de ${esc(label)}"></figure>`;
 }
 
-/** Fotos de la ficha: primero la de producto, como en la rejilla, y después las originales de la casa
-    (p.orig: la principal y la de ambiente), que solo se ven aquí. Las miniaturas las activa src/js/galeria.js */
+/* Foto original número i (0 = a, 1 = b…): cuadrada, en 160, 800 y 1600 px */
+const ORIG_LETRAS = 'abcdef';
+export const origSrc = (p, i, w) => `/img/originales/${p.id}-${ORIG_LETRAS[i]}-${w}.webp`;
+const origImg = (p, i, sizes, attrs) =>
+  `<img src="${origSrc(p, i, 800)}" srcset="${origSrc(p, i, 800)} 800w, ${origSrc(p, i, 1600)} 1600w" sizes="${sizes}" width="1600" height="1600"${attrs}>`;
+
+/** Fotos de la ficha: todas las originales de la casa, con miniaturas debajo (las activa
+    src/js/galeria.js). Sin originales, la foto recortada como en la rejilla */
 export function productGallery(p, { sizes = '(min-width: 960px) 50vw, 100vw' } = {}) {
-  const c = casaById(p.casa), label = `${c.name} ${p.name}`;
-  const origs = p.orig ? ['a', ...(p.orig.hover ? ['b'] : [])] : [];
-  if (!origs.length) return productMedia(p, { sizes, eager: true });
-  const orig = (k, i) => {
-    const src = (w) => `/img/originales/${p.id}-${k}-${w}.webp`;
-    return `<figure class="product__media product__media--foto" data-slide hidden><img src="${src(800)}" srcset="${src(800)} 800w, ${src(1600)} 1600w" sizes="${sizes}" width="${p.orig.w}" height="${p.orig.h}" loading="lazy" alt="${esc(label)}, foto ${i + 2}"></figure>`;
-  };
-  const thumb = (src, i) => `<li><button class="gallery__thumb" type="button" data-thumb="${i}" aria-pressed="${i === 0}" aria-label="Ver la foto ${i + 1} de ${origs.length + 1}"><img src="${src}" width="80" height="80" loading="lazy" alt=""></button></li>`;
+  if (!p.orig) return productMedia(p, { sizes, eager: true });
+  const c = casaById(p.casa), label = `${c.name} ${p.name}`, n = p.orig.n;
+  if (n === 1) return productMedia(p, { sizes, eager: true });
+  const slide = (i) => i === 0
+    ? productMedia(p, { sizes, eager: true, hover: false, attrs: ' data-slide' })
+    : `<figure class="product__media product__media--orig" data-slide hidden>${origImg(p, i, sizes, ` loading="lazy" alt="${esc(label)}, foto ${i + 1}"`)}</figure>`;
+  const thumb = (i) => `<li><button class="gallery__thumb" type="button" data-thumb="${i}" aria-pressed="${i === 0}" aria-label="Ver la foto ${i + 1} de ${n}"><img src="${origSrc(p, i, 160)}" width="80" height="80" loading="lazy" alt=""></button></li>`;
+  const idx = [...Array(n).keys()];
   return `<div class="gallery" data-gallery>
-        <div class="gallery__main">${productMedia(p, { sizes, eager: true, attrs: ' data-slide' })}${origs.map(orig).join('')}</div>
-        <ul class="gallery__thumbs" data-thumbs hidden>${thumb(`/img/productos/${p.img}-400.webp`, 0)}${origs.map((k, i) => thumb(`/img/originales/${p.id}-${k}-160.webp`, i + 1)).join('')}</ul>
+        <div class="gallery__main">${idx.map(slide).join('')}</div>
+        <ul class="gallery__thumbs" data-thumbs hidden>${idx.map(thumb).join('')}</ul>
       </div>`;
 }
 

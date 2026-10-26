@@ -16,12 +16,14 @@
      year     año de lanzamiento, o null si no está confirmado (entonces no se muestra)
      featured (opcional) aparece en la selección de la portada
 
-   FOTOS: solo se publican las fragancias que tienen foto oficial en
-   public/img/productos/<id>-400.webp y -800.webp. La lista la mantiene
-   `npm run fotos` en fotos.js; las demás quedan en TODAS hasta que tengan foto.
-   ORIGINALES: las que además tienen las fotos originales de la casa, sin recortar
-   (`npm run originales`, en originales.js). Solo se ven en la ficha, después de la de producto:
-   en las rejillas todas las fragancias usan la foto recortada, para que se vean iguales.
+   CATÁLOGO DE MUESTRA: la web enseña solo las fragancias de MUESTRA (cinco por casa).
+   TODAS guarda el catálogo entero para cuando se complete con el negocio.
+
+   FOTOS: solo se publican las fragancias que tienen foto, y son de dos tipos:
+   ORIGINALES  las fotos de la casa tal cual las publica en su web, en alta resolución
+               (`npm run originales`, en originales.js). Cuando las hay, son las que se ven.
+   FOTOS       el frasco recortado sobre fondo transparente, en public/img/productos/<id>-400
+               y -800.webp (`npm run fotos`, en fotos.js). Para las que no tienen originales.
    Como site.js, no debe usar nada del navegador (lo lee también vite.config.js).
    ========================================================================== */
 
@@ -422,8 +424,22 @@ export const TODAS = [
     'Cereza y humo de madera: oscuro, ahumado y muy seductor.')
 ];
 
-/** Las que se publican: solo las que tienen foto oficial (y notas oficiales) */
-export const FRAGANCIAS = TODAS.filter((p) => p.img && p.notes);
+/** Catálogo de muestra: las cinco más conocidas de cada casa, en el orden en que salen en la web.
+    Memo Paris solo tiene todavía Marfa: a las otras cuatro les faltan la foto y las notas oficiales */
+export const MUESTRA = {
+  creed: ['aventus', 'green-irish-tweed', 'silver-mountain-water', 'aventus-for-her', 'royal-oud'],
+  amouage: ['interlude-man', 'reflection-man', 'guidance-46', 'epic-woman', 'memoir-man'],
+  xerjoff: ['naxos', 'erba-pura', 'alexandria-ii', 'torino21', 'accento'],
+  pdm: ['layton', 'delina', 'pegasus', 'herod', 'greenley'],
+  initio: ['oud-for-greatness', 'side-effect', 'rehab', 'atomic-rose', 'psychedelic-love'],
+  montale: ['arabians-tonka', 'intense-cafe', 'roses-musk', 'chocolate-greedy', 'wild-pears'],
+  memo: ['marfa', 'african-leather', 'irish-leather', 'inle', 'french-leather'],
+  tomford: ['tobacco-vanille', 'oud-wood', 'lost-cherry', 'tuscan-leather', 'neroli-portofino']
+};
+export const MUESTRA_IDS = Object.entries(MUESTRA).flatMap(([casa, ids]) => ids.map((x) => `${casa}-${x}`));
+
+/** Las que se publican: las de la muestra que tienen foto (original o recortada) y notas oficiales */
+export const FRAGANCIAS = MUESTRA_IDS.map((id) => TODAS.find((p) => p.id === id)).filter((p) => p && (p.orig || p.img) && p.notes);
 
 /* Utilidades de datos (sirven al navegador y al compilar) */
 export const casaById = (id) => CASAS.find((c) => c.id === id);

@@ -2,14 +2,12 @@
 .pdp__crumbs { padding-block: 1.4rem 1rem; }
 .pdp { display: grid; gap: 2rem; padding-bottom: var(--section); }
 /* En grande, el frasco recortado algo más pequeño para que respire (las fotos originales van enteras) */
-.pdp__media .product__media:not(.product__media--foto) img { padding: 6% 9%; }
-.product__media--foto img { object-fit: cover; }
-/* Galería: la foto grande y, debajo, las miniaturas (src/js/galeria.js) */
+.pdp__media .product__media:not(.product__media--orig) img { padding: 6% 9%; }
+/* Galería de fotos originales: la foto grande y, debajo, las miniaturas (src/js/galeria.js) */
 .gallery { display: grid; gap: .8rem; }
 .gallery__thumbs { display: flex; gap: .6rem; }
 .gallery__thumb { display: block; width: 72px; aspect-ratio: 1; padding: 0; border: 1px solid var(--line); background: var(--stone); cursor: pointer; transition: border-color .2s; }
 .gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
-.gallery__thumbs li:first-child img { object-fit: contain; padding: 6%; } /* la de producto, entera como en la rejilla */
 .gallery__thumb:hover { border-color: rgba(18, 17, 16, .5); }
 .gallery__thumb[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
 .pdp__info { display: grid; gap: .9rem; align-content: start; justify-items: start; }
