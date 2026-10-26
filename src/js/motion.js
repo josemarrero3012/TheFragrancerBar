@@ -9,7 +9,8 @@ function introHero() {
   const soft = !fullMotion || matchMedia('(max-width: 959px)').matches;
   $('.hero__media').animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1100, easing: EASE, fill: 'backwards' });
   const kf = soft ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(22px)' }, { opacity: 1, transform: 'none' }];
-  [...$('.hero__copy').children].forEach((el, i) => el.animate(kf, { duration: 1100, delay: i * 110, easing: EASE, fill: 'backwards' }));
+  const items = [...$('.hero__copy').children, ...$$('.hero__tag, .hero__card')];
+  items.forEach((el, i) => el.animate(kf, { duration: 1100, delay: i * 110, easing: EASE, fill: 'backwards' }));
   document.documentElement.classList.remove('is-intro');
 }
 
@@ -63,25 +64,15 @@ function initReveal() {
   });
 }
 
-/* Parallax de la casa destacada y progreso de la historia, en un único rAF por scroll */
+/* Progreso de la historia, en un único rAF por scroll */
 function initScrollFx() {
   const tl = $('.timeline'), steps = tl ? $$('li', tl) : [];
-  const inv = $('.invitada');
-  if (!tl && !inv) return;
-  const para = fullMotion && inv && $('.invitada__media img').animate(
-    [{ transform: 'translateY(-7%) scale(1.16)' }, { transform: 'translateY(7%) scale(1.16)' }],
-    { duration: 1000, easing: 'linear', fill: 'both' });
-  if (para) para.pause();
+  if (!tl) return;
 
   let ticking = false;
   const update = () => {
     ticking = false;
     const vh = innerHeight;
-    if (para) {
-      const r = inv.getBoundingClientRect();
-      para.currentTime = clamp01((vh - r.top) / (vh + r.height)) * 1000;
-    }
-    if (!tl) return;
     const r = tl.getBoundingClientRect(), mark = vh * .62;
     tl.style.setProperty('--tl', clamp01((mark - r.top) / r.height).toFixed(4));
     steps.forEach((li) => li.classList.toggle('is-reached', li.getBoundingClientRect().top + 10 <= mark));

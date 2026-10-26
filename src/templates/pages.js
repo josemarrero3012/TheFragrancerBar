@@ -4,12 +4,12 @@
    Una casa nueva en src/data/casas.js o una fragancia publicada en catalogo/fragancias.csv crea su página sola.
    ========================================================================== */
 import { SITE, mainStore } from '../data/site.js';
-import { CASAS, FRAGANCIAS, FAMILIAS, CONCENTRACIONES, PRECIOS, casaById, fragById, familiaName, fragsDeCasa, euros } from '../data/catalogo.js';
+import { CASAS, FRAGANCIAS, FAMILIAS, CONCENTRACIONES, PRECIOS, casaById, fragById, familiaName, fragsDeCasa, euros, priceFrom } from '../data/catalogo.js';
 import { NOTAS, NOTAS_FOTOS, gruposDeNotas, notasPlanas } from '../data/notas.js';
 import { GUIAS } from '../data/guias.js';
 import * as schema from '../data/schema.js';
 import { layout, whatsappHref } from './layout.js';
-import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productGallery, productMedia, productCard, moreButton, crumbs, pageHead, demoNote, brandStrip, clock, nota } from './ui.js';
+import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productGallery, productMedia, productCard, origSrc, moreButton, crumbs, pageHead, demoNote, brandStrip, clock, nota } from './ui.js';
 
 const DAYS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const cap = (s) => s[0].toUpperCase() + s.slice(1);
@@ -58,9 +58,15 @@ const mapBox = (s) => `
 
 /* ---------------------------------------------------------------- Portada */
 function home(url) {
-  const d = casaById(SITE.destacada.casa), t = mainStore();
+  const e = SITE.destacada, d = casaById(e.casa), f = fragById(e.frag), t = mainStore();
+  // En móvil la foto 16:9 llena un marco cuadrado: se ve 1,8 veces más ancha que la pantalla
+  const heroImg = { src: `/${e.img}-2400.webp`, srcset: `/${e.img}-1200.webp 1200w, /${e.img}-2400.webp 2400w`, sizes: '(min-width: 960px) 100vw, 178vw' };
   const main = `
     <section class="hero" aria-labelledby="hero-title">
+      <figure class="hero__media">
+        <img src="${heroImg.src}" srcset="${heroImg.srcset}" sizes="${heroImg.sizes}" width="2400" height="1350"
+             style="object-position: ${e.focus}" alt="${esc(e.alt)}" fetchpriority="high">
+      </figure>
       <div class="hero__copy">
         <p class="eyebrow">Perfumería nicho · Gran Canaria y Tenerife</p>
         <h1 class="hero__title" id="hero-title">Perfumería nicho, <em>sin prisa.</em></h1>
@@ -69,13 +75,15 @@ function home(url) {
           <a class="btn btn--dark" href="${u('comprar/')}">Comprar fragancias</a>
           <a class="btn btn--line" href="${storeUrl(t)}">Visitar la tienda</a>
         </div>
-        <p class="hero__where">${ICON.pin}<span>${esc(t.addressShort)}</span></p>
-        ${clock(t)}
       </div>
-      <figure class="hero__media">
-        <img src="/${t.img}-1448.webp" srcset="/${t.img}-800.webp 800w, /${t.img}-1448.webp 1448w"
-             sizes="(min-width: 960px) 54vw, 100vw" width="1448" height="1086" alt="${esc(t.imgAlt)}" fetchpriority="high">
-      </figure>
+      <p class="hero__tag">En el escaparate · <a href="${casaUrl(d)}">${esc(d.name)}</a></p>
+      ${f ? `<a class="hero__card" href="${fragUrl(f)}">
+        <img src="${f.orig ? origSrc(f, 0, 160) : `/img/productos/${f.img}-400.webp`}" width="160" height="160" alt="">
+        <span class="hero__card-brand">${esc(d.name)}</span>
+        <span class="hero__card-name">${esc(f.name)}</span>
+        <span class="hero__card-price">${f.sizes.length > 1 ? 'desde ' : ''}${euros(priceFrom(f))}</span>
+        <span class="hero__card-go">Ver fragancia</span>
+      </a>` : ''}
     </section>
 
     <div class="brandline">
@@ -97,18 +105,6 @@ function home(url) {
       </div>
     </section>
 
-    <section class="invitada" aria-labelledby="invitada-title">
-      <figure class="invitada__media">
-        <img src="/img/casas/xerjoff-banner-1200.webp" srcset="/img/casas/xerjoff-banner-1200.webp 1200w, /img/casas/xerjoff-banner-2400.webp 2400w"
-             sizes="100vw" width="2400" height="1350" loading="lazy" alt="Frasco de Xerjoff Naxos sobre un mapa antiguo, envuelto por una cinta verde">
-      </figure>
-      <div class="invitada__copy wrap" data-reveal="up" data-stagger>
-        <p class="eyebrow invitada__eyebrow">En el escaparate</p>
-        <h2 class="invitada__title" id="invitada-title">Este mes, <em>${esc(d.name)}</em></h2>
-        <p>${esc(SITE.destacada.text)}</p>
-        <a class="link" href="${casaUrl(d)}">Conocer ${esc(d.name)}</a>
-      </div>
-    </section>
 
     <section class="barra section section--dark" aria-labelledby="barra-title">
       <div class="wrap barra__grid">
@@ -141,7 +137,7 @@ function home(url) {
     title: 'Perfumería nicho en Las Palmas y Tenerife | The Fragrance Bar',
     ogTitle: 'The Fragrance Bar · Triana, Las Palmas de Gran Canaria',
     description: 'Perfumería nicho en la Calle Mayor de Triana (Las Palmas de Gran Canaria), Costa Adeje y Playa de las Américas. Creed, Xerjoff, Amouage, Initio y más.',
-    preload: `<link rel="preload" as="image" href="/${t.img}-1448.webp" imagesrcset="/${t.img}-800.webp 800w, /${t.img}-1448.webp 1448w" imagesizes="(min-width: 960px) 54vw, 100vw">`,
+    preload: `<link rel="preload" as="image" href="${heroImg.src}" imagesrcset="${heroImg.srcset}" imagesizes="${heroImg.sizes}">`,
     schema: schema.graph([
       { '@type': 'WebSite', '@id': `${url}/#web`, name: SITE.brand, url: `${url}/`, inLanguage: 'es' },
       schema.organization(SITE, url),

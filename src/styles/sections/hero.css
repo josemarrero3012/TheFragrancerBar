@@ -1,24 +1,47 @@
-/* Inicio: titular y, al lado, la foto de la fachada de Triana a sangre hasta el borde derecho */
-.hero { display: grid; }
-.hero__media { margin: 0; order: -1; aspect-ratio: 4 / 3; overflow: hidden; background: var(--stone); }
-.hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
-.hero__copy { padding: 2.4rem var(--gutter) 3.4rem; display: flex; flex-direction: column; justify-content: center; }
-.hero__title { font-size: var(--t-h1); margin-top: 1.1rem; max-width: 12ch; }
-.hero__lede { margin-top: 1.4rem; max-width: 30rem; font-size: var(--t-lg); color: var(--muted); font-weight: 300; line-height: 1.55; }
+/* Inicio: la foto de campaña del escaparate del mes a toda la pantalla, como las webs de las casas.
+   El titular va a la izquierda, sobre un velo del color del papel que solo aclara ese lado de la foto
+   para que se lea; la tarjeta de la fragancia, abajo a la derecha. En móvil, foto arriba y texto debajo. */
+.hero { position: relative; display: flex; flex-direction: column; background: var(--stone); }
+.hero__media { position: relative; margin: 0; aspect-ratio: 1; overflow: hidden; }
+.hero__media img { width: 100%; height: 100%; object-fit: cover; }
+.hero__copy { padding: 2.2rem var(--gutter) 1.4rem; }
+.hero__title { font-size: var(--t-h1); margin-top: 1rem; max-width: 12ch; line-height: 1.02; }
+.hero__lede { margin-top: 1.2rem; max-width: 30rem; font-size: var(--t-lg); color: var(--ink-2); font-weight: 300; line-height: 1.55; }
 .hero__ctas { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
-.hero__where { display: flex; align-items: flex-start; gap: .5rem; margin-top: 2.2rem; font-size: var(--t-sm); color: var(--ink-2); }
-.hero__where .icon { width: 18px; height: 18px; margin-top: .1em; color: var(--oak); }
-.hero__where + .status { margin-top: .5rem; }
+.hero__tag { padding: 0 var(--gutter) .7rem; font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+.hero__tag a { font-weight: 600; color: inherit; text-decoration: none; }
+.hero__tag a:hover { color: var(--oak); }
+.hero__card {
+  display: grid; grid-template-columns: 76px 1fr; column-gap: 1rem; align-items: center;
+  margin: 0 var(--gutter) 2.6rem; padding: .8rem 1.4rem .8rem .8rem;
+  background: var(--card); color: var(--ink); text-decoration: none;
+}
+.hero__card img { grid-row: 1 / 5; width: 76px; height: 76px; object-fit: cover; background: #fff; }
+.hero__card-brand { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.hero__card-name { font-family: var(--f-serif); font-size: 1.15rem; }
+.hero__card-price { font-size: var(--t-sm); color: var(--muted); }
+.hero__card-go { margin-top: .2rem; font-size: var(--t-sm); text-decoration: underline; text-underline-offset: 3px; }
+.hero__card:hover .hero__card-go { color: var(--oak); }
+
+@media (min-width: 960px) {
+  .hero { display: block; height: calc(100svh - var(--header-h)); min-height: 600px; max-height: 960px; overflow: hidden; }
+  .hero__media { position: absolute; inset: 0; aspect-ratio: auto; }
+  /* La foto algo ampliada y desplazada a la derecha deja sitio al titular sin tapar el frasco */
+  .hero__media img { transform: scale(1.12); transform-origin: 20% 50%; }
+  .hero__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(248, 247, 244, .94), rgba(248, 247, 244, .86) 30%, rgba(248, 247, 244, 0) 52%); }
+  .hero__copy, .hero__tag { position: absolute; left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); padding: 0; }
+  .hero__copy { top: 50%; transform: translateY(-50%); max-width: 34rem; }
+  .hero__title { font-size: clamp(3rem, 1.6rem + 3.6vw, 5.2rem); max-width: none; }
+  .hero__lede { max-width: 25rem; }
+  .hero__tag { bottom: 2.2rem; }
+  .hero__card { position: absolute; right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); bottom: 2.2rem; margin: 0; min-width: 290px; background: rgba(255, 255, 255, .94); }
+}
+
+/* Horario de cada tienda (tarjetas y fichas de tienda) */
 .status { display: inline-flex; align-items: center; gap: .6rem; margin-top: 2rem; font-size: var(--t-sm); color: var(--muted); }
 .status__dot { width: 7px; height: 7px; border-radius: 50%; background: #B9B1A6; }
 .status.is-open .status__dot { background: var(--ok); }
 .status.is-last .status__dot { background: var(--oak); }
-
-@media (min-width: 960px) {
-  .hero { grid-template-columns: 46fr 54fr; min-height: min(calc(100svh - var(--header-h)), 900px); }
-  .hero__media { order: 0; aspect-ratio: auto; }
-  .hero__copy { padding-left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); padding-right: clamp(2rem, 4vw, 4.5rem); }
-}
 
 /* Franja de casas */
 .brandline { border-block: 1px solid var(--line); }
