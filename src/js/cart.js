@@ -2,7 +2,7 @@
    Para conectarla a una tienda real, el pedido de initCheckout() debe enviarse a la pasarela
    de pago y al sistema de pedidos en lugar de mostrarse directamente como confirmado. */
 import { SITE, storeById } from '../data/site.js';
-import { fragById, casaById, euros } from '../data/catalogo.js';
+import { fragById, casaById, euros } from './tienda.js';
 import { $, $$, reduceMotion, EASE, store, esc, asset } from './utils.js';
 
 const KEY = 'tfb-cart';

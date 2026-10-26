@@ -1,5 +1,5 @@
 /* Contacto: mapas bajo demanda, formulario (sin envío real todavía) y boletín */
-import { casaById } from '../data/catalogo.js';
+import { casaById } from './tienda.js';
 import { $, $$, reduceMotion, EASE } from './utils.js';
 import { pickedProducts } from './lista.js';
 

@@ -8,9 +8,9 @@
   -webkit-appearance: none; appearance: none;
 }
 .toolbar__search input:focus-visible { outline: 2px solid var(--oak); outline-offset: 0; border-color: var(--oak); }
-.toolbar__selects { display: flex; gap: .8rem; flex: 1 1 320px; }
+.toolbar__selects { display: flex; flex-wrap: wrap; gap: .8rem; flex: 1 1 320px; }
 @media (min-width: 960px) { .toolbar__selects { flex: 0 1 auto; } }
-.select { display: grid; gap: .3rem; flex: 1; min-width: 0; }
+.select { display: grid; gap: .3rem; flex: 1 1 9rem; min-width: 0; }
 .select span { font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .select select {
   width: 100%; min-height: 50px; padding: .6rem 2.2rem .6rem .9rem; border: 1px solid rgba(18, 17, 16, .22); border-radius: 0;

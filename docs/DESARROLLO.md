@@ -22,7 +22,7 @@ Cada sección es una página con su propia URL. Todas se generan desde los datos
 |---|---|
 | `/` | Portada: tienda de Triana, selección, casa destacada, la barra, tiendas |
 | `/casas/` · `/casas/<casa>/` | Las 8 casas y una página por casa con todas sus fragancias |
-| `/comprar/` | Catálogo con buscador, filtros por casa y familia, y orden (los filtros van en la URL: `?casa=xerjoff&familia=ambar`) |
+| `/comprar/` | Catálogo con buscador, filtros por casa, familia y precio (con el número de resultados de cada opción), orden y «Ver más» de 24 en 24 (los filtros van en la URL: `?casa=xerjoff&familia=ambar&precio=150-250`) |
 | `/fragancias/<id>/` | Ficha de cada fragancia: tamaños, precio, notas de salida, corazón y fondo, relacionadas |
 | `/cesta/` | Cesta y pedido (recogida en tienda o envío) |
 | `/la-barra/` · `/historia/` | El concepto de la barra y la historia de la marca |
@@ -35,7 +35,8 @@ Al pasar de una página a otra hay una transición suave (View Transitions) en l
 ## Estructura
 
 ```
-├── vite.config.js          Genera las páginas (en desarrollo y al compilar), robots.txt y sitemap.xml
+├── vite.config.js          Genera las páginas (en desarrollo y al compilar), robots.txt, sitemap.xml y virtual:tienda
+├── catalogo/fragancias.csv ★ La hoja del catálogo: una fila por fragancia (ver docs/CATALOGO.md)
 ├── public/                 Archivos que se copian tal cual a dist/
 │   ├── img/casas/          Imágenes editoriales de cada casa (560 y 1000 px)
 │   ├── img/productos/      Frascos con foto (400 y 800 px)
@@ -44,7 +45,9 @@ Al pasar de una página a otra hay una transición suave (View Transitions) en l
     ├── main.js             Punto de entrada común a todas las páginas
     ├── data/
     │   ├── site.js         ★ Negocio: tiendas, horarios, festivos, contacto, envíos, FAQ, menú
-    │   ├── catalogo.js     ★ Casas, familias y fragancias (con precios de demostración)
+    │   ├── casas.js        ★ Casas, familias olfativas y concentraciones
+    │   ├── catalogo.js     Fragancias de la hoja con sus fotos y notas, y qué se publica
+    │   ├── fragancias.js   La hoja catalogo/fragancias.csv pasada a datos (lo genera npm run catalogo)
     │   └── schema.js       Datos estructurados schema.org
     ├── templates/          Marcado de las páginas (se ejecuta al compilar, no en el navegador)
     │   ├── layout.js       <head>, cabecera, menú, pie, barra de contacto y cesta lateral
@@ -54,7 +57,8 @@ Al pasar de una página a otra hay una transición suave (View Transitions) en l
     │   ├── header.js       Cabecera y menú móvil
     │   ├── clock.js        «Abierto ahora / Cerrado», con festivos
     │   ├── cart.js         Cesta, cesta lateral, ficha de producto y pedido
-    │   ├── shop.js         Buscador, filtros y orden del catálogo
+    │   ├── shop.js         Buscador, filtros, orden y «Ver más» del catálogo
+    │   ├── tienda.js       Lo que la cesta y «Tu lista» necesitan de las fragancias publicadas
     │   ├── lista.js        «Tu lista» (favoritos que se envían por WhatsApp o con el formulario)
     │   ├── galeria.js      Miniaturas de la ficha de producto
     │   ├── contacto.js     Mapas bajo demanda, formulario y boletín
@@ -73,8 +77,8 @@ No hay archivos `.html` en el proyecto: las páginas salen de `src/templates` y 
 
 ## Editar el contenido
 
-- **Fragancias**: `TODAS` en `src/data/catalogo.js` guarda el catálogo entero y `MUESTRA` dice cuáles se publican (ahora, cinco por casa). Añadir una a `MUESTRA` crea su página y la añade al catálogo, a su casa y al sitemap. Solo se publican las que tienen foto y notas oficiales. La foto puede ser de dos tipos: las originales de la casa (`npm run originales`: `img/originales/<id>-a|b|c…-160|800|1600.webp`, cuadradas; la `a` se ve en las rejillas, la `b` al pasar el ratón y todas en la ficha) o, si no las tiene, el frasco recortado (`npm run fotos`: `img/productos/<id>-400.webp` y `-800.webp`, 4:5 sobre fondo transparente, con la base siempre a la misma altura). Las fotos propias de la tienda entran con `npm run fotos -- --carpeta <carpeta>` ([FOTOS.md](FOTOS.md)). `featured: true` la pone en la portada (se ven las 8 primeras).
-- **Casas**: `CASAS` en `src/data/catalogo.js`. Cada casa necesita `img/casas/<img>-560.webp` y `-1000.webp` (4:5).
+- **Fragancias**: en la hoja `catalogo/fragancias.csv`, una fila por fragancia, con sus precios y una columna «publicar» que dice cuáles salen en la web (ahora, cinco por casa). Guía para rellenarla y comprobarla: [CATALOGO.md](CATALOGO.md). `npm run catalogo` la pasa a `src/data/fragancias.js` (se ejecuta solo antes de `dev` y `build`). Marcar una crea su página y la añade al catálogo, a su casa y al sitemap. Solo se publican las que tienen foto original o propia, notas oficiales y descripción. La foto puede ser de dos tipos: las originales de la casa (`npm run originales`: `img/originales/<id>-a|b|c…-160|800|1600.webp`, cuadradas; la `a` se ve en las rejillas, la `b` al pasar el ratón y todas en la ficha) o una foto propia de la tienda, que se recorta como frasco (`npm run fotos -- --carpeta <carpeta>`: `img/productos/<id>-400.webp` y `-800.webp`, 4:5 sobre fondo transparente, con la base siempre a la misma altura; ver [FOTOS.md](FOTOS.md)). Los frascos recortados de las webs de las marcas no bastan para publicar. «destacada» la pone en la portada (se ven las 8 primeras).
+- **Casas**: `CASAS` en `src/data/casas.js`. Cada casa necesita `img/casas/<img>-560.webp` y `-1000.webp` (4:5). Una casa sin fragancias publicadas no sale en el filtro de `/comprar/` y su página invita a probarlas en tienda.
 - **Tiendas, horarios y festivos**: `SITE.stores` y `SITE.calendar` en `src/data/site.js` (índice 0 = domingo, `null` = cerrado).
 - **Envíos y preguntas frecuentes**: `SITE.shipping` y `SITE.faq`.
 - **Precios de demostración**: con `SITE.demoPrices = true` se avisa en el catálogo, las fichas y la cesta de que los precios son inventados, y no se publican en los datos estructurados. Con los precios reales, ponerlo en `false`.
@@ -113,7 +117,7 @@ Todo lo marcado `PROVISIONAL` en `src/data/site.js` y los datos entre corchetes 
 - [ ] Conectar la pasarela de pago y los pedidos (ver `initCheckout()` en `src/js/cart.js`)
 - [ ] Conectar el formulario de contacto y el boletín a un servicio real (ver `src/js/contacto.js`)
 - [ ] Reseñas de Google Business Profile, enlace a Facebook si lo hay
-- [ ] El catálogo real con el negocio (ahora es una muestra de cinco fragancias por casa) y permiso para usar las imágenes oficiales de las marcas, o fotos propias (guía y estado en [FOTOS.md](FOTOS.md))
+- [ ] El catálogo real con el negocio en `catalogo/fragancias.csv` (ahora se publica una muestra de cinco fragancias por casa) y permiso para usar las imágenes oficiales de las marcas, o fotos propias (guía y estado en [FOTOS.md](FOTOS.md))
 - [ ] Fotos de las tiendas de Tenerife (`npm run foto-tienda`, ver [FOTOS.md](FOTOS.md))
 - [ ] Confirmar las respuestas de las preguntas frecuentes (muestras, tarjeta regalo, envíos)
 - [ ] Dominio definitivo (`SITE.url`)

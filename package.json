@@ -5,13 +5,16 @@
   "description": "Web de The Fragrance Bar Triana, perfumería nicho en Las Palmas de Gran Canaria.",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/catalogo.mjs",
     "dev": "vite",
+    "prebuild": "node scripts/catalogo.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "fotos": "node scripts/fotos.mjs",
     "foto-tienda": "node scripts/foto-tienda.mjs",
     "notas": "node scripts/notas.mjs",
-    "originales": "node scripts/originales.mjs"
+    "originales": "node scripts/originales.mjs",
+    "catalogo": "node scripts/catalogo.mjs"
   },
   "dependencies": {
     "@fontsource-variable/hanken-grotesk": "5.3.0",

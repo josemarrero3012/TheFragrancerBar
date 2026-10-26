@@ -1,6 +1,6 @@
 /* «Tu lista»: fragancias guardadas con el corazón (en el navegador).
    Se añaden al mensaje de contacto y se pueden enviar por WhatsApp. */
-import { fragById, casaById } from '../data/catalogo.js';
+import { fragById, casaById } from './tienda.js';
 import { $, $$, reduceMotion, EASE, store, esc, asset, whatsappHref } from './utils.js';
 
 const picks = store.get('tfb-picks', []).filter(fragById);

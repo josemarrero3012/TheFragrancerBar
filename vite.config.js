@@ -1,18 +1,28 @@
+import { execFile } from 'node:child_process';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import { SITE } from './src/data/site.js';
 import { pages } from './src/templates/pages.js';
+import { CASAS, FRAGANCIAS } from './src/data/catalogo.js';
 
 // La variable de entorno SITE_URL sustituye a SITE.url (p. ej. al publicar en GitHub Pages)
 const SITE_URL = (process.env.SITE_URL || SITE.url).replace(/\/$/, '');
 const ROOT = import.meta.dirname;
 
 /* Web de varias páginas generadas desde src/data (contenido) y src/templates (marcado):
-   - En desarrollo, cada petición se genera al vuelo (cambiar una plantilla recarga el navegador)
+   - En desarrollo, cada petición se genera al vuelo (cambiar una plantilla recarga el navegador;
+     guardar la hoja catalogo/fragancias.csv la vuelve a pasar con `npm run catalogo`)
    - Al compilar, cada página es una entrada HTML virtual: Vite procesa sus recursos sin que
      existan archivos .html en el proyecto
-   - robots.txt y sitemap.xml (con lastmod) al compilar */
+   - robots.txt y sitemap.xml (con lastmod) al compilar
+   - virtual:tienda: lo que el navegador necesita de las fragancias publicadas (src/js/tienda.js) */
+const TIENDA = '\0virtual:tienda';
+/** Fragancias publicadas para la cesta y «Tu lista»: id, casa, nombre, tamaños y la foto de la miniatura */
+const tienda = ({ CASAS, FRAGANCIAS }) =>
+  `export const CASAS = ${JSON.stringify(CASAS.map(({ id, name }) => ({ id, name })))};\n` +
+  `export const FRAGANCIAS = ${JSON.stringify(FRAGANCIAS.map(({ id, casa, name, sizes, orig, img }) => ({ id, casa, name, sizes, ...(orig ? { orig: 1 } : { img }) })))};\n`;
+
 function sitePages() {
   const PAGES = pages(SITE_URL);
   const toFile = (id) => (id.startsWith(ROOT) ? id.slice(ROOT.length + 1) : id.replace(/^\//, ''));
@@ -23,12 +33,28 @@ function sitePages() {
     return p.endsWith('.html') ? p : `${p}/index.html`;
   };
 
+  let dev = null;
+
   return {
     name: 'tfb-pages',
 
     configureServer(server) {
-      const reload = (f) => { if (/src[\\/](templates|data)[\\/]/.test(f)) server.ws.send({ type: 'full-reload' }); };
+      dev = server;
+      const reload = (f) => {
+        if (!/src[\\/](templates|data)[\\/]/.test(f)) return;
+        const m = server.moduleGraph.getModuleById(TIENDA);
+        if (m) server.moduleGraph.invalidateModule(m);
+        server.ws.send({ type: 'full-reload' });
+      };
       server.watcher.on('change', reload);
+      const hoja = resolve(ROOT, 'catalogo/fragancias.csv');
+      server.watcher.add(hoja);
+      server.watcher.on('change', (f) => {
+        if (resolve(f) !== hoja) return;
+        execFile(process.execPath, [resolve(ROOT, 'scripts/catalogo.mjs')], (err, out, errOut) => {
+          server.config.logger[err ? 'error' : 'info']((err ? errOut : out).trim(), { timestamp: true });
+        });
+      });
       server.middlewares.use(async (req, res, next) => {
         const { pathname } = new URL(req.url, 'http://x');
         const base = server.config.base;
@@ -67,8 +93,14 @@ function sitePages() {
     config() {
       return { build: { rolldownOptions: { input: Object.keys(PAGES).map((f) => resolve(ROOT, f)) } } };
     },
-    resolveId(id) { const f = toFile(id); if (PAGES[f]) return resolve(ROOT, f); },
-    load(id) { const f = toFile(id); if (PAGES[f]) return PAGES[f]; },
+    resolveId(id) {
+      if (id === 'virtual:tienda') return TIENDA;
+      const f = toFile(id); if (PAGES[f]) return resolve(ROOT, f);
+    },
+    async load(id) {
+      if (id === TIENDA) return tienda(dev ? await dev.ssrLoadModule('/src/data/catalogo.js') : { CASAS, FRAGANCIAS });
+      const f = toFile(id); if (PAGES[f]) return PAGES[f];
+    },
 
     generateBundle() {
       const today = new Date().toISOString().slice(0, 10);
