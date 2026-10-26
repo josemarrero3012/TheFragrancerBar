@@ -34,7 +34,7 @@ Con un móvil y una mesa junto a una ventana basta.
 
 Por cada tienda, en horizontal y de día, con la tienda recogida y sin clientes (o con su permiso):
 
-1. **La fachada o la entrada** con el rótulo, de frente. Es la que sale en la portada y en la tarjeta de la tienda.
+1. **La fachada o la entrada** con el rótulo, de frente. Es la que sale en la página de la tienda y, la de Triana, en la portada, recortada en cuadrado desde el centro (el rótulo tiene que quedar entero en el medio).
 2. **El interior completo**, desde la puerta.
 3. **La barra**, con los frascos para probar.
 4. **Un detalle**: una vitrina bien iluminada, el mostrador o las lámparas.
@@ -74,7 +74,7 @@ Deja `public/img/tienda/plaza-del-duque-fachada-800.webp` y `-1448.webp`. Despu�
 
 ## Escaparate de la portada
 
-El hero de la portada pasa varias campañas a pantalla completa (`SITE.escaparate` en `src/data/site.js`). Cada una es una foto horizontal o una película de la casa, más la foto de la tienda de Triana. Van en `public/escaparate/`.
+Bajo el hero, la portada pasa varias campañas a pantalla completa (`SITE.escaparate` en `src/data/site.js`), con el nombre de la casa en grande. Cada una es una foto horizontal o una película de la casa. Van en `public/escaparate/`.
 
 **Foto:** horizontal, de 2400 px de ancho como mínimo, en `<nombre>-1200.webp` y `<nombre>-2400.webp`.
 

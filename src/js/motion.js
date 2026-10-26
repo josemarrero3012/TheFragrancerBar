@@ -3,16 +3,21 @@
 import { MOTION } from '../data/site.js';
 import { $, $$, reduceMotion, fullMotion, EASE, clamp01 } from './utils.js';
 
-/* Entrada de la portada: fundido del escaparate y el titular subiendo línea a línea, como si saliera de una ranura */
+/* Entrada de la portada: el nombre sale palabra a palabra de su ranura, la foto de la fachada se descubre
+   de abajo arriba, como al subir la persiana de la tienda, y los datos llegan después */
 function introHero() {
-  if (!$('.hero')) return;
+  const hero = $('.hero');
+  if (!hero) return;
   const soft = !fullMotion || matchMedia('(max-width: 959px)').matches;
-  const up = soft ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'none' }];
-  $('.hero__stage').animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1200, easing: EASE, fill: 'backwards' });
-  $$('.hero__line > span').forEach((el, i) => el.animate([{ transform: 'translateY(105%)' }, { transform: 'none' }],
-    { duration: soft ? 900 : 1300, delay: 250 + i * 140, easing: 'cubic-bezier(.2,.7,.1,1)', fill: 'backwards' }));
-  const rest = [$('.hero__eyebrow'), $('.hero__lede'), $('.hero__ctas'), $('.hero__credit'), $('.hero__card.is-active'), $('.hero__nav')];
-  rest.filter(Boolean).forEach((el, i) => el.animate(up, { duration: 1000, delay: 500 + i * 110, easing: EASE, fill: 'backwards' }));
+  const up = soft ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }];
+  $$('.hero__w > *', hero).forEach((el, i) => el.animate([{ transform: 'translateY(180%)' }, { transform: 'none' }],
+    { duration: soft ? 1000 : 1400, delay: 150 + i * 130, easing: 'cubic-bezier(.2,.7,.1,1)', fill: 'backwards' }));
+  $('.hero__rotulo .logo__sub', hero).animate(up, { duration: 1000, delay: 650, easing: EASE, fill: 'backwards' });
+  const photo = $('.hero__photo', hero);
+  photo.animate([{ clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0)' }], { duration: soft ? 1100 : 1500, delay: 300, easing: 'cubic-bezier(.77,0,.18,1)', fill: 'backwards' });
+  if (!soft) $('img', photo).animate([{ transform: 'scale(1.12)' }, { transform: 'none' }], { duration: 2400, delay: 300, easing: 'cubic-bezier(.2,.7,.1,1)', fill: 'backwards' });
+  // Los datos uno a uno (en móvil las columnas no tienen caja propia: van sus hijos)
+  [...$$('.hero__col > *', hero), $('.hero__also', hero)].filter(Boolean).forEach((el, i) => el.animate(up, { duration: 1000, delay: 900 + i * 70, easing: EASE, fill: 'backwards' }));
   document.documentElement.classList.remove('is-intro');
 }
 

@@ -3,12 +3,11 @@
    barra de contacto móvil y cesta lateral.
    ========================================================================== */
 import { SITE, NAV, mainStore } from '../data/site.js';
-import { esc, u, ICON, NEW_TAB, storeUrl, telHref } from './ui.js';
+import { esc, u, ICON, NEW_TAB, LOGO, storeUrl, telHref } from './ui.js';
 
 const logo = (cls = '', label = 'The Fragrance Bar, inicio') => `
       <a class="logo${cls}" href="${u()}" aria-label="${label}">
-        <span class="logo__mark"><span class="logo__caps">The</span> <em>fragrance</em> <span class="logo__caps">Bar</span></span>
-        <span class="logo__sub">Luxury perfumes</span>
+        ${LOGO}
       </a>`;
 
 const badge = (attr, label) => `<span class="badge" ${attr} hidden><span data-n>0</span><span class="visually-hidden"> ${label}</span></span>`;
@@ -146,7 +145,9 @@ export function layout(page, url) {
   <link rel="stylesheet" href="/src/styles/main.css">
   <link rel="expect" href="#contenido" blocking="render">
   <script>
-    /* Animaciones: con movimiento, el contenido revelable espera a src/js/motion.js (con red de seguridad) */
+    /* Animaciones: con movimiento, el contenido revelable espera a src/js/motion.js (con red de seguridad).
+       En la portada, el logo de la cabecera espera a que el nombre grande del hero suba hasta él (src/js/rotulo.js) */
+    ${page.rotulo ? "document.documentElement.classList.add('has-rotulo');" : ''}
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.documentElement.classList.add('has-motion'${page.intro ? ", 'is-intro'" : ''});
       ${page.intro ? "setTimeout(function () { document.documentElement.classList.remove('is-intro'); }, 3000);" : ''}

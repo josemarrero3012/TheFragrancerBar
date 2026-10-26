@@ -6,6 +6,8 @@
   border-bottom: 1px solid transparent; transition: border-color .3s;
 }
 .header.is-scrolled { border-bottom-color: var(--line); }
+/* Portada: el logo espera a que el nombre grande del hero suba y encoja hasta él (src/js/rotulo.js). Con el teclado se ve siempre */
+.has-rotulo .header:not(.is-docked) .logo:not(:focus-visible) { opacity: 0; }
 .header__inner { display: flex; align-items: center; gap: 2rem; min-height: var(--header-h); }
 .header .logo { margin-right: auto; }
 .header__actions { display: flex; align-items: center; gap: .4rem; }
@@ -26,7 +28,7 @@
 .burger[aria-expanded="true"] .burger__lines::after { top: 4px; transform: rotate(-45deg); }
 
 .mobile-menu {
-  position: fixed; inset: var(--header-h) 0 0 0; z-index: 99; background: var(--paper);
+  position: fixed; inset: var(--header-h) 0 0 0; z-index: 101; background: var(--paper);
   padding: 2rem var(--gutter); display: flex; flex-direction: column; overflow-y: auto;
   opacity: 0; transition: opacity .35s var(--ease);
 }

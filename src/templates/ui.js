@@ -16,6 +16,10 @@ export const casaUrl = (c) => u(`casas/${c.id}/`);
 export const storeUrl = (s) => u(`tiendas/${s.id}/`);
 export const telHref = (phone) => `tel:${phone.replace(/\s/g, '')}`;
 
+/** El nombre y el lema como en el rótulo de la tienda: logo de la cabecera y del pie */
+export const LOGO = `<span class="logo__mark"><span class="logo__caps">The</span> <em>fragrance</em> <span class="logo__caps">Bar</span></span>
+        <span class="logo__sub" lang="en">Luxury perfumes</span>`;
+
 /* Iconos de trazo fino (heredan el color del texto) */
 const svg = (d, extra = '') => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"${extra}>${d}</svg>`;
 const stroke = 'fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"';
@@ -145,5 +149,5 @@ export function brandStrip(current) {
     : `<li><a href="${casaUrl(c)}">${esc(c.name)}</a></li>`).join('');
 }
 
-/** Estado de apertura de una tienda (lo rellena src/js/clock.js) */
-export const clock = (store) => `<p class="status" data-clock="${store.id}" aria-live="polite"><span class="status__dot" aria-hidden="true"></span><span class="status__text">Consultando horario…</span></p>`;
+/** Estado de apertura de una tienda (lo rellena src/js/clock.js; text es lo que se ve hasta entonces o sin JavaScript) */
+export const clock = (store, text = 'Consultando horario…') => `<p class="status" data-clock="${store.id}" aria-live="polite"><span class="status__dot" aria-hidden="true"></span><span class="status__text">${text}</span></p>`;

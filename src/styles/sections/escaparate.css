@@ -1,0 +1,81 @@
+/* Inicio: el escaparate, bajo el hero. Las campañas de las casas (película o foto) a pantalla completa, una tras otra,
+   con pestañas de progreso, créditos de revista, el nombre de la casa en grande y, si la hay, la tarjeta de la fragancia.
+   Encima de cada foto, un velo suave del lado del texto: del color del papel si la foto es clara (data-tone="light")
+   y de tinta si es oscura. El cambio entre diapositivas lo anima src/js/escaparate.js; sin JavaScript se ve la primera.
+   En móvil: foto arriba, pestañas y texto debajo, sobre la piedra. */
+.esc { --e-ink: var(--ink); --e-soft: var(--ink-2); --e-accent: var(--oak); position: relative; display: flex; flex-direction: column; background: var(--stone); color: var(--e-ink); }
+.esc__stage { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--ink); }
+.esc__slide { position: absolute; inset: 0; margin: 0; visibility: hidden; z-index: 0; }
+.esc__slide.is-active { visibility: visible; z-index: 2; }
+.esc__slide.is-leaving { visibility: visible; z-index: 1; }
+.esc__slide img, .esc__slide video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.esc__slide video { opacity: 0; transition: opacity .8s var(--ease); }
+.esc__slide.is-playing video { opacity: 1; }
+
+.esc__credit { position: absolute; z-index: 4; top: 1rem; left: var(--gutter); padding: .35rem .7rem; background: rgba(18, 17, 16, .55); color: var(--paper); font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; font-variant-numeric: tabular-nums; }
+.esc__copy { order: 2; padding: 1.6rem var(--gutter) 1.6rem; }
+.esc__eyebrow { margin: 0; font-family: var(--f-sans); line-height: 1.6; }
+/* Los nombres de las casas, uno encima de otro: solo se ve el de la campaña que está delante */
+.esc__casas { display: grid; margin-top: .7rem; }
+.esc__casa { grid-area: 1 / 1; display: grid; justify-items: start; align-content: start; }
+.esc__name { font-family: var(--f-display); font-size: var(--t-h1); line-height: 1; clip-path: inset(-.3em -.3em -.35em -.3em); }
+.esc__name > span { display: inline-block; }
+.esc__meta { margin-top: .7rem; font-size: var(--t-sm); letter-spacing: .04em; color: var(--e-soft); }
+.esc__link { margin-top: 1.1rem; color: inherit; }
+
+.esc__card {
+  order: 3; display: grid; grid-template-columns: 76px 1fr; column-gap: 1rem; align-items: center;
+  margin: 0 var(--gutter) 2.6rem; padding: .8rem 1.4rem .8rem .8rem;
+  background: var(--card); color: var(--ink); text-decoration: none;
+}
+.esc__card[hidden] { display: none; }
+.esc__card img { grid-row: 1 / 5; width: 76px; height: 76px; object-fit: cover; background: #fff; }
+.esc__card-brand { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.esc__card-name { font-family: var(--f-serif); font-size: 1.15rem; }
+.esc__card-price { font-size: var(--t-sm); color: var(--muted); }
+.esc__card-go { margin-top: .2rem; font-size: var(--t-sm); text-decoration: underline; text-underline-offset: 3px; }
+.esc__card:hover .esc__card-go { color: var(--oak); }
+
+/* Pestañas: una barra fina por casa que se llena mientras está delante, como las «stories» */
+.esc__nav { order: 1; display: flex; align-items: center; gap: 1rem; padding: 1rem var(--gutter) 0; }
+.esc__nav[hidden] { display: none; }
+.esc__tabs { flex: 1; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: .6rem; }
+.esc__tab { display: block; padding: .6rem 0 .4rem; background: none; border: 0; color: inherit; font: inherit; font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; text-align: left; cursor: pointer; opacity: .55; transition: opacity .4s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.esc__tab[aria-selected="true"], .esc__tab:hover { opacity: 1; }
+.esc__bar { position: relative; display: block; height: 2px; margin-bottom: .6rem; background: color-mix(in srgb, currentColor 25%, transparent); overflow: hidden; }
+.esc__bar i { position: absolute; inset: 0; background: currentColor; transform: scaleX(0); transform-origin: 0 50%; }
+.esc__tab-n { font-variant-numeric: tabular-nums; color: var(--e-accent); margin-right: .3rem; }
+.esc__pause { flex: none; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 1px solid color-mix(in srgb, currentColor 40%, transparent); border-radius: 50%; background: none; color: inherit; cursor: pointer; }
+.esc__pause .icon { width: 14px; height: 14px; }
+.esc__pause .icon:nth-of-type(2), .esc__pause[aria-pressed="true"] .icon:nth-of-type(1) { display: none; }
+.esc__pause[aria-pressed="true"] .icon:nth-of-type(2) { display: block; }
+@media (max-width: 599px) { .esc__tab { font-size: 0; } .esc__tab .esc__bar { margin-bottom: 0; } }
+
+@media (min-width: 960px) {
+  .esc { display: block; height: calc(100svh - var(--header-h)); min-height: 600px; max-height: 900px; overflow: hidden; background: var(--paper); transition: color .8s var(--ease); }
+  .esc[data-tone="dark"] { --e-ink: var(--paper); --e-soft: rgba(248, 247, 244, .86); --e-accent: var(--oak-light); }
+  .esc__stage { position: absolute; inset: 0; aspect-ratio: auto; }
+  /* Los dos velos, uno por tono; se cruzan al cambiar de diapositiva */
+  .esc__stage::before, .esc__stage::after { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; transition: opacity 1s var(--ease); }
+  .esc__stage::before { background: linear-gradient(90deg, rgba(248, 247, 244, .93), rgba(248, 247, 244, .8) 30%, rgba(248, 247, 244, 0) 55%), linear-gradient(0deg, rgba(248, 247, 244, .75), rgba(248, 247, 244, 0) 22%); }
+  .esc__stage::after { background: linear-gradient(90deg, rgba(18, 17, 16, .82), rgba(18, 17, 16, .6) 34%, rgba(18, 17, 16, 0) 60%), linear-gradient(0deg, rgba(18, 17, 16, .65), rgba(18, 17, 16, 0) 30%); opacity: 0; }
+  .esc[data-tone="dark"] .esc__stage::before { opacity: 0; }
+  .esc[data-tone="dark"] .esc__stage::after { opacity: 1; }
+  .esc[data-tone="dark"] :is(.esc__copy, .esc__credit) { text-shadow: 0 1px 18px rgba(18, 17, 16, .55); }
+
+  .esc__copy, .esc__nav, .esc__credit, .esc__card { position: absolute; z-index: 4; }
+  .esc__copy { left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); bottom: 7.4rem; max-width: 40rem; padding: 0; }
+  .esc__eyebrow { color: var(--e-accent); transition: color .8s var(--ease); }
+  .esc__name { font-size: clamp(3.4rem, 1.2rem + 4.6vw, 6.6rem); letter-spacing: -.01em; }
+  .esc__meta { transition: color .8s var(--ease); }
+  .esc__credit { top: 1.6rem; left: auto; right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); padding: 0; background: none; color: var(--e-ink); transition: color .8s var(--ease); }
+  .esc__card { right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); bottom: 7.4rem; margin: 0; min-width: 300px; background: rgba(255, 255, 255, .94); }
+  .esc__nav { left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); bottom: 1.6rem; padding: 0; gap: 2rem; }
+  .esc__tabs { gap: 1.6rem; }
+
+  /* Al bajar, el escaparate se recoge un poco y se redondea, como en las webs de las casas */
+  @supports (animation-timeline: view()) {
+    .has-motion .esc__stage { animation: esc-salida linear both; animation-timeline: view(); animation-range: exit 0% exit 90%; }
+  }
+}
+@keyframes esc-salida { to { transform: scale(.93); border-radius: 24px; } }
