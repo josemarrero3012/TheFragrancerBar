@@ -8,9 +8,9 @@ La web enseña un catálogo de muestra: las cinco fragancias más conocidas de c
 
 | Catálogo de muestra | Fragancias |
 |---|---|
-| Con las fotos originales de la casa | 5 (las de Creed) |
-| Solo con el frasco recortado de la foto de la marca, a falta de descargar las originales | 31 |
-| Sin foto ni notas oficiales, no se publican todavía | 4 (Memo Paris: African Leather, Irish Leather, Inlé, French Leather) |
+| Con las fotos originales de la casa | 40 de 40 |
+| …con foto al pasar el ratón | 35 (Montale solo publica una foto por fragancia) |
+| …con la foto principal por debajo de 1200 px | 5 (Parfums de Marly no publica el frasco a más de 1080 px; se enseña sin ampliar) |
 | Con foto propia, hecha en la tienda | 0 |
 
 Las fotos de las marcas valen para el prototipo, pero antes de publicar la web hace falta una de dos cosas por cada una: permiso por escrito de la marca o del distribuidor, o una foto propia. El estado al día lo dan `scripts/originales-informe.txt` (`npm run originales`) y `scripts/fotos-informe.txt` (`npm run fotos`).

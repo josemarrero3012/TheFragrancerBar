@@ -107,6 +107,14 @@ export const NOTAS_OFICIALES = {
 
   'memo-marfa': { fuente: 'https://us.memoparis.com/products/marfa-eau-de-parfum-75ml',
     salida: ['Mandarina', 'Melocotón'], corazon: ['Ylang-ylang', 'Nardo', 'Flor de azahar'], fondo: ['Cedro', 'Vainilla', 'Haba tonka', 'Sándalo', 'Almizcle'] },
+  'memo-african-leather': { fuente: 'https://us.memoparis.com/products/african-leather-eau-de-parfum-75ml',
+    salida: ['Cardamomo', 'Geranio', 'Pimienta rosa'], corazon: ['Rosa', 'Pachulí', 'Canela'], fondo: ['Cuero', 'Oud', 'Ámbar'] },
+  'memo-irish-leather': { fuente: 'https://www.memoparis.com/products/irish-leather-eau-de-parfum-75ml',
+    salida: ['Pimienta', 'Mandarina', 'Bayas de enebro'], corazon: ['Iris', 'Salvia esclarea', 'Mate'], fondo: ['Cuero', 'Cedro', 'Vetiver'] },
+  'memo-inle': { fuente: 'https://www.memoparis.com/products/inle-eau-de-parfum-75ml',
+    salida: ['Cardamomo', 'Bergamota', 'Té', 'Neroli'], corazon: ['Osmanto', 'Higo', 'Jazmín sambac'], fondo: ['Almizcle', 'Cedro', 'Violeta', 'Mate'] },
+  'memo-french-leather': { fuente: 'https://www.memoparis.com/products/french-leather-eau-de-parfum-75ml',
+    salida: ['Bayas de enebro', 'Lima', 'Bergamota', 'Pimienta rosa'], corazon: ['Rosa', 'Salvia esclarea', 'Heno'], fondo: ['Cedro', 'Ante'] },
 
   'montale-aoud-forest': { fuente: 'https://www.montaleparfums.com/en/woody/16-aoud-forest-marron.html',
     salida: ['Pimienta', 'Nuez moscada', 'Limón', 'Hojas de ruibarbo'], corazon: ['Rosa', 'Violeta', 'Jengibre'], fondo: ['Cedro', 'Musgo de roble', 'Pachulí', 'Almizcle', 'Oud'] },

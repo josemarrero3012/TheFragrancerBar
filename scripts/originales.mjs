@@ -87,7 +87,23 @@ const ELEGIDAS = {
   'creed-viking': [2, 5],
   'creed-royal-oud': [2, 6],
   'creed-original-santal': [2, 6],
-  'creed-himalaya': [1, 6]
+  'creed-himalaya': [1, 6],
+  // Amouage: frasco y estuche; en las que lo tienen, el bodegón de la colección al pasar el ratón
+  'amouage-reflection-man': [1, 3],
+  'amouage-guidance-46': [1, 3],
+  // Xerjoff: el frasco recortado delante y su campaña o su composición de notas detrás
+  'xerjoff-naxos': [2, 1],
+  'xerjoff-erba-pura': [2, 4],
+  'xerjoff-alexandria-ii': [2, 4],
+  'xerjoff-torino21': [2, 1],
+  'xerjoff-accento': [2, 4],
+  // Parfums de Marly: el frasco y su composición con ingredientes (la casa no publica nada mayor de 1080 px del frasco)
+  'pdm-layton': [1, 5],
+  'pdm-delina': [1, 3],
+  'pdm-pegasus': [1, 5],
+  'pdm-herod': [1, 4],
+  'pdm-greenley': [1, 4]
+  // Initio, Memo Paris y Tom Ford: las dos primeras (frasco y foto de campaña); Montale solo publica una
 };
 /* Fotos con una línea de marco en el borde: píxeles que se quitan por cada lado antes de pasarlas a WebP */
 const MARCO = { 'creed-original-santal-b': 8 };
@@ -155,7 +171,16 @@ async function tiendaShopify(p, base) {
   }
   const { product } = await get(`${pagina}.json`, 'json');
   // src es el archivo que subió la casa; sin el ?v= de la caché
-  return { pagina, urls: (product.images || []).map((i) => i.src.split('?')[0]) };
+  const urls = (product.images || []).map((i) => i.src.split('?')[0]);
+  if (p.casa !== 'xerjoff') return { pagina, urls };
+  // Xerjoff sube al producto las fotos del listado (590×774); las grandes (1604 px) son las gallery-… de la página
+  const html = limpia(await get(pagina, 'text', ES));
+  const slug = norm(p.name).replace(/[^a-z0-9]/g, '');
+  const dePagina = [...new Set([...html.matchAll(/\/cdn\/shop\/files\/([^"'?\s]+?\.(?:jpe?g|png))/gi)].map((m) => m[1]))]
+    .filter((f) => !/_small\.|^listing-/.test(f) && f.toLowerCase().replace(/[^a-z0-9]/g, '').includes(slug))
+    .sort((a, b) => /^gallery-/.test(b) - /^gallery-/.test(a))
+    .map((f) => `https://www.xerjoff.com/cdn/shop/files/${f}`);
+  return { pagina, urls: [...dePagina, ...urls] };
 }
 
 /* ---------------------------------------------------------------- Montale (PrestaShop) */
