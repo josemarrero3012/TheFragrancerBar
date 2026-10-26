@@ -36,12 +36,14 @@
   .mobile-menu__foot { padding-top: .8rem; }
 
   /* Portada: foto del escaparate a la derecha y texto a la izquierda, ocupando lo que queda de pantalla.
-     La tarjeta de la fragancia no cabe: el escaparate queda en la línea de la casa */
+     La tarjeta de la fragancia y los créditos no caben */
   .hero { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr auto; min-height: var(--avail); }
-  .hero__media { grid-column: 2; grid-row: 1 / 3; aspect-ratio: auto; }
-  .hero__copy { grid-column: 1; padding-block: 1rem; align-self: center; }
-  .hero__tag { grid-column: 1; }
-  .hero__card { display: none; }
+  .hero__stage { grid-column: 2; grid-row: 1 / 3; aspect-ratio: auto; }
+  .hero__copy { grid-column: 1; grid-row: 1; padding-block: 1rem; align-self: center; }
+  .hero__nav { grid-column: 1; grid-row: 2; padding-bottom: .8rem; }
+  .hero__card, .hero__credit { display: none; }
+  .hero__tab { font-size: 0; }
+  .hero__tab .hero__bar { margin-bottom: 0; }
   .hero__title { margin-top: .5rem; }
   .hero__lede { margin-top: .6rem; }
   .hero__ctas { margin-top: 1rem; }

@@ -27,6 +27,8 @@ export const ICON = {
   search: svg(`<circle ${stroke} cx="11" cy="11" r="6.5"/><path ${stroke} d="m16 16 4 4"/>`),
   phone: svg(`<path ${stroke} d="M5 3h3.5l1.8 4.5-2.3 1.4a11 11 0 0 0 7.1 7.1l1.4-2.3L21 15.5V19a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/>`),
   pin: svg(`<path ${stroke} d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle ${stroke} cx="12" cy="9.5" r="2.5"/>`),
+  pause: svg('<path fill="currentColor" d="M7 5h3v14H7zM14 5h3v14h-3z"/>'),
+  play: svg('<path fill="currentColor" d="M8 5v14l11-7z"/>'),
   drop: svg(`<path ${stroke} d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11Z"/>`),
   truck: svg(`<path ${stroke} d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle ${stroke} cx="7" cy="17.5" r="1.5"/><circle ${stroke} cx="17" cy="17.5" r="1.5"/>`),
   store: svg(`<path ${stroke} d="M4 10v10h16V10M3 10l2-6h14l2 6H3ZM10 20v-5h4v5"/>`),

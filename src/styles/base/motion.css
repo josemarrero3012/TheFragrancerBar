@@ -1,7 +1,8 @@
 /* Movimiento ---------------------------------------------------------------
    Solo con .has-motion (lo pone el <head> si no hay prefers-reduced-motion).
    Las entradas y revelados se hacen en src/js/motion.js con Web Animations API. */
-.is-intro .hero__copy > *, .is-intro .hero__media, .is-intro .hero__tag, .is-intro .hero__card { opacity: 0; }
+.is-intro .hero__copy > :not(.hero__title), .is-intro .hero__stage, .is-intro .hero__credit, .is-intro .hero__card, .is-intro .hero__nav { opacity: 0; }
+.is-intro .hero__line > span { transform: translateY(105%); }
 
 /* Estado de apertura: anillo que pulsa */
 .has-motion .status__dot { position: relative; }

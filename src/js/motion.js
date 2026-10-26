@@ -3,14 +3,16 @@
 import { MOTION } from '../data/site.js';
 import { $, $$, reduceMotion, fullMotion, EASE, clamp01 } from './utils.js';
 
-/* Entrada de la portada: solo un fundido de la foto y el texto, sin barridos ni zoom */
+/* Entrada de la portada: fundido del escaparate y el titular subiendo línea a línea, como si saliera de una ranura */
 function introHero() {
   if (!$('.hero')) return;
   const soft = !fullMotion || matchMedia('(max-width: 959px)').matches;
-  $('.hero__media').animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1100, easing: EASE, fill: 'backwards' });
-  const kf = soft ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(22px)' }, { opacity: 1, transform: 'none' }];
-  const items = [...$('.hero__copy').children, ...$$('.hero__tag, .hero__card')];
-  items.forEach((el, i) => el.animate(kf, { duration: 1100, delay: i * 110, easing: EASE, fill: 'backwards' }));
+  const up = soft ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'none' }];
+  $('.hero__stage').animate([{ opacity: 0 }, { opacity: 1 }], { duration: 1200, easing: EASE, fill: 'backwards' });
+  $$('.hero__line > span').forEach((el, i) => el.animate([{ transform: 'translateY(105%)' }, { transform: 'none' }],
+    { duration: soft ? 900 : 1300, delay: 250 + i * 140, easing: 'cubic-bezier(.2,.7,.1,1)', fill: 'backwards' }));
+  const rest = [$('.hero__eyebrow'), $('.hero__lede'), $('.hero__ctas'), $('.hero__credit'), $('.hero__card.is-active'), $('.hero__nav')];
+  rest.filter(Boolean).forEach((el, i) => el.animate(up, { duration: 1000, delay: 500 + i * 110, easing: EASE, fill: 'backwards' }));
   document.documentElement.classList.remove('is-intro');
 }
 
