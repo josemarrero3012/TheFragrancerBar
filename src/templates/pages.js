@@ -164,8 +164,8 @@ function home(url) {
       <div class="wrap">
         <header class="section__head section__head--row">
           <div data-reveal="up" data-stagger>
-            <h2 class="section__title" id="seleccion-title">Selección de la casa</h2>
-            <p class="section__intro">Algunas de las fragancias más pedidas en nuestras tiendas. Cómpralas online o guárdalas en tu lista y pruébalas antes en la barra.</p>
+            <h2 class="section__title" id="seleccion-title">Las más pedidas</h2>
+            <p class="section__intro">Las fragancias que más se llevan en nuestras tiendas. Puedes comprarlas aquí o venir a olerlas antes.</p>
           </div>
           <a class="link section__more" href="${u('comprar/')}" data-reveal="up">Ver las ${FRAGANCIAS.length} fragancias</a>
         </header>
@@ -179,13 +179,13 @@ function home(url) {
     <section class="barra section section--dark" aria-labelledby="barra-title">
       <div class="wrap barra__grid">
         <figure class="barra__media" data-reveal="clip">
-          <img src="/img/tienda/interior-mesa-800.webp" width="579" height="1035" loading="lazy" alt="La barra de la tienda de Triana: mesa de madera con encimera de mármol, un gran ramo de flores, frascos para probar y taburetes de madera">
+          <img src="/img/tienda/interior-pasillo-800.webp" srcset="/img/tienda/interior-pasillo-800.webp 800w, /img/tienda/interior-pasillo-1380.webp 1380w" sizes="(min-width: 960px) 45vw, 100vw" width="1380" height="1038" loading="lazy" alt="Las vitrinas de la tienda de Triana: cristal iluminado y estantes llenos de frascos de perfume">
         </figure>
         <div class="barra__copy" data-reveal="up" data-stagger>
-          <p class="eyebrow eyebrow--light">El nombre de la casa</p>
-          <h2 class="section__title" id="barra-title">Una barra <em>para oler</em></h2>
-          <p class="section__intro">En el centro de cada tienda hay una barra donde se prueba con calma, sin cita y sin compromiso. Primero en tira, después en piel.</p>
-          <a class="btn btn--line" href="${u('la-barra/')}">Cómo es una visita</a>
+          <p class="eyebrow eyebrow--light">En la tienda</p>
+          <h2 class="section__title" id="barra-title">Todo está en las vitrinas</h2>
+          <p class="section__intro">Si quieres oler alguno, pídeselo a la dependienta. Te lo saca, te lo prueba en una tira o en la piel y te cuenta cómo es. No hace falta cita.</p>
+          <a class="btn btn--line" href="${u('probar/')}">Cómo es una visita</a>
         </div>
       </div>
     </section>
@@ -194,8 +194,8 @@ function home(url) {
       <div class="wrap">
         <header class="section__head section__head--row">
           <div data-reveal="up" data-stagger>
-            <h2 class="section__title" id="tiendas-title">Tres tiendas, <em>dos islas</em></h2>
-            <p class="section__intro">Triana, en Las Palmas de Gran Canaria, y dos tiendas en el sur de Tenerife.</p>
+            <h2 class="section__title" id="tiendas-title">Nuestras tiendas</h2>
+            <p class="section__intro">Una en la Calle Mayor de Triana, en Las Palmas de Gran Canaria, y dos en el sur de Tenerife: Plaza del Duque y Américas Plaza.</p>
           </div>
           <a class="link section__more" href="${u('tiendas/')}" data-reveal="up">Todas las tiendas</a>
         </header>
@@ -220,7 +220,7 @@ function storeCard(s, { photo = true } = {}) {
   return `
           <li class="storecard">
             ${s.img && photo ? `<figure class="storecard__media"><img src="/${s.cardImg || s.img}-800.webp" width="800" height="600" loading="lazy" alt=""></figure>`
-              : `<div class="storecard__media storecard__media--sinfoto" aria-hidden="true"><span>${esc(s.islandName)}</span><em>${esc(s.city)}</em></div>`}
+              : `<div class="storecard__media storecard__media--sinfoto" aria-hidden="true"><span>${esc(s.islandName)}</span><strong>${esc(s.city)}</strong></div>`}
             <div class="storecard__body">
               <p class="eyebrow">${esc(s.islandName)}${s.isNew ? ' · Nueva tienda' : ''}</p>
               <h3 class="storecard__title"><a href="${storeUrl(s)}">${esc(s.title)}</a></h3>
@@ -230,7 +230,7 @@ function storeCard(s, { photo = true } = {}) {
           </li>`;
 }
 
-/** Las tiendas al pie de una casa o de una guía: dónde oler lo que se acaba de ver (SEO local) */
+/** Las tiendas al pie de una casa o de una guía: dónde se puede oler lo que se acaba de ver (SEO local) */
 const dondeProbar = (title, intro) => `<section class="section probar" aria-labelledby="probar-title">
         <div class="wrap">
           <header class="section__head" data-reveal="up" data-stagger>
@@ -245,9 +245,9 @@ const dondeProbar = (title, intro) => `<section class="section probar" aria-labe
 function casas(url) {
   const main = `${pageHead({
     crumbs: [['Inicio', ''], ['Casas']],
-    eyebrow: `${CASAS.length} casas de autor`,
-    title: 'Las <em>casas</em>',
-    intro: 'Trabajamos con perfumistas y maisons independientes. Cada una tiene un carácter muy distinto: te ayudamos a encontrar la tuya.'
+    eyebrow: `${CASAS.length} casas`,
+    title: 'Las casas que trabajamos',
+    intro: 'Estas son las marcas de perfumería nicho que tenemos en tienda. En cada una encontrarás su historia y sus fragancias.'
   })}
     <section class="section section--tight">
       <ul class="wrap casagrid">${CASAS.map((c, i) => `
@@ -297,7 +297,7 @@ function casa(url, c) {
       ${items.length ? `<section class="section" id="fragancias" aria-labelledby="frag-title">
         <div class="wrap" data-paged>
           <header class="section__head section__head--row">
-            <h2 class="section__title" id="frag-title" data-reveal="up">Fragancias de <em>${esc(c.name)}</em></h2>
+            <h2 class="section__title" id="frag-title" data-reveal="up">Fragancias de ${esc(c.name)}</h2>
             <a class="link section__more" href="${u(`comprar/?casa=${c.id}`)}" data-reveal="up">Filtrar en la tienda</a>
           </header>
           <ul class="products">${items.map((p, i) => productCard(p, { notes: true, i })).join('')}</ul>
@@ -306,8 +306,8 @@ function casa(url, c) {
         </div>
       </section>` : ''}
 
-      ${dondeProbar(`Prueba <em>${esc(c.name)}</em> en Las Palmas y Tenerife`,
-        `Las fragancias de ${esc(c.name)} se huelen en la barra de nuestras tiendas: Triana, en Las Palmas de Gran Canaria, y Plaza del Duque y Américas Plaza, en el sur de Tenerife. Si buscas una en concreto, escríbenos antes y te decimos en qué tienda está.`)}
+      ${dondeProbar(`${esc(c.name)} en Las Palmas y Tenerife`,
+        `Puedes oler las fragancias de ${esc(c.name)} en nuestras tiendas de Triana, en Las Palmas de Gran Canaria, y de Plaza del Duque y Américas Plaza, en el sur de Tenerife. Pide a la dependienta la que quieras probar. Si buscas una en concreto, escríbenos antes y te decimos en qué tienda está.`)}
 
       <nav class="brandline brandline--foot" aria-label="Otras casas">
         <ul class="brandline__list wrap">${brandStrip(c.id)}</ul>
@@ -330,7 +330,7 @@ function comprar(url) {
   const main = `${pageHead({
     crumbs: [['Inicio', ''], ['Comprar']],
     eyebrow: 'Tienda online',
-    title: 'Comprar <em>fragancias</em>',
+    title: 'Comprar fragancias',
     intro: `${FRAGANCIAS.length} fragancias de ${enVenta.length} casas de autor. Envío en ${SITE.shipping.days}, gratis desde ${euros(SITE.shipping.freeFrom)}, o recogida en tienda.`,
     extra: demoNote(SITE)
   })}
@@ -398,7 +398,7 @@ function fragancia(url, p) {
         </form>
 
         <ul class="perks">
-          <li>${ICON.drop}<span><strong>Pruébala antes en la barra.</strong> En cualquiera de nuestras tiendas, sin compromiso.</span></li>
+          <li>${ICON.drop}<span><strong>Huélela antes en tienda.</strong> Pídesela a la dependienta en cualquiera de nuestras tiendas.</span></li>
           <li>${ICON.truck}<span><strong>Envío en ${SITE.shipping.days}.</strong> Gratis a partir de ${euros(SITE.shipping.freeFrom)}.</span></li>
           <li>${ICON.store}<span><strong>Recogida gratis</strong> en Triana, Plaza del Duque o Américas Plaza.</span></li>
           <li>${ICON.gift}<span><strong>Envoltorio de regalo</strong> sin coste.</span></li>
@@ -410,10 +410,10 @@ function fragancia(url, p) {
     <section class="notes section section--stone" aria-labelledby="notes-title">
       <div class="wrap">
         <header class="section__head">
-          <h2 class="section__title" id="notes-title" data-reveal="up">Sus <em>notas</em></h2>
+          <h2 class="section__title" id="notes-title" data-reveal="up">Notas olfativas</h2>
           <p class="notes__fuente" data-reveal="up">${grupos.length
             ? `Tal como las describe ${esc(c.name)} en su <a href="${p.notes.fuente}" target="_blank" rel="noopener">web oficial${NEW_TAB}</a>.`
-            : `${esc(c.name)} guarda en secreto las notas de ${esc(p.name)}. La mejor forma de conocerlo es olerlo: pruébalo en la barra de cualquiera de nuestras tiendas.`}</p>
+            : `${esc(c.name)} guarda en secreto las notas de ${esc(p.name)}. Para conocerlo, lo mejor es olerlo: pídelo en cualquiera de nuestras tiendas.`}</p>
         </header>
         ${grupos.map(([t, notas]) => `<div class="notes__group" data-reveal="up">
           <h3 class="notes__tier">${t}</h3>
@@ -425,7 +425,7 @@ function fragancia(url, p) {
     ${related.length ? `<section class="section" aria-labelledby="rel-title">
       <div class="wrap">
         <header class="section__head section__head--row">
-          <h2 class="section__title" id="rel-title" data-reveal="up">También te puede <em>gustar</em></h2>
+          <h2 class="section__title" id="rel-title" data-reveal="up">También te puede gustar</h2>
           <a class="link section__more" href="${casaUrl(c)}" data-reveal="up">Todo ${esc(c.name)}</a>
         </header>
         <ul class="products">${related.map((x, i) => productCard(x, { i })).join('')}</ul>
@@ -455,7 +455,7 @@ function cesta() {
                 <p class="field__error" id="e-o-${id}"></p>
               </div>`;
   const ISLAS = ['Gran Canaria', 'Tenerife', 'Lanzarote', 'Fuerteventura', 'La Palma', 'La Gomera', 'El Hierro', 'La Graciosa'];
-  const main = `${pageHead({ crumbs: [['Inicio', ''], ['Comprar', 'comprar/'], ['Cesta']], title: 'Tu <em>cesta</em>', extra: demoNote(SITE) })}
+  const main = `${pageHead({ crumbs: [['Inicio', ''], ['Comprar', 'comprar/'], ['Cesta']], title: 'Tu cesta', extra: demoNote(SITE) })}
     <section class="checkout section section--tight" data-checkout>
       <div class="wrap">
         <div class="checkout__empty" data-cart-empty>
@@ -539,7 +539,7 @@ function cesta() {
 
         <div class="success" data-order-done hidden tabindex="-1">
           <p class="eyebrow">Pedido <span data-order-id></span></p>
-          <h2 class="success__title">Gracias, <em data-order-name></em></h2>
+          <h2 class="success__title">Gracias, <span data-order-name></span></h2>
           <p data-order-text></p>
           <ul class="cartlines cartlines--mini" data-order-lines></ul>
           ${SITE.demoPrices ? '<p class="demo-note demo-note--inline">Demo: este pedido no se ha cobrado ni enviado.</p>' : ''}
@@ -554,19 +554,20 @@ function cesta() {
   };
 }
 
-/* ---------------------------------------------------------------- La barra */
-function barra(url) {
+/* ---------------------------------------------------------------- Probar en tienda */
+// Cómo se prueba un perfume en las tiendas: todo está en vitrinas y la dependienta te saca el que quieras oler
+function probar(url) {
   const main = `
     <header class="barrahero section--dark">
       <div class="wrap barrahero__grid">
         <div class="barrahero__copy" data-reveal="up" data-stagger>
-          ${crumbs([['Inicio', ''], ['La barra']])}
-          <p class="eyebrow eyebrow--light">De ahí viene el nombre</p>
-          <h1 class="pagehead__title">Una barra <em>para oler</em></h1>
-          <p class="pagehead__intro">En el centro de cada tienda hay una barra de madera donde se prueba con calma, sin cita y sin compromiso. Es lo que nos diferencia de una perfumería al uso.</p>
+          ${crumbs([['Inicio', ''], ['Probar en tienda']])}
+          <p class="eyebrow eyebrow--light">Probar en tienda</p>
+          <h1 class="pagehead__title">Cómo probar un perfume en la tienda</h1>
+          <p class="pagehead__intro">En nuestras tiendas todos los perfumes están en vitrinas. Para oler cualquiera, pregunta a la dependienta: te lo saca y te lo prueba en una tira o en la piel. No hace falta cita ni comprar nada.</p>
         </div>
         <figure class="barrahero__media" data-reveal="clip">
-          <img src="/img/tienda/interior-mesa-800.webp" width="579" height="1035" fetchpriority="high" alt="La barra de la tienda de Triana: mesa de madera con encimera de mármol, un gran ramo de flores, frascos para probar y taburetes de madera">
+          <img src="/img/tienda/interior-pasillo-800.webp" srcset="/img/tienda/interior-pasillo-800.webp 800w, /img/tienda/interior-pasillo-1380.webp 1380w" sizes="(min-width: 960px) 40vw, 100vw" width="1380" height="1038" fetchpriority="high" alt="Las vitrinas de la tienda de Triana: cristal iluminado y estantes llenos de frascos de perfume">
         </figure>
       </div>
     </header>
@@ -574,38 +575,38 @@ function barra(url) {
     <section class="section" aria-labelledby="ritual-title">
       <div class="wrap">
         <header class="section__head" data-reveal="up" data-stagger>
-          <h2 class="section__title" id="ritual-title">Cómo es una <em>visita</em></h2>
-          <p class="section__intro">No hay prisa ni guion. Pero si es tu primera vez, así suele ir.</p>
+          <h2 class="section__title" id="ritual-title">Cómo es una visita</h2>
+          <p class="section__intro">Si es tu primera vez, así suele ir.</p>
         </header>
         <ol class="steps" data-reveal="up" data-stagger>
-          <li><span class="steps__n">01</span><h3>Tú eliges</h3><p>Todo lo que ves en las vitrinas se puede oler. Coge el frasco que te llame la atención, aunque no conozcas la casa.</p></li>
-          <li><span class="steps__n">02</span><h3>Primero en tira</h3><p>Probamos varias en tiras de papel para descartar rápido y quedarnos con dos o tres candidatas.</p></li>
-          <li><span class="steps__n">03</span><h3>Después en piel</h3><p>Un perfume cambia con el calor de la piel. Te ponemos la favorita y te recomendamos dejarle unos minutos, o volver otro día.</p></li>
-          <li><span class="steps__n">04</span><h3>Te orientamos</h3><p>Cuéntanos qué te gusta y te proponemos alternativas de otras casas que quizá no conocías.</p></li>
+          <li><span class="steps__n">01</span><h3>Mira las vitrinas</h3><p>Todos los perfumes están a la vista, ordenados por casa. Fíjate en los que te llamen la atención, aunque no conozcas la marca.</p></li>
+          <li><span class="steps__n">02</span><h3>Pregunta a la dependienta</h3><p>Dile cuál quieres oler y te lo saca de la vitrina. Si no sabes por dónde empezar, cuéntale qué perfumes te gustan y te propondrá algunos.</p></li>
+          <li><span class="steps__n">03</span><h3>Primero en tira</h3><p>Te los prueba en tiras de papel. Así se descarta rápido y te quedas con dos o tres.</p></li>
+          <li><span class="steps__n">04</span><h3>Después en la piel</h3><p>El que más te guste, en la muñeca. Un perfume cambia con el calor de la piel, así que dale unos minutos antes de decidir, o vuelve otro día.</p></li>
         </ol>
       </div>
     </section>
 
     <section class="section section--stone" aria-labelledby="servicios-title">
       <div class="wrap">
-        <h2 class="section__title" id="servicios-title" data-reveal="up">Además, <em>en la barra</em></h2>
+        <h2 class="section__title" id="servicios-title" data-reveal="up">También puedes pedir</h2>
         <ul class="services" data-reveal="up" data-stagger>
-          <li>${ICON.drop}<h3>Muestras para casa</h3><p>Llévate muestras de tus candidatas y decide con calma.</p></li>
-          <li>${ICON.gift}<h3>Regalos</h3><p>Te ayudamos a acertar y lo envolvemos sin coste. También hay tarjeta regalo.</p></li>
-          <li>${ICON.heart}<h3>Tu lista</h3><p>Guarda en la web lo que te interese y enséñanoslo al llegar, o envíanoslo por WhatsApp.</p></li>
+          <li>${ICON.drop}<h3>Muestras para casa</h3><p>Pide muestras de los que te hayan gustado y decide en casa, sin prisa.</p></li>
+          <li>${ICON.gift}<h3>Regalos</h3><p>Te ayudamos a elegir y lo envolvemos sin coste. También hay tarjeta regalo.</p></li>
+          <li>${ICON.heart}<h3>Tu lista</h3><p>Guarda en la web los que te interesen y enséñaselos a la dependienta al llegar, o mándanoslos por WhatsApp.</p></li>
         </ul>
         <div class="hero__ctas" data-reveal="up">
-          <a class="btn btn--dark" href="${u('tiendas/')}">Encontrar una tienda</a>
+          <a class="btn btn--dark" href="${u('tiendas/')}">Ver las tiendas</a>
           <a class="btn btn--line" href="${u('comprar/')}">Ver el catálogo</a>
         </div>
         <p class="barra__guia" data-reveal="up">¿Primera vez? Lee <a href="${u('guias/como-elegir-un-perfume/')}">cómo elegir un perfume sin equivocarte</a>.</p>
       </div>
     </section>`;
   return {
-    path: 'la-barra/', section: 'barra', main,
-    title: 'La barra: prueba perfumes nicho sin cita | The Fragrance Bar',
-    description: 'En el centro de cada tienda de The Fragrance Bar hay una barra para oler y probar perfumes nicho con calma, sin cita y sin compromiso.',
-    schema: schema.graph([schema.breadcrumbs(url, [['Inicio', ''], ['La barra', 'la-barra/']])])
+    path: 'probar/', section: 'probar', main,
+    title: 'Probar perfumes nicho en tienda, sin cita | The Fragrance Bar',
+    description: 'En las tiendas de The Fragrance Bar los perfumes están en vitrinas: pide a la dependienta el que quieras oler y te lo prueba en tira o en la piel, sin cita.',
+    schema: schema.graph([schema.breadcrumbs(url, [['Inicio', ''], ['Probar en tienda', 'probar/']])])
   };
 }
 
@@ -617,7 +618,7 @@ function historiaFoto() {
 }
 
 function historia(url) {
-  const main = `${pageHead({ crumbs: [['Inicio', ''], ['Historia']], eyebrow: 'Desde 2022', title: 'Nuestra <em>historia</em>',
+  const main = `${pageHead({ crumbs: [['Inicio', ''], ['Historia']], eyebrow: 'Desde 2022', title: 'Nuestra historia',
     intro: 'The Fragrance Bar nace de un negocio familiar de perfumería y de una idea sencilla: en Canarias faltaba una tienda dedicada solo a la perfumería nicho.',
     cls: 'pagehead--foto', extra: historiaFoto() })}
     <section class="historia section section--tight">
@@ -651,11 +652,11 @@ function historia(url) {
 const islas = () => [...SITE.stores.reduce((m, s) => m.set(s.islandName, [...(m.get(s.islandName) || []), s]), new Map())];
 
 function tiendas(url) {
-  const main = `${pageHead({ crumbs: [['Inicio', ''], ['Tiendas']], eyebrow: 'Gran Canaria y Tenerife', title: 'Nuestras <em>tiendas</em>',
-    intro: 'Tres tiendas con barra para oler y probar con calma. Ven sin cita.' })}
+  const main = `${pageHead({ crumbs: [['Inicio', ''], ['Tiendas']], eyebrow: 'Gran Canaria y Tenerife', title: 'Nuestras tiendas',
+    intro: 'Una en la Calle Mayor de Triana, en Las Palmas de Gran Canaria, y dos en centros comerciales del sur de Tenerife. Puedes venir sin cita a cualquiera.' })}
     ${islas().map(([isla, list]) => `<section class="section section--tight isla" aria-labelledby="isla-${list[0].island}">
       <div class="wrap">
-        <h2 class="isla__title" id="isla-${list[0].island}" data-reveal="up">Perfumería nicho en <em>${esc(isla)}</em></h2>
+        <h2 class="isla__title" id="isla-${list[0].island}" data-reveal="up">Perfumería nicho en ${esc(isla)}</h2>
         <ul class="storecards storecards--big" data-reveal="up" data-stagger>${list.map((x) => storeCard(x)).join('')}</ul>
       </div>
     </section>`).join('')}`;
@@ -675,7 +676,7 @@ function tienda(url, s) {
         <div class="storehero__copy" data-reveal="up" data-stagger>
           ${crumbs([['Inicio', ''], ['Tiendas', 'tiendas/'], [s.name]])}
           <p class="eyebrow">${esc(s.islandName)}${s.isNew ? ' · Nueva tienda' : ''}</p>
-          <h1 class="pagehead__title">${esc(s.title.split(',')[0])}${s.title.includes(',') ? `, <em>${esc(s.title.split(',')[1].trim())}</em>` : ''}</h1>
+          <h1 class="pagehead__title">${esc(s.title)}</h1>
           <p class="pagehead__intro">${esc(s.intro)}</p>
           ${clock(s)}
           ${storeFicha(s)}
@@ -691,7 +692,7 @@ function tienda(url, s) {
 
       ${s.interior ? `<section class="section section--tight" aria-labelledby="dentro-title">
         <div class="wrap">
-          <h2 class="section__title" id="dentro-title" data-reveal="up">Dentro de <em>la tienda</em></h2>
+          <h2 class="section__title" id="dentro-title" data-reveal="up">Dentro de la tienda</h2>
           <ul class="interior" data-reveal="up" data-stagger>${s.interior.map((x) => {
             const set = x.sizes.map((w) => `/${x.img}-${w}.webp ${Math.min(w, x.w)}w`).join(', ');
             return `<li><figure class="interior__media"><img src="/${x.img}-800.webp" srcset="${set}" sizes="(min-width: 960px) 40vw, 100vw" width="${x.w}" height="${x.h}" loading="lazy" alt="${esc(x.alt)}"></figure></li>`;
@@ -704,9 +705,9 @@ function tienda(url, s) {
       <section class="section" aria-labelledby="casas-tienda-title">
         <div class="wrap localseo">
           <div data-reveal="up" data-stagger>
-            <h2 class="section__title" id="casas-tienda-title">Perfumería nicho en <em>${esc(s.city)}</em></h2>
-            <p class="section__intro">Si vienes desde ${esc(s.near)}, en The Fragrance Bar ${esc(s.name)} puedes oler y probar en piel las casas de autor que trabajamos, sin cita. Te orientamos y te llevas muestras para decidir en casa.</p>
-            <a class="link" href="${u('la-barra/')}">Cómo es una visita a la barra</a>
+            <h2 class="section__title" id="casas-tienda-title">Perfumería nicho en ${esc(s.city)}</h2>
+            <p class="section__intro">Si vienes desde ${esc(s.near)}, en The Fragrance Bar ${esc(s.name)} tienes las casas que trabajamos. Pide a la dependienta las que quieras oler y te las prueba en tira o en la piel. No hace falta cita.</p>
+            <a class="link" href="${u('probar/')}">Cómo es una visita</a>
           </div>
           <ul class="localseo__casas" data-reveal="up" data-stagger>${CASAS.map((c) => `<li><a href="${casaUrl(c)}"><span>${esc(c.name)}</span><small>${esc(c.icons.slice(0, 2).join(' · '))}</small></a></li>`).join('')}</ul>
         </div>
@@ -715,8 +716,8 @@ function tienda(url, s) {
       <section class="section section--stone" aria-labelledby="opiniones-title">
         <div class="wrap reviews">
           <div data-reveal="up" data-stagger>
-            <h2 class="section__title" id="opiniones-title">Opiniones en <em>Google</em></h2>
-            <p class="section__intro">Lo que dicen quienes ya han pasado por la barra.</p>
+            <h2 class="section__title" id="opiniones-title">Opiniones en Google</h2>
+            <p class="section__intro">Lo que cuentan nuestros clientes en la ficha de la tienda.</p>
             <a class="link" href="${s.gbp || s.mapsUrl}" target="_blank" rel="noopener">Ver las reseñas y dejar la tuya${NEW_TAB}</a>
           </div>
           <p class="reviews__proto" data-proto>Prototipo: aquí se mostrarán las reseñas reales de la ficha de Google Business Profile de la tienda, con su valoración media.</p>
@@ -725,7 +726,7 @@ function tienda(url, s) {
 
       <section class="section" aria-labelledby="otras-title">
         <div class="wrap">
-          <h2 class="section__title" id="otras-title" data-reveal="up">Otras <em>tiendas</em></h2>
+          <h2 class="section__title" id="otras-title" data-reveal="up">Otras tiendas</h2>
           <ul class="storecards" data-reveal="up" data-stagger>${others.map((x) => storeCard(x)).join('')}</ul>
         </div>
       </section>
@@ -760,8 +761,8 @@ function guiaCard(g, i = 0) {
 }
 
 function guias(url) {
-  const main = `${pageHead({ crumbs: [['Inicio', ''], ['Guías']], eyebrow: 'Aprende a oler', title: 'Guías de <em>perfumería nicho</em>',
-    intro: 'Lo que nos preguntan cada día en la barra, por escrito: qué es el nicho, cómo elegir, qué llevar con el calor de Canarias y cómo acertar con un regalo.' })}
+  const main = `${pageHead({ crumbs: [['Inicio', ''], ['Guías']], eyebrow: 'Guías', title: 'Guías de perfumería nicho',
+    intro: 'Respuestas a lo que más nos preguntan en tienda: qué es el nicho, cómo elegir, qué llevar con el calor de Canarias y cómo acertar con un regalo.' })}
     <section class="section section--tight">
       <ul class="wrap guiagrid">${GUIAS.map(guiaCard).join('')}</ul>
     </section>`;
@@ -794,12 +795,12 @@ function guia(url, g) {
         ${fragsGuia(g).length ? demoNote(SITE) : ''}
       </div>
 
-      ${dondeProbar('Ven a <em>olerlas</em>', 'Todo lo que cuenta esta guía se entiende mejor en la barra. Ven sin cita a cualquiera de nuestras tiendas, en Las Palmas de Gran Canaria o en el sur de Tenerife.')}
+      ${dondeProbar('Dónde olerlas', 'Las fragancias de esta guía se pueden oler en nuestras tiendas de Las Palmas de Gran Canaria y del sur de Tenerife. Pídeselas a la dependienta; no hace falta cita.')}
 
       <section class="section" aria-labelledby="otras-guias-title">
         <div class="wrap">
           <header class="section__head section__head--row">
-            <h2 class="section__title" id="otras-guias-title" data-reveal="up">Otras <em>guías</em></h2>
+            <h2 class="section__title" id="otras-guias-title" data-reveal="up">Otras guías</h2>
             <a class="link section__more" href="${u('guias/')}" data-reveal="up">Todas las guías</a>
           </header>
           <ul class="guiagrid">${otras.map(guiaCard).join('')}</ul>
@@ -867,8 +868,8 @@ function contacto(url) {
     <section class="faq section section--stone" id="preguntas" aria-labelledby="faq-title">
       <div class="wrap faq__grid">
         <div data-reveal="up" data-stagger>
-          <h2 class="section__title" id="faq-title">Preguntas <em>frecuentes</em></h2>
-          <p class="section__intro">Lo que más nos preguntan en la barra.</p>
+          <h2 class="section__title" id="faq-title">Preguntas frecuentes</h2>
+          <p class="section__intro">Lo que más nos preguntan en tienda.</p>
           <p class="historia__note" data-proto>Respuestas de ejemplo, a confirmar con The Fragrance Bar.</p>
         </div>
         <div class="faq__list" data-reveal="up" data-stagger>
@@ -879,7 +880,7 @@ function contacto(url) {
   return {
     path: 'contacto/', section: 'contacto', main,
     title: 'Contacto y preguntas frecuentes | The Fragrance Bar',
-    description: 'Escribe a The Fragrance Bar por WhatsApp, teléfono o correo. Muestras, tarjeta regalo, envíos y todo lo que nos preguntan en la barra.',
+    description: 'Escribe a The Fragrance Bar por WhatsApp, teléfono o correo. Muestras, tarjeta regalo, envíos y lo que más nos preguntan en tienda.',
     schema: schema.graph([schema.breadcrumbs(url, [['Inicio', ''], ['Contacto', 'contacto/']]), schema.faqPage(SITE)])
   };
 }
@@ -976,7 +977,7 @@ export function pages(url) {
   const list = [
     home(url), casas(url), ...CASAS.map((c) => casa(url, c)),
     comprar(url), ...FRAGANCIAS.map((p) => fragancia(url, p)), cesta(),
-    barra(url), historia(url), tiendas(url), ...SITE.stores.map((s) => tienda(url, s)),
+    probar(url), historia(url), tiendas(url), ...SITE.stores.map((s) => tienda(url, s)),
     guias(url), ...GUIAS.map((g) => guia(url, g)),
     contacto(url), legal(), notFound()
   ];

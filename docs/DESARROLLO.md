@@ -20,12 +20,12 @@ Cada sección es una página con su propia URL. Todas se generan desde los datos
 
 | Ruta | Página |
 |---|---|
-| `/` | Portada: el nombre de la tienda en grande, como en su rótulo, sobre la foto de la fachada de Triana, con la dirección, el horario y el teléfono (al bajar, el nombre encoge hasta quedarse en el logo de la cabecera: `src/js/rotulo.js`); después, el escaparate de campañas de las casas que van pasando (películas y fotos, `SITE.escaparate`), la selección, la barra y las tiendas |
+| `/` | Portada: el nombre de la tienda en grande, como en su rótulo, sobre la foto de la fachada de Triana, con la dirección, el horario y el teléfono (al bajar, el nombre encoge hasta quedarse en el logo de la cabecera: `src/js/rotulo.js`); después, el escaparate de campañas de las casas que van pasando (películas y fotos, `SITE.escaparate`), la selección, cómo se prueba en tienda y las tiendas |
 | `/casas/` · `/casas/<casa>/` | Las 8 casas y una página por casa con todas sus fragancias |
 | `/comprar/` | Catálogo con buscador, filtros por casa, familia y precio (con el número de resultados de cada opción), orden y «Ver más» de 24 en 24 (los filtros van en la URL: `?casa=xerjoff&familia=ambar&precio=150-250`) |
 | `/fragancias/<id>/` | Ficha de cada fragancia: tamaños, precio, notas de salida, corazón y fondo, relacionadas |
 | `/cesta/` | Cesta y pedido (recogida en tienda o envío) |
-| `/la-barra/` · `/historia/` | El concepto de la barra y la historia de la marca |
+| `/probar/` · `/historia/` | Cómo se prueba un perfume en tienda (todo está en vitrinas y la dependienta te lo saca) y la historia de la marca |
 | `/tiendas/` · `/tiendas/<tienda>/` | Triana, Plaza del Duque y Américas Plaza, con horario, mapa y datos estructurados |
 | `/guias/` · `/guias/<guía>/` | Guías para quien busca antes de venir: qué es el nicho, perfumes para el calor, concentraciones, cómo elegir y regalos (`src/data/guias.js`) |
 | `/contacto/` | Formulario, «Tu lista» y preguntas frecuentes |

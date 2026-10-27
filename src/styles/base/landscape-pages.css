@@ -10,7 +10,7 @@
   .buybar { display: none; }
   body:has(.buybar) { padding-bottom: 0; }
 
-  /* Casa, tienda y La barra: imagen y texto en paralelo */
+  /* Casa, tienda y Probar en tienda: imagen y texto en paralelo */
   .casahero, .storehero, .barrahero__grid { grid-template-columns: auto minmax(0, 1fr); gap: 1.6rem; align-items: start; }
   .casahero__media { margin: 0; height: calc(var(--avail) - 2rem); width: auto; aspect-ratio: 4 / 5; position: sticky; top: calc(var(--header-h) + 1rem); }
   .casahero__title { font-size: 2.6rem; }

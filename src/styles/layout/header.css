@@ -34,7 +34,7 @@
 }
 .mobile-menu.is-open { opacity: 1; }
 .mobile-menu nav { display: grid; }
-.mobile-menu a[aria-current="page"] { font-family: var(--f-serif); font-style: italic; color: var(--oak); }
+.mobile-menu a[aria-current="page"] { color: var(--oak); }
 .mobile-menu a { display: flex; align-items: center; font-family: var(--f-display); font-size: 2rem; padding: .55rem 0; border-bottom: 1px solid var(--line); text-decoration: none; }
 .mobile-menu .badge, .burger .badge { background: var(--ink); color: var(--paper); }
 .mobile-menu .badge { margin-left: .8rem; }

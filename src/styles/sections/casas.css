@@ -9,7 +9,8 @@
 .casacard__body { display: grid; gap: .35rem; }
 .casacard__city { font-size: var(--t-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
 .casacard__name { font-family: var(--f-display); font-size: clamp(1.7rem, 1.4rem + 1vw, 2.3rem); line-height: 1.05; }
-.casacard__link:hover .casacard__name { font-family: var(--f-serif); font-style: italic; }
+.casacard__name { transition: color .25s; }
+.casacard__link:hover .casacard__name { color: var(--oak); }
 .casacard__desc { font-size: var(--t-sm); color: var(--muted); line-height: 1.5; }
 .casacard__count { display: inline-flex; align-items: center; gap: .5rem; margin-top: .3rem; font-size: var(--t-sm); font-weight: 500; }
 .casacard__count .icon { width: 1rem; height: 1rem; transition: transform .35s var(--ease); }

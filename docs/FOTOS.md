@@ -36,7 +36,7 @@ Por cada tienda, en horizontal y de día, con la tienda recogida y sin clientes 
 
 1. **La fachada o la entrada** con el rótulo, de frente. Es la que sale en la página de la tienda y, la de Triana, en la portada, recortada en cuadrado desde el centro (el rótulo tiene que quedar entero en el medio).
 2. **El interior completo**, desde la puerta.
-3. **La barra**, con los frascos para probar.
+3. **Las vitrinas**, de cerca, con los frascos.
 4. **Un detalle**: una vitrina bien iluminada, el mostrador o las lámparas.
 
 La web las recorta a 4:3 desde el centro, así que lo importante tiene que ir en el medio.
