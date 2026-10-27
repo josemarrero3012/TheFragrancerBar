@@ -17,7 +17,7 @@
 /* Tienda sin foto todavía: la isla y la ciudad, en tipografía sobre el fondo de piedra */
 .storecard__media--sinfoto { display: grid; place-content: center; justify-items: center; gap: .4rem; padding: 1rem; text-align: center; }
 .storecard__media--sinfoto span { font-size: var(--t-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
-.storecard__media--sinfoto em { font-family: var(--f-serif); font-size: var(--t-h3); line-height: 1.15; color: var(--ink-2); }
+.storecard__media--sinfoto strong { font-family: var(--f-display); font-weight: 400; font-size: var(--t-h3); line-height: 1.15; color: var(--ink-2); }
 
 .storehero { display: grid; gap: 2.4rem; padding-block: clamp(20px, 3vw, 48px) var(--section); }
 .storehero__copy { display: grid; gap: 1rem; justify-items: start; align-content: start; }
@@ -60,7 +60,7 @@
 .reviews__proto { align-self: center; padding: 1.4rem 1.6rem; border: 1px dashed rgba(18, 17, 16, .3); font-size: var(--t-sm); color: var(--muted); }
 @media (min-width: 960px) { .reviews { grid-template-columns: 1fr 1fr; gap: 6vw; } }
 
-/* Fotos del interior: el pasillo de vitrinas a lo ancho, la barra en vertical y las lámparas */
+/* Fotos del interior: el pasillo de vitrinas a lo ancho, la mesa en vertical y las lámparas */
 .interior { display: grid; gap: 1rem; margin-top: 2rem; }
 .interior__media { margin: 0; overflow: hidden; background: var(--stone); aspect-ratio: 4 / 3; }
 .interior__media img { width: 100%; height: 100%; object-fit: cover; }

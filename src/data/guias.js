@@ -13,7 +13,7 @@ export const GUIAS = [
   {
     id: 'que-es-la-perfumeria-nicho',
     title: 'Qué es la perfumería nicho y en qué se diferencia',
-    h1: 'Qué es la <em>perfumería nicho</em>',
+    h1: 'Qué es la perfumería nicho',
     description: 'Qué es un perfume nicho, en qué se diferencia de uno de gran distribución y por qué conviene probarlo en piel antes de comprarlo. Guía de The Fragrance Bar.',
     eyebrow: 'Para empezar',
     lede: 'Casas pequeñas o independientes, materias primas protagonistas y fragancias que no buscan gustar a todo el mundo. Te contamos qué hay detrás de la palabra «nicho».',
@@ -24,7 +24,7 @@ export const GUIAS = [
           'Se suele oponer a la perfumería de gran distribución, la que se encuentra en cualquier gran almacén y se diseña para agradar a la mayoría. No es que una sea buena y la otra mala: buscan cosas distintas.'] },
       { h: 'Qué la hace diferente',
         p: ['El perfumista suele tener más libertad y más presupuesto para las materias primas. Por eso en el nicho se habla tanto de ingredientes: el incienso de Omán en Amouage, el oud en Initio o Tom Ford, la lavanda y la miel de Naxos en Xerjoff.',
-          'También cambia la forma de vender. Las casas nicho se distribuyen en pocas tiendas, con personal que conoce cada fragancia y tiempo para probar. Es justo la idea de [nuestra barra](la-barra/).'],
+          'También cambia la forma de vender. Las casas nicho se distribuyen en pocas tiendas, con personal que conoce cada fragancia y tiempo para probar. En nuestras tiendas todo está en vitrinas y [la dependienta te saca lo que quieras oler](probar/).'],
         frags: ['amouage-interlude-man', 'xerjoff-naxos', 'initio-oud-for-greatness'] },
       { h: 'Nicho no siempre significa intenso',
         p: ['Hay quien asocia el nicho a perfumes densos y orientales, pero el abanico es enorme: de los verdes limpios de Creed a los florales luminosos de Parfums de Marly. Si buscas algo fresco para el día a día, también hay nicho para ti.'],
@@ -37,7 +37,7 @@ export const GUIAS = [
   {
     id: 'perfumes-para-el-calor',
     title: 'Perfumes para el calor: qué llevar en Canarias todo el año',
-    h1: 'Perfumes para <em>el calor</em>',
+    h1: 'Perfumes para el calor',
     description: 'Qué perfumes funcionan mejor con calor y humedad, cómo aplicarlos para que duren y nuestras fragancias nicho frescas favoritas para Canarias.',
     eyebrow: 'Clima de Canarias',
     lede: 'En Canarias es verano casi todo el año. El calor hace que un perfume se note más y dure distinto, así que conviene elegirlo y ponérselo con un poco de cabeza.',
@@ -61,7 +61,7 @@ export const GUIAS = [
   {
     id: 'eau-de-toilette-eau-de-parfum-extracto',
     title: 'Eau de toilette, eau de parfum o extracto: qué cambia',
-    h1: 'Eau de toilette, eau de parfum <em>o extracto</em>',
+    h1: 'Eau de toilette, eau de parfum o extracto',
     description: 'La diferencia entre eau de toilette, eau de parfum, parfum y extracto: concentración, duración, estela y cuál elegir según el uso.',
     eyebrow: 'Concentraciones',
     lede: 'La etiqueta del frasco dice cuánta esencia lleva el perfume. Influye en lo que dura y en cómo se nota, pero no en si te va a gustar.',
@@ -75,16 +75,16 @@ export const GUIAS = [
         frags: ['amouage-guidance-46', 'xerjoff-alexandria-ii'] },
       { h: 'Cuál elegir',
         p: ['Para el día a día y el calor, un eau de toilette o un eau de parfum fresco. Para la noche o para quien quiere un perfume muy duradero y cercano, un extracto.',
-          'La mayoría de las fragancias de nuestro [catálogo](comprar/) son eau de parfum, la concentración más habitual en perfumería nicho. Si dudas entre dos versiones, pruébalas a la vez en la barra, una en cada muñeca.'] }
+          'La mayoría de las fragancias de nuestro [catálogo](comprar/) son eau de parfum, la concentración más habitual en perfumería nicho. Si dudas entre dos versiones, pide en tienda que te las prueben a la vez, una en cada muñeca.'] }
     ]
   },
   {
     id: 'como-elegir-un-perfume',
     title: 'Cómo elegir un perfume nicho sin equivocarte',
-    h1: 'Cómo elegir un perfume <em>sin equivocarte</em>',
+    h1: 'Cómo elegir un perfume sin equivocarte',
     description: 'Cinco consejos para elegir un perfume nicho: familias olfativas, cuántos oler a la vez, probar en piel y llevarse muestras antes de decidir.',
-    eyebrow: 'En la barra',
-    lede: 'Elegir perfume es más fácil de lo que parece si sabes qué buscar. Estos son los consejos que damos cada día en la barra.',
+    eyebrow: 'Consejos',
+    lede: 'Elegir perfume es más fácil de lo que parece si sabes qué buscar. Estos son los consejos que damos a diario en tienda.',
     date: '2026-10-26',
     sections: [
       { h: '1. Empieza por lo que ya te gusta',
@@ -96,21 +96,21 @@ export const GUIAS = [
       { h: '4. Decide en la piel, no en la tira',
         p: ['La tira sirve para descartar; la piel, para decidir. Ponte tu favorita y date un paseo: la salida de los primeros minutos no es lo que olerás después. Si dudas, vuelve otro día.'] },
       { h: '5. Llévate muestras',
-        p: ['Pídenos muestras de tus candidatas y llévalas unos días. Puedes guardar las que te interesen en [Tu lista](contacto/#lista) y enseñárnoslas al llegar o mandárnoslas por WhatsApp.'],
+        p: ['Pídenos muestras de tus candidatas y llévalas unos días. Puedes guardar las que te interesen en [Tu lista](contacto/#lista) y enseñárselas a la dependienta al llegar, o mandárnoslas por WhatsApp.'],
         frags: ['creed-aventus', 'pdm-delina', 'memo-marfa', 'tomford-tobacco-vanille'] }
     ]
   },
   {
     id: 'perfume-para-regalar',
     title: 'Cómo acertar al regalar un perfume nicho',
-    h1: 'Cómo acertar al <em>regalar un perfume</em>',
+    h1: 'Cómo acertar al regalar un perfume',
     description: 'Ideas para regalar un perfume nicho sin conocer los gustos exactos de quien lo recibe: fragancias versátiles, muestras y consejos de The Fragrance Bar.',
     eyebrow: 'Regalos',
     lede: 'Regalar perfume da respeto, porque es algo muy personal. Con unas pocas pistas sobre la persona es más fácil acertar de lo que parece.',
     date: '2026-10-26',
     sections: [
       { h: 'Las pistas que necesitas',
-        p: ['Fíjate en qué perfume lleva ahora, si prefiere lo fresco o lo cálido y si lo usará a diario o para ocasiones. Con eso ya podemos orientarte en la barra, aunque no sepas el nombre de ninguna fragancia.'] },
+        p: ['Fíjate en qué perfume lleva ahora, si prefiere lo fresco o lo cálido y si lo usará a diario o para ocasiones. Con eso ya podemos orientarte en tienda, aunque no sepas el nombre de ninguna fragancia.'] },
       { h: 'Fragancias que gustan a casi todos',
         p: ['Si no tienes pistas, busca perfumes versátiles: limpios, luminosos y sin notas difíciles. Estas son algunas de las que más recomendamos para regalar.'],
         frags: ['pdm-layton', 'xerjoff-erba-pura', 'amouage-reflection-man', 'montale-roses-musk'] },

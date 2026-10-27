@@ -50,11 +50,11 @@ export const SITE = {
       areaServed: ['Las Palmas de Gran Canaria', 'Gran Canaria'],
       near: 'Triana, Vegueta, San Telmo y el centro de Las Palmas de Gran Canaria',
       // img: foto principal (portada y página de la tienda) · cardImg: la de su tarjeta, para no repetir la fachada en la portada
-      img: 'img/tienda/triana-fachada', cardImg: 'img/tienda/interior-pasillo', imgAlt: 'Fachada de The Fragrance Bar en Triana: arco de piedra, rótulo negro y un interior iluminado con vitrinas de perfumes y una barra de madera en el centro',
+      img: 'img/tienda/triana-fachada', cardImg: 'img/tienda/interior-lamparas', imgAlt: 'Fachada de The Fragrance Bar en Triana: arco de piedra, rótulo negro y un interior iluminado con vitrinas de perfumes y una mesa de madera en el centro',
       /* Fotos del interior para la página de la tienda (prototipo: confirmar con la tienda que se pueden usar) */
       interior: [
         { img: 'img/tienda/interior-pasillo', w: 1380, h: 1038, sizes: [800, 1380], alt: 'Pasillo de vitrinas de cristal iluminadas, llenas de frascos de perfume, con suelo de madera clara' },
-        { img: 'img/tienda/interior-mesa', w: 579, h: 1035, sizes: [800], alt: 'La barra: mesa de madera con encimera de mármol, un gran ramo de flores, frascos para probar y taburetes' },
+        { img: 'img/tienda/interior-mesa', w: 579, h: 1035, sizes: [800], alt: 'Mesa de madera con encimera de mármol, un gran ramo de flores y taburetes, en el centro de la tienda' },
         { img: 'img/tienda/interior-lamparas', w: 1380, h: 1040, sizes: [800, 1380], alt: 'Lámparas de cuentas de cristal blancas, azules y rosas sobre el mostrador de azulejo azul, con las vitrinas negras y la cortina de cadenas cobre al fondo' }
       ] },
     { id: 'plaza-del-duque', name: 'Plaza del Duque', title: 'C. C. Plaza del Duque', island: 'tenerife', islandName: 'Tenerife',
@@ -135,7 +135,7 @@ export const SITE = {
   // Preguntas frecuentes (página de contacto). PROVISIONAL: respuestas de ejemplo, a confirmar con el negocio
   faq: [
     { q: '¿Puedo probar un perfume antes de comprarlo?',
-      a: 'Sí, y te lo recomendamos. En la barra de cada tienda puedes oler todo lo que hay en las vitrinas, primero en tira y después en piel, sin cita y sin compromiso.' },
+      a: 'Sí. Todos los perfumes están en las vitrinas: pide a la dependienta el que quieras oler y te lo prueba en una tira o en la piel. No hace falta cita ni comprar nada.' },
     { q: '¿Preparáis muestras para probar en casa?',
       a: 'Sí. Pregúntanos en tienda o por WhatsApp y te preparamos muestras de las fragancias que te interesen, para que las lleves unos días antes de decidir.' },
     { q: '¿Qué diferencia hay entre Eau de Toilette, Eau de Parfum y extracto?',
@@ -157,7 +157,7 @@ export const MOTION = { mode: 'completo', marquee: false };
 export const NAV = [
   { id: 'casas', label: 'Casas', path: 'casas/' },
   { id: 'comprar', label: 'Comprar', path: 'comprar/' },
-  { id: 'barra', label: 'La barra', path: 'la-barra/' },
+  { id: 'probar', label: 'Probar en tienda', path: 'probar/' },
   { id: 'historia', label: 'Historia', path: 'historia/' },
   { id: 'tiendas', label: 'Tiendas', path: 'tiendas/' }
 ];

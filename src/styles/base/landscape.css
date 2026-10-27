@@ -75,7 +75,7 @@
   .product__body { padding-top: .6rem; }
   .product__try { min-height: 36px; padding-top: .4rem; }
 
-  /* La barra: foto que no supera la pantalla */
+  /* Probar en tienda: foto que no supera la pantalla */
   .barra__grid { grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
   .barra__media { aspect-ratio: auto; height: calc(var(--avail) - 2rem); max-height: none; }
   .ritual { margin-top: 1.2rem; }

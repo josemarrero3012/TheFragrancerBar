@@ -1,9 +1,9 @@
 ﻿id;casa;nombre;concentracion;año;familia;tamaños y precios;descripcion;destacada;publicar
-creed-aventus;Creed;Aventus;EDP;2010;Frescas y afrutadas;50 ml = 285 € / 100 ml = 395 €;El chipre afrutado que convirtió a Creed en un fenómeno: piña luminosa sobre un fondo ahumado de abedul.;sí;sí
-creed-green-irish-tweed;Creed;Green Irish Tweed;EDP;1985;Frescas y afrutadas;50 ml = 285 € / 100 ml = 395 €;Hierba recién cortada y hoja de violeta: el gran clásico verde de la casa.;;sí
-creed-silver-mountain-water;Creed;Silver Mountain Water;EDP;1995;Frescas y afrutadas;50 ml = 275 € / 100 ml = 385 €;Arroyos de montaña y té verde, fresco y con un brillo casi metálico.;;sí
-creed-aventus-for-her;Creed;Aventus for Her;EDP;2016;Florales;30 ml = 175 € / 75 ml = 315 €;La versión femenina de Aventus: manzana verde, rosa y almizcle.;;sí
-creed-royal-oud;Creed;Royal Oud;EDP;2011;Amaderadas;50 ml = 285 € / 100 ml = 395 €;Un oud elegante y seco, muy lejos de los ouds densos de Oriente.;;sí
+creed-aventus;Creed;Aventus;EDP;2010;Frescas y afrutadas;50 ml = 285 € / 100 ml = 395 €;Piña, bergamota y abedul ahumado sobre un fondo de almizcle. Es el perfume que hizo famosa a Creed.;sí;sí
+creed-green-irish-tweed;Creed;Green Irish Tweed;EDP;1985;Frescas y afrutadas;50 ml = 285 € / 100 ml = 395 €;Hierba recién cortada, hoja de violeta e iris. Un verde clásico de la casa, de 1985.;;sí
+creed-silver-mountain-water;Creed;Silver Mountain Water;EDP;1995;Frescas y afrutadas;50 ml = 275 € / 100 ml = 385 €;Bergamota, té verde y grosella negra. Fresco y limpio, con un punto metálico.;;sí
+creed-aventus-for-her;Creed;Aventus for Her;EDP;2016;Florales;30 ml = 175 € / 75 ml = 315 €;Manzana verde, rosa y almizcle. La versión femenina de Aventus.;;sí
+creed-royal-oud;Creed;Royal Oud;EDP;2011;Amaderadas;50 ml = 285 € / 100 ml = 395 €;Oud seco con cedro y pimienta rosa. Más ligero que los ouds árabes.;;sí
 creed-viking;Creed;Viking;EDP;2017;Amaderadas;50 ml = 275 € / 100 ml = 385 €;Pimienta y menta sobre vetiver: energía de travesía nórdica.;;no
 creed-original-santal;Creed;Original Santal;EDP;2005;Amaderadas;50 ml = 255 € / 100 ml = 365 €;Sándalo cálido y especiado, de los más versátiles de la casa.;;no
 creed-millesime-imperial;Creed;Millésime Impérial;EDP;1995;Frescas y afrutadas;50 ml = 265 € / 100 ml = 375 €;Sal marina y cítricos sicilianos, con un brillo dorado.;;no
@@ -22,11 +22,11 @@ creed-erolfa;Creed;Erolfa;EDP;1992;Frescas y afrutadas;50 ml = 275 € / 100 ml 
 creed-neroli-sauvage;Creed;Néroli Sauvage;EDP;1994;Frescas y afrutadas;50 ml = 265 € / 100 ml = 375 €;Neroli puro y chispeante, limpio de principio a fin.;;no
 creed-original-vetiver;Creed;Original Vetiver;EDP;2004;Frescas y afrutadas;50 ml = 255 € / 100 ml = 365 €;Un vetiver fresco y jabonoso, de camisa blanca recién planchada.;;no
 creed-fleurissimo;Creed;Fleurissimo;EDP;1956;Florales;50 ml = 265 € / 100 ml = 375 €;El ramo de novia creado para Grace Kelly: tuberosa, rosa y violeta.;;no
-amouage-interlude-man;Amouage;Interlude Man;EDP;2012;Amaderadas;50 ml = 255 € / 100 ml = 350 €;Caos ordenado: humo de incienso, orégano y oud, con una estela inconfundible.;sí;sí
-amouage-reflection-man;Amouage;Reflection Man;EDP;2007;Florales;50 ml = 255 € / 100 ml = 350 €;El floral limpio y elegante de Amouage, perfecto para el día a día.;;sí
-amouage-guidance-46;Amouage;Guidance 46;Extrait;2023;Florales;50 ml = 295 € / 100 ml = 415 €;Pera y avellana tostada sobre incienso, en concentración de extracto.;sí;sí
-amouage-epic-woman;Amouage;Epic Woman;EDP;2009;Ámbar y especiadas;50 ml = 255 € / 100 ml = 350 €;La Ruta de la Seda en un frasco: especias, té ahumado e incienso.;;sí
-amouage-memoir-man;Amouage;Memoir Man;EDP;2010;Amaderadas;50 ml = 225 € / 100 ml = 320 €;Ajenjo y cuero: el lado oscuro y literario de la casa.;;sí
+amouage-interlude-man;Amouage;Interlude Man;EDP;2012;Amaderadas;50 ml = 255 € / 100 ml = 350 €;Incienso, orégano, ámbar y oud. Ahumado e intenso, y se nota a distancia.;sí;sí
+amouage-reflection-man;Amouage;Reflection Man;EDP;2007;Florales;50 ml = 255 € / 100 ml = 350 €;Jazmín, neroli y sándalo. Un floral limpio que se puede llevar a diario.;;sí
+amouage-guidance-46;Amouage;Guidance 46;Extrait;2023;Florales;50 ml = 295 € / 100 ml = 415 €;Pera, avellana tostada e incienso. Es un extracto, así que dura mucho.;sí;sí
+amouage-epic-woman;Amouage;Epic Woman;EDP;2009;Ámbar y especiadas;50 ml = 255 € / 100 ml = 350 €;Comino, té ahumado, incienso y rosa. Especiado y cálido.;;sí
+amouage-memoir-man;Amouage;Memoir Man;EDP;2010;Amaderadas;50 ml = 225 € / 100 ml = 320 €;Ajenjo, incienso y cuero. Amargo y oscuro.;;sí
 amouage-jubilation-xxv;Amouage;Jubilation XXV;EDP;2008;Ámbar y especiadas;50 ml = 235 € / 100 ml = 330 €;Creado para el 25 aniversario de la casa: incienso, miel y frutas oscuras.;;no
 amouage-epic-man;Amouage;Epic Man;EDP;2009;Amaderadas;50 ml = 255 € / 100 ml = 350 €;Un viaje por la Ruta de la Seda: té, especias e incienso.;;no
 amouage-lyric-woman;Amouage;Lyric Woman;EDP;2008;Florales;50 ml = 255 € / 100 ml = 350 €;Una rosa de ópera, profunda y especiada.;;no
@@ -39,11 +39,11 @@ amouage-memoir-woman;Amouage;Memoir Woman;EDP;2010;Amaderadas;50 ml = 225 € / 
 amouage-journey-man;Amouage;Journey Man;EDP;2014;Ámbar y especiadas;50 ml = 235 € / 100 ml = 330 €;Tabaco, cardamomo y cuero: un viaje en un tren nocturno de los años 30.;;no
 amouage-overture-man;Amouage;Overture Man;EDP;;Ámbar y especiadas;50 ml = 255 € / 100 ml = 350 €;Coñac y especias cálidas: festivo, envolvente y muy de noche.;;no
 amouage-lilac-love;Amouage;Lilac Love;EDP;2016;Florales;50 ml = 225 € / 100 ml = 320 €;Lila y heliotropo empolvados con un toque goloso de cacao.;;no
-xerjoff-naxos;Xerjoff;Naxos;EDP;2015;Ámbar y especiadas;50 ml = 245 € / 100 ml = 340 €;Lavanda, miel y tabaco: un homenaje a Sicilia y una de las fragancias más queridas del nicho.;sí;sí
-xerjoff-erba-pura;Xerjoff;Erba Pura;EDP;2019;Frescas y afrutadas;50 ml = 215 € / 100 ml = 310 €;Una explosión de fruta mediterránea sobre almizcles blancos. De las más pedidas en tienda.;sí;sí
-xerjoff-alexandria-ii;Xerjoff;Alexandria II;Parfum;2012;Amaderadas;50 ml = 395 € / 100 ml = 575 €;Uno de los grandes ouds de la casa, rosado y cremoso.;;sí
-xerjoff-torino21;Xerjoff;Torino21;EDP;2021;Frescas y afrutadas;50 ml = 225 € / 100 ml = 320 €;Menta y hierbas aromáticas: un homenaje fresco a la ciudad de Turín.;;sí
-xerjoff-accento;Xerjoff;Accento;EDP;2010;Florales;50 ml = 245 € / 100 ml = 340 €;Piña y jacinto sobre iris: dulce y floral.;;sí
+xerjoff-naxos;Xerjoff;Naxos;EDP;2015;Ámbar y especiadas;50 ml = 245 € / 100 ml = 340 €;Lavanda, miel, tabaco y vainilla. Inspirado en Sicilia y uno de los más vendidos de Xerjoff.;sí;sí
+xerjoff-erba-pura;Xerjoff;Erba Pura;EDP;2019;Frescas y afrutadas;50 ml = 215 € / 100 ml = 310 €;Naranja, limón y fruta madura sobre almizcle blanco. De los que más se piden en tienda.;sí;sí
+xerjoff-alexandria-ii;Xerjoff;Alexandria II;Parfum;2012;Amaderadas;50 ml = 395 € / 100 ml = 575 €;Oud con rosa, lavanda y ámbar. Cremoso y muy duradero.;;sí
+xerjoff-torino21;Xerjoff;Torino21;EDP;2021;Frescas y afrutadas;50 ml = 225 € / 100 ml = 320 €;Menta, albahaca y limón. Fresco y aromático, dedicado a Turín.;;sí
+xerjoff-accento;Xerjoff;Accento;EDP;2010;Florales;50 ml = 245 € / 100 ml = 340 €;Piña, jacinto e iris. Dulce y floral.;;sí
 xerjoff-lira;Xerjoff;Lira;EDP;2010;Ámbar y especiadas;50 ml = 205 € / 100 ml = 300 €;Naranja sanguina y caramelo: un gourmand luminoso.;;no
 xerjoff-erba-gold;Xerjoff;Erba Gold;EDP;2021;Frescas y afrutadas;50 ml = 235 € / 100 ml = 330 €;La hermana dorada de Erba Pura, con jengibre y melón.;;no
 xerjoff-renaissance;Xerjoff;Renaissance;EDP;2012;Frescas y afrutadas;50 ml = 205 € / 100 ml = 300 €;Cítricos y menta: chispeante y elegante.;;no
@@ -60,11 +60,11 @@ xerjoff-oesel;Xerjoff;Oesel;EDP;;Florales;50 ml = 225 € / 100 ml = 320 €;Aza
 xerjoff-italica;Xerjoff;Italica;EDP;;Ámbar y especiadas;50 ml = 235 € / 100 ml = 330 €;Almendra, leche y toffee: un gourmand cremoso e italianísimo.;;no
 xerjoff-fiore-d-ulivo;Xerjoff;Fiore d'Ulivo;EDP;;Frescas y afrutadas;50 ml = 235 € / 100 ml = 330 €;Albahaca, limón y jazmín: la frescura de un jardín mediterráneo.;;no
 xerjoff-quattro-pizzi;Xerjoff;Quattro Pizzi;EDP;;Ámbar y especiadas;50 ml = 215 € / 100 ml = 310 €;Ron, coco y tabaco rubio: cálido, tropical y muy goloso.;;no
-pdm-layton;Parfums de Marly;Layton;EDP;2016;Ámbar y especiadas;75 ml = 265 € / 125 ml = 345 €;Manzana, lavanda y vainilla con un toque de cardamomo. Elegante y muy versátil.;sí;sí
-pdm-delina;Parfums de Marly;Delina;EDP;2017;Florales;75 ml = 245 € / 125 ml = 325 €;Lichi y ruibarbo sobre una rosa turca: el floral más famoso de la casa.;sí;sí
-pdm-pegasus;Parfums de Marly;Pegasus;EDP;2011;Ámbar y especiadas;75 ml = 235 € / 125 ml = 315 €;Almendra y vainilla: el gourmand elegante de la casa.;;sí
-pdm-herod;Parfums de Marly;Herod;EDP;2012;Amaderadas;75 ml = 235 € / 125 ml = 315 €;Tabaco y canela: cálido, sereno y muy de invierno.;;sí
-pdm-greenley;Parfums de Marly;Greenley;EDP;2020;Frescas y afrutadas;75 ml = 225 € / 125 ml = 305 €;Manzana verde y cachemira: verde y luminoso.;;sí
+pdm-layton;Parfums de Marly;Layton;EDP;2016;Ámbar y especiadas;75 ml = 265 € / 125 ml = 345 €;Manzana, lavanda, vainilla y cardamomo. Fácil de llevar en cualquier época del año.;sí;sí
+pdm-delina;Parfums de Marly;Delina;EDP;2017;Florales;75 ml = 245 € / 125 ml = 325 €;Lichi, ruibarbo y rosa turca. El floral más vendido de Parfums de Marly.;sí;sí
+pdm-pegasus;Parfums de Marly;Pegasus;EDP;2011;Ámbar y especiadas;75 ml = 235 € / 125 ml = 315 €;Almendra amarga, heliotropo y vainilla. Dulce sin llegar a empalagar.;;sí
+pdm-herod;Parfums de Marly;Herod;EDP;2012;Amaderadas;75 ml = 235 € / 125 ml = 315 €;Tabaco, canela y vainilla. Cálido, para el invierno.;;sí
+pdm-greenley;Parfums de Marly;Greenley;EDP;2020;Frescas y afrutadas;75 ml = 225 € / 125 ml = 305 €;Manzana verde, bergamota y cachemira. Fresco y suave.;;sí
 pdm-percival;Parfums de Marly;Percival;EDP;2015;Frescas y afrutadas;75 ml = 225 € / 125 ml = 305 €;Fresco y almizclado, el comodín para todos los días.;;no
 pdm-sedley;Parfums de Marly;Sedley;EDP;2019;Frescas y afrutadas;75 ml = 245 € / 125 ml = 325 €;Menta helada y pomelo: el más fresco de Marly.;;no
 pdm-carlisle;Parfums de Marly;Carlisle;EDP;2015;Ámbar y especiadas;75 ml = 255 € / 125 ml = 335 €;Manzana y nuez moscada con un fondo de vainilla y pachulí.;;no
@@ -81,22 +81,22 @@ pdm-godolphin;Parfums de Marly;Godolphin;EDP;2012;Amaderadas;75 ml = 225 € / 1
 pdm-galloway;Parfums de Marly;Galloway;EDP;2009;Frescas y afrutadas;75 ml = 225 € / 125 ml = 305 €;Cítricos y flores empolvadas: limpio, suave y muy luminoso.;;no
 pdm-safanad;Parfums de Marly;Safanad;EDP;2017;Florales;75 ml = 265 € / 125 ml = 345 €;Azahar e iris sobre vainilla: un floral dulce y sofisticado.;;no
 pdm-meliora;Parfums de Marly;Meliora;EDP;2016;Florales;75 ml = 235 € / 125 ml = 315 €;Frutos rojos y rosa: alegre, chispeante y muy femenino.;;no
-initio-oud-for-greatness;Initio;Oud for Greatness;EDP;2018;Amaderadas;90 ml = 325 €;Azafrán y un oud poderoso: la fragancia insignia de Initio.;sí;sí
-initio-side-effect;Initio;Side Effect;EDP;2016;Ámbar y especiadas;90 ml = 325 €;Ron, tabaco y vainilla: adictivo y nocturno.;;sí
-initio-rehab;Initio;Rehab;EDP;2016;Amaderadas;90 ml = 295 €;Lavanda y almizcles cremosos: reconfortante.;;sí
-initio-atomic-rose;Initio;Atomic Rose;EDP;2019;Florales;90 ml = 285 €;Una rosa luminosa con un fondo de vainilla.;;sí
-initio-psychedelic-love;Initio;Psychedelic Love;EDP;2019;Florales;90 ml = 285 €;Iris y azahar sobre maderas suaves: hipnótico y luminoso.;;sí
+initio-oud-for-greatness;Initio;Oud for Greatness;EDP;2018;Amaderadas;90 ml = 325 €;Azafrán, nuez moscada, lavanda y oud. El perfume más conocido de Initio.;sí;sí
+initio-side-effect;Initio;Side Effect;EDP;2016;Ámbar y especiadas;90 ml = 325 €;Ron, tabaco, canela y vainilla. Dulce e intenso, más de noche.;;sí
+initio-rehab;Initio;Rehab;EDP;2016;Amaderadas;90 ml = 295 €;Lavanda, almizcle y maderas. Suave y limpio.;;sí
+initio-atomic-rose;Initio;Atomic Rose;EDP;2019;Florales;90 ml = 285 €;Rosa con bergamota y un fondo de vainilla.;;sí
+initio-psychedelic-love;Initio;Psychedelic Love;EDP;2019;Florales;90 ml = 285 €;Iris, azahar y maderas claras. Floral y suave.;;sí
 initio-musk-therapy;Initio;Musk Therapy;EDP;2017;Florales;90 ml = 285 €;Almizcles limpios y pera: como una piel mejorada.;;no
 initio-absolute-aphrodisiac;Initio;Absolute Aphrodisiac;EDP;2016;Ámbar y especiadas;90 ml = 325 €;Vainilla, almizcle y maderas: sensualidad en estado puro.;;no
 initio-paragon;Initio;Paragon;EDP;2017;Amaderadas;90 ml = 295 €;Un fougère amaderado, solar y moderno.;;no
 initio-blessed-baraka;Initio;Blessed Baraka;EDP;2016;Amaderadas;90 ml = 285 €;Sándalo, ámbar y almizcle: místico y cálido.;;no
 initio-high-frequency;Initio;High Frequency;EDP;2018;Frescas y afrutadas;90 ml = 295 €;Cítricos y flores blancas sobre almizcle: vibrante.;;no
 initio-narcotic-delight;Initio;Narcotic Delight;EDP;2020;Ámbar y especiadas;90 ml = 285 €;Cereza negra y coñac: un ámbar embriagador.;;no
-montale-arabians-tonka;Montale;Arabians Tonka;EDP;2016;Ámbar y especiadas;50 ml = 95 € / 100 ml = 135 €;Azafrán, rosa y oud endulzados con haba tonka. Intenso y muy duradero.;sí;sí
-montale-intense-cafe;Montale;Intense Café;EDP;2013;Ámbar y especiadas;50 ml = 125 € / 100 ml = 165 €;Café tostado y rosa: el gourmand más famoso de Montale.;;sí
-montale-roses-musk;Montale;Roses Musk;EDP;2007;Florales;50 ml = 95 € / 100 ml = 135 €;Rosa y almizcle blanco: suave y muy persistente.;;sí
-montale-chocolate-greedy;Montale;Chocolate Greedy;EDP;2009;Ámbar y especiadas;50 ml = 115 € / 100 ml = 155 €;Chocolate, café y vainilla: goloso de verdad.;;sí
-montale-wild-pears;Montale;Wild Pears;EDP;2013;Frescas y afrutadas;50 ml = 115 € / 100 ml = 155 €;Pera jugosa con un fondo almizclado.;;sí
+montale-arabians-tonka;Montale;Arabians Tonka;EDP;2016;Ámbar y especiadas;50 ml = 95 € / 100 ml = 135 €;Azafrán, rosa, oud y haba tonka. Intenso y muy duradero.;sí;sí
+montale-intense-cafe;Montale;Intense Café;EDP;2013;Ámbar y especiadas;50 ml = 125 € / 100 ml = 165 €;Café tostado, rosa y vainilla. El perfume más conocido de Montale.;;sí
+montale-roses-musk;Montale;Roses Musk;EDP;2007;Florales;50 ml = 95 € / 100 ml = 135 €;Rosa y almizcle blanco. Suave y duradero.;;sí
+montale-chocolate-greedy;Montale;Chocolate Greedy;EDP;2009;Ámbar y especiadas;50 ml = 115 € / 100 ml = 155 €;Chocolate, café, haba tonka y vainilla. Muy dulce.;;sí
+montale-wild-pears;Montale;Wild Pears;EDP;2013;Frescas y afrutadas;50 ml = 115 € / 100 ml = 155 €;Pera, bergamota y almizcle. Afrutado y ligero.;;sí
 montale-black-aoud;Montale;Black Aoud;EDP;2006;Amaderadas;50 ml = 95 € / 100 ml = 135 €;Oud y rosa negra: intenso, sin concesiones.;;no
 montale-dark-purple;Montale;Dark Purple;EDP;2009;Florales;50 ml = 125 € / 100 ml = 165 €;Ciruela y rosa: oscuro y seductor.;;no
 montale-aoud-forest;Montale;Aoud Forest;EDP;2008;Amaderadas;50 ml = 95 € / 100 ml = 135 €;Oud y cítricos en un bosque de maderas húmedas.;;no
@@ -109,20 +109,20 @@ montale-pure-gold;Montale;Pure Gold;EDP;;Ámbar y especiadas;50 ml = 115 € / 1
 montale-red-aoud;Montale;Red Aoud;EDP;;Amaderadas;50 ml = 105 € / 100 ml = 145 €;Oud y rosa con azafrán: intenso y muy oriental.;;no
 montale-mango-manga;Montale;Mango Manga;EDP;;Frescas y afrutadas;50 ml = 115 € / 100 ml = 155 €;Mango maduro y flores blancas: tropical, alegre y jugoso.;;no
 montale-roses-elixir;Montale;Roses Elixir;EDP;;Florales;50 ml = 95 € / 100 ml = 135 €;Una rosa fresca y afrutada, más ligera que Roses Musk.;;no
-memo-marfa;Memo Paris;Marfa;EDP;2016;Florales;30 ml = 165 € / 75 ml = 275 €;Nardo y azahar en el desierto de Texas: un floral blanco cálido y solar.;sí;sí
-memo-african-leather;Memo Paris;African Leather;EDP;2015;Amaderadas;30 ml = 125 € / 75 ml = 235 €;Cuero especiado con azafrán: la sabana al atardecer.;;sí
-memo-irish-leather;Memo Paris;Irish Leather;EDP;2014;Amaderadas;30 ml = 165 € / 75 ml = 275 €;Cuero verde con enebro y mate: las praderas de Irlanda.;;sí
-memo-inle;Memo Paris;Inlé;EDP;2011;Florales;30 ml = 165 € / 75 ml = 275 €;Osmanthus y té: el lago Inle de Birmania al amanecer.;;sí
-memo-french-leather;Memo Paris;French Leather;EDP;2017;Amaderadas;30 ml = 135 € / 75 ml = 245 €;Un cuero rosado, fino como un guante.;;sí
+memo-marfa;Memo Paris;Marfa;EDP;2016;Florales;30 ml = 165 € / 75 ml = 275 €;Nardo, azahar y agave. Inspirado en Marfa, en el desierto de Texas.;sí;sí
+memo-african-leather;Memo Paris;African Leather;EDP;2015;Amaderadas;30 ml = 125 € / 75 ml = 235 €;Cuero, azafrán, comino y cardamomo. Cálido y especiado.;;sí
+memo-irish-leather;Memo Paris;Irish Leather;EDP;2014;Amaderadas;30 ml = 165 € / 75 ml = 275 €;Cuero con enebro, mate y hierba. Un cuero verde, más fresco de lo habitual.;;sí
+memo-inle;Memo Paris;Inlé;EDP;2011;Florales;30 ml = 165 € / 75 ml = 275 €;Osmanto y té, con un fondo de almizcle. Toma el nombre del lago Inle, en Birmania.;;sí
+memo-french-leather;Memo Paris;French Leather;EDP;2017;Amaderadas;30 ml = 135 € / 75 ml = 245 €;Cuero suave con rosa y pimienta rosa. Ligero para ser un cuero.;;sí
 memo-italian-leather;Memo Paris;Italian Leather;EDP;2016;Amaderadas;30 ml = 165 € / 75 ml = 275 €;Hoja de tomatera y cuero: Italia en pleno verano.;;no
 memo-lalibela;Memo Paris;Lalibela;EDP;2014;Ámbar y especiadas;30 ml = 145 € / 75 ml = 255 €;Incienso y miel inspirados en las iglesias excavadas de Etiopía.;;no
 memo-tiger-s-nest;Memo Paris;Tiger's Nest;EDP;2018;Ámbar y especiadas;30 ml = 135 € / 75 ml = 245 €;Especias y té a la sombra del monasterio de Bután.;;no
 memo-russian-leather;Memo Paris;Russian Leather;EDP;2015;Amaderadas;30 ml = 165 € / 75 ml = 275 €;Cuero helado con menta: las estepas rusas en invierno.;;no
-tomford-tobacco-vanille;Tom Ford;Tobacco Vanille;EDP;2007;Ámbar y especiadas;50 ml = 295 € / 100 ml = 405 €;Hoja de tabaco y vainilla: un clásico cálido y envolvente de la colección Private Blend.;sí;sí
-tomford-oud-wood;Tom Ford;Oud Wood;EDP;2007;Amaderadas;50 ml = 305 € / 100 ml = 415 €;El oud que lo empezó todo en Occidente: suave, seco y elegante.;;sí
-tomford-lost-cherry;Tom Ford;Lost Cherry;EDP;2018;Ámbar y especiadas;50 ml = 295 € / 100 ml = 405 €;Cereza negra y licor: seductor, goloso y muy nocturno.;;sí
-tomford-tuscan-leather;Tom Ford;Tuscan Leather;EDP;2007;Amaderadas;50 ml = 315 € / 100 ml = 425 €;Cuero crudo con frambuesa y azafrán: icónico.;;sí
-tomford-neroli-portofino;Tom Ford;Neroli Portofino;EDP;2011;Frescas y afrutadas;50 ml = 325 € / 100 ml = 435 €;La Riviera italiana en un frasco: neroli y cítricos.;;sí
+tomford-tobacco-vanille;Tom Ford;Tobacco Vanille;EDP;2007;Ámbar y especiadas;50 ml = 295 € / 100 ml = 405 €;Hoja de tabaco, vainilla, cacao y especias. Uno de los más vendidos de Private Blend.;sí;sí
+tomford-oud-wood;Tom Ford;Oud Wood;EDP;2007;Amaderadas;50 ml = 305 € / 100 ml = 415 €;Oud, palo de rosa y cardamomo. Seco y suave, de los primeros ouds de una casa occidental.;;sí
+tomford-lost-cherry;Tom Ford;Lost Cherry;EDP;2018;Ámbar y especiadas;50 ml = 295 € / 100 ml = 405 €;Cereza negra, licor de almendra y haba tonka. Dulce y muy de noche.;;sí
+tomford-tuscan-leather;Tom Ford;Tuscan Leather;EDP;2007;Amaderadas;50 ml = 315 € / 100 ml = 425 €;Cuero, frambuesa, azafrán y tomillo. Uno de los cueros más conocidos de Tom Ford.;;sí
+tomford-neroli-portofino;Tom Ford;Neroli Portofino;EDP;2011;Frescas y afrutadas;50 ml = 325 € / 100 ml = 435 €;Neroli, bergamota, limón y lavanda. Fresco y cítrico, pensado para el verano.;;sí
 tomford-bitter-peach;Tom Ford;Bitter Peach;EDP;2020;Ámbar y especiadas;50 ml = 295 € / 100 ml = 405 €;Melocotón maduro con ron y coñac.;;no
 tomford-soleil-blanc;Tom Ford;Soleil Blanc;EDP;2016;Florales;50 ml = 315 € / 100 ml = 425 €;Flores blancas y coco: piel tostada al sol.;;no
 tomford-rose-prick;Tom Ford;Rose Prick;EDP;2020;Florales;50 ml = 295 € / 100 ml = 405 €;Tres rosas con espinas de pimienta.;;no

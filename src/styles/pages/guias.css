@@ -5,7 +5,8 @@
 .guiacard__link { display: grid; gap: .6rem; align-content: start; text-decoration: none; }
 .guiacard .product__media { margin-bottom: .6rem; }
 .guiacard__title { font-family: var(--f-display); font-size: var(--t-h3); line-height: 1.15; }
-.guiacard__link:hover .guiacard__title { font-family: var(--f-serif); font-style: italic; }
+.guiacard__title { transition: color .25s; }
+.guiacard__link:hover .guiacard__title { color: var(--oak); }
 .guiacard__desc { font-size: var(--t-sm); color: var(--muted); line-height: 1.5; }
 
 .guia .pagehead__title { max-width: 20ch; }
@@ -32,7 +33,7 @@
 .localseo__casas a { display: grid; gap: .2rem; padding: 1rem .2rem; border-bottom: 1px solid var(--line); text-decoration: none; }
 .localseo__casas span { font-family: var(--f-display); font-size: var(--t-lg); }
 .localseo__casas small { font-size: var(--t-xs); color: var(--muted); }
-.localseo__casas a:hover span { font-family: var(--f-serif); font-style: italic; }
+.localseo__casas a:hover span { color: var(--oak); }
 @media (min-width: 960px) {
   .localseo { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 6vw; align-items: start; }
   .localseo__casas li:nth-child(odd) a { margin-right: 1.4rem; }

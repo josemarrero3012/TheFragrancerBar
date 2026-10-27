@@ -1,4 +1,4 @@
-/* La barra (el concepto que da nombre a la tienda): fondo de tinta y la foto real de la barra de Triana */
+/* Cómo se prueba en tienda (portada y página «Probar en tienda»): fondo de tinta y la foto de las vitrinas de Triana */
 .barra__media img, .barrahero__media img { object-position: 50% 40%; }
 .barra__grid { display: grid; gap: 2.6rem; }
 .barra__media { margin: 0; aspect-ratio: 4 / 5; max-height: 80vh; overflow: hidden; }
