@@ -109,12 +109,12 @@ export const SITE = {
     { name: 'Google Maps', url: 'https://www.google.com/maps/search/?api=1&query=The+Fragrance+Bar+Calle+Mayor+de+Triana+32+Las+Palmas+de+Gran+Canaria' }
   ],
 
-  // Escaparate de la portada: las campañas de varias casas a pantalla completa, que van pasando solas
-  // (o con las pestañas, el dedo o las flechas). Cada una es una foto o una película de la casa:
+  // Escaparate de la portada (la sección bajo el hero): las campañas de varias casas a pantalla completa,
+  // que van pasando solas (o con las pestañas, el dedo o las flechas). Cada una es una foto o una película de la casa:
   //   media   ruta sin extensión: foto en <media>-<ancho>.webp con los anchos de «widths»;
   //           si video es true, además <media>-1600.mp4 y <media>-960.mp4 (móvil), y la foto es su primer fotograma
-  //   casa    la casa de la campaña, o tienda: el id de una tienda para enseñar la tienda (foto propia)
-  //   frag    fragancia publicada de la tarjeta; sin ella, la tarjeta lleva a la casa (o a la tienda)
+  //   casa    la casa de la campaña: su nombre, ciudad y año salen en grande sobre la foto
+  //   frag    fragancia publicada para la tarjeta de compra (opcional)
   //   focus   el punto que no se puede cortar (el frasco), en % horizontal y vertical
   //   tone    'dark' si la foto es oscura (texto claro encima) o 'light' si es clara (texto oscuro)
   //   dur     milisegundos en pantalla
@@ -128,11 +128,8 @@ export const SITE = {
       focus: '50% 50%', tone: 'light', dur: 7000, credit: 'Foto de campaña',
       alt: 'Frasco de Xerjoff Naxos sobre un mapa antiguo de Sicilia, envuelto por una cinta verde' },
     { casa: 'tomford', media: 'escaparate/tomford', widths: [1200, 2400], w: 2400, h: 1029,
-      focus: '85% 50%', tone: 'dark', dur: 7000, credit: 'Foto de campaña · Private Blend',
-      alt: 'Frasco de Tom Ford Tobacco Chocolat iluminado en ámbar sobre fondo oscuro' },
-    { tienda: 'triana', media: 'img/tienda/triana-fachada', widths: [800, 1448], w: 1448, h: 1086,
-      focus: '50% 30%', tone: 'dark', dur: 7000, credit: 'Nuestra tienda de Triana',
-      alt: 'Fachada de The Fragrance Bar en la calle Mayor de Triana, con el rótulo y la tienda iluminada al fondo' }
+      focus: '85% 50%', tone: 'dark', dur: 7000, credit: 'Foto de campaña',
+      alt: 'Frasco de Tom Ford Tobacco Chocolat iluminado en ámbar sobre fondo oscuro' }
   ],
 
   // Preguntas frecuentes (página de contacto). PROVISIONAL: respuestas de ejemplo, a confirmar con el negocio

@@ -20,7 +20,7 @@ Cada sección es una página con su propia URL. Todas se generan desde los datos
 
 | Ruta | Página |
 |---|---|
-| `/` | Portada: escaparate de campañas que van pasando (películas y fotos de las casas y la tienda, `SITE.escaparate`), selección, la barra, tiendas |
+| `/` | Portada: el nombre de la tienda en grande, como en su rótulo, sobre la foto de la fachada de Triana, con la dirección, el horario y el teléfono (al bajar, el nombre encoge hasta quedarse en el logo de la cabecera: `src/js/rotulo.js`); después, el escaparate de campañas de las casas que van pasando (películas y fotos, `SITE.escaparate`), la selección, la barra y las tiendas |
 | `/casas/` · `/casas/<casa>/` | Las 8 casas y una página por casa con todas sus fragancias |
 | `/comprar/` | Catálogo con buscador, filtros por casa, familia y precio (con el número de resultados de cada opción), orden y «Ver más» de 24 en 24 (los filtros van en la URL: `?casa=xerjoff&familia=ambar&precio=150-250`) |
 | `/fragancias/<id>/` | Ficha de cada fragancia: tamaños, precio, notas de salida, corazón y fondo, relacionadas |

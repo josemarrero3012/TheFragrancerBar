@@ -57,88 +57,108 @@ const mapBox = (s) => `
         </div>`;
 
 /* ---------------------------------------------------------------- Portada */
-/* Escaparate: una diapositiva por campaña (SITE.escaparate). Sin JavaScript se ve la primera, con su foto.
-   src/js/escaparate.js las pasa, reproduce la película de la que está delante y mueve las pestañas */
+/* Hero: el nombre de la tienda como en su rótulo, la foto de la fachada de Triana y sus datos.
+   Al bajar, src/js/rotulo.js encoge el nombre hasta dejarlo en el logo de la cabecera.
+   Cada palabra va en su propia ranura para la entrada (src/js/motion.js) */
+const ROTULO = `<span class="logo__mark"><span class="hero__w"><span class="logo__caps">The</span></span> <span class="hero__w"><em>fragrance</em></span> <span class="hero__w"><span class="logo__caps">Bar</span></span></span>
+        <span class="logo__sub" lang="en">Luxury perfumes</span>`;
+// La foto (4:3) llena un marco cuadrado: se ve 1,33 veces más ancha que el marco (como mucho 600 px en escritorio)
+const HERO_SIZES = '(min-width: 960px) 800px, 134vw';
+/** «Lunes a sábado, 10:00–21:00»: el horario en una línea, sin los días que cierra */
+const hoursLine = (s) => hourGroups(s.hours).filter((g) => g.value !== 'Cerrado').map((g) => `${g.label}, ${g.value}`).join(' · ');
+
+/* Escaparate: las campañas de las casas (SITE.escaparate), una tras otra a pantalla completa.
+   Sin JavaScript se ve la primera, con su foto. src/js/escaparate.js las pasa, reproduce la película
+   de la que está delante y mueve las pestañas */
 // En móvil la foto 16:9 llena un marco 4:5: se ve 2,2 veces más ancha que la pantalla
 const SLIDE_SIZES = '(min-width: 960px) 100vw, 222vw';
 const slideSrcset = (e) => e.widths.map((w) => `/${e.media}-${w}.webp ${w}w`).join(', ');
 
-const slideStore = (e) => SITE.stores.find((s) => s.id === e.tienda);
-const slideName = (e) => (e.tienda ? 'La tienda' : casaById(e.casa).name);
-const slideCredit = (e) => (e.tienda ? e.credit : `${slideName(e)} · ${e.credit}`);
-
-function heroSlide(e, i) {
+function escSlide(e, i) {
   const first = i === 0, pos = ` style="object-position: ${e.focus}"`;
-  const img = `<img src="/${e.media}-${e.widths[e.widths.length - 1]}.webp" srcset="${slideSrcset(e)}" sizes="${SLIDE_SIZES}" width="${e.w}" height="${e.h}"${pos} alt="${esc(e.alt)}"${first ? ' fetchpriority="high"' : ' loading="lazy" fetchpriority="low"'}>`;
+  const img = `<img src="/${e.media}-${e.widths[e.widths.length - 1]}.webp" srcset="${slideSrcset(e)}" sizes="${SLIDE_SIZES}" width="${e.w}" height="${e.h}"${pos} alt="${esc(e.alt)}" loading="lazy"${first ? '' : ' fetchpriority="low"'}>`;
   // La película se carga solo cuando le toca (preload="none"); hasta entonces se ve la foto de debajo
   const video = e.video ? `<video muted playsinline loop preload="none" aria-hidden="true" tabindex="-1"${pos}>
           <source src="/${e.media}-960.mp4" type="video/mp4" media="(max-width: 959px)">
           <source src="/${e.media}-1600.mp4" type="video/mp4">
         </video>` : '';
-  return `<figure class="hero__slide${first ? ' is-active' : ''}" data-slide data-tone="${e.tone}" data-dur="${e.dur}" data-credit="${esc(slideCredit(e))}"${first ? '' : ' aria-hidden="true"'}>
+  return `<figure class="esc__slide${first ? ' is-active' : ''}" data-slide data-tone="${e.tone}" data-dur="${e.dur}" data-credit="${esc(e.credit)}"${first ? '' : ' aria-hidden="true"'}>
         ${img}${video}
       </figure>`;
 }
 
-function heroCard(e, i) {
-  const attrs = `class="hero__card${i === 0 ? ' is-active' : ''}" data-card${i === 0 ? '' : ' hidden'}`;
-  if (e.tienda) {
-    const st = slideStore(e);
-    return `<a ${attrs} href="${storeUrl(st)}">
-        <img src="/${st.cardImg || st.img}-800.webp" width="800" height="600" loading="lazy" alt="">
-        <span class="hero__card-brand">${esc(st.islandName)}</span>
-        <span class="hero__card-name">${esc(st.title)}</span>
-        <span class="hero__card-price">${esc(st.street)}</span>
-        <span class="hero__card-go">Ver la tienda y el horario</span>
-      </a>`;
-  }
-  const c = casaById(e.casa), f = e.frag && fragById(e.frag);
-  if (f) return `<a ${attrs} href="${fragUrl(f)}">
+/** Nombre, ciudad y año de la casa de cada campaña, en grande sobre la foto */
+function escCasa(e, i) {
+  const c = casaById(e.casa);
+  return `<div class="esc__casa${i === 0 ? ' is-active' : ''}" data-esc-casa${i === 0 ? '' : ' hidden'}>
+            <p class="esc__name"><span>${esc(c.name)}</span></p>
+            <p class="esc__meta">${esc(c.city)} · ${esc(c.founded)}</p>
+            <a class="link esc__link" href="${casaUrl(c)}">Ver las fragancias de ${esc(c.name)}</a>
+          </div>`;
+}
+
+/** Tarjeta de compra de la fragancia de la campaña, si la tiene */
+function escCard(e, i) {
+  const f = e.frag && fragById(e.frag);
+  if (!f) return '';
+  return `<a class="esc__card${i === 0 ? ' is-active' : ''}" data-card="${i}"${i === 0 ? '' : ' hidden'} href="${fragUrl(f)}">
         <img src="${f.orig ? origSrc(f, 0, 160) : `/img/productos/${f.img}-400.webp`}" width="160" height="160" loading="lazy" alt="">
-        <span class="hero__card-brand">${esc(c.name)}</span>
-        <span class="hero__card-name">${esc(f.name)}</span>
-        <span class="hero__card-price">${f.sizes.length > 1 ? 'desde ' : ''}${euros(priceFrom(f))}</span>
-        <span class="hero__card-go">Ver fragancia</span>
-      </a>`;
-  return `<a ${attrs} href="${casaUrl(c)}">
-        <img src="/img/casas/${c.img}-560.webp" width="560" height="700" loading="lazy" alt="">
-        <span class="hero__card-brand">${esc(c.city)}</span>
-        <span class="hero__card-name">${esc(c.name)}</span>
-        <span class="hero__card-price">${nFrag(fragsDeCasa(c.id).length)} en la web</span>
-        <span class="hero__card-go">Ver la casa</span>
+        <span class="esc__card-brand">${esc(casaById(e.casa).name)}</span>
+        <span class="esc__card-name">${esc(f.name)}</span>
+        <span class="esc__card-price">${f.sizes.length > 1 ? 'desde ' : ''}${euros(priceFrom(f))}</span>
+        <span class="esc__card-go">Ver fragancia</span>
       </a>`;
 }
 
 function home(url) {
-  const t = mainStore(), E = SITE.escaparate, n = String(E.length).padStart(2, '0');
-  const first = E[0];
+  const t = mainStore(), otras = SITE.stores.filter((s) => s !== t);
+  const E = SITE.escaparate, n = String(E.length).padStart(2, '0'), first = E[0];
   const main = `
-    <section class="hero" data-hero data-tone="${first.tone}" aria-labelledby="hero-title" aria-roledescription="escaparate">
-      <div class="hero__stage">
-      ${E.map(heroSlide).join('\n      ')}
-      </div>
-      <p class="hero__credit" data-credit aria-live="polite"><span data-count>01</span> / ${n} · <span data-credit-text>${esc(slideCredit(first))}</span></p>
-      <div class="hero__copy">
-        <p class="eyebrow hero__eyebrow">Perfumería nicho · Gran Canaria y Tenerife</p>
-        <h1 class="hero__title" id="hero-title"><span class="hero__line"><span>Perfumería nicho,</span></span> <span class="hero__line"><span><em>sin prisa.</em></span></span></h1>
-        <p class="hero__lede">Las grandes casas de autor, en tiendas pensadas para oler con calma y probar sobre la piel antes de elegir.</p>
-        <div class="hero__ctas">
-          <a class="btn hero__btn" href="${u('comprar/')}">Comprar fragancias</a>
-          <a class="link hero__link" href="${storeUrl(t)}">Visitar la tienda de Triana</a>
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 class="hero__rotulo" id="hero-title" data-rotulo><span class="hero__lockup">${ROTULO}</span></h1>
+      <div class="hero__row wrap">
+        <figure class="hero__photo">
+          <img src="/${t.img}-1448.webp" srcset="/${t.img}-800.webp 800w, /${t.img}-1448.webp 1448w" sizes="${HERO_SIZES}" width="1448" height="1086" fetchpriority="high" alt="${esc(t.imgAlt)}">
+        </figure>
+        <div class="hero__col hero__col--tienda">
+          <p class="eyebrow hero__cat">Perfumería nicho</p>
+          <p class="hero__big hero__addr">${esc(t.street).replace(/ (\S+)$/, '&nbsp;$1')}</p>
+          <p class="hero__city">${esc(t.city)}</p>
+          <a class="link hero__go" href="${storeUrl(t)}">Ver la tienda</a>
+        </div>
+        <div class="hero__col hero__col--hoy">
+          <p class="eyebrow hero__when">Horario y teléfono</p>
+          ${clock(t, hoursLine(t))}
+          <p class="hero__big hero__tel"><a href="${telHref(t.phone)}">${esc(t.phone.replace(/^\+34\s*/, ''))}</a></p>
+          <a class="btn btn--dark hero__btn" href="${u('comprar/')}">Comprar online</a>
         </div>
       </div>
-      ${E.map(heroCard).join('\n      ')}
-      <div class="hero__nav" data-hero-nav hidden>
-        <div class="hero__tabs" role="tablist" aria-label="Casas del escaparate">
-          ${E.map((e, i) => `<button class="hero__tab" type="button" role="tab" data-tab aria-selected="${i === 0}"><span class="hero__bar"><i></i></span><span class="hero__tab-n">${String(i + 1).padStart(2, '0')}</span> ${esc(slideName(e))}</button>`).join('\n          ')}
-        </div>
-        <button class="hero__pause" type="button" data-pause aria-pressed="false">${ICON.pause}${ICON.play}<span class="visually-hidden">Pausar el escaparate</span></button>
-      </div>
+      ${otras.length ? `<p class="hero__also">También en ${esc([...new Set(otras.map((s) => s.islandName))].join(' y '))}: ${otras.map((s) => `<a href="${storeUrl(s)}">${esc(s.name)}</a>`).join(' · ')}</p>` : ''}
     </section>
 
     <div class="brandline">
       <ul class="brandline__list wrap" aria-label="Casas que trabajamos" data-brandline data-reveal="up" data-stagger>${brandStrip()}</ul>
     </div>
+
+    <section class="esc" data-esc data-tone="${first.tone}" aria-labelledby="esc-title" aria-roledescription="escaparate">
+      <div class="esc__stage">
+      ${E.map(escSlide).join('\n      ')}
+      </div>
+      <p class="esc__credit" data-credit aria-live="polite"><span data-count>01</span> / ${n} · <span data-credit-text>${esc(first.credit)}</span></p>
+      <div class="esc__copy">
+        <h2 class="eyebrow esc__eyebrow" id="esc-title">En el escaparate</h2>
+        <div class="esc__casas">
+          ${E.map(escCasa).join('\n          ')}
+        </div>
+      </div>
+      ${E.map(escCard).filter(Boolean).join('\n      ')}
+      <div class="esc__nav" data-esc-nav hidden>
+        <div class="esc__tabs" role="tablist" aria-label="Casas del escaparate">
+          ${E.map((e, i) => `<button class="esc__tab" type="button" role="tab" data-tab aria-selected="${i === 0}"><span class="esc__bar"><i></i></span><span class="esc__tab-n">${String(i + 1).padStart(2, '0')}</span> ${esc(casaById(e.casa).name)}</button>`).join('\n          ')}
+        </div>
+        <button class="esc__pause" type="button" data-pause aria-pressed="false">${ICON.pause}${ICON.play}<span class="visually-hidden">Pausar el escaparate</span></button>
+      </div>
+    </section>
 
     <section class="seleccion section" aria-labelledby="seleccion-title">
       <div class="wrap">
@@ -183,11 +203,11 @@ function home(url) {
       </div>
     </section>`;
   return {
-    path: '', section: 'home', intro: true, main,
+    path: '', section: 'home', intro: true, rotulo: true, main,
     title: 'Perfumería nicho en Las Palmas y Tenerife | The Fragrance Bar',
     ogTitle: 'The Fragrance Bar · Triana, Las Palmas de Gran Canaria',
     description: 'Perfumería nicho en la Calle Mayor de Triana (Las Palmas de Gran Canaria), Costa Adeje y Playa de las Américas. Creed, Xerjoff, Amouage, Initio y más.',
-    preload: `<link rel="preload" as="image" href="/${first.media}-${first.widths[first.widths.length - 1]}.webp" imagesrcset="${slideSrcset(first)}" imagesizes="${SLIDE_SIZES}">`,
+    preload: `<link rel="preload" as="image" href="/${t.img}-1448.webp" imagesrcset="/${t.img}-800.webp 800w, /${t.img}-1448.webp 1448w" imagesizes="${HERO_SIZES}">`,
     schema: schema.graph([
       { '@type': 'WebSite', '@id': `${url}/#web`, name: SITE.brand, url: `${url}/`, inLanguage: 'es' },
       schema.organization(SITE, url),

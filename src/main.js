@@ -15,6 +15,7 @@ import { initMap, initContacto, initNews } from './js/contacto.js';
 import { initMotion } from './js/motion.js';
 import { initGaleria } from './js/galeria.js';
 import { initEscaparate } from './js/escaparate.js';
+import { initRotulo } from './js/rotulo.js';
 
 // Los módulos se ejecutan con el documento ya analizado (equivalen a «defer»)
 $$('[data-proto]').forEach((el) => { el.hidden = !SITE.prototype; });
@@ -29,5 +30,6 @@ initContacto();
 initNews();
 initGaleria();
 initEscaparate();
+initRotulo();
 $$('main img:not([fetchpriority]):not(.product__hover)').forEach(fadeIn);
 initMotion();

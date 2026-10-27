@@ -3,6 +3,7 @@
 .logo__mark { font-family: var(--f-serif); font-size: 1.32rem; white-space: nowrap; }
 .logo__caps { font-weight: 700; text-transform: uppercase; font-size: .84em; letter-spacing: .02em; }
 .logo__mark em { font-style: italic; font-size: 1.12em; }
-.logo__sub { font-family: var(--f-serif); font-size: .5rem; letter-spacing: .3em; text-transform: uppercase; }
+/* El margen negativo compensa el espaciado que queda tras la última letra, para que el lema quede centrado */
+.logo__sub { font-family: var(--f-serif); font-size: .5rem; letter-spacing: .3em; margin-right: -.3em; text-transform: uppercase; }
 .logo--light { color: var(--paper); }
 @media (min-width: 960px) { .logo__mark { font-size: 1.45rem; } }
