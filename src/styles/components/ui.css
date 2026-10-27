@@ -10,7 +10,8 @@
 .pagehead .demo-note { margin-top: .6rem; }
 .eyebrow--light { color: var(--oak-light); }
 .section--tight { padding-top: 0; }
-.section__more { align-self: end; white-space: nowrap; }
+/* El subrayado mide lo que el texto, también en móvil, donde la cabecera es una sola columna */
+.section__more { align-self: end; justify-self: start; white-space: nowrap; }
 
 /* Migas de pan */
 .crumbs ol { display: flex; flex-wrap: wrap; gap: .2rem .5rem; font-size: var(--t-xs); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
@@ -22,12 +23,17 @@
 .section--dark .crumbs li + li::before { color: rgba(248, 247, 244, .3); }
 .section--dark .crumbs [aria-current], .section--dark .crumbs a:hover { color: var(--paper); }
 
-/* Aviso de precios de demostración */
-.demo-note { max-width: 46rem; padding: .85rem 1.1rem; border: 1px dashed rgba(142, 79, 26, .55); background: rgba(194, 122, 52, .12); font-size: var(--t-sm); color: var(--ink-2); line-height: 1.5; }
-.demo-note strong { font-weight: 600; color: var(--oak); }
-.demo-note--inline { padding: 0; border: 0; background: none; font-size: var(--t-xs); color: var(--oak); letter-spacing: .02em; }
-.demo-note--inline::before { content: "◆ "; font-size: .7em; vertical-align: .1em; }
-.products ~ .demo-note { margin-top: 2.4rem; }
+/* Avisos del prototipo (precios de demostración, capítulos y reseñas pendientes, respuestas de ejemplo):
+   todos iguales, una nota en gris con el rombo cobre delante, sin caja. Se leen, pero no parecen una web a medias */
+.demo-note, .products__note, .historia__note, .reviews__proto {
+  position: relative; max-width: 46rem; padding: 0 0 0 1.25rem; border: 0; background: none;
+  font-size: var(--t-sm); line-height: 1.55; color: var(--muted);
+}
+:is(.demo-note, .products__note, .historia__note, .reviews__proto)::before { content: "◆"; position: absolute; left: 0; top: .35em; font-size: .62em; line-height: 1; color: var(--oak); }
+.demo-note strong { font-weight: 500; color: var(--ink-2); }
+.demo-note--inline { padding: 0; font-size: var(--t-xs); color: var(--oak); letter-spacing: .02em; }
+.demo-note--inline::before { content: "◆ "; position: static; font-size: .7em; vertical-align: .1em; }
+.products ~ .demo-note, .products ~ .products__note { margin-top: 2.4rem; }
 
 /* Botón de icono (cesta, cerrar) */
 .iconbtn {

@@ -38,7 +38,27 @@
 .more__status { font-size: var(--t-sm); color: var(--muted); font-variant-numeric: tabular-nums; }
 .more .btn { min-width: min(100%, 16rem); }
 
-.products__note { margin-top: 2.6rem; padding-top: 1.2rem; border-top: 1px solid var(--line); font-size: var(--t-sm); color: var(--muted); }
 /* Enlace al catálogo bajo la selección de la portada (en escritorio ya está en la cabecera) */
 .seleccion__more { margin-top: 2.4rem; text-align: center; }
 @media (min-width: 960px) { .seleccion__more { display: none; } }
+
+/* Portada en el móvil vertical: la selección en una fila que se desliza con el dedo, con la siguiente asomando.
+   Ocho fichas en dos columnas eran cuatro pantallas de scroll antes de llegar a la tienda */
+@media (max-width: 759px) and (orientation: portrait) {
+  .products--carrusel {
+    display: flex; gap: 1rem; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+    margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+  .products--carrusel::-webkit-scrollbar { display: none; }
+  .products--carrusel > .product { flex: 0 0 72%; scroll-snap-align: start; }
+}
+
+/* Garantías de compra bajo la selección: envío, recogida y regalo */
+.garantias { display: grid; gap: 1.2rem 2rem; margin-top: clamp(2.6rem, 5vw, 4rem); padding-top: 1.6rem; border-top: 1px solid var(--line); }
+.garantias li { display: flex; align-items: flex-start; gap: .9rem; }
+.garantias .icon { width: 26px; height: 26px; color: var(--oak); }
+.garantias p { font-size: var(--t-sm); color: var(--muted); line-height: 1.5; }
+.garantias strong { display: block; margin-bottom: .1rem; font-weight: 500; font-size: var(--t-base); color: var(--ink); }
+@media (min-width: 760px) { .garantias { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.garantias + .products__note { margin-top: 2rem; }

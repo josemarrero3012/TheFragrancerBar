@@ -13,11 +13,14 @@
 .storecard:hover .storecard__title a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .storecard__addr { font-size: var(--t-sm); color: var(--muted); }
 .storecard .status { margin-top: .4rem; }
+/* Teléfono y cómo llegar: por encima del enlace que hace clicable toda la tarjeta */
+.storecard__acts { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; margin-top: .7rem; font-size: var(--t-sm); }
+.storecard__acts a { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: .45rem; min-height: 32px; text-decoration: none; font-weight: 500; transition: color .25s; }
+.storecard__acts a:hover { color: var(--oak); }
+.storecard__acts .icon { width: 1.05rem; height: 1.05rem; color: var(--oak); }
 
-/* Tienda sin foto todavía: la isla y la ciudad, en tipografía sobre el fondo de piedra */
-.storecard__media--sinfoto { display: grid; place-content: center; justify-items: center; gap: .4rem; padding: 1rem; text-align: center; }
-.storecard__media--sinfoto span { font-size: var(--t-xs); letter-spacing: .14em; text-transform: uppercase; color: var(--oak); font-weight: 500; }
-.storecard__media--sinfoto strong { font-family: var(--f-display); font-weight: 400; font-size: var(--t-h3); line-height: 1.15; color: var(--ink-2); }
+/* Tienda sin foto (por defecto en la portada, las casas y las guías): una raya de tinta encima y los datos */
+.storecard--texto { padding-top: 1.3rem; border-top: 1px solid var(--ink); }
 
 .storehero { display: grid; gap: 2.4rem; padding-block: clamp(20px, 3vw, 48px) var(--section); }
 .storehero__copy { display: grid; gap: 1rem; justify-items: start; align-content: start; }
@@ -57,7 +60,7 @@
 
 .reviews { display: grid; gap: 2rem; }
 .reviews .link { margin-top: 1.4rem; }
-.reviews__proto { align-self: center; padding: 1.4rem 1.6rem; border: 1px dashed rgba(18, 17, 16, .3); font-size: var(--t-sm); color: var(--muted); }
+.reviews__proto { align-self: end; }
 @media (min-width: 960px) { .reviews { grid-template-columns: 1fr 1fr; gap: 6vw; } }
 
 /* Fotos del interior: el pasillo de vitrinas a lo ancho, la mesa en vertical y las lámparas */

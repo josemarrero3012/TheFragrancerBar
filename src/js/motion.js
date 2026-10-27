@@ -4,7 +4,8 @@ import { MOTION } from '../data/site.js';
 import { $, $$, reduceMotion, fullMotion, EASE, clamp01 } from './utils.js';
 
 /* Entrada de la portada: el nombre sale palabra a palabra de su ranura, la foto de la fachada se descubre
-   de abajo arriba, como al subir la persiana de la tienda, y los datos llegan después */
+   de abajo arriba, como al subir la persiana de la tienda, y los datos y la franja de casas llegan después
+   (en escritorio la franja también está en la primera pantalla) */
 function introHero() {
   const hero = $('.hero');
   if (!hero) return;
@@ -17,7 +18,7 @@ function introHero() {
   photo.animate([{ clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0)' }], { duration: soft ? 1100 : 1500, delay: 300, easing: 'cubic-bezier(.77,0,.18,1)', fill: 'backwards' });
   if (!soft) $('img', photo).animate([{ transform: 'scale(1.12)' }, { transform: 'none' }], { duration: 2400, delay: 300, easing: 'cubic-bezier(.2,.7,.1,1)', fill: 'backwards' });
   // Los datos uno a uno (en móvil las columnas no tienen caja propia: van sus hijos)
-  [...$$('.hero__col > *', hero), $('.hero__also', hero)].filter(Boolean).forEach((el, i) => el.animate(up, { duration: 1000, delay: 900 + i * 70, easing: EASE, fill: 'backwards' }));
+  [...$$('.hero__col > *', hero), $('.hero__also', hero), ...$$('[data-brandline] > li')].filter(Boolean).forEach((el, i) => el.animate(up, { duration: 1000, delay: 900 + i * 70, easing: EASE, fill: 'backwards' }));
   document.documentElement.classList.remove('is-intro');
 }
 

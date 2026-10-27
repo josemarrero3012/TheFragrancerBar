@@ -153,13 +153,15 @@ export const SITE = {
    marquee: franja de marcas en movimiento continuo (opcional). */
 export const MOTION = { mode: 'completo', marquee: false };
 
-/* Navegación principal: la misma en escritorio y en móvil */
+/* Navegación principal: la misma en escritorio y en móvil.
+   En el orden en que se decide: qué hay (casas, comprar), dónde y cómo se prueba (tiendas) y, al final, leer (guías, historia) */
 export const NAV = [
   { id: 'casas', label: 'Casas', path: 'casas/' },
   { id: 'comprar', label: 'Comprar', path: 'comprar/' },
+  { id: 'tiendas', label: 'Tiendas', path: 'tiendas/' },
   { id: 'probar', label: 'Probar en tienda', path: 'probar/' },
-  { id: 'historia', label: 'Historia', path: 'historia/' },
-  { id: 'tiendas', label: 'Tiendas', path: 'tiendas/' }
+  { id: 'guias', label: 'Guías', path: 'guias/' },
+  { id: 'historia', label: 'Historia', path: 'historia/' }
 ];
 
 export const mainStore = () => SITE.stores[0];

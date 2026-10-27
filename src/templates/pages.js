@@ -6,7 +6,7 @@
 import { SITE, mainStore } from '../data/site.js';
 import { CASAS, FRAGANCIAS, FAMILIAS, CONCENTRACIONES, PRECIOS, casaById, fragById, familiaName, fragsDeCasa, euros, priceFrom } from '../data/catalogo.js';
 import { NOTAS, NOTAS_FOTOS, gruposDeNotas, notasPlanas } from '../data/notas.js';
-import { GUIAS } from '../data/guias.js';
+import { GUIAS, GUIAS_PORTADA } from '../data/guias.js';
 import * as schema from '../data/schema.js';
 import { layout, whatsappHref } from './layout.js';
 import { esc, u, ICON, NEW_TAB, fragUrl, casaUrl, storeUrl, telHref, productGallery, productMedia, productCard, origSrc, moreButton, crumbs, pageHead, demoNote, brandStrip, clock, nota } from './ui.js';
@@ -18,6 +18,8 @@ const featured = [...FRAGANCIAS.filter((p) => p.featured), ...FRAGANCIAS.filter(
 const nFrag = (n) => `${n} ${n === 1 ? 'fragancia' : 'fragancias'}`;
 /** Meta description de 160 caracteres como máximo: añade el primer complemento que quepa */
 const fit = (base, ...extras) => base + (extras.find((x) => (base + x).length <= 160) || '');
+/** «Triana, Plaza del Duque o Américas Plaza» */
+const oLista = (a) => (a.length > 1 ? `${a.slice(0, -1).join(', ')} o ${a[a.length - 1]}` : a[0]);
 
 /** Agrupa los días consecutivos con el mismo horario: «Lunes a sábado 10:00–21:00» */
 function hourGroups(hours) {
@@ -137,7 +139,7 @@ function home(url) {
     </section>
 
     <div class="brandline">
-      <ul class="brandline__list wrap" aria-label="Casas que trabajamos" data-brandline data-reveal="up" data-stagger>${brandStrip()}</ul>
+      <ul class="brandline__list wrap" aria-label="Casas que trabajamos" data-brandline>${brandStrip()}</ul>
     </div>
 
     <section class="esc" data-esc data-tone="${first.tone}" aria-labelledby="esc-title" aria-roledescription="escaparate">
@@ -165,16 +167,20 @@ function home(url) {
         <header class="section__head section__head--row">
           <div data-reveal="up" data-stagger>
             <h2 class="section__title" id="seleccion-title">Las más pedidas</h2>
-            <p class="section__intro">Las fragancias que más se llevan en nuestras tiendas. Puedes comprarlas aquí o venir a olerlas antes.</p>
+            <p class="section__intro">Las que más se llevan en nuestras tiendas. Cómpralas aquí o ven a olerlas antes.</p>
           </div>
-          <a class="link section__more" href="${u('comprar/')}" data-reveal="up">Ver las ${FRAGANCIAS.length} fragancias</a>
+          <a class="link section__more" href="${u('comprar/')}" data-reveal="up">Ver todo el catálogo</a>
         </header>
-        <ul class="products">${featured.slice(0, 8).map((p, i) => productCard(p, { notes: true, i })).join('')}</ul>
+        <ul class="products products--carrusel">${featured.slice(0, 8).map((p, i) => productCard(p, { notes: true, i })).join('')}</ul>
         <p class="seleccion__more"><a class="btn btn--line" href="${u('comprar/')}">Ver todo el catálogo</a></p>
+        <ul class="garantias" data-reveal="up" data-stagger>
+          <li>${ICON.truck}<p><strong>Envío en ${SITE.shipping.days}</strong> Gratis a partir de ${euros(SITE.shipping.freeFrom)}.</p></li>
+          <li>${ICON.store}<p><strong>Recogida gratis en tienda</strong> En ${oLista(SITE.stores.map((s) => s.name))}.</p></li>
+          <li>${ICON.gift}<p><strong>Envoltorio de regalo</strong> Sin coste, en tienda y en los pedidos online.</p></li>
+        </ul>
         ${SITE.demoPrices ? '<p class="products__note">Los precios de esta demo son inventados. En la tienda online verás cómo funcionaría la compra.</p>' : ''}
       </div>
     </section>
-
 
     <section class="barra section section--dark" aria-labelledby="barra-title">
       <div class="wrap barra__grid">
@@ -183,8 +189,13 @@ function home(url) {
         </figure>
         <div class="barra__copy" data-reveal="up" data-stagger>
           <p class="eyebrow eyebrow--light">En la tienda</p>
-          <h2 class="section__title" id="barra-title">Todo está en las vitrinas</h2>
-          <p class="section__intro">Si quieres oler alguno, pídeselo a la dependienta. Te lo saca, te lo prueba en una tira o en la piel y te cuenta cómo es. No hace falta cita.</p>
+          <h2 class="section__title" id="barra-title">Prueba el que quieras antes de comprarlo</h2>
+          <p class="section__intro">Todos los perfumes están en las vitrinas. Pide a la dependienta el que quieras oler: te lo prueba en una tira o en la piel y te cuenta cómo es. No hace falta cita ni comprar nada.</p>
+          <ul class="ritual">
+            <li><h3>Consejo</h3><p>Dile qué perfumes te gustan y te propondrá otros que te pueden encajar.</p></li>
+            <li><h3>Muestras para casa</h3><p>Llévate muestras de los que más te gusten y decide en casa.</p></li>
+            <li><h3>Tu lista</h3><p>Guarda en la web los que quieras oler y enséñaselos a la dependienta al llegar.</p></li>
+          </ul>
           <a class="btn btn--line" href="${u('probar/')}">Cómo es una visita</a>
         </div>
       </div>
@@ -195,11 +206,24 @@ function home(url) {
         <header class="section__head section__head--row">
           <div data-reveal="up" data-stagger>
             <h2 class="section__title" id="tiendas-title">Nuestras tiendas</h2>
-            <p class="section__intro">Una en la Calle Mayor de Triana, en Las Palmas de Gran Canaria, y dos en el sur de Tenerife: Plaza del Duque y Américas Plaza.</p>
+            <p class="section__intro">Abrimos la primera en Tenerife en 2022. La de Triana es la más nueva y la primera en Gran Canaria.</p>
           </div>
           <a class="link section__more" href="${u('tiendas/')}" data-reveal="up">Todas las tiendas</a>
         </header>
         <ul class="storecards" data-reveal="up" data-stagger>${SITE.stores.map((st) => storeCard(st)).join('')}</ul>
+      </div>
+    </section>
+
+    <section class="section section--stone" aria-labelledby="guias-title">
+      <div class="wrap">
+        <header class="section__head section__head--row">
+          <div data-reveal="up" data-stagger>
+            <h2 class="section__title" id="guias-title">Guías para elegir perfume</h2>
+            <p class="section__intro">Lo que más nos preguntan en tienda: cómo elegir, qué llevar con el calor de Canarias y cómo acertar con un regalo.</p>
+          </div>
+          <a class="link section__more" href="${u('guias/')}" data-reveal="up">Todas las guías</a>
+        </header>
+        <ul class="guiatexts">${GUIAS_PORTADA.map((id) => GUIAS.find((g) => g.id === id)).filter(Boolean).map(guiaTexto).join('')}</ul>
       </div>
     </section>`;
   return {
@@ -216,16 +240,20 @@ function home(url) {
   };
 }
 
-function storeCard(s, { photo = true } = {}) {
+/** Tarjeta de una tienda: sus datos, si está abierta, el teléfono y cómo llegar.
+    Por defecto sin foto, para que no quede un hueco vacío en las tiendas que aún no tienen
+    (las de Tenerife); con photo, la foto de la tienda encima si la tiene (índice de tiendas) */
+function storeCard(s, { photo = false } = {}) {
+  const media = photo && s.img;
   return `
-          <li class="storecard">
-            ${s.img && photo ? `<figure class="storecard__media"><img src="/${s.cardImg || s.img}-800.webp" width="800" height="600" loading="lazy" alt=""></figure>`
-              : `<div class="storecard__media storecard__media--sinfoto" aria-hidden="true"><span>${esc(s.islandName)}</span><strong>${esc(s.city)}</strong></div>`}
+          <li class="storecard${media ? '' : ' storecard--texto'}">
+            ${media ? `<figure class="storecard__media"><img src="/${s.cardImg || s.img}-800.webp" width="800" height="600" loading="lazy" alt=""></figure>` : ''}
             <div class="storecard__body">
               <p class="eyebrow">${esc(s.islandName)}${s.isNew ? ' · Nueva tienda' : ''}</p>
               <h3 class="storecard__title"><a href="${storeUrl(s)}">${esc(s.title)}</a></h3>
               <p class="storecard__addr">${esc(s.addressShort)}</p>
               ${clock(s)}
+              <p class="storecard__acts"><a href="${telHref(s.phone)}">${ICON.phone}${esc(s.phone)}</a><a href="${s.mapsUrl}" target="_blank" rel="noopener">${ICON.pin}Cómo llegar${NEW_TAB}</a></p>
             </div>
           </li>`;
 }
@@ -245,7 +273,7 @@ const dondeProbar = (title, intro) => `<section class="section probar" aria-labe
 function casas(url) {
   const main = `${pageHead({
     crumbs: [['Inicio', ''], ['Casas']],
-    eyebrow: `${CASAS.length} casas`,
+    eyebrow: 'Perfumería nicho',
     title: 'Las casas que trabajamos',
     intro: 'Estas son las marcas de perfumería nicho que tenemos en tienda. En cada una encontrarás su historia y sus fragancias.'
   })}
@@ -331,7 +359,7 @@ function comprar(url) {
     crumbs: [['Inicio', ''], ['Comprar']],
     eyebrow: 'Tienda online',
     title: 'Comprar fragancias',
-    intro: `${FRAGANCIAS.length} fragancias de ${enVenta.length} casas de autor. Envío en ${SITE.shipping.days}, gratis desde ${euros(SITE.shipping.freeFrom)}, o recogida en tienda.`,
+    intro: `${enVenta.slice(0, 4).map((c) => c.name).join(', ')} y más casas nicho. Envío en ${SITE.shipping.days}, gratis desde ${euros(SITE.shipping.freeFrom)}, o recogida gratis en tienda.`,
     extra: demoNote(SITE)
   })}
     <section class="shop section section--tight" data-shop data-paged>
@@ -657,7 +685,7 @@ function tiendas(url) {
     ${islas().map(([isla, list]) => `<section class="section section--tight isla" aria-labelledby="isla-${list[0].island}">
       <div class="wrap">
         <h2 class="isla__title" id="isla-${list[0].island}" data-reveal="up">Perfumería nicho en ${esc(isla)}</h2>
-        <ul class="storecards storecards--big" data-reveal="up" data-stagger>${list.map((x) => storeCard(x)).join('')}</ul>
+        <ul class="storecards storecards--big" data-reveal="up" data-stagger>${list.map((x) => storeCard(x, { photo: true })).join('')}</ul>
       </div>
     </section>`).join('')}`;
   return {
@@ -746,6 +774,17 @@ const fechaLarga = (d) => new Date(`${d}T12:00:00`).toLocaleDateString('es-ES', 
 /** Las fragancias publicadas de las que habla la guía (portada de su tarjeta: la primera) */
 const fragsDe = (ids = []) => ids.map(fragById).filter(Boolean);
 const fragsGuia = (g) => fragsDe(g.sections.flatMap((x) => x.frags || []));
+
+/** Guía en una tarjeta de solo texto (portada): en la portada sus frascos repetirían los de «Las más pedidas» */
+const guiaTexto = (g, i) => `
+          <li class="guiatext" data-reveal="up" data-reveal-delay="${i * 80}">
+            <a class="guiatext__link" href="${u(`guias/${g.id}/`)}">
+              <span class="eyebrow">${esc(g.eyebrow)}</span>
+              <span class="guiatext__title">${esc(g.title)}</span>
+              <span class="guiatext__desc">${esc(g.lede)}</span>
+              <span class="guiatext__go">Leer la guía ${ICON.arrow}</span>
+            </a>
+          </li>`;
 
 function guiaCard(g, i = 0) {
   const p = fragsGuia(g)[0];

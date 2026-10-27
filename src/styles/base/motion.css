@@ -3,7 +3,7 @@
    Las entradas y revelados se hacen en src/js/motion.js con Web Animations API. */
 /* Portada, antes de su entrada (src/js/motion.js introHero) */
 .is-intro .hero__w > * { transform: translateY(180%); }
-.is-intro :is(.hero__rotulo .logo__sub, .hero__col > *, .hero__also) { opacity: 0; }
+.is-intro :is(.hero__rotulo .logo__sub, .hero__col > *, .hero__also, [data-brandline] > li) { opacity: 0; }
 .is-intro .hero__photo { clip-path: inset(100% 0 0 0); }
 
 /* Estado de apertura: anillo que pulsa */
