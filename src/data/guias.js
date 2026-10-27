@@ -9,6 +9,9 @@
    Como site.js, no debe usar nada del navegador (lo lee también vite.config.js).
    ========================================================================== */
 
+/* Las tres guías de la portada, en este orden. En noviembre y diciembre, la de regalos primero */
+export const GUIAS_PORTADA = ['perfume-para-regalar', 'como-elegir-un-perfume', 'perfumes-para-el-calor'];
+
 export const GUIAS = [
   {
     id: 'que-es-la-perfumeria-nicho',

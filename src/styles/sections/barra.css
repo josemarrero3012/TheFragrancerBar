@@ -3,10 +3,12 @@
 .barra__grid { display: grid; gap: 2.6rem; }
 .barra__media { margin: 0; aspect-ratio: 4 / 5; max-height: 80vh; overflow: hidden; }
 .barra__media img { width: 100%; height: 100%; object-fit: cover; }
-.ritual { margin-top: 2.2rem; border-top: 1px solid var(--line-dark); }
-.ritual li { padding: 1.3rem 0; border-bottom: 1px solid var(--line-dark); display: grid; gap: .35rem; }
-.ritual h3 { font-size: var(--t-h3); }
-.ritual p { color: rgba(248, 247, 244, .72); font-size: var(--t-base); max-width: 32rem; }
+/* Lo que ofrece la tienda además de probar (portada): consejo, muestras y «Tu lista», en filas separadas por rayas */
+.ritual { margin-top: 2rem; border-top: 1px solid var(--line-dark); }
+.ritual li { display: grid; gap: .3rem; padding: 1.05rem 0; border-bottom: 1px solid var(--line-dark); }
+.ritual h3 { font-size: var(--t-lg); line-height: 1.3; }
+.ritual p { color: rgba(248, 247, 244, .72); font-size: var(--t-sm); max-width: 32rem; }
+@media (min-width: 1100px) { .ritual li { grid-template-columns: 11rem minmax(0, 1fr); gap: 1.5rem; align-items: baseline; } }
 @media (min-width: 960px) { .barra__grid { grid-template-columns: 1fr 1fr; gap: 6vw; align-items: center; } }
 
 /* Página «La barra» */

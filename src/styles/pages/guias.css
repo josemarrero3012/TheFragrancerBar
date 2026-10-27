@@ -9,6 +9,19 @@
 .guiacard__link:hover .guiacard__title { color: var(--oak); }
 .guiacard__desc { font-size: var(--t-sm); color: var(--muted); line-height: 1.5; }
 
+/* Guías en la portada: tarjetas de solo texto sobre la piedra */
+.guiatexts { display: grid; gap: 1rem 1.4rem; }
+@media (min-width: 760px) { .guiatexts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.guiatext__link { display: flex; flex-direction: column; align-items: flex-start; gap: .6rem; height: 100%; padding: clamp(1.4rem, 2.4vw, 2rem); background: var(--paper); text-decoration: none; transition: background .3s var(--ease); }
+.guiatext__link:hover { background: var(--card); }
+.guiatext__title { font-family: var(--f-display); font-size: var(--t-h3); line-height: 1.15; text-wrap: balance; transition: color .25s; }
+.guiatext__link:hover .guiatext__title { color: var(--oak); }
+.guiatext__desc { font-size: var(--t-sm); color: var(--muted); line-height: 1.5; }
+/* «Leer la guía» al pie de la tarjeta, a la misma altura en las tres */
+.guiatext__go { display: inline-flex; align-items: center; gap: .5rem; margin-top: auto; padding-top: .6rem; font-size: var(--t-sm); font-weight: 500; }
+.guiatext__go .icon { width: 1rem; height: 1rem; transition: transform .35s var(--ease); }
+.guiatext__link:hover .guiatext__go .icon { transform: translateX(4px); }
+
 .guia .pagehead__title { max-width: 20ch; }
 .guia__meta { font-size: var(--t-sm); color: var(--muted); }
 .guia__body { padding-bottom: var(--section); }

@@ -61,7 +61,7 @@ function footer() {
       <div class="footer__cols">
         <div><p class="footer__label">Tiendas</p><ul>${SITE.stores.map((s) =>
           `<li><a href="${storeUrl(s)}">${esc(s.title)}</a><br><span class="footer__muted">${esc(s.islandName)} · <a href="${telHref(s.phone)}">${esc(s.phone)}</a></span></li>`).join('')}</ul></div>
-        <div><p class="footer__label">Explorar</p><ul>${NAV.map((n) => `<li><a href="${u(n.path)}">${n.label}</a></li>`).join('')}<li><a href="${u('guias/')}">Guías</a></li><li><a href="${u('contacto/#preguntas')}">Preguntas frecuentes</a></li></ul></div>
+        <div><p class="footer__label">Explorar</p><ul>${NAV.map((n) => `<li><a href="${u(n.path)}">${n.label}</a></li>`).join('')}<li><a href="${u('contacto/#preguntas')}">Preguntas frecuentes</a></li></ul></div>
         <div><p class="footer__label">Síguenos</p><ul>${social}</ul></div>
         <div><p class="footer__label">Legal</p><ul><li><a href="${u('legal/#aviso-legal')}">Aviso legal</a></li><li><a href="${u('legal/#privacidad')}">Privacidad</a></li><li><a href="${u('legal/#cookies')}">Cookies</a></li></ul></div>
       </div>
