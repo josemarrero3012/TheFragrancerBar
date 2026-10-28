@@ -1,7 +1,7 @@
 /* Cabecera fija, navegación y menú móvil */
 .header {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(248, 247, 244, .92);
+  background: rgba(var(--paper-rgb), .92);
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent; transition: border-color .3s;
 }

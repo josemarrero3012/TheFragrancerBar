@@ -57,7 +57,7 @@
   .esc__stage { position: absolute; inset: 0; aspect-ratio: auto; }
   /* Los dos velos, uno por tono; se cruzan al cambiar de diapositiva */
   .esc__stage::before, .esc__stage::after { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; transition: opacity 1s var(--ease); }
-  .esc__stage::before { background: linear-gradient(90deg, rgba(248, 247, 244, .93), rgba(248, 247, 244, .8) 30%, rgba(248, 247, 244, 0) 55%), linear-gradient(0deg, rgba(248, 247, 244, .75), rgba(248, 247, 244, 0) 22%); }
+  .esc__stage::before { background: linear-gradient(90deg, rgba(var(--paper-rgb), .93), rgba(var(--paper-rgb), .8) 30%, rgba(var(--paper-rgb), 0) 55%), linear-gradient(0deg, rgba(var(--paper-rgb), .75), rgba(var(--paper-rgb), 0) 22%); }
   .esc__stage::after { background: linear-gradient(90deg, rgba(18, 17, 16, .82), rgba(18, 17, 16, .6) 34%, rgba(18, 17, 16, 0) 60%), linear-gradient(0deg, rgba(18, 17, 16, .65), rgba(18, 17, 16, 0) 30%); opacity: 0; }
   .esc[data-tone="dark"] .esc__stage::before { opacity: 0; }
   .esc[data-tone="dark"] .esc__stage::after { opacity: 1; }
