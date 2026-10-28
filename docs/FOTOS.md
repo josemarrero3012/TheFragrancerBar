@@ -88,3 +88,9 @@ ffmpeg -ss 8.5 -i campaña.mp4 -frames:v 1 primer-fotograma.png   # y de ahí cr
 
 Así cada película pesa entre 1 y 2 MB (unos 0,6 MB en móvil). Las películas y fotos de campaña son de las casas, y necesitan el mismo permiso que el resto de fotos de marca.
 
+
+## Luz de fondo
+
+Arriba de cada página (y, en la portada, en «Nuestras tiendas») se ve la sombra de una palmera sobre la pared y algo de sol cálido (`src/styles/base/luz.css`). La sombra es una foto real, no un dibujo: [«Shadow of palm fronds cast on light wall»](https://unsplash.com/photos/shadow-of-palm-fronds-cast-on-light-wall-T0BYurbDK_M), de Augustine Wong, con la licencia de Unsplash (permite el uso comercial sin atribución). `scripts/sombra.py` la convierte en una capa transparente (`src/assets/luz/palmera.webp`, 86 KB); el sol son dos degradados.
+
+Para cambiarla por otra foto de sombras (por ejemplo, una hecha en la propia tienda): una pared clara con sol directo, de frente y sin nada más en la foto, y `python3 scripts/sombra.py foto.jpg src/assets/luz/palmera.webp`.

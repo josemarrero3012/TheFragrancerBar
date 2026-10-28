@@ -4,7 +4,8 @@ import { $, $$, reduceMotion, EASE } from './utils.js';
 
 export function initHeader() {
   const header = $('[data-header]');
-  const onScroll = () => header.classList.toggle('is-scrolled', scrollY > 8);
+  // Arriba del todo la cabecera es transparente (base/luz.css); sin JavaScript se queda opaca
+  const onScroll = () => { header.classList.toggle('is-scrolled', scrollY > 8); header.classList.toggle('is-top', scrollY <= 8); };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   const btn = $('.burger'), menu = $('#menu-movil'), label = $('.burger__label');

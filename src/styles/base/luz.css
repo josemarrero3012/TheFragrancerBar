@@ -1,0 +1,45 @@
+/* Luz: el fondo con profundidad. Arriba de cada página, la sombra de una palmera sobre la pared
+   y algo de sol cálido, como el escaparate de una tienda de Triana por la mañana.
+   La sombra es una foto real (scripts/sombra.py dice de dónde sale y cómo se prepara), no un dibujo;
+   el sol son dos degradados. Todo va detrás del contenido, no se pulsa y se queda en la primera pantalla:
+   las secciones oscuras lo tapan, así que en las páginas que empiezan en negro no se ve. */
+body { position: relative; isolation: isolate; }
+body::before, body::after { content: ""; position: absolute; z-index: -1; top: 0; pointer-events: none; }
+/* Sol: entra por la izquierda y se apaga antes de la segunda pantalla */
+body::after {
+  left: 0; right: 0; height: min(115svh, 1050px);
+  background:
+    radial-gradient(ellipse 48% 30% at 6% 66%, rgba(255, 214, 160, .30), rgba(255, 214, 160, 0) 70%),
+    radial-gradient(ellipse 60% 55% at 0% 30%, rgba(255, 246, 232, .55), rgba(255, 246, 232, 0) 72%);
+}
+/* Sombra de la palmera en la esquina de arriba a la izquierda, fundida hacia el centro */
+body::before {
+  left: 0; width: min(100vw, 62rem); height: min(100svh, 900px);
+  background: url('../../assets/luz/palmera.webp') no-repeat 0 0 / 110% auto;
+  opacity: .2;
+  -webkit-mask-image: radial-gradient(ellipse 100% 100% at 0 0, #000 30%, transparent 78%);
+  mask-image: radial-gradient(ellipse 100% 100% at 0 0, #000 30%, transparent 78%);
+}
+@media (min-width: 960px) {
+  body::before { width: min(58vw, 60rem); opacity: .3; }
+}
+
+/* La cabecera, transparente mientras la página está arriba, para que la sombra pase por debajo (src/js/header.js) */
+.header.is-top { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+/* Una sección más abajo con la misma luz, del otro lado y más suave (en la portada, las tiendas) */
+.section--luz { position: relative; isolation: isolate; }
+.section--luz::before {
+  content: ""; position: absolute; z-index: -1; top: 0; right: 0; width: min(100vw, 46rem); height: min(100%, 760px); pointer-events: none;
+  background: url('../../assets/luz/palmera.webp') no-repeat 0 0 / 120% auto;
+  transform: scaleX(-1); opacity: .16;
+  -webkit-mask-image: radial-gradient(ellipse 100% 100% at 0 0, #000 25%, transparent 75%);
+  mask-image: radial-gradient(ellipse 100% 100% at 0 0, #000 25%, transparent 75%);
+}
+
+/* Fotos principales: se levantan un poco de la pared, con una sombra larga y suave */
+.hero__photo, .casahero__media, .storehero__media:not(.storehero__media--map), .pagehead__media { box-shadow: 0 34px 60px -34px rgba(70, 45, 20, .45), 0 12px 24px -16px rgba(70, 45, 20, .22); }
+/* La fachada de la portada, además, con un filete de cobre separado de la foto, como un cuadro */
+@media (min-width: 600px) {
+  .hero__photo { outline: 1px solid rgba(142, 79, 26, .42); outline-offset: 6px; }
+}

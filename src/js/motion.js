@@ -15,7 +15,8 @@ function introHero() {
     { duration: soft ? 1000 : 1400, delay: 150 + i * 130, easing: 'cubic-bezier(.2,.7,.1,1)', fill: 'backwards' }));
   $('.hero__rotulo .logo__sub', hero).animate(up, { duration: 1000, delay: 650, easing: EASE, fill: 'backwards' });
   const photo = $('.hero__photo', hero);
-  photo.animate([{ clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0)' }], { duration: soft ? 1100 : 1500, delay: 300, easing: 'cubic-bezier(.77,0,.18,1)', fill: 'backwards' });
+  // El recorte deja fuera el filete y la sombra de la foto (base/luz.css) hasta que se ha descubierto entera
+  photo.animate([{ clipPath: 'inset(calc(100% + 5rem) -3rem -5rem -3rem)' }, { clipPath: 'inset(-3rem -3rem -5rem -3rem)' }], { duration: soft ? 1100 : 1500, delay: 300, easing: 'cubic-bezier(.77,0,.18,1)', fill: 'backwards' });
   if (!soft) $('img', photo).animate([{ transform: 'scale(1.12)' }, { transform: 'none' }], { duration: 2400, delay: 300, easing: 'cubic-bezier(.2,.7,.1,1)', fill: 'backwards' });
   // Los datos uno a uno (en móvil las columnas no tienen caja propia: van sus hijos)
   [...$$('.hero__col > *', hero), $('.hero__also', hero), ...$$('[data-brandline] > li')].filter(Boolean).forEach((el, i) => el.animate(up, { duration: 1000, delay: 900 + i * 70, easing: EASE, fill: 'backwards' }));

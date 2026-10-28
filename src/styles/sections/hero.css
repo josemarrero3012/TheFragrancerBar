@@ -43,7 +43,7 @@
 .hero__also a { color: var(--ink); text-underline-offset: 3px; }
 .hero__also a:hover { color: var(--oak); }
 @media (min-width: 600px) and (max-width: 959px) {
-  .hero__photo { justify-self: center; width: min(100%, 56svh); margin-inline: 0; }
+  .hero__photo { justify-self: center; width: min(100%, 56svh); margin: 0 0 1.6rem; } /* deja aire al filete de cobre (base/luz.css) */
   .hero__row, .hero__also { max-width: 40rem; margin-inline: auto; }
   .hero__also { padding-inline: var(--gutter); }
 }

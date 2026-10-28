@@ -2,8 +2,9 @@
    Paleta corta y sobria: papel, tinta y un acento cobre. El color de la tienda
    (el azul del mostrador, la madera, la cortina de cadenas) se ve en las fotos, no se dibuja. */
 :root {
-  --paper: #F8F7F4;      /* fondo general */
-  --stone: #F1EFEA;      /* fondo de las fotos de producto y de las secciones alternas */
+  --paper: #F5F0E8;      /* fondo general: crema cálido, la pared de la tienda al sol (base/luz.css) */
+  --paper-rgb: 245, 240, 232;
+  --stone: #EEE8DE;      /* fondo de las fotos de producto y de las secciones alternas */
   --ink: #121110;        /* texto y fondos oscuros */
   --ink-2: #26231F;
   --muted: #5F5A54;      /* texto secundario (AA sobre --paper) */

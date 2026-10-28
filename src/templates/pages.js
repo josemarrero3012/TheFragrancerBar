@@ -201,7 +201,7 @@ function home(url) {
       </div>
     </section>
 
-    <section class="section" aria-labelledby="tiendas-title">
+    <section class="section section--luz" aria-labelledby="tiendas-title">
       <div class="wrap">
         <header class="section__head section__head--row">
           <div data-reveal="up" data-stagger>
