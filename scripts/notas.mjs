@@ -8,13 +8,14 @@
    `file`. Solo acepta fotos con licencia libre. La recorta en cuadrado y guarda
    public/img/notas/<clave>-160.webp y -320.webp. Al final rehace
    src/data/notas-fotos.js con el autor y la licencia de cada foto (salen en
-   /legal/#creditos) y escribe en scripts/notas-informe.txt cuáles faltan.
+   /legal/#creditos) y escribe en reports/notas-informe.txt cuáles faltan.
 
    Revisa siempre el resultado: la foto principal de un artículo puede ser un
    mapa, un dibujo o la planta entera en vez del ingrediente. Si pasa, fija un
    archivo concreto de Commons en `file` y vuelve a lanzarlo con esa nota.
    ========================================================================== */
 
+import { reportPath } from './lib/reports.mjs';
 import { readdirSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -104,7 +105,7 @@ writeFileSync(resolve(ROOT, 'src/data/notas-fotos.js'), `/* Lo rehace \`npm run 
    con el archivo de Wikimedia Commons, su autor y su licencia. */
 export const NOTAS_FOTOS = ${JSON.stringify(final, null, 2)};
 `);
-writeFileSync(resolve(import.meta.dirname, 'notas-informe.txt'),
+writeFileSync(reportPath('notas-informe.txt'),
   `Notas con foto: ${Object.keys(final).length} de ${Object.keys(NOTAS).length}\n\nSin foto:\n${
     Object.keys(NOTAS).filter((k) => !final[k]).map((k) => `${k}  ${(fallos.find(([f]) => f === k) || [])[1] || ''}`).join('\n') || '(ninguna)'}\n`);
-console.log(`\n${Object.keys(final).length} de ${Object.keys(NOTAS).length} notas con foto. Informe en scripts/notas-informe.txt`);
+console.log(`\n${Object.keys(final).length} de ${Object.keys(NOTAS).length} notas con foto. Informe en reports/notas-informe.txt`);

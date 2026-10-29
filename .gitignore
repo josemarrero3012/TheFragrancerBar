@@ -19,3 +19,17 @@ Thumbs.db
 
 # Fotos originales sin tocar que descarga scripts/originales.mjs
 fotos-originales/
+
+# Configuración personal de asistentes
+.claude/
+.codex/
+
+# Informes y hojas de revisión regenerables
+reports/
+
+# Credenciales y entornos locales (solo se admite una plantilla sin valores)
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc

@@ -10,18 +10,19 @@
    (frasco centrado y apoyado en la misma línea, fondo transparente) y guarda
    public/img/productos/<id>-400.webp y -800.webp. Al final rehace
    src/data/fotos.js, que decide qué fragancias se publican, y escribe en
-   scripts/fotos-informe.txt de dónde salió cada foto y cuáles faltan.
+   reports/fotos-informe.txt de dónde salió cada foto y cuáles faltan.
 
    Revisa siempre el resultado: una coincidencia por nombre puede traer un set
    de regalo o el tamaño de viaje. Si pasa, fija la página buena en fotos-fuentes.js.
 
    Las fotos propias pasan por el mismo recorte y encaje, así que quedan igual que
-   las demás. Se apuntan en scripts/fotos-propias.json y las descargas no las vuelven
+   las demás. Se apuntan en catalogo/fotos-propias.json y las descargas no las vuelven
    a pisar (salvo que se pida esa fragancia por su id). El informe dice al final cuántas
    fotos son propias, cuántas siguen siendo de la web de la marca (provisionales hasta
    tener permiso) y cuáles faltan.
    ========================================================================== */
 
+import { reportPath } from './lib/reports.mjs';
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { extname, resolve } from 'node:path';
 import sharp from 'sharp';
@@ -41,7 +42,7 @@ const carpeta = args.includes('--carpeta') ? args[args.indexOf('--carpeta') + 1]
 const solo = args.filter((a, i) => !a.startsWith('--') && args[i - 1] !== '--carpeta');
 const conFoto = new Set(readdirSync(OUT).filter((f) => f.endsWith('-800.webp')).map((f) => f.slice(0, -9)));
 // Fragancias con foto propia (hecha en la tienda): las descargas no las pisan
-const PROPIAS_FILE = resolve(ROOT, 'scripts/fotos-propias.json');
+const PROPIAS_FILE = resolve(ROOT, 'catalogo/fotos-propias.json');
 const propias = new Set(existsSync(PROPIAS_FILE) ? JSON.parse(readFileSync(PROPIAS_FILE, 'utf8')) : []);
 
 /* Imágenes candidatas de una fragancia (la primera con fondo limpio será la buena) */
@@ -219,10 +220,10 @@ writeFileSync(resolve(ROOT, 'src/data/fotos.js'),
   `export const FOTOS = [\n${fotos.map((id) => `  '${id}'`).join(',\n')}\n];\n`);
 // Estado de todo el catálogo, no solo de esta pasada: qué fotos son propias, cuáles siguen siendo de la marca y cuáles faltan
 const conMarca = fotos.filter((id) => !propias.has(id)), sinFoto = ids.filter((id) => !fotos.includes(id));
-writeFileSync(resolve(ROOT, 'scripts/fotos-informe.txt'),
+writeFileSync(reportPath('fotos-informe.txt'),
   `Esta pasada: ${informe.length} fotos nuevas\nid  origen\n${informe.join('\n')}\n\nNo se pudo (${faltan.length})\n${faltan.join('\n')}\n\n` +
   `Estado del catálogo (${ids.length} fragancias)\n` +
   `- Con foto propia: ${fotos.length - conMarca.length}\n` +
   `- Con foto de la web de la marca, provisional hasta tener permiso o foto propia: ${conMarca.length}\n` +
   `- Sin foto, no se publican: ${sinFoto.length}${sinFoto.length ? `\n  ${sinFoto.join('\n  ')}` : ''}\n`);
-console.log(`\n${fotos.length} de ${ids.length} fragancias con foto. Informe en scripts/fotos-informe.txt`);
+console.log(`\n${fotos.length} de ${ids.length} fragancias con foto. Informe en reports/fotos-informe.txt`);

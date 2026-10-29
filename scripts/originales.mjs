@@ -19,11 +19,12 @@
       Las pasa a WebP de alta calidad (q 92) en public/img/originales/<id>-<a|b|c…>-160|800|1600.webp
       (160: miniatura de la ficha) y rehace src/data/originales.js.
    5. Hace una hoja de contacto con todas las candidatas numeradas en
-      scripts/originales-revision.jpg y un informe en scripts/originales-informe.txt, que avisa
+      reports/originales-revision.jpg y un informe en reports/originales-informe.txt, que avisa
       de las fotos de menos de 1200 px.
    Sube la hoja y el informe con las fotos para revisarlas.
    ========================================================================== */
 
+import { reportPath } from './lib/reports.mjs';
 import { mkdirSync, readdirSync, writeFileSync, existsSync, rmSync } from 'node:fs';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -269,7 +270,7 @@ async function hojaDeContacto(filas) {
   }
   const svg = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">${textos.join('')}</svg>`);
   await sharp({ create: { width: W, height: H, channels: 3, background: '#ffffff' } })
-    .composite([...capas, { input: svg, left: 0, top: 0 }]).jpeg({ quality: 80 }).toFile(resolve(ROOT, 'scripts/originales-revision.jpg'));
+    .composite([...capas, { input: svg, left: 0, top: 0 }]).jpeg({ quality: 80 }).toFile(reportPath('originales-revision.jpg'));
 }
 
 /* ---------------------------------------------------------------- Descarga */
@@ -314,6 +315,6 @@ const cuantas = (id) => { const n = [...LETRAS].findIndex((l) => !files.has(`${i
 const datos = TODAS.map((p) => [p.id, cuantas(p.id)]).filter(([, n]) => n > 0);
 writeFileSync(resolve(ROOT, 'src/data/originales.js'),
   `// Generado por \`npm run originales\`: fotos originales de la casa en public/img/originales, cuadradas (n fotos: a = principal, b = al pasar el ratón, c… solo en la ficha). No editar a mano.\nexport const ORIGINALES = {\n${datos.map(([id, n]) => `  '${id}': { n: ${n} }`).join(',\n')}\n};\n`);
-writeFileSync(resolve(ROOT, 'scripts/originales-informe.txt'), `${informe.join('\n\n')}\n`);
+writeFileSync(reportPath('originales-informe.txt'), `${informe.join('\n\n')}\n`);
 const sin = A_PUBLICAR.map((p) => p.id).filter((id) => !datos.some(([x]) => x === id));
-console.log(`\n${A_PUBLICAR.length - sin.length} de ${A_PUBLICAR.length} fragancias a publicar con foto original${sin.length ? ` (faltan: ${sin.join(', ')})` : ''}. Revisa scripts/originales-revision.jpg`);
+console.log(`\n${A_PUBLICAR.length - sin.length} de ${A_PUBLICAR.length} fragancias a publicar con foto original${sin.length ? ` (faltan: ${sin.join(', ')})` : ''}. Revisa reports/originales-revision.jpg`);

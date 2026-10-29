@@ -7,7 +7,7 @@
       casa, la familia y la concentración existan, que los tamaños y precios se entiendan y
       que no haya dos fragancias con el mismo id. Si algo falla, dice la fila y no cambia nada.
    2. Escribe src/data/fragancias.js, que es lo que lee la web (no se edita a mano).
-   3. Hace un informe en scripts/catalogo-informe.txt: cuántas hay por casa, cuántas se publican
+   3. Hace un informe en reports/catalogo-informe.txt: cuántas hay por casa, cuántas se publican
       y, de las marcadas para publicar, a cuáles les falta la foto original o las notas oficiales
       (esas no salen en la web hasta tenerlas).
 
@@ -15,6 +15,7 @@
    Con --comprobar solo revisa la hoja, sin escribir nada.
    ========================================================================== */
 
+import { reportPath } from './lib/reports.mjs';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { CASAS, FAMILIAS, CONCENTRACIONES, slug } from '../src/data/casas.js';
@@ -25,7 +26,7 @@ import { NOTAS_OFICIALES } from '../src/data/notas-oficiales.js';
 const ROOT = resolve(import.meta.dirname, '..');
 const HOJA = resolve(ROOT, 'catalogo/fragancias.csv');
 const SALIDA = resolve(ROOT, 'src/data/fragancias.js');
-const INFORME = resolve(ROOT, 'scripts/catalogo-informe.txt');
+const INFORME = reportPath('catalogo-informe.txt');
 const comprobar = process.argv.includes('--comprobar');
 
 /** Texto comparable: sin tildes, en minúsculas y sin espacios de sobra */
@@ -159,4 +160,4 @@ if (!comprobar) {
   writeFileSync(INFORME, `${informe}\n`);
 }
 console.log(`✓  ${fragancias.length} fragancias en la hoja, ${publicadas.length} en la web` +
-  (pendientes.length ? ` (${pendientes.length} marcadas esperan foto o notas: scripts/catalogo-informe.txt)` : ''));
+  (pendientes.length ? ` (${pendientes.length} marcadas esperan foto o notas: reports/catalogo-informe.txt)` : ''));
