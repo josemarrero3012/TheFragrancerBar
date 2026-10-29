@@ -5,10 +5,10 @@ Sitio estático de varias páginas, con catálogo y tienda online de demostraci�
 
 ## Puesta en marcha
 
-Requisitos: Node.js 20.19 o superior.
+Requisitos: Node.js 22.12 o superior. La versión recomendada está en `.nvmrc`.
 
 ```bash
-npm install       # instala Vite y las fuentes
+npm ci            # instala las versiones fijadas en package-lock.json
 npm run dev       # servidor de desarrollo en http://localhost:8765
 npm run build     # genera la web lista para publicar en dist/
 npm run preview   # sirve dist/ para revisarla antes de publicar
@@ -37,6 +37,9 @@ Al pasar de una página a otra hay una transición suave (View Transitions) en l
 
 ```
 ├── vite.config.js          Genera las páginas (en desarrollo y al compilar), robots.txt, sitemap.xml y virtual:tienda
+├── scripts/               Herramientas de catálogo, imágenes y verificación
+├── reports/               Informes locales regenerables (ignorados por Git)
+├── docs/                  Desarrollo, catálogo, imágenes y estado del prototipo
 ├── catalogo/fragancias.csv ★ La hoja del catálogo: una fila por fragancia (ver docs/CATALOGO.md)
 ├── public/                 Archivos que se copian tal cual a dist/
 │   ├── img/casas/          Imágenes editoriales de cada casa (560 y 1000 px)

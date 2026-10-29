@@ -35,7 +35,7 @@ Marcarla con `sí` en «publicar» no basta: solo sale en la web si además tien
 2. **las notas oficiales** de su casa (salida, corazón y fondo);
 3. **descripción**.
 
-Así la web nunca enseña una ficha a medias. Las que están marcadas y aún no cumplen esto quedan en espera, y el informe (`scripts/catalogo-informe.txt`) dice qué le falta a cada una.
+Así la web nunca enseña una ficha a medias. Las que están marcadas y aún no cumplen esto quedan en espera, y el informe (`reports/catalogo-informe.txt`) dice qué le falta a cada una.
 
 ## Para quien mantiene la web
 

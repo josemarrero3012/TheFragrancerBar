@@ -13,7 +13,7 @@ La web enseña un catálogo de muestra: las cinco fragancias más conocidas de c
 | …con la foto principal por debajo de 1200 px | 5 (Parfums de Marly no publica el frasco a más de 1080 px; se enseña sin ampliar) |
 | Con foto propia, hecha en la tienda | 0 |
 
-Las fotos de las marcas valen para el prototipo, pero antes de publicar la web hace falta una de dos cosas por cada una: permiso por escrito de la marca o del distribuidor, o una foto propia. El estado al día lo dan `scripts/originales-informe.txt` (`npm run originales`) y `scripts/fotos-informe.txt` (`npm run fotos`).
+Las fotos de las marcas se incluyen como material de demostración; su presencia en el repositorio no acredita permiso de reutilización. Antes de producción deben confirmarse las autorizaciones con el negocio y los titulares de cada recurso, o sustituirse por fotografías propias autorizadas. El estado al día lo dan `reports/originales-informe.txt` (`npm run originales`) y `reports/fotos-informe.txt` (`npm run fotos`).
 
 Tienda sin foto: **C. C. Plaza del Duque** y **C. C. Américas Plaza** (Tenerife). Mientras no la tengan, su tarjeta enseña la isla y la ciudad en letra.
 
@@ -50,7 +50,7 @@ npm run originales              # todas las marcadas para publicar en la hoja
 npm run originales -- amouage   # una casa, o una fragancia por su id
 ```
 
-Por cada fragancia guarda en `public/img/originales/` la foto principal (`a`, la de las rejillas), la que sale al pasar el ratón (`b`) y, si se eligen más en `ELEGIDAS`, otras que solo se ven en la ficha (`c`, `d`…). Todas quedan cuadradas sin cortar el frasco: si la foto de la casa no es cuadrada y tiene fondo de estudio, se alarga ese fondo; si es una foto de ambiente, se recorta desde el centro. Revisa `scripts/originales-revision.jpg` y fija en `ELEGIDAS` las buenas si las dos primeras no lo son.
+Por cada fragancia guarda en `public/img/originales/` la foto principal (`a`, la de las rejillas), la que sale al pasar el ratón (`b`) y, si se eligen más en `ELEGIDAS`, otras que solo se ven en la ficha (`c`, `d`…). Todas quedan cuadradas sin cortar el frasco: si la foto de la casa no es cuadrada y tiene fondo de estudio, se alarga ese fondo; si es una foto de ambiente, se recorta desde el centro. Revisa `reports/originales-revision.jpg` y fija en `ELEGIDAS` las buenas si las dos primeras no lo son.
 
 **Fotos de producto propias:**
 
@@ -58,9 +58,9 @@ Por cada fragancia guarda en `public/img/originales/` la foto principal (`a`, la
 npm run fotos -- --carpeta ~/Descargas/fotos-tienda
 ```
 
-Cada archivo `<id>.jpg` (también `.png` o `.webp`) pasa por el mismo recorte que las fotos de las marcas: se gira según el móvil, se quita el fondo y se coloca el frasco centrado y apoyado en la misma línea, en `public/img/productos/<id>-400.webp` y `-800.webp`. Las que no tienen el fondo liso o tienen un nombre que no es de ninguna fragancia salen en `scripts/fotos-informe.txt` para repetirlas o renombrarlas.
+Cada archivo `<id>.jpg` (también `.png` o `.webp`) pasa por el mismo recorte que las fotos de las marcas: se gira según el móvil, se quita el fondo y se coloca el frasco centrado y apoyado en la misma línea, en `public/img/productos/<id>-400.webp` y `-800.webp`. Las que no tienen el fondo liso o tienen un nombre que no es de ninguna fragancia salen en `reports/fotos-informe.txt` para repetirlas o renombrarlas.
 
-Las fotos propias se apuntan en `scripts/fotos-propias.json`, y `npm run fotos` (también con `--todas` o con el nombre de una casa) no las vuelve a sustituir por la de la marca. Solo se sustituye una si se pide por su id: `npm run fotos -- creed-aventus`.
+Las fotos propias se apuntan en `catalogo/fotos-propias.json`, y `npm run fotos` (también con `--todas` o con el nombre de una casa) no las vuelve a sustituir por la de la marca. Solo se sustituye una si se pide por su id: `npm run fotos -- creed-aventus`.
 
 Si queda sombra o un halo, `scripts/recortar.py` (BiRefNet) las limpia; las instrucciones están en el propio archivo.
 
