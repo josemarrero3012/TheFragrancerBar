@@ -2,7 +2,7 @@
   "name": "the-fragrance-bar",
   "version": "0.2.0",
   "private": true,
-  "description": "Web de The Fragrance Bar Triana, perfumería nicho en Las Palmas de Gran Canaria.",
+  "description": "Prototipo web oficial presentado a The Fragrance Bar. Catálogo y compra de demostración.",
   "type": "module",
   "scripts": {
     "predev": "node scripts/catalogo.mjs",
@@ -14,7 +14,9 @@
     "foto-tienda": "node scripts/foto-tienda.mjs",
     "notas": "node scripts/notas.mjs",
     "originales": "node scripts/originales.mjs",
-    "catalogo": "node scripts/catalogo.mjs"
+    "catalogo": "node scripts/catalogo.mjs",
+    "check": "node scripts/check.mjs",
+    "check:dist": "node scripts/check-dist.mjs"
   },
   "dependencies": {
     "@fontsource-variable/hanken-grotesk": "5.3.0",
@@ -22,10 +24,16 @@
     "@fontsource/libre-caslon-text": "5.3.0"
   },
   "devDependencies": {
-    "sharp": "^0.34.4",
-    "vite": "8.3.1"
+    "sharp": "0.35.5",
+    "vite": "8.3.5"
   },
   "engines": {
-    "node": ">=20.19"
-  }
+    "node": ">=22.12.0"
+  },
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josemarrero3012/TheFragrancerBar.git"
+  },
+  "homepage": "https://josemarrero3012.github.io/TheFragrancerBar/"
 }
