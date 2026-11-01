@@ -112,6 +112,30 @@ function escCard(e, i) {
       </a>`;
 }
 
+/* «Entra en la tienda»: al bajar, la cámara cruza la puerta de la fachada de Triana y llega al interior.
+   Tres capas de la misma foto se acercan a distinto ritmo (src/js/entrar.js). Sin JavaScript o con
+   prefers-reduced-motion se ve la foto del interior con los textos. */
+function entrar(t) {
+  const fach = (w) => `/${t.img}-${w}.webp`, dentro = (w) => `/${t.cardImg}-${w}.webp`;
+  const capa = (cls) => `<img class="entrar__capa ${cls}" src="${fach(1448)}" srcset="${fach(800)} 800w, ${fach(1448)} 1448w" sizes="(min-width: 700px) 100vw, 133vh" width="1448" height="1086" loading="lazy" decoding="async" alt="">`;
+  return `<section class="entrar" data-entrar aria-labelledby="entrar-title">
+      <div class="entrar__stage">
+        <div class="entrar__capas" aria-hidden="true">
+          ${capa('entrar__fondo')}
+          ${capa('entrar__marco')}
+        </div>
+        <img class="entrar__dentro" src="${dentro(1380)}" srcset="${dentro(800)} 800w, ${dentro(1380)} 1380w" sizes="100vw" width="1380" height="1040" loading="lazy" decoding="async" alt="${esc(t.interior?.find((g) => g.img === t.cardImg)?.alt || 'Interior de la tienda de Triana')}">
+        <div class="entrar__textos wrap">
+          <h2 class="visually-hidden" id="entrar-title">Entra en la tienda</h2>
+          <p class="entrar__t" data-paso="0"><span class="eyebrow">Entra</span>${esc(t.street)}<small>${esc(t.city)}</small></p>
+          <p class="entrar__t" data-paso="1"><span class="eyebrow">Dentro</span>${CASAS.length} casas de perfumería nicho<small>${esc(CASAS.map((c) => c.name).slice(0, 4).join(', '))} y más</small></p>
+          <p class="entrar__t" data-paso="2"><span class="eyebrow">Huele antes</span>Te sacamos de la vitrina las que quieras probar<small><a class="link" href="${storeUrl(t)}">Ver la tienda</a></small></p>
+        </div>
+        <div class="entrar__barra" aria-hidden="true"><i></i></div>
+      </div>
+    </section>`;
+}
+
 function home(url) {
   const t = mainStore(), otras = SITE.stores.filter((s) => s !== t);
   const E = SITE.escaparate, n = String(E.length).padStart(2, '0'), first = E[0];
@@ -141,6 +165,8 @@ function home(url) {
     <div class="brandline">
       <ul class="brandline__list wrap" aria-label="Casas que trabajamos" data-brandline>${brandStrip()}</ul>
     </div>
+
+    ${entrar(t)}
 
     <section class="esc" data-esc data-tone="${first.tone}" aria-labelledby="esc-title" aria-roledescription="escaparate">
       <div class="esc__stage">
